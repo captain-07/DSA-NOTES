@@ -18,7 +18,7 @@ revisions:
 
 - **Confidence Checklist:**
   - [ ] Low  
-  - [x] Medium  
+  - [ ] Medium  
   - [ ] High  
 
 - **Concepts:**
