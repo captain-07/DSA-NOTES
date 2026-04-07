@@ -14,7 +14,7 @@ revisions:
 ## Metadata & Placement Tags
 
 - **Target Companies:**
-  - #Amazon #Google #Microsoft #Netflix #Airbnb #DoorDash
+  - #Amazon #Google #Microsoft #Airbnb #Uber
 
 - **Confidence Checklist:**
   - [ ] Low  
@@ -22,47 +22,41 @@ revisions:
   - [ ] High  
 
 - **Concepts:**
-  - #binarysearch [[Binary Search]]
-  - #array [[Array]]
+  - #binarysearch [[Binary Search]], #arrays [[Arrays]]
 
----
 ## Pattern
-
-Binary Search on Answer (Monotonic Search Space)
+Binary Search on Answer (Range Search)
 
 ---
 ## Difficulty
-
 Medium #medium
 
 ---
 
 ## ⚡ Key Idea (Core Insight)
-
-The possible eating speed $k$ ranges from $1$ (minimum) to $max(piles)$ (maximum needed to finish in $n$ hours). Since the total time taken is monotonically decreasing as $k$ increases, we can binary search for the minimum $k$ that satisfies the condition $total\_hours \le h$.
+The possible eating speed `k` lies in a predictable range: `[1, max(piles)]`. If Koko can finish all bananas at speed `k` within `h` hours, she can also finish them at any speed `> k`. This monotonicity allows us to use **Binary Search** to find the minimum `k`.
 
 ---
 
 ## ⚡ Quick Recall (VERY IMPORTANT)
-
-Binary Search over speed range $[1, max(piles)]$. For each mid $k$, calculate total hours using $\sum \lceil pile/k \rceil$. If possible, shrink right; else, move left.
+Binary search for the smallest speed `k` in range `[1, max(piles)]` where the total hours calculated as `sum(ceil(pile/k))` is less than or equal to `h`.
 
 ---
 
 ## Approach
 
 ### Brute Force
-- Try every integer speed $k$ starting from 1 until the condition is met.
-- **Time:** $O(max(P) \cdot N)$, where $P$ is the max pile size and $N$ is the number of piles.
+- Iterate through every possible speed `k` starting from 1 up to `max(piles)`. For each `k`, calculate the total hours needed. The first `k` that satisfies `total_hours <= h` is the answer.
+- **Time Complexity:** O(N * M), where N is `len(piles)` and M is `max(piles)`.
 
 ### Optimal
-1. Define search space: `left = 1`, `right = max(piles)`.
-2. While `left <= right`:
-   - Calculate `mid` (current speed $k$).
-   - Calculate total hours: `sum((p + mid - 1) // mid for p in piles)`.
-   - If `hours <= h`: This $k$ works; store it and try a smaller speed (`right = mid - 1`).
-   - Else: Speed is too slow; increase it (`left = mid + 1`).
-3. Return the stored result.
+1. **Define Range:** The minimum possible speed is 1, and the maximum is `max(piles)` (eating the largest pile in one hour).
+2. **Binary Search:** Perform binary search on the range `[low, high]`.
+3. **Check Condition:** For a candidate speed `mid`, calculate total hours: `sum((p + mid - 1) // mid for p in piles)`.
+4. **Shrink Range:**
+   - If `total_hours <= h`, then `mid` is a possible answer. Try to find a smaller speed by searching in the left half (`high = mid - 1`).
+   - If `total_hours > h`, the speed is too slow. Search in the right half (`low = mid + 1`).
+- **Time Complexity:** O(N * log(M)).
 
 ---
 
@@ -72,84 +66,83 @@ Binary Search over speed range $[1, max(piles)]$. For each mid $k$, calculate to
 import math
 
 def minEatingSpeed(piles, h):
-    # Search space for the speed k
-    left, right = 1, max(piles)
-    result = right
+    # Search space for speed k
+    low, high = 1, max(piles)
+    ans = high
     
-    while left <= right:
-        k = left + (right - left) // 2
+    while low <= high:
+        mid = (low + high) // 2
         
-        # Calculate total hours needed at speed k
-        # Equivalent to ceil(p/k)
+        # Calculate total hours spent at speed 'mid'
         total_hours = 0
         for p in piles:
-            total_hours += (p + k - 1) // k
+            # (p + mid - 1) // mid is an integer way to do math.ceil(p / mid)
+            total_hours += (p + mid - 1) // mid
             
         if total_hours <= h:
-            # Possible speed, try to find a smaller one
-            result = k
-            right = k - 1
+            # Found a valid speed, record and try to find a smaller one
+            ans = mid
+            high = mid - 1
         else:
-            # Too slow, must increase speed
-            left = k + 1
+            # Speed is too slow, must increase it
+            low = mid + 1
             
-    return result
+    return ans
 ```
 
 ---
 
 ## Dry Run (Smart Example)
+**Input:** `piles = [3, 6, 7, 11]`, `h = 8`
 
-**Input:** `piles = [3, 6, 7, 11], h = 8`
-
-| Step | Range [L, R] | Mid (k) | Total Hours Calculation | Result | Action |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| 1 | [1, 11] | 6 | $\lceil 3/6 \rceil + \lceil 6/6 \rceil + \lceil 7/6 \rceil + \lceil 11/6 \rceil = 1+1+2+2 = 6$ | 6 | $6 \le 8$, $R = 5$ |
-| 2 | [1, 5] | 3 | $\lceil 3/3 \rceil + \lceil 6/3 \rceil + \lceil 7/3 \rceil + \lceil 11/3 \rceil = 1+2+3+4 = 10$ | 6 | $10 > 8$, $L = 4$ |
-| 3 | [4, 5] | 4 | $\lceil 3/4 \rceil + \lceil 6/4 \rceil + \lceil 7/4 \rceil + \lceil 11/4 \rceil = 1+2+2+3 = 8$ | 4 | $8 \le 8$, $R = 3$ |
-| 4 | [4, 3] | - | Loop terminates | 4 | Final Result |
+| Step | Variables | Explanation |
+| :--- | :--- | :--- |
+| 1 | `low=1, high=11, mid=6` | Hours: `1+1+2+2 = 6`. `6 <= 8` is True. `ans=6, high=5`. |
+| 2 | `low=1, high=5, mid=3` | Hours: `1+2+3+4 = 10`. `10 <= 8` is False. `low=4`. |
+| 3 | `low=4, high=5, mid=4` | Hours: `1+2+2+3 = 8`. `8 <= 8` is True. `ans=4, high=3`. |
+| 4 | `low=4, high=3` | `low > high`, loop terminates. Return `ans = 4`. |
 
 ---
 
 ## Edge Cases
 
-- **len(piles) == h:** Minimum speed is exactly `max(piles)`.
-- **h is very large:** Minimum speed will be 1 (Koko eats as slowly as possible).
-- **Single Pile:** Result is `ceil(pile / h)`.
-- **All piles same size:** Result is `ceil(pile_size / (h/n))`.
+- `h == len(piles)`: Koko must eat at a speed equal to the largest pile size to finish on time.
+- `len(piles) == 1`: Simple range search where `ans = ceil(pile / h)`.
+- `h` is extremely large: The speed will be 1 as it's the minimum possible.
+- All piles are the same size: Binary search still efficiently finds the boundary.
 
 ---
 
 ## Mistakes
 
-- Using `p // k` instead of `ceil(p / k)` (integer division truncates).
-- Setting the initial `right` boundary to an arbitrary large number (inefficient).
-- Not using `(p + k - 1) // k` for integer-only ceiling division.
+- **Integer Division:** Forgetting to use `math.ceil()` or the `(p + k - 1) // k` trick, leading to incorrect hour counts.
+- **Search Range:** Using `sum(piles)` as the upper bound (unnecessary and slower) instead of `max(piles)`.
+- **Binary Search Condition:** Using `low < high` instead of `low <= high` without proper adjustment of `ans`.
 - **User Mistake:** No specific note provided.
 
 ---
 
 ## Complexity
 
-- **Time:** $O(N \cdot \log(max(P)))$ → Binary search takes $\log(max(P))$ steps, and each step iterates through $N$ piles.
-- **Space:** $O(1)$ → Only a few variables for pointers and sum.
+Time: O(N * log(M)) → We check `N` piles for each step of the binary search over range `M` (`max(piles)`).  
+Space: O(1) → Constant space for pointers and temporary calculations.
 
 ---
 
 ## Similar Problems
 
 - [Capacity To Ship Packages Within D Days](https://leetcode.com/problems/capacity-to-ship-packages-within-d-days/) - Medium
-- [Split Array Largest Sum](https://leetcode.com/problems/split-array-largest-sum/) - Hard
 - [Minimum Number of Days to Make m Bouquets](https://leetcode.com/problems/minimum-number-of-days-to-make-m-bouquets/) - Medium
-- [Find the Smallest Divisor Given a Threshold](https://leetcode.com/problems/find-the-smallest-divisor-given-a-threshold/) - Medium
+- [Split Array Largest Sum](https://leetcode.com/problems/split-array-largest-sum/) - Hard
 
 ---
 
 ## Tags and Properties
-- #dsa #important #revisit #binarysearch 
-- [[Binary Search]] [[Array]]
-- **Revision Date:** 2026-04-07
-- **Problem Link:** [LeetCode 875 - Koko Eating Bananas](https://leetcode.com/problems/koko-eating-bananas/)
+  - #dsa #important #revisit  
+  - #binarysearch #koko-eating-banana #monotonicity  
+  - [[Binary Search]] [[Arrays]]
+  - Revision Date: 2026-04-07
+  - **Problem Link:** [LeetCode - Koko Eating Bananas](https://leetcode.com/problems/koko-eating-bananas/)
 
 ---
 ### 🔄 Revision Checklist

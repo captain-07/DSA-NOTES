@@ -1,10 +1,10 @@
 ---
-created: 2026-04-04
+created: 2026-04-07
 revisions:
-  - 2026-04-06
-  - 2026-04-11
-  - 2026-04-19
-  - 2026-05-04
+  - 2026-04-09
+  - 2026-04-14
+  - 2026-04-22
+  - 2026-05-07
 ---
 
 # Single Element In A Sorted Array
@@ -14,7 +14,7 @@ revisions:
 ## Metadata & Placement Tags
 
 - **Target Companies:**
-  - #Amazon #Google #Microsoft #Facebook #Adobe
+  - #Amazon #Google #Microsoft #Facebook #Uber #Adobe
 
 - **Confidence Checklist:**
   - [ ] Low  
@@ -23,13 +23,13 @@ revisions:
 
 - **Concepts:**
   - #binarysearch [[Binary Search]]
+  - #array [[Arrays]]
   - #bitmanipulation [[Bit Manipulation]]
-  - #arrays [[Arrays]]
 
 ---
 ## Pattern
 
-Binary Search (Index Parity Partitioning)
+Binary Search on Index Parity
 
 ---
 ## Difficulty
@@ -40,41 +40,39 @@ Medium #medium
 
 ## ⚡ Key Idea (Core Insight)
 
-In a sorted array where every element appears twice except one:
-- **Before the single element:** Pairs start at **even** indices and end at **odd** indices (`(even, odd)`).
-- **After the single element:** Pairs start at **odd** indices and end at **even** indices (`(odd, even)`).
-- We use Binary Search to find the point where this parity rule breaks.
+In a paired sorted array, the "single" element disrupts the index parity. 
+- **Left of Single Element:** Pairs follow `(Even Index, Odd Index)` pattern (e.g., `nums[i] == nums[i+1]` where `i` is even).
+- **Right of Single Element:** Pairs follow `(Odd Index, Even Index)` pattern.
+- **Goal:** Find the first index where this property breaks using Binary Search.
 
 ---
 
 ## ⚡ Quick Recall (VERY IMPORTANT)
 
-Use the XOR trick: `mid ^ 1`. 
-- If `mid` is even, `mid ^ 1` is `mid + 1`.
-- If `mid` is odd, `mid ^ 1` is `mid - 1`.
-Check if `nums[mid] == nums[mid ^ 1]` to decide the search direction.
+Use `mid ^ 1` to find the partner index. If `nums[mid] == nums[mid ^ 1]`, the single element is on the **right**; otherwise, it's on the **left**.
 
 ---
 
 ## Approach
 
 ### Brute Force
-- Linear scan through the array comparing `nums[i]` with `nums[i+1]`.
-- Time: $O(n)$
-- Space: $O(1)$
+- Linear scan through the array using a pointer or XORing all elements.
+- **Complexity:** O(N) time, O(1) space.
 
 ### Better
-- XOR all elements in the array. The result is the single element.
-- Time: $O(n)$
-- Space: $O(1)$
+- Check elements in pairs while iterating (skipping by 2).
+- **Complexity:** O(N/2) time, O(1) space.
 
 ### Optimal
-1. Initialize `low = 0`, `high = len(nums) - 2`.
+1. Initialize `low = 0` and `high = len(nums) - 2`.
 2. While `low <= high`:
    - Calculate `mid`.
-   - Use the **XOR trick**: if `nums[mid] == nums[mid ^ 1]`, it means we are in the "left" part of the array (before the single element). Move `low = mid + 1`.
-   - Otherwise, we are in the "right" part or at the single element. Move `high = mid - 1`.
-3. Return `nums[low]`.
+   - Use the **XOR Trick**: `mid ^ 1`. 
+     - If `mid` is even, `mid ^ 1` is `mid + 1`.
+     - If `mid` is odd, `mid ^ 1` is `mid - 1`.
+   - If `nums[mid] == nums[mid ^ 1]`: We are in the left half; move `low = mid + 1`.
+   - Else: We are in the right half or at the element; move `high = mid - 1`.
+3. The answer is at `nums[low]`.
 
 ---
 
@@ -82,20 +80,19 @@ Check if `nums[mid] == nums[mid ^ 1]` to decide the search direction.
 
 ```python
 def singleNonDuplicate(nums: list[int]) -> int:
-    # We search in the range [0, n-2] to avoid index out of bounds
+    # Search space excludes the last element to avoid boundary checks
     low, high = 0, len(nums) - 2
     
     while low <= high:
         mid = (low + high) // 2
         
-        # XOR Trick: 
+        # The XOR trick handles both even and odd mid parity
         # If mid is even, mid^1 is mid+1. If mid is odd, mid^1 is mid-1.
-        # This checks if the pair (even, odd) is intact.
         if nums[mid] == nums[mid ^ 1]:
-            # Pair is correct, single element is further right
+            # Property holds (Even-Odd pair), move right
             low = mid + 1
         else:
-            # Parity broken, single element is to the left (including mid)
+            # Property broken, single element is on the left
             high = mid - 1
             
     return nums[low]
@@ -105,51 +102,58 @@ def singleNonDuplicate(nums: list[int]) -> int:
 
 ## Dry Run (Smart Example)
 
-Input: `nums = [1, 1, 2, 3, 3, 4, 4]`
+**Input:** `nums = [1, 1, 2, 3, 3, 4, 4]`
 
-| Step | low | high | mid | `mid ^ 1` | Comparison (`nums[mid] == nums[mid^1]`) | Action |
-| :--- | :-- | :--- | :-- | :------- | :------------------------------------- | :----- |
-| 1 | 0 | 5 | 2 | 3 | `nums[2](2) == nums[3](3)` -> **False** | `high = 1` |
-| 2 | 0 | 1 | 0 | 1 | `nums[0](1) == nums[1](1)` -> **True** | `low = 1` |
-| 3 | 1 | 1 | 1 | 0 | `nums[1](1) == nums[0](1)` -> **True** | `low = 2` |
-| 4 | 2 | 1 | - | - | Loop terminates (`low > high`) | Return `nums[2] = 2` |
+| Step | Low | High | Mid | mid ^ 1 | Comparison | Action |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| 1 | 0 | 5 | 2 | 3 | `nums[2]=2 != nums[3]=3` | `high = mid - 1 = 1` |
+| 2 | 0 | 1 | 0 | 1 | `nums[0]=1 == nums[1]=1` | `low = mid + 1 = 1` |
+| 3 | 1 | 1 | 1 | 0 | `nums[1]=1 == nums[0]=1` | `low = mid + 1 = 2` |
+| 4 | 2 | 1 | - | - | `low > high` | **Return nums[2] = 2** |
 
 ---
 
 ## Edge Cases
 
-- **Single element at index 0:** `[1, 2, 2, 3, 3]` -> Binary search correctly shifts `high` left.
-- **Single element at the end:** `[1, 1, 2, 2, 3]` -> Binary search correctly shifts `low` right.
-- **Array size 1:** `[1]` -> `high` starts at -1, returns `nums[0]`.
-- **Large numbers:** Handled correctly by standard comparison.
+- **Array Size 1:** `[1]` → Handled by `low=0, high=-1`, returns `nums[0]`.
+- **Single Element at End:** `[1, 1, 2, 2, 3]` → `low` will correctly increment to the last index.
+- **Single Element at Start:** `[1, 2, 2, 3, 3]` → `high` will correctly decrement until `low=0`.
+- **All elements identical except one:** Standard case.
 
 ---
 
 ## Mistakes
 
-- **User Mistake:** Manually checking `if mid % 2 == 0` and comparing with `mid + 1` or `mid - 1`. 
-- **Fix:** Use the **`mid ^ 1` trick** to handle both even/odd cases in one line.
-- Searching up to `n-1` instead of `n-2` can lead to index out of bounds if not careful.
-- Forgetting the array is **sorted** (if it weren't sorted, only the XOR $O(n)$ approach would work).
+- **User Mistake:** Manually checking `if mid % 2 == 0` and comparing with `mid + 1` or `mid - 1`. This leads to verbose, error-prone boundary checks.
+- Using `high = len(nums) - 1` and forgetting to handle index out of bounds for `mid + 1`.
+- Not realizing the array must be sorted for the $O(\log N)$ approach.
 
 ---
 
 ## Complexity
 
-Time: $O(\log n)$ → Binary search halves the search space each iteration.  
-Space: $O(1)$ → Only a few pointers used.
+Time: O(log N) → Binary search halves the search space each step.  
+Space: O(1) → Constant space used for pointers.
+
+---
+
+## Similar Problems
+
+- [Search in Rotated Sorted Array](https://leetcode.com/problems/search-in-rotated-sorted-array/) - Medium
+- [Find Minimum in Rotated Sorted Array](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/) - Medium
+- [Find Peak Element](https://leetcode.com/problems/find-peak-element/) - Medium
 
 ---
 
 ## Tags and Properties
-  - #dsa #important #revisit #binarysearch 
+  - #dsa #important #revisit #binarysearch #logic
   - [[Binary Search]] [[Bit Manipulation]]
-  - Revision Date: 2026-04-04
-  - Related: [[Find Peak Element]], [[Search in Rotated Sorted Array]]
+  - **Revision Date:** 2026-04-07
+  - **Problem Link:** [LeetCode - Single Element in a Sorted Array](https://leetcode.com/problems/single-element-in-a-sorted-array/)
 
 ---
 ### 🔄 Revision Checklist
-- [ ] Day 2 Revision (2026-04-06)
-- [ ] Day 7 Revision (2026-04-11)
-- [ ] Day 15 Revision (2026-04-19)
-- [ ] Day 30 Revision (2026-05-04)
+- [ ] Day 2 Revision (2026-04-09)
+- [ ] Day 7 Revision (2026-04-14)
+- [ ] Day 15 Revision (2026-04-22)
+- [ ] Day 30 Revision (2026-05-07)

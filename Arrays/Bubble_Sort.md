@@ -1,10 +1,10 @@
 ---
-created: 2026-04-06
+created: 2026-04-07
 revisions:
-  - 2026-04-08
-  - 2026-04-13
-  - 2026-04-21
-  - 2026-05-06
+  - 2026-04-09
+  - 2026-04-14
+  - 2026-04-22
+  - 2026-05-07
 ---
 
 # Bubble Sort
@@ -14,7 +14,7 @@ revisions:
 ## Metadata & Placement Tags
 
 - **Target Companies:**
-  - #Microsoft #Adobe #Amazon #HCL #TCS
+  - #Amazon #Microsoft #Adobe #TCS #Infosys #Wipro
 
 - **Confidence Checklist:**
   - [ ] Low  
@@ -22,48 +22,40 @@ revisions:
   - [ ] High  
 
 - **Concepts:**
-  - #sorting [[Sorting]]
-  - #arrays [[Arrays]]
-  - #in-place [[In-Place Algorithms]]
+  - #sorting [[Sorting]], #arrays [[Arrays]]
 
 ## Pattern
 
-Adjacent Comparisons + In-place Swapping  
+In-place Sorting + Adjacent Swapping  
 
 ---
 ## Difficulty
 
-Easy  
-#easy
+Easy #easy
 
 ---
 
 ## ⚡ Key Idea (Core Insight)
 
-The algorithm repeatedly steps through the list, compares **adjacent elements**, and swaps them if they are in the wrong order. In each complete pass, the **largest unsorted element** "bubbles up" to its correct position at the end of the array.
+Repeatedly step through the list, compare adjacent elements, and swap them if they are in the wrong order. In each pass, the largest unsorted element "bubbles up" to its correct position at the end of the array.
 
 ---
 
 ## ⚡ Quick Recall (VERY IMPORTANT)
 
-Compare `arr[j]` and `arr[j+1]`. If `left > right`, swap. Largest element "sinks" to the back every iteration.
+Adjacent swaps; largest element moves to the end per pass. Optimized version stops early if no swaps occur.
 
 ---
 
 ## Approach
 
 ### Brute Force
-- Run two nested loops. Inner loop compares all adjacent pairs regardless of whether the array is already sorted.
-- **Time Complexity:** $O(N^2)$
+- Run two nested loops $n$ times regardless of array state.
+- Time Complexity: $O(n^2)$
 
-### Better (Early Exit Optimization)
-- Introduce a `swapped` boolean flag. 
-- If no two elements were swapped during the inner loop pass, the array is already sorted—break immediately.
-- **Improvement:** Reduces best-case time complexity to $O(N)$.
-
-### Optimal
-- The "Better" approach is the standard optimal version for Bubble Sort.
-- Ensure the inner loop range decreases by `i` each time (as the last `i` elements are already in place).
+### Optimal (Optimized Bubble Sort)
+- **Logic:** Use a `swapped` boolean flag. If a pass completes without any swaps, the array is already sorted, so we break early.
+- **Pass reduction:** After $i$ passes, the last $i$ elements are already in place, so the inner loop only needs to run up to $n-i-1$.
 
 ---
 
@@ -72,18 +64,18 @@ Compare `arr[j]` and `arr[j+1]`. If `left > right`, swap. Largest element "sinks
 ```python
 def bubble_sort(arr):
     n = len(arr)
+    # Outer loop for number of passes
     for i in range(n):
-        # Flag to check if any swapping happened
         swapped = False
-        
-        # Last i elements are already in place
+        # Inner loop for adjacent comparisons
+        # n-i-1 because last i elements are already sorted
         for j in range(0, n - i - 1):
             if arr[j] > arr[j + 1]:
-                # Swap if the element found is greater than the next
+                # Swap elements
                 arr[j], arr[j + 1] = arr[j + 1], arr[j]
                 swapped = True
         
-        # If no two elements were swapped by inner loop, then break
+        # If no elements were swapped by inner loop, then break
         if not swapped:
             break
     return arr
@@ -93,53 +85,62 @@ def bubble_sort(arr):
 
 ## Dry Run (Smart Example)
 
-**Input:** `[4, 2, 4, 1]` (Includes duplicates)
+**Input:** `[5, 1, 4, 2, 8]`
 
-| Step | Current State | Variables | Explanation |
+| Step | i, j | Array State | Explanation |
 | :--- | :--- | :--- | :--- |
-| 1 | `[2, 4, 4, 1]` | `i=0, j=0` | `4 > 2`, swap. |
-| 2 | `[2, 4, 4, 1]` | `i=0, j=1` | `4 == 4`, no swap. |
-| 3 | `[2, 4, 1, 4]` | `i=0, j=2` | `4 > 1`, swap. Largest `4` is at end. |
-| 4 | `[2, 1, 4, 4]` | `i=1, j=0` | `2 > 1`, swap. Second largest `4` is at end. |
-| 5 | `[1, 2, 4, 4]` | `i=2` | Pass starts, `swapped` remains `False`. |
+| 1 | i=0, j=0 | `[1, 5, 4, 2, 8]` | 5 > 1, swap. |
+| 2 | i=0, j=1 | `[1, 4, 5, 2, 8]` | 5 > 4, swap. |
+| 3 | i=0, j=2 | `[1, 4, 2, 5, 8]` | 5 > 2, swap. |
+| 4 | i=0, j=3 | `[1, 4, 2, 5, 8]` | 5 < 8, no swap. 8 is now "bubbled" to end. |
+| 5 | i=1, j=0 | `[1, 4, 2, 5, 8]` | 1 < 4, no swap. |
+| 6 | i=1, j=1 | `[1, 2, 4, 5, 8]` | 4 > 2, swap. 5 and 8 are sorted. |
 
 ---
 
 ## Edge Cases
 
-- **Already Sorted:** `[1, 2, 3, 4]` — Handled by `swapped` flag in $O(N)$.
-- **Reverse Sorted:** `[4, 3, 2, 1]` — Maximum swaps required, $O(N^2)$.
-- **Single Element:** `[1]` — Loop condition `n-i-1` handles this safely.
-- **All Duplicates:** `[2, 2, 2]` — No swaps occur, exits in $O(N)$.
+- **Already Sorted:** $O(n)$ time with optimized flag.
+- **Reverse Sorted:** Maximum swaps required, $O(n^2)$.
+- **Single Element:** Loop terminates immediately.
+- **Duplicate Elements:** Stable sort (maintains relative order of equal elements).
 
 ---
 
 ## Mistakes
 
-- **Inner Loop Range:** Running the inner loop to `n-1` instead of `n-i-1` (unnecessary comparisons).
-- **Early Exit:** Forgetting the `swapped` flag, making the best case $O(N^2)$ instead of $O(N)$.
-- **Stability:** Using `>=` instead of `>` in the comparison, which breaks algorithm stability.
+- **Inner Loop Bounds:** Forgetting to use `n - i - 1`, leading to redundant comparisons or IndexOutOfBounds.
+- **Optimization:** Missing the `swapped` flag, causing $O(n^2)$ even on sorted input.
 - **User Mistake:** No specific note provided.
 
 ---
 
 ## Complexity
 
-- **Time:** $O(N^2)$ → Average and Worst case due to nested loops; $O(N)$ Best case with flag.
-- **Space:** $O(1)$ → Performed in-place without auxiliary data structures.
+Time: O($n^2$) → Average and Worst case due to nested loops. $O(n)$ Best case with optimized flag.  
+Space: O(1) → In-place sorting; no extra memory used beyond variables.
+
+---
+
+## Similar Problems
+
+- [Selection Sort](https://www.geeksforgeeks.org/selection-sort/) - Easy
+- [Insertion Sort](https://www.geeksforgeeks.org/insertion-sort/) - Easy
+- [Sort Colors (Dutch National Flag)](https://leetcode.com/problems/sort-colors/) - Medium
+- [Sort an Array](https://leetcode.com/problems/sort-an-array/) - Medium
 
 ---
 
 ## Tags and Properties
 
-- #dsa #important #revisit  
-- #sorting [[Sorting]] #algorithms [[Algorithms]]
-- **Revision Date:** 2026-04-06
-- **Related:** [[Selection Sort]], [[Insertion Sort]]
+- #dsa #important #revisit #sorting #arrays
+- [[Sorting]] [[Arrays]]
+- **Revision Date:** 2026-04-07
+- **Problem Link:** [GeeksforGeeks - Bubble Sort](https://www.geeksforgeeks.org/bubble-sort-algorithms-by-using-python-language/)
 
 ---
 ### 🔄 Revision Checklist
-- [ ] Day 2 Revision (2026-04-08)
-- [ ] Day 7 Revision (2026-04-13)
-- [ ] Day 15 Revision (2026-04-21)
-- [ ] Day 30 Revision (2026-05-06)
+- [ ] Day 2 Revision (2026-04-09)
+- [ ] Day 7 Revision (2026-04-14)
+- [ ] Day 15 Revision (2026-04-22)
+- [ ] Day 30 Revision (2026-05-07)

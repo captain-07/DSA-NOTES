@@ -1,10 +1,10 @@
 ---
-created: 2026-04-03
+created: 2026-04-07
 revisions:
-  - 2026-04-05
-  - 2026-04-10
-  - 2026-04-18
-  - 2026-05-03
+  - 2026-04-09
+  - 2026-04-14
+  - 2026-04-22
+  - 2026-05-07
 ---
 
 # Floor And Celling In Sorted Array
@@ -22,121 +22,134 @@ revisions:
   - [ ] High  
 
 - **Concepts:**
-  - #binarysearch [[Binary Search]], #arrays [[Arrays]]
+  - #binarysearch [[Binary Search]]
+  - #arrays [[Arrays]]
 
 ## Pattern
 
-Modified Binary Search (Range Seeking)
+Modified Binary Search (Range Bound Search)
 
 ---
 ## Difficulty
 
 Easy
-#easy 
+#easy
 
 ---
 
 ## ⚡ Key Idea (Core Insight)
 
-Since the array is sorted, use **Binary Search** to find the boundaries. 
-- **Floor:** The largest element $\le X$. If `arr[mid] <= X`, it's a candidate for floor; move right to find a larger one.
-- **Ceiling:** The smallest element $\ge X$. If `arr[mid] >= X`, it's a candidate for ceiling; move left to find a smaller one.
+The floor of $X$ is the largest element $\le X$. The ceiling of $X$ is the smallest element $\ge X$. In a sorted array, Binary Search naturally converges such that when the loop (`low <= high`) ends without finding $X$, `high` points to the **floor** and `low` points to the **ceiling**.
 
 ---
 
 ## ⚡ Quick Recall (VERY IMPORTANT)
 
-Floor is the "rightmost" valid element $\le X$; Ceiling is the "leftmost" valid element $\ge X$. If `arr[mid] == X`, both floor and ceiling are $X$.
+If target not found: **Floor = arr[high]**, **Ceiling = arr[low]**. Always check if `high < 0` (no floor) or `low >= n` (no ceiling).
 
 ---
 
 ## Approach
 
 ### Brute Force
-- Linearly traverse the array to find the last element $\le X$ and first element $\ge X$.
+- Iterate through the array and keep track of the largest element $\le X$ and smallest $\ge X$.
 - Time: $O(N)$
+- Space: $O(1)$
 
 ### Optimal
-1. Initialize `floor = -1` and `ceil = -1`.
-2. Perform Binary Search.
-3. If `arr[mid] == X`: both floor and ceil are $X$, return immediately.
-4. If `arr[mid] < X`: Update `floor = arr[mid]`, search right half (`low = mid + 1`).
-5. If `arr[mid] > X`: Update `ceil = arr[mid]`, search left half (`high = mid - 1`).
-- Time: $O(\log N)$
+- Use Binary Search to find the element.
+- If `arr[mid] == X`, both floor and ceiling are $X$.
+- If `arr[mid] < X`, move `low = mid + 1`.
+- If `arr[mid] > X`, move `high = mid - 1`.
+- After the loop, validate `high` and `low` indices.
 
 ---
 
 ## Code (Python)
 
 ```python
-def findFloorCeil(arr, x):
-    low, high = 0, len(arr) - 1
-    floor, ceil = -1, -1
+def find_floor_ceil(arr, x):
+    n = len(arr)
+    low, high = 0, n - 1
+    f, c = -1, -1
     
     while low <= high:
-        mid = (low + high) // 2
+        mid = low + (high - low) // 2
         
         if arr[mid] == x:
-            return (arr[mid], arr[mid])
-        
-        if arr[mid] < x:
-            floor = arr[mid] # Potential floor found
-            low = mid + 1    # Try to find a larger one
+            return arr[mid], arr[mid]
+        elif arr[mid] < x:
+            f = arr[mid] # Potential floor
+            low = mid + 1
         else:
-            ceil = arr[mid]  # Potential ceiling found
-            high = mid - 1   # Try to find a smaller one
+            c = arr[mid] # Potential ceiling
+            high = mid - 1
             
-    return (floor, ceil)
+    return f, c
+
+# Usage
+# arr = [1, 2, 8, 10, 10, 12, 19], x = 5
+# Output: (2, 8)
 ```
 
 ---
 
 ## Dry Run (Smart Example)
 
-**Input:** `arr = [3, 4, 7, 8, 10]`, `X = 5`
+**Input:** `arr = [3, 4, 7, 8, 10]`, `x = 5`
 
-| Step | Variables (low, high, mid) | arr[mid] | Action | Floor | Ceil |
+| Step | low | high | mid | arr[mid] | Explanation |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| 1 | L=0, H=4, M=2 | 7 | 7 > 5: search left | -1 | 7 |
-| 2 | L=0, H=1, M=0 | 3 | 3 < 5: search right | 3 | 7 |
-| 3 | L=1, H=1, M=1 | 4 | 4 < 5: search right | 4 | 7 |
-| 4 | L=2, H=1 | - | Loop terminates | **4** | **7** |
+| 1 | 0 | 4 | 2 | 7 | $7 > 5$, so Ceiling = 7, `high = 1` |
+| 2 | 0 | 1 | 0 | 3 | $3 < 5$, so Floor = 3, `low = 1` |
+| 3 | 1 | 1 | 1 | 4 | $4 < 5$, so Floor = 4, `low = 2` |
+| 4 | 2 | 1 | - | - | `low > high`, loop ends. Result: (4, 7) |
 
 ---
 
 ## Edge Cases
 
-- **X is smaller than arr[0]:** Floor remains -1, Ceil is arr[0].
-- **X is larger than arr[n-1]:** Floor is arr[n-1], Ceil remains -1.
-- **X exists in array:** Both floor and ceil equal X.
-- **Array size is 1:** Compare single element with X and update accordingly.
+- **X is smaller than all:** `floor` will be -1, `ceil` will be `arr[0]`.
+- **X is larger than all:** `floor` will be `arr[n-1]`, `ceil` will be -1.
+- **X exists in array:** Both `floor` and `ceil` equal $X$.
+- **Duplicates:** Binary search handles duplicates correctly for floor/ceil values.
+- **Empty Array:** Handled by `low <= high` condition (returns -1, -1).
 
 ---
 
 ## Mistakes
 
-- Returning index instead of value (read problem carefully).
-- Forgetting to handle the "not found" case (return -1).
-- **User Mistake:** No specific note provided (ensure revision notes are created for all fundamental BS variations).
+- **Index Out of Bounds:** Forgetting to check if `high` or `low` went out of range before returning.
+- **Off-by-one:** Using `low < high` instead of `low <= high` in the while loop.
+- **Initialization:** Initializing `f` and `c` with values present in the array instead of a sentinel like -1.
+- **User Mistake:** Ensure revision notes are created for all fundamental BS variations (Lower Bound, Upper Bound, Floor, Ceil).
 
 ---
 
 ## Complexity
 
-Time: $O(\log N)$ → Binary search halves the search space each iteration.  
-Space: $O(1)$ → Only a few pointers/variables used.
+Time: $O(\log N)$ → Binary search cuts the search space in half each iteration.  
+Space: $O(1)$ → Constant space used for pointers and variables.
+
+---
+
+## Similar Problems
+
+- [Search Insert Position](https://leetcode.com/problems/search-insert-position/) - Easy
+- [Find First and Last Position of Element in Sorted Array](https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/) - Medium
+- [Find Smallest Letter Greater Than Target](https://leetcode.com/problems/find-smallest-letter-greater-than-target/) - Easy
 
 ---
 
 ## Tags and Properties
-- #dsa #important #revisit #searching 
-- [[Binary Search]] [[Arrays]]
-- Revision Date: 2026-04-03
-- Related: [[Search Insert Position]], [[Lower Bound and Upper Bound]]
+  - #dsa #important #revisit #binarysearch #searching
+  - [[Binary Search]] [[Arrays]]
+  - **Revision Date:** 2026-04-07
+  - **Problem Link:** [GeeksforGeeks - Floor in Sorted Array](https://www.geeksforgeeks.org/floor-in-a-sorted-array/)
 
 ---
 ### 🔄 Revision Checklist
-- [ ] Day 2 Revision (2026-04-05)
-- [ ] Day 7 Revision (2026-04-10)
-- [ ] Day 15 Revision (2026-04-18)
-- [ ] Day 30 Revision (2026-05-03)
+- [ ] Day 2 Revision (2026-04-09)
+- [ ] Day 7 Revision (2026-04-14)
+- [ ] Day 15 Revision (2026-04-22)
+- [ ] Day 30 Revision (2026-05-07)

@@ -1,10 +1,10 @@
 ---
-created: 2026-03-31
+created: 2026-04-07
 revisions:
-  - 2026-04-02
-  - 2026-04-07
-  - 2026-04-15
-  - 2026-04-30
+  - 2026-04-09
+  - 2026-04-14
+  - 2026-04-22
+  - 2026-05-07
 ---
 
 # Find First And Last Position Of Element In A Sorted Array
@@ -14,7 +14,7 @@ revisions:
 ## Metadata & Placement Tags
 
 - **Target Companies:**
-  - #Amazon #Google #Microsoft #Facebook #LinkedIn #Adobe
+  - #Google #Facebook #Amazon #Microsoft #LinkedIn #Uber
 
 - **Confidence Checklist:**
   - [ ] Low  
@@ -22,45 +22,42 @@ revisions:
   - [ ] High  
 
 - **Concepts:**
-  - #binarysearch [[Binary Search]]
-  - #array [[Array]]
+  - #binarysearch [[Binary Search]], #array [[Array]]
 
 ## Pattern
 
-Modified Binary Search (Two Passes)
+Modified Binary Search (Finding Boundaries)
 
 ---
 ## Difficulty
 
-Medium  
-#medium
+Medium #medium
 
 ---
 
 ## ⚡ Key Idea (Core Insight)
 
-Since the array is sorted, use **Binary Search** twice. Instead of stopping when `nums[mid] == target`, record the index as a potential candidate and continue searching in the left half (for first position) or right half (for last position).
+The array is sorted, which signals **Binary Search**. To find the range, perform two separate binary searches: one to find the **leftmost** index and another for the **rightmost** index. When `nums[mid] == target`, don't stop; adjust the search range to keep looking for a "more extreme" boundary.
 
 ---
 
 ## ⚡ Quick Recall (VERY IMPORTANT)
 
-To find **First**: If `mid == target`, set `first = mid` and move `high = mid - 1`.  
-To find **Last**: If `mid == target`, set `last = mid` and move `low = mid + 1`.
+Run Binary Search twice. If `nums[mid] == target`, record the index and move `right = mid - 1` (to find first) or `left = mid + 1` (to find last).
 
 ---
 
 ## Approach
 
 ### Brute Force
-- Linear scan from left to find the first occurrence, then linear scan from right to find the last.
-- Time: O(N)
+- Linear scan through the array to find the first and last occurrence.
+- **Time Complexity:** O(N)
 
 ### Optimal
-1. **Find First Position**: Run Binary Search. If `target` is found, update `result[0]` and shrink search space to the left (`high = mid - 1`) to see if an earlier occurrence exists.
-2. **Reset Pointers**: Reset `low` to 0 and `high` to `n-1`.
-3. **Find Last Position**: Run Binary Search. If `target` is found, update `result[1]` and shrink search space to the right (`low = mid + 1`) to see if a later occurrence exists.
-- Time: O(log N)
+- **Two Binary Searches:** 
+    1. First search: If `target` is found, update `first_idx` and move `right` pointer to `mid - 1` to check the left side.
+    2. Second search: If `target` is found, update `last_idx` and move `left` pointer to `mid + 1` to check the right side.
+- **Time Complexity:** O(log N)
 
 ---
 
@@ -68,23 +65,25 @@ To find **Last**: If `mid == target`, set `last = mid` and move `low = mid + 1`.
 
 ```python
 def searchRange(nums, target):
-    def findBound(isFirst):
-        low, high = 0, len(nums) - 1
+    def findBound(is_first):
+        left, right = 0, len(nums) - 1
         bound = -1
         
-        while low <= high:
-            mid = (low + high) // 2
+        while left <= right:
+            mid = left + (right - left) // 2
             
             if nums[mid] == target:
                 bound = mid
-                if isFirst:
-                    high = mid - 1 # Look left
+                if is_first:
+                    # Look left for earlier occurrence
+                    right = mid - 1
                 else:
-                    low = mid + 1  # Look right
+                    # Look right for later occurrence
+                    left = mid + 1
             elif nums[mid] < target:
-                low = mid + 1
+                left = mid + 1
             else:
-                high = mid - 1
+                right = mid - 1
         return bound
 
     return [findBound(True), findBound(False)]
@@ -94,53 +93,62 @@ def searchRange(nums, target):
 
 ## Dry Run (Smart Example)
 
-**Input:** `nums = [5, 7, 7, 8, 8, 10]`, `target = 8`
+Input: `nums = [5, 7, 7, 8, 8, 10]`, `target = 8`
 
-| Pass | Step | low, high, mid | nums[mid] | Action | Result Variable |
+**Finding First Position (`is_first = True`):**
+
+| Step | left, right | mid | nums[mid] | Action | bound |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **First** | 1 | L:0, H:5, M:2 | 7 | 7 < 8, low = mid + 1 (3) | first = -1 |
-| **First** | 2 | L:3, H:5, M:4 | 8 | 8 == 8, first = 4, high = 3 | first = 4 |
-| **First** | 3 | L:3, H:3, M:3 | 8 | 8 == 8, first = 3, high = 2 | first = 3 |
-| **Last** | 1 | L:0, H:5, M:2 | 7 | 7 < 8, low = mid + 1 (3) | last = -1 |
-| **Last** | 2 | L:3, H:5, M:4 | 8 | 8 == 8, last = 4, low = 5 | last = 4 |
-| **Last** | 3 | L:5, H:5, M:5 | 10 | 10 > 8, high = 4 | last = 4 |
+| 1 | 0, 5 | 2 | 7 | 7 < 8, `left = 3` | -1 |
+| 2 | 3, 5 | 4 | 8 | 8 == 8, `bound = 4`, `right = 3` | 4 |
+| 3 | 3, 3 | 3 | 8 | 8 == 8, `bound = 3`, `right = 2` | 3 |
+| End | 3, 2 | - | - | Loop terminates | **3** |
 
 ---
 
 ## Edge Cases
 
-- **Empty Array**: `nums = []` -> Return `[-1, -1]`.
-- **Target Not Present**: `nums = [1, 2, 4], target = 3` -> Return `[-1, -1]`.
-- **Single Element**: `nums = [5], target = 5` -> Return `[0, 0]`.
-- **All Elements are Target**: `nums = [8, 8, 8], target = 8` -> Return `[0, 2]`.
+- **Empty Array:** Should return `[-1, -1]`.
+- **Target Not Present:** Binary search finishes without finding target, returns `[-1, -1]`.
+- **All Elements are Target:** Should return `[0, n-1]`.
+- **Single Element Array:** Returns `[0, 0]` if match, else `[-1, -1]`.
 
 ---
 
 ## Mistakes
 
-- **User Mistake**: Forgetting to reset `low` and `high` pointers to original bounds before starting the second binary search pass.
-- Not handling the `nums = []` case, leading to index errors.
-- Using `while low < high` instead of `low <= high`, missing the last element.
-- Returning `[mid, mid]` immediately upon finding the target once.
+- Using a single linear scan (O(N)) instead of binary search (O(log N)).
+- Forgetting to handle the "not found" case correctly.
+- Stopping the search immediately after finding the target instead of searching for boundaries.
+- **User Mistake:** None
 
 ---
 
 ## Complexity
 
-Time: O(log N) → Two independent binary searches are performed.  
-Space: O(1) → Only a few variables used for pointers and results.
+Time: O(log N) → Two independent binary searches take 2 * log N time.  
+Space: O(1) → Only a few pointers and variables used.
+
+---
+
+## Similar Problems
+
+- [Search Insert Position](https://leetcode.com/problems/search-insert-position/) - Easy
+- [First Bad Version](https://leetcode.com/problems/first-bad-version/) - Easy
+- [Search in Rotated Sorted Array](https://leetcode.com/problems/search-in-rotated-sorted-array/) - Medium
+- [Find Minimum in Rotated Sorted Array](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/) - Medium
 
 ---
 
 ## Tags and Properties
-- #dsa #important #revisit #leetcode34
-- [[Binary Search]] [[Array]]
-- Revision Date: 2026-03-31
-- Related: [[Search in Rotated Sorted Array]], [[Find Minimum in Rotated Sorted Array]]
+  - #dsa #important #revisit #binarysearch #sorting
+  - [[Binary Search]] [[Arrays]]
+  - **Revision Date:** 2026-04-07
+  - **Problem Link:** [LeetCode - Find First and Last Position of Element in Sorted Array](https://leetcode.com/problems/find-first-and-last-position-of-element-in-a-sorted-array/)
 
 ---
 ### 🔄 Revision Checklist
-- [ ] Day 2 Revision (2026-04-02)
-- [ ] Day 7 Revision (2026-04-07)
-- [ ] Day 15 Revision (2026-04-15)
-- [ ] Day 30 Revision (2026-04-30)
+- [ ] Day 2 Revision (2026-04-09)
+- [ ] Day 7 Revision (2026-04-14)
+- [ ] Day 15 Revision (2026-04-22)
+- [ ] Day 30 Revision (2026-05-07)

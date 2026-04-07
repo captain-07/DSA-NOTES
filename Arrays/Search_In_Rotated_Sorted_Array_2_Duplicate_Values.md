@@ -1,10 +1,10 @@
 ---
-created: 2026-04-01
+created: 2026-04-07
 revisions:
-  - 2026-04-03
-  - 2026-04-08
-  - 2026-04-16
-  - 2026-05-01
+  - 2026-04-09
+  - 2026-04-14
+  - 2026-04-22
+  - 2026-05-07
 ---
 
 # Search In Rotated Sorted Array 2 [Duplicate Values]
@@ -23,13 +23,12 @@ revisions:
 
 - **Concepts:**
   - #binarysearch [[Binary Search]]
-  - #arrays [[Arrays]]
-  - #twopointers [[Two Pointers]]
+  - #array [[Array]]
+  - #duplicates [[Handling Duplicates]]
 
----
 ## Pattern
 
-Modified Binary Search (Handling Duplicates)
+Modified Binary Search + Linear Shrink  
 
 ---
 ## Difficulty
@@ -41,31 +40,38 @@ Medium
 
 ## ⚡ Key Idea (Core Insight)
 
-In a rotated sorted array **with duplicates**, the condition `nums[low] <= nums[mid]` no longer guarantees that the left half is sorted (e.g., `[1, 0, 1, 1, 1]`). When `nums[low] == nums[mid] == nums[high]`, we cannot determine which side is sorted, so we must shrink the search space by incrementing `low` and decrementing `high`.
+- In a rotated sorted array, at least one half (left or right) is always sorted.
+- **The Duplicate Problem:** If `nums[left] == nums[mid] == nums[right]`, we cannot determine which half is sorted.
+- **The Unlock:** In the ambiguous case, simply shrink the search space by incrementing `left` and decrementing `right` until the ambiguity is resolved.
 
 ---
 
 ## ⚡ Quick Recall (VERY IMPORTANT)
 
-If `nums[low] == nums[mid] == nums[high]`, just do `low += 1` and `high -= 1` to skip duplicates. Otherwise, proceed with standard Rotated Binary Search logic.
+- Standard Rotated Binary Search, but add `if nums[L] == nums[M] == nums[R]: L++; R--` to handle duplicates before checking sorted halves.
 
 ---
 
 ## Approach
 
 ### Brute Force
-- Linear Search: Iterate through the array and check if any element equals the target.
-- **Time Complexity:** O(N)
+- Linear search through the entire array.
+- **Time:** O(N)
 
-### Optimal
-- **Modified Binary Search:**
-  1. Initialize `low = 0`, `high = len(nums) - 1`.
-  2. While `low <= high`:
-     - Calculate `mid`.
-     - If `nums[mid] == target`, return `True`.
-     - **Handle Duplicates:** If `nums[low] == nums[mid] == nums[high]`, increment `low` and decrement `high`, then `continue`.
-     - **Identify Sorted Half:** Check if left side `[low...mid]` or right side `[mid...high]` is sorted.
-     - **Binary Search Logic:** If target lies within the sorted half, search there; otherwise, search the other half.
+### Better
+- Sort the array first (if not already "sorted-rotated") and use standard Binary Search.
+- **Time:** O(N log N) - Inferior to brute force for this specific problem.
+
+### Optimal (Modified Binary Search)
+1. Initialize `left = 0`, `right = len(nums) - 1`.
+2. While `left <= right`:
+   - Calculate `mid`.
+   - If `nums[mid] == target`, return `True`.
+   - **Critical Step:** If `nums[left] == nums[mid] == nums[right]`, increment `left` and decrement `right`.
+   - Otherwise, identify the sorted half:
+     - If `nums[left] <= nums[mid]` (Left side is sorted): Check if target is within `[nums[left], nums[mid])`.
+     - Else (Right side is sorted): Check if target is within `(nums[mid], nums[right]]`.
+3. Return `False` if not found.
 
 ---
 
@@ -81,22 +87,20 @@ def search(nums: list[int], target: int) -> bool:
         if nums[mid] == target:
             return True
             
-        # The critical check for duplicates
+        # Ambiguous case due to duplicates
         if nums[low] == nums[mid] == nums[high]:
             low += 1
             high -= 1
             continue
             
-        # Check if Left half is sorted
+        # Left side is sorted
         if nums[low] <= nums[mid]:
-            # Target is in the sorted left half
             if nums[low] <= target < nums[mid]:
                 high = mid - 1
             else:
                 low = mid + 1
-        # Right half must be sorted
+        # Right side is sorted
         else:
-            # Target is in the sorted right half
             if nums[mid] < target <= nums[high]:
                 low = mid + 1
             else:
@@ -111,48 +115,55 @@ def search(nums: list[int], target: int) -> bool:
 
 **Input:** `nums = [1, 0, 1, 1, 1]`, `target = 0`
 
-| Step | low | mid | high | nums[mid] | Explanation |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| 1 | 0 | 2 | 4 | 1 | `nums[0]==nums[2]==nums[4] (1==1==1)`. Shrink: `low=1, high=3`. |
-| 2 | 1 | 2 | 3 | 1 | `nums[1]=0, nums[2]=1`. Left half `[0, 1]` is sorted. `0 <= 0 < 1` is True. `high = mid-1 = 1`. |
-| 3 | 1 | 1 | 1 | 0 | `nums[1] == target`. Return **True**. |
+| Step | L, M, R | Variables | Explanation |
+| :--- | :--- | :--- | :--- |
+| 1 | 0, 2, 4 | `nums[0]=1, nums[2]=1, nums[4]=1` | `nums[L]==nums[M]==nums[R]`. Shrink: `L=1, R=3`. |
+| 2 | 1, 2, 3 | `nums[1]=0, nums[2]=1, nums[3]=1` | `nums[M]=1`. Left half `[1, 2]` is sorted (`0 <= 1`). |
+| 3 | 1, 1, 1 | `nums[1]=0` | `nums[1] == target`. Return `True`. |
 
 ---
 
 ## Edge Cases
 
-- **All elements identical:** `[1, 1, 1]`, target `0` → Correctly returns `False` after shrinking.
-- **Array size 1:** `[1]`, target `1` → Correctly returns `True`.
-- **Target at pivot:** `[2, 5, 6, 0, 0, 1, 2]`, target `0` → Standard rotated logic handles this.
-- **Empty Array:** Handled by `low <= high` condition.
+- `[1]`: Single element matching/not matching target.
+- `[1, 1, 1, 1]`: All elements identical to each other but not the target.
+- `[3, 1]`: Minimum rotation, two elements.
+- Target is the pivot element itself.
 
 ---
 
 ## Mistakes
 
-- **Forget duplicate check:** If you don't check `nums[low] == nums[mid] == nums[high]`, the code will fail on cases like `[1, 0, 1, 1, 1]`.
-- **Misplacing the `continue`:** After shrinking `low` and `high`, you must skip the rest of the loop to re-evaluate `mid`.
-- **Using `True/False` instead of index:** Read the problem carefully; this version (Part 2) usually asks for a boolean, while Part 1 asks for an index.
+- **Incorrect Duplicate Handling:** Forgetting to check `nums[low] == nums[mid] == nums[high]` leads to incorrect "sorted half" logic.
+- **Strict Inequalities:** Using `<` instead of `<=` when checking if target is within the sorted range.
+- **User Mistake:** None.
 
 ---
 
 ## Complexity
 
-- **Time:** O(log N) on average; O(N) in the worst case (e.g., all elements are duplicates).
-- **Space:** O(1) as no extra space is used.
+- **Time:** Average O(log N). Worst case O(N) when all elements are duplicates (e.g., `[1, 1, 1]` searching for `0`).
+- **Space:** O(1) as we only use pointers.
+
+---
+
+## Similar Problems
+
+- [Search in Rotated Sorted Array](https://leetcode.com/problems/search-in-rotated-sorted-array/) - Medium
+- [Find Minimum in Rotated Sorted Array II](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array-ii/) - Hard
+- [Find Minimum in Rotated Sorted Array](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/) - Medium
 
 ---
 
 ## Tags and Properties
-
-- #dsa #important #revisit #searching
-- [[Binary Search]] [[Rotated Sorted Array]]
-- Revision Date: 2026-04-01
-- Related: [[Search In Rotated Sorted Array 1]]
+  - #dsa #important #revisit #binarysearch #interview-prep
+  - [[Binary Search]] [[Array]] [[Two Pointers]]
+  - **Revision Date:** 2026-04-07
+  - **Problem Link:** [LeetCode 81 - Search in Rotated Sorted Array II](https://leetcode.com/problems/search-in-rotated-sorted-array-ii/)
 
 ---
 ### 🔄 Revision Checklist
-- [ ] Day 2 Revision (2026-04-03)
-- [ ] Day 7 Revision (2026-04-08)
-- [ ] Day 15 Revision (2026-04-16)
-- [ ] Day 30 Revision (2026-05-01)
+- [ ] Day 2 Revision (2026-04-09)
+- [ ] Day 7 Revision (2026-04-14)
+- [ ] Day 15 Revision (2026-04-22)
+- [ ] Day 30 Revision (2026-05-07)
