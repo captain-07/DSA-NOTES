@@ -1,10 +1,10 @@
 ---
-created: 2026-04-07
+created: 2026-04-10
 revisions:
-  - 2026-04-09
-  - 2026-04-14
-  - 2026-04-22
-  - 2026-05-07
+  - 2026-04-12
+  - 2026-04-17
+  - 2026-04-25
+  - 2026-05-10
 ---
 
 # Two Sum
@@ -26,60 +26,63 @@ revisions:
 
 ## Pattern
 
-HashMap (Complement Search)
+HashMap (One-pass)
 
 ---
 ## Difficulty
 
-Easy  
-#easy
+Easy #easy
 
 ---
 
 ## ⚡ Key Idea (Core Insight)
 
-Instead of searching for a pair by nested iteration ($O(N^2)$), use a **HashMap** to store previously seen numbers and their indices. For each element $x$, calculate the required `complement = target - x` and check if it exists in the map in $O(1)$ time.
+- For every number `x`, we are looking for a `complement` such that `complement = target - x`.
+- A HashMap stores previously seen numbers as keys and their indices as values, enabling $O(1)$ lookups for the complement.
 
 ---
 
 ## ⚡ Quick Recall (VERY IMPORTANT)
 
-Store `index` of visited elements in a map. If `target - current` is in the map, you found the pair.
+- Iterate once: `if target - num in seen: return [seen[target - num], current_index]`. 
+- Store current number in map **after** checking to prevent using the same element twice.
 
 ---
 
 ## Approach
 
 ### Brute Force
-- Iterate through every pair $(i, j)$ and check if $nums[i] + nums[j] == target$.
-- Time Complexity: $O(N^2)$
+- Use nested loops to check every possible pair $(i, j)$ where $i \neq j$.
+- Time: $O(n^2)$ | Space: $O(1)$
 
 ### Optimal (One-Pass Hash Map)
-- Use a dictionary to store `{value: index}`.
-- For each number, calculate `complement`.
-- If `complement` is in the dictionary, return `[dictionary[complement], current_index]`.
-- Otherwise, add the current number to the dictionary.
+1. Initialize an empty hash map `prev_map`.
+2. Iterate through `nums` with index `i`.
+3. Calculate `diff = target - nums[i]`.
+4. If `diff` exists in `prev_map`, return `[prev_map[diff], i]`.
+5. Otherwise, add `nums[i]` to `prev_map` with its index `i`.
+- Time: $O(n)$ | Space: $O(n)$
 
 ---
 
 ## Code (Python)
 
 ```python
-def twoSum(nums, target):
-    # Dictionary to store value -> index mapping
-    prev_map = {} 
-    
-    for i, n in enumerate(nums):
-        diff = target - n
+class Solution:
+    def twoSum(self, nums: list[int], target: int) -> list[int]:
+        # prev_map: value -> index
+        prev_map = {}
         
-        # Check if the required complement was already seen
-        if diff in prev_map:
-            return [prev_map[diff], i]
-        
-        # Store current number and its index for future lookups
-        prev_map[n] = i
-        
-    return [] # Should not reach here based on problem constraints
+        for i, n in enumerate(nums):
+            diff = target - n
+            # Check if complement exists in map
+            if diff in prev_map:
+                return [prev_map[diff], i]
+            
+            # Store current value and index for future complements
+            prev_map[n] = i
+            
+        return [] # Should not happen based on constraints
 ```
 
 ---
@@ -88,43 +91,43 @@ def twoSum(nums, target):
 
 **Input:** `nums = [3, 2, 4], target = 6`
 
-| Step | Current (n) | Diff (6 - n) | prev_map (before update) | Explanation |
-| :--- | :--- | :--- | :--- | :--- |
-| 1 | 3 | 3 | `{}` | 3 not in map. Store `{3: 0}`. |
-| 2 | 2 | 4 | `{3: 0}` | 4 not in map. Store `{3: 0, 2: 1}`. |
-| 3 | 4 | 2 | `{3: 0, 2: 1}` | **2 is in map!** Return `[prev_map[2], 2]` -> `[1, 2]`. |
+| Step | Variables | Explanation |
+| :--- | :--- | :--- |
+| 1 | `i=0, n=3, diff=3, map={}` | `3` not in map. Add `3: 0` to map. |
+| 2 | `i=1, n=2, diff=4, map={3: 0}` | `4` not in map. Add `2: 1` to map. |
+| 3 | `i=2, n=4, diff=2, map={3:0, 2:1}` | `2` IS in map! Return `[prev_map[2], 2]`. |
+| **Result** | **[1, 2]** | Indices of 2 and 4. |
 
 ---
 
 ## Edge Cases
 
-- **Negative Numbers:** `nums = [-1, -2, -3, -4], target = -5` → Works normally.
-- **Multiple Pairs:** Return the first one found (standard LC behavior).
-- **Large Inputs:** $O(N)$ ensures it won't Time Limit Exceeded (TLE).
-- **Same Number as Complement:** `nums = [3, 3], target = 6` → Handled by storing after checking.
+- **Duplicates:** `[3, 3], target=6` (Ensure second 3 finds the first 3 in the map).
+- **Negative Numbers:** `[-1, -2, -3], target=-5` (Logic remains same).
+- **Target is double a number:** `[3, 2, 4], target=6` (Must not return index `0` twice for `3+3`).
+- **Large Inputs:** Ensure $O(n)$ to avoid TLE.
 
 ---
 
 ## Mistakes
 
-- **Forgot to use HashMap:** Attempting $O(N^2)$ or unnecessary sorting.
-- **Sorting First:** Changes original indices; requires storing original positions before sorting.
-- **Handling Duplicates:** Returning the same index twice (e.g., for `target = 6, nums = [3]`).
-- **One-pass vs Two-pass:** One-pass is cleaner and handles duplicates naturally.
+- **Same Element Twice:** Accessing the same index twice (e.g., `target=6`, `nums=[3, 2]`, returning `[0, 0]`). *[User Mistake]*
+- **Map Update Timing:** Adding the current number to the map **before** checking for the complement (causes the "same element" bug).
+- **Sorting First:** Sorting `nums` breaks the original index mapping unless pairs of `(value, index)` are stored.
 
 ---
 
 ## Complexity
 
-Time: $O(N)$ → We traverse the list containing $N$ elements exactly once. Each lookup in the table costs only $O(1)$ time.  
-Space: $O(N)$ → In the worst case, we store all $N$ elements in the hash table.
+Time: $O(n)$ → Single pass through the array.  
+Space: $O(n)$ → Worst case stores all elements in the hash map.
 
 ---
 
 ## Similar Problems
 
-- [3Sum](https://leetcode.com/problems/3sum/) - Medium
 - [Two Sum II - Input Array Is Sorted](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/) - Medium
+- [3Sum](https://leetcode.com/problems/3sum/) - Medium
 - [4Sum](https://leetcode.com/problems/4sum/) - Medium
 - [Subarray Sum Equals K](https://leetcode.com/problems/subarray-sum-equals-k/) - Medium
 
@@ -132,14 +135,14 @@ Space: $O(N)$ → In the worst case, we store all $N$ elements in the hash table
 
 ## Tags and Properties
 - #dsa #important #revisit  
-- #blind75 #neetcode150 #easy-win  
-- [[HashMap]] [[Array]]  
-- **Revision Date:** 2026-04-07  
+- #hashmap #array #blind75 
+- [[HashMap]] [[Array]]
+- **Revision Date:** 2026-04-10
 - **Problem Link:** [LeetCode - Two Sum](https://leetcode.com/problems/two-sum/)
 
 ---
 ### 🔄 Revision Checklist
-- [ ] Day 2 Revision (2026-04-09)
-- [ ] Day 7 Revision (2026-04-14)
-- [ ] Day 15 Revision (2026-04-22)
-- [ ] Day 30 Revision (2026-05-07)
+- [ ] Day 2 Revision (2026-04-12)
+- [ ] Day 7 Revision (2026-04-17)
+- [ ] Day 15 Revision (2026-04-25)
+- [ ] Day 30 Revision (2026-05-10)
