@@ -1,10 +1,10 @@
 ---
-created: 2026-04-07
+created: 2026-04-10
 revisions:
-  - 2026-04-09
-  - 2026-04-14
-  - 2026-04-22
-  - 2026-05-07
+  - 2026-04-12
+  - 2026-04-17
+  - 2026-04-25
+  - 2026-05-10
 ---
 
 # Upper Bound
@@ -14,7 +14,7 @@ revisions:
 ## Metadata & Placement Tags
 
 - **Target Companies:**
-  - #Google #Amazon #Microsoft #Adobe #MorganStanley
+  - #Google #Amazon #Microsoft #Adobe #Meta #Bloomberg
 
 - **Confidence Checklist:**
   - [ ] Low  
@@ -22,13 +22,11 @@ revisions:
   - [ ] High  
 
 - **Concepts:**
-  - #binarysearch [[Binary Search]]
-  - #arrays [[Arrays]]
-  - #searching [[Searching]]
+  - #binarysearch [[Binary Search]], #arrays [[Arrays]], #searching [[Searching]]
 
 ## Pattern
 
-Binary Search (Sorted Array)
+Binary Search (Sorted Search Space)
 
 ---
 ## Difficulty
@@ -40,97 +38,92 @@ Easy
 
 ## ⚡ Key Idea (Core Insight)
 
-The **Upper Bound** of $X$ is the first index $i$ where $arr[i] > X$. In a sorted array, this represents the smallest value strictly greater than the target. If no such element exists, return $N$ (the array size).
+- Find the **smallest index `i`** in a sorted array such that `arr[i] > target`.
+- Unlike Lower Bound (which is `arr[i] >= target`), Upper Bound looks for a value **strictly greater** than the target.
 
 ---
 
 ## ⚡ Quick Recall (VERY IMPORTANT)
 
-If $arr[mid] > X$, then $mid$ is a potential answer; save it and search the **left** half to find a smaller index. Otherwise, search the **right** half.
+- If `arr[mid] > target`, then `mid` is a potential answer; narrow search to the left (`high = mid - 1`).
+- Otherwise, the target is still larger or equal; move to the right (`low = mid + 1`).
 
 ---
 
 ## Approach
 
 ### Brute Force
-- Linear search from index 0 to $N-1$ and return the first index where $arr[i] > X$.
+- Linear search through the array from index 0. Return the first index where `arr[i] > x`.
 - Time: O(N)
-- Space: O(1)
 
 ### Optimal
-- Use two pointers (`low`, `high`) for Binary Search.
-- Maintain an `ans` variable initialized to $N$.
-- Narrow the search space based on whether the current middle element is strictly greater than $X$.
+- Use **Binary Search** to divide the search space.
+- Maintain an `ans` variable initialized to the array length (default if no element is greater).
 - Time: O(log N)
-- Space: O(1)
 
 ---
 
 ## Code (Python)
 
 ```python
-def get_upper_bound(arr, n, x):
-    low = 0
-    high = n - 1
-    ans = n # Default if no element > x
-
-    while low <= high:
-        mid = (low + high) // 2
+class Solution:
+    def upperBound(self, arr: list[int], n: int, x: int) -> int:
+        low = 0
+        high = n - 1
+        ans = n # Default: target is greater than all elements
         
-        # If mid element is strictly greater than x
-        if arr[mid] > x:
-            ans = mid      # Potential answer
-            high = mid - 1 # Try to find a smaller index on the left
-        else:
-            low = mid + 1  # Search the right half
+        while low <= high:
+            mid = (low + high) // 2
             
-    return ans
-
-# Example usage:
-# arr = [1, 2, 4, 4, 5, 6, 8], x = 4
-# Output: 4 (index of first element > 4, which is 5)
+            # If strictly greater, this is a candidate
+            if arr[mid] > x:
+                ans = mid
+                # Look for an even smaller index on the left
+                high = mid - 1
+            else:
+                # Value is <= x, answer must be on the right
+                low = mid + 1
+                
+        return ans
 ```
 
 ---
 
 ## Dry Run (Smart Example)
 
-Input: `arr = [1, 2, 4, 4, 5, 6, 8]`, `n = 7`, `x = 4`
+Input: `arr = [1, 2, 4, 4, 5, 6, 8]`, `x = 4`, `n = 7`
 
-| Step | low, high, mid | arr[mid] | Explanation | ans |
-| :--- | :--- | :--- | :--- | :--- |
-| 1 | L=0, H=6, M=3 | 4 | 4 is not > 4. Move right: `low = mid + 1`. | 7 |
-| 2 | L=4, H=6, M=5 | 6 | 6 > 4. Potential answer. Move left: `high = mid - 1`. | 5 |
-| 3 | L=4, H=4, M=4 | 5 | 5 > 4. Potential answer. Move left: `high = mid - 1`. | 4 |
-| 4 | L=4, H=3 | - | `low > high`. Loop terminates. | 4 |
-
-**Result: Index 4**
+| Step | Variables (low, high, mid) | arr[mid] | Explanation |
+| :--- | :--- | :--- | :--- |
+| 1 | low=0, high=6, mid=3 | 4 | `4 <= 4`, move `low = mid + 1` (low=4). |
+| 2 | low=4, high=6, mid=5 | 6 | `6 > 4`, `ans = 5`, move `high = mid - 1` (high=4). |
+| 3 | low=4, high=4, mid=4 | 5 | `5 > 4`, `ans = 4`, move `high = mid - 1` (high=3). |
+| 4 | low=4, high=3 | - | `low > high`, exit loop. Result: **4**. |
 
 ---
 
 ## Edge Cases
 
-- **X is greater than all elements:** Loop completes with `ans` remaining $N$.
-- **X is smaller than all elements:** Returns index 0.
-- **Empty Array:** Should return 0 or handle as per requirement.
-- **Array with all same elements (e.g., [4, 4, 4], X=4):** Returns $N$ (3).
-- **Array with all same elements (e.g., [5, 5, 5], X=4):** Returns 0.
+- **Target > All Elements:** Returns `n` (array size).
+- **Target < All Elements:** Returns index `0`.
+- **Empty Array:** Returns `0`.
+- **All Elements Identical:** If `arr[i] > x`, returns `0`; else returns `n`.
 
 ---
 
 ## Mistakes
 
-- Using `arr[mid] >= x` instead of `arr[mid] > x` (that would be Lower Bound).
-- Not initializing `ans` to $N$, leading to errors when no element is greater than $X$.
-- Returning `mid` immediately when `arr[mid] > x` without searching for a smaller index.
-- **User Mistake:** No specific note provided.
+- Using `arr[mid] >= x` instead of `arr[mid] > x` (this computes Lower Bound).
+- Forgetting to initialize `ans = n` which leads to errors when target is the largest element.
+- Off-by-one errors in `mid` calculation or loop boundaries.
+- **User Mistake:** No specific note provided. (Ensure to dry run duplicates manually to grasp the boundary shift).
 
 ---
 
 ## Complexity
 
-Time: O(log N) → The search space is halved in every iteration of the binary search.  
-Space: O(1) → Only a few variables are used regardless of input size.
+Time: O(log N) → The search space is halved in every iteration.  
+Space: O(1) → Only a few pointers (`low`, `high`, `mid`, `ans`) are used.
 
 ---
 
@@ -144,15 +137,14 @@ Space: O(1) → Only a few variables are used regardless of input size.
 ---
 
 ## Tags and Properties
-  - #dsa #important #revisit  
-  - #binarysearch #arrays #searching #stl
-  - [[Binary Search]] [[Searching]]
-  - **Revision Date:** 2026-04-07
-  - **Problem Link:** [Implement Upper Bound - GFG](https://www.geeksforgeeks.org/problems/implement-upper-bound/1)
+  - #dsa #important #revisit #binarysearch #searching
+  - [[Binary Search]] [[Arrays]]
+  - **Revision Date:** 2026-04-10
+  - **Problem Link:** [GeeksforGeeks - Implement Upper Bound](https://www.geeksforgeeks.org/problems/implement-upper-bound/1)
 
 ---
 ### 🔄 Revision Checklist
-- [ ] Day 2 Revision (2026-04-09)
-- [ ] Day 7 Revision (2026-04-14)
-- [ ] Day 15 Revision (2026-04-22)
-- [ ] Day 30 Revision (2026-05-07)
+- [ ] Day 2 Revision (2026-04-12)
+- [ ] Day 7 Revision (2026-04-17)
+- [ ] Day 15 Revision (2026-04-25)
+- [ ] Day 30 Revision (2026-05-10)
