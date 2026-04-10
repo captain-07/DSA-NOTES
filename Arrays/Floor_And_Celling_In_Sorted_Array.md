@@ -14,7 +14,7 @@ revisions:
 ## Metadata & Placement Tags
 
 - **Target Companies:**
-  - #Amazon #Google #Microsoft #Adobe #Flipkart
+  - #Amazon #Microsoft #Samsung #Adobe #Flipkart
 
 - **Confidence Checklist:**
   - [ ] Low  
@@ -22,7 +22,8 @@ revisions:
   - [ ] High  
 
 - **Concepts:**
-  - #binarysearch [[Binary Search]], #arrays [[Arrays]], #searching [[Searching]]
+  - #binarysearch [[Binary Search]]
+  - #arrays [[Arrays]]
 
 ## Pattern
 
@@ -31,38 +32,36 @@ Binary Search (Boundary Search)
 ---
 ## Difficulty
 
-Easy
+Easy  
 #easy
 
 ---
 
 ## ⚡ Key Idea (Core Insight)
 
-The problem asks for two boundaries: the largest value $\le X$ (Floor) and the smallest value $\ge X$ (Ceiling). Since the array is sorted, we use **Binary Search** to eliminate half the search space. For Floor, we keep track of the last element $\le X$ while moving right; for Ceiling, we track the last element $\ge X$ while moving left.
+Since the array is sorted, we use **Binary Search** to find the transition points. 
+- **Floor:** The largest element $\leq X$. If `arr[mid] <= X`, `mid` is a potential floor; search the right half for a larger one.
+- **Ceiling:** The smallest element $\geq X$. If `arr[mid] >= X`, `mid` is a potential ceiling; search the left half for a smaller one.
 
 ---
 
 ## ⚡ Quick Recall (VERY IMPORTANT)
 
-- **Ceiling** is identical to `Lower Bound` (first element $\ge X$).
-- **Floor** is the element at `high` after a standard binary search if $X$ is not found.
-- If $X$ exists in the array, both Floor and Ceiling are $X$.
+Floor is the "last element $\leq X$"; Ceiling is the "first element $\geq X$". Both are found in $O(\log N)$ using modified binary search logic.
 
 ---
 
 ## Approach
 
 ### Brute Force
-- Linear scan through the array to find the two boundaries.
-- Time: $O(N)$
-- Space: $O(1)$
+- Iterate through the array once and track the maximum element $\leq X$ and minimum element $\geq X$.
+- Time Complexity: $O(N)$
 
 ### Optimal
-- Use two separate Binary Search passes or one modified pass.
-- For **Floor**: If `arr[mid] <= x`, it's a candidate; search right (`low = mid + 1`).
-- For **Ceiling**: If `arr[mid] >= x`, it's a candidate; search left (`high = mid - 1`).
-- Time: $O(\log N)$
-- Space: $O(1)$
+- Use two separate binary searches (or one combined search) to identify the floor and ceiling.
+- **Floor Search:** If `arr[mid] <= X`, update `floor = arr[mid]` and move `low = mid + 1`.
+- **Ceiling Search:** If `arr[mid] >= X`, update `ceil = arr[mid]` and move `high = mid - 1`.
+- Time Complexity: $O(\log N)$
 
 ---
 
@@ -70,73 +69,73 @@ The problem asks for two boundaries: the largest value $\le X$ (Floor) and the s
 
 ```python
 class Solution:
-    def getFloorAndCeil(self, arr: list[int], n: int, x: int) -> tuple[int, int]:
-        """
-        Returns (floor, ceiling) of x in sorted array arr.
-        -1 if not found.
-        """
-        # Calculate Floor
-        f_ans = -1
+    def getFloorAndCeil(self, arr: list, n: int, x: int) -> list:
+        # Array must be sorted for Binary Search
+        arr.sort() 
+        
+        floor = -1
+        ceil = -1
+        
+        # Binary Search for Floor
         low, high = 0, n - 1
         while low <= high:
-            mid = low + (high - low) // 2
+            mid = (low + high) // 2
             if arr[mid] <= x:
-                f_ans = arr[mid]
+                floor = arr[mid]
                 low = mid + 1
             else:
                 high = mid - 1
                 
-        # Calculate Ceiling (Lower Bound)
-        c_ans = -1
+        # Binary Search for Ceiling
         low, high = 0, n - 1
         while low <= high:
-            mid = low + (high - low) // 2
+            mid = (low + high) // 2
             if arr[mid] >= x:
-                c_ans = arr[mid]
+                ceil = arr[mid]
                 high = mid - 1
             else:
                 low = mid + 1
                 
-        return (f_ans, c_ans)
+        return [floor, ceil]
 ```
 
 ---
 
 ## Dry Run (Smart Example)
 
-**Input:** `arr = [3, 4, 7, 8, 8, 10]`, `x = 5`
+**Input:** `arr = [3, 4, 7, 8, 10], x = 5`
 
 | Step | Variables | Explanation |
 | :--- | :--- | :--- |
-| 1 | `low=0, high=5, mid=2 (arr[2]=7)` | `7 > 5`: Ceiling candidate = 7, search left for Ceil. |
-| 2 | `low=0, high=1, mid=0 (arr[0]=3)` | `3 < 5`: Floor candidate = 3, search right for Floor. |
-| 3 | `low=1, high=1, mid=1 (arr[1]=4)` | `4 < 5`: Floor candidate = 4, search right. |
-| 4 | `low=2, high=1` | Loop terminates. **Floor: 4, Ceil: 7**. |
+| 1 | `low=0, high=4, mid=2` | `arr[2]=7`. `7 > 5`. Ceil becomes `7`, move `high=1`. |
+| 2 | `low=0, high=1, mid=0` | `arr[0]=3`. `3 < 5`. Floor becomes `3`, move `low=1`. |
+| 3 | `low=1, high=1, mid=1` | `arr[1]=4`. `4 < 5`. Floor becomes `4`, move `low=2`. |
+| 4 | `low > high` | Loop terminates. Floor = `4`, Ceil = `7`. |
 
 ---
 
 ## Edge Cases
 
-- **X smaller than min element:** Floor is -1, Ceiling is `arr[0]`.
-- **X larger than max element:** Floor is `arr[n-1]`, Ceiling is -1.
-- **X exists in array:** Both Floor and Ceiling are $X$.
-- **Empty Array:** Handled by `low <= high` (returns -1, -1).
-- **Duplicate elements:** Binary search correctly identifies the nearest boundary.
+- **X is smaller than all elements:** Floor is `-1`, Ceiling is `arr[0]`.
+- **X is larger than all elements:** Floor is `arr[n-1]`, Ceiling is `-1`.
+- **X is present in the array:** Floor and Ceiling are both `X`.
+- **Array has duplicates:** Binary search correctly identifies the values.
 
 ---
 
 ## Mistakes
 
-- Confusing Floor with Ceiling logic (remember: Floor is "down", Ceiling is "up").
-- Forgetting to handle the case where $X$ is out of array bounds.
-- **Critical:** Not mastering fundamental BS variations (Lower Bound, Upper Bound, Floor, Ceil) which are the building blocks for harder problems.
+- Not handling the case where floor or ceiling does not exist (should return -1).
+- Forgetting that the array must be sorted (if not provided sorted).
+- Confusion between `low = mid + 1` and `high = mid - 1` when updating candidates.
+- **User Mistake:** No specific note provided.
 
 ---
 
 ## Complexity
 
-Time: $O(\log N)$ → We perform two binary searches, each halving the search space.  
-Space: $O(1)$ → No extra space used besides a few variables.
+Time: $O(\log N)$ → We perform two binary searches over the array of size $N$.  
+Space: $O(1)$ → No extra space used besides variables (unless sorting is required, then $O(\log N)$ or $O(N)$ depending on sort).
 
 ---
 
@@ -149,10 +148,11 @@ Space: $O(1)$ → No extra space used besides a few variables.
 ---
 
 ## Tags and Properties
-  - #dsa #important #revisit #binarysearch
-  - [[Binary Search]] [[Lower Bound]] [[Searching]]
-  - **Revision Date:** 2026-04-10
-  - **Problem Link:** [GeeksforGeeks - Floor and Ceil](https://www.geeksforgeeks.org/problems/ceil-the-floor0532/1)
+  - #dsa #important #revisit  
+  - #binarysearch #searching #boundaryconditions
+  - [[Binary Search]] [[Lower Bound]]
+  - Revision Date: 2026-04-10
+  - **Problem Link:** [GeeksforGeeks - Ceil the Floor](https://www.geeksforgeeks.org/problems/ceil-the-floor2802/1)
 
 ---
 ### 🔄 Revision Checklist
