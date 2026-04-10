@@ -14,7 +14,7 @@ revisions:
 ## Metadata & Placement Tags
 
 - **Target Companies:**
-  - #Amazon #Google #Microsoft #Adobe #Samsung
+  - #Amazon #Microsoft #Adobe #Zoho #Google
 
 - **Confidence Checklist:**
   - [ ] Low  
@@ -22,45 +22,42 @@ revisions:
   - [ ] High  
 
 - **Concepts:**
-  - #binarysearch [[Binary Search]]
-  - #array [[Array]]
+  - #binarysearch [[Binary Search]], #array [[Arrays]]
 
 ## Pattern
 
-Modified Binary Search (Boundary Search)
+Binary Search (Boundary Finding)
 
 ---
 ## Difficulty
 
-Easy
+Easy  
 #easy
 
 ---
 
 ## ⚡ Key Idea (Core Insight)
 
-In a sorted array, all occurrences of a target value are contiguous. Instead of a linear scan, use **Binary Search** twice to find the leftmost (first) and rightmost (last) indices of the target. The count is simply `(last - first + 1)`.
+Since the array is **sorted**, all occurrences of a target `x` are contiguous. Instead of a linear scan, use **Binary Search** twice to find the `first_occurrence` and `last_occurrence` of `x`. The count is simply `(last - first + 1)`.
 
 ---
 
 ## ⚡ Quick Recall (VERY IMPORTANT)
 
-Find `first_occurrence` and `last_occurrence` using Binary Search. If `first == -1`, return `0`. Otherwise, return `last - first + 1`.
+`Count = LastIndex - FirstIndex + 1`. Use modified Binary Search to find boundaries in $O(\log N)$.
 
 ---
 
 ## Approach
 
 ### Brute Force
-- Linear scan through the array and increment a counter whenever the target is found.
-- Time: O(N) | Space: O(1)
+- Linearly traverse the array and increment a counter whenever the target is found.
+- **Time Complexity:** $O(N)$
 
 ### Optimal
-- Use two separate binary search functions (or one parameterized function) to find:
-    1. The **first** index where `arr[i] == target`.
-    2. The **last** index where `arr[i] == target`.
-- Logic: When `arr[mid] == target`, don't stop; move the `high` pointer (for first) or `low` pointer (for last) to find the boundary.
-- Time: O(log N) | Space: O(1)
+1. **Find First Occurrence:** Run Binary Search. If `arr[mid] == x`, record index and move `high = mid - 1` to search left.
+2. **Find Last Occurrence:** Run Binary Search. If `arr[mid] == x`, record index and move `low = mid + 1` to search right.
+3. **Result:** If the target isn't found, return 0. Otherwise, return `last - first + 1`.
 
 ---
 
@@ -68,98 +65,90 @@ Find `first_occurrence` and `last_occurrence` using Binary Search. If `first == 
 
 ```python
 class Solution:
-    def countOccurrences(self, arr: list[int], n: int, x: int) -> int:
-        first = self.findFirst(arr, n, x)
+    def countOccurrences(self, arr: list[int], x: int) -> int:
+        n = len(arr)
+        
+        def find_bound(is_first: bool) -> int:
+            low, high = 0, n - 1
+            res = -1
+            while low <= high:
+                mid = (low + high) // 2
+                if arr[mid] == x:
+                    res = mid
+                    if is_first:
+                        high = mid - 1 # Look left
+                    else:
+                        low = mid + 1  # Look right
+                elif arr[mid] < x:
+                    low = mid + 1
+                else:
+                    high = mid - 1
+            return res
+
+        first = find_bound(True)
         if first == -1:
             return 0
-        last = self.findLast(arr, n, x)
+            
+        last = find_bound(False)
         return last - first + 1
-
-    def findFirst(self, arr, n, x):
-        low, high = 0, n - 1
-        res = -1
-        while low <= high:
-            mid = low + (high - low) // 2
-            if arr[mid] == x:
-                res = mid
-                high = mid - 1 # Keep looking left
-            elif arr[mid] < x:
-                low = mid + 1
-            else:
-                high = mid - 1
-        return res
-
-    def findLast(self, arr, n, x):
-        low, high = 0, n - 1
-        res = -1
-        while low <= high:
-            mid = low + (high - low) // 2
-            if arr[mid] == x:
-                res = mid
-                low = mid + 1 # Keep looking right
-            elif arr[mid] < x:
-                low = mid + 1
-            else:
-                high = mid - 1
-        return res
 ```
 
 ---
 
 ## Dry Run (Smart Example)
 
-**Input:** `arr = [1, 2, 4, 4, 4, 5, 6]`, `x = 4`
+**Input:** `arr = [1, 2, 2, 2, 3]`, `x = 2`
 
-| Step | Function | Mid (Val) | Action | Range (Low, High) | res |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| 1 | `findFirst` | 3 (4) | Target found, search Left | [0, 2] | 3 |
-| 2 | `findFirst` | 1 (2) | 2 < 4, search Right | [2, 2] | 3 |
-| 3 | `findFirst` | 2 (4) | Target found, search Left | [2, 1] (End) | 2 |
-| 4 | `findLast` | 3 (4) | Target found, search Right | [4, 6] | 3 |
-| 5 | `findLast` | 5 (5) | 5 > 4, search Left | [4, 4] | 3 |
-| 6 | `findLast` | 4 (4) | Target found, search Right | [5, 4] (End) | 4 |
-
-**Result:** `last(4) - first(2) + 1 = 3`
+| Step | Operation | Variables | Explanation |
+| :--- | :--- | :--- | :--- |
+| 1 | Find First | `low=0, high=4, mid=2` | `arr[2]==2`. `res=2`, `high=1`. |
+| 2 | Find First | `low=0, high=1, mid=0` | `arr[0]==1 < 2`. `low=1`. |
+| 3 | Find First | `low=1, high=1, mid=1` | `arr[1]==2`. `res=1`, `high=0`. Loop Ends. |
+| 4 | Find Last | `low=0, high=4, mid=2` | `arr[2]==2`. `res=2`, `low=3`. |
+| 5 | Find Last | `low=3, high=4, mid=3` | `arr[3]==2`. `res=3`, `low=4`. |
+| 6 | Find Last | `low=4, high=4, mid=4` | `arr[4]==3 > 2`. `high=3`. Loop Ends. |
+| **End** | Result | `3 - 1 + 1 = 3` | Correct count. |
 
 ---
 
 ## Edge Cases
 
-- **Target not in array:** `findFirst` returns -1, function returns 0.
-- **Empty array:** Handled by loop conditions; returns 0.
-- **All elements are target:** `first` becomes 0, `last` becomes `n-1`.
-- **Single element array:** Binary search handles range correctly.
+- **Target not in array:** Binary search returns -1; result should be 0.
+- **Empty array:** Handle gracefully (returns 0).
+- **All elements are target:** `first = 0`, `last = n-1`.
+- **Target at boundaries:** First/last index at 0 or `n-1`.
 
 ---
 
 ## Mistakes
 
-- Using linear search inside a binary search (e.g., finding the first occurrence then scanning right) results in O(N) worst case (e.g., all elements are the same).
-- Forgetting the `first == -1` check before calculating the difference.
-- User mistake: None.
+- Using linear search $O(N)$ when the array is already sorted.
+- Forgetting to handle the "not found" case (result should be 0, not `(-1) - (-1) + 1`).
+- Off-by-one errors in `last - first + 1`.
+- **User mistake:** No specific note provided.
 
 ---
 
 ## Complexity
 
-Time: O(log N) → Two independent binary searches performed.
-Space: O(1) → Only a few pointers/variables used.
+Time: $O(\log N)$ → Two independent binary searches.  
+Space: $O(1)$ → Constant extra space used for pointers.
 
 ---
 
 ## Similar Problems
 
 - [Find First and Last Position of Element in Sorted Array](https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/) - Medium
-- [Find Peak Element](https://leetcode.com/problems/find-peak-element/) - Medium
-- [Search in Rotated Sorted Array](https://leetcode.com/problems/search-in-rotated-sorted-array/) - Medium
+- [Find Minimum in Rotated Sorted Array](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/) - Medium
+- [Search in a Sorted Array of Unknown Size](https://leetcode.com/problems/search-in-a-sorted-array-of-unknown-size/) - Medium
 
 ---
 
 ## Tags and Properties
-  - #dsa #important #revisit #binarysearch #searching
-  - [[Binary Search]] [[Array]]
-  - **Revision Date:** 2026-04-10
-  - **Problem Link:** [GeeksforGeeks - Count occurrences in a sorted array](https://www.geeksforgeeks.org/problems/count-occurences-of-a-number-in-a-sorted-array1249/1)
+- #dsa #important #revisit #binarysearch #searching
+- [[Binary Search]] [[Arrays]]
+- **Revision Date:** 2026-04-10
+- **Problem Link:** [GeeksforGeeks - Count occurrences in a sorted array](https://www.geeksforgeeks.org/problems/count-occurences-of-number-in-sorted-array5424/1)
 
 ---
 ### 🔄 Revision Checklist
