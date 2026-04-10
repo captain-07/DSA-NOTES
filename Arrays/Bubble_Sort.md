@@ -26,7 +26,7 @@ revisions:
 
 ## Pattern
 
-Adjacent Comparison + In-place Swapping
+- Adjacent Comparison + Swapping (Sinking Sort)
 
 ---
 ## Difficulty
@@ -38,26 +38,26 @@ Easy
 
 ## ⚡ Key Idea (Core Insight)
 
-Iteratively compare adjacent elements and swap them if they are in the wrong order. In each pass, the largest unsorted element "bubbles up" to its correct position at the end of the array.
+Iteratively compare adjacent elements and swap them if they are in the wrong order. In each pass, the largest unsorted element "bubbles up" to its correct final position at the end of the array.
 
 ---
 
 ## ⚡ Quick Recall (VERY IMPORTANT)
 
-Compare `arr[j]` and `arr[j+1]`; swap if `arr[j] > arr[j+1]`. Use a `swapped` flag to exit early if no swaps occur (array is already sorted).
+Compare `arr[j]` and `arr[j+1]`; swap if `arr[j] > arr[j+1]`. Use a `swapped` flag to exit early if the array becomes sorted.
 
 ---
 
 ## Approach
 
 ### Brute Force
-- Run two nested loops $N$ times regardless of array state.
-- Time Complexity: $O(N^2)$
-- Space Complexity: $O(1)$
+- Run two nested loops: outer loop `n` times, inner loop `n-1` times.
+- Time: O(n²) | Space: O(1)
 
-### Better / Optimal
-- **Optimization:** Introduce a boolean flag `swapped`. If the inner loop completes without any swaps, the array is already sorted—break early.
-- Inner loop range reduces by 1 in each outer iteration (`n - i - 1`) as the end is already sorted.
+### Optimal (Adaptive)
+- **Optimization 1:** The inner loop only needs to run up to `n - i - 1` because the last `i` elements are already sorted.
+- **Optimization 2:** Use a `swapped` boolean. If no swaps occur in a pass, the array is sorted; break immediately.
+- Time: O(n²) worst/average, O(n) best case | Space: O(1)
 
 ---
 
@@ -67,20 +67,22 @@ Compare `arr[j]` and `arr[j+1]`; swap if `arr[j] > arr[j+1]`. Use a `swapped` fl
 class Solution:
     def bubbleSort(self, arr: list[int]) -> list[int]:
         n = len(arr)
-        # Outer loop for number of passes
+        
         for i in range(n):
+            # Flag to check if any swapping happened in this pass
             swapped = False
-            # Inner loop for adjacent comparisons
+            
             # Last i elements are already in place
             for j in range(0, n - i - 1):
                 if arr[j] > arr[j + 1]:
-                    # Swap if elements are in wrong order
+                    # Swap adjacent elements
                     arr[j], arr[j + 1] = arr[j + 1], arr[j]
                     swapped = True
             
             # If no two elements were swapped by inner loop, then break
             if not swapped:
                 break
+                
         return arr
 ```
 
@@ -88,57 +90,56 @@ class Solution:
 
 ## Dry Run (Smart Example)
 
-**Input:** `[5, 1, 4, 2, 8]`
+Input: `[5, -2, 9, 1, 5]` (Includes negative and duplicate)
 
 | Step | Variables (i, j) | Array State | Explanation |
 | :--- | :--- | :--- | :--- |
-| 1.1 | i=0, j=0 | `[1, 5, 4, 2, 8]` | 5 > 1, Swap |
-| 1.2 | i=0, j=1 | `[1, 4, 5, 2, 8]` | 5 > 4, Swap |
-| 1.3 | i=0, j=2 | `[1, 4, 2, 5, 8]` | 5 > 2, Swap |
-| 1.4 | i=0, j=3 | `[1, 4, 2, 5, 8]` | 5 < 8, No Swap. 8 is locked at end. |
-| 2.1 | i=1, j=1 | `[1, 2, 4, 5, 8]` | 4 > 2, Swap. |
-| 3.1 | i=2 | `[1, 2, 4, 5, 8]` | No swaps in pass i=2. Break early. |
+| 1 | i=0, j=0..3 | `[-2, 5, 1, 5, 9]` | 9 bubbles to the end. `swapped=True`. |
+| 2 | i=1, j=0..2 | `[-2, 1, 5, 5, 9]` | 5 bubbles to second last. `swapped=True`. |
+| 3 | i=2, j=0..1 | `[-2, 1, 5, 5, 9]` | No swaps needed for `[-2, 1, 5]`. `swapped=False`. |
+| 4 | Exit | `[-2, 1, 5, 5, 9]` | `swapped` is False; break early. |
 
 ---
 
 ## Edge Cases
 
-- **Already Sorted:** `[1, 2, 3, 4, 5]` -> Optimized version finishes in $O(N)$.
-- **Reverse Sorted:** `[5, 4, 3, 2, 1]` -> Requires maximum swaps $O(N^2)$.
-- **All Identical:** `[2, 2, 2]` -> Finishes in one pass $O(N)$.
-- **Single Element:** `[1]` -> Loop doesn't execute; returns correctly.
-- **Negative Numbers:** `[-2, -5, 1, 0]` -> Handled correctly by standard comparison.
+- **Already Sorted:** `[1, 2, 3, 4, 5]` → Handled by `swapped` flag (O(n)).
+- **Reverse Sorted:** `[5, 4, 3, 2, 1]` → Takes full O(n²) iterations.
+- **All Identical:** `[2, 2, 2]` → Handled by `swapped` flag after 1st pass.
+- **Single Element:** `[1]` → Inner loop doesn't run; returns correctly.
+- **Negative Numbers:** `[-5, -1, -10]` → Comparison logic remains identical.
 
 ---
 
 ## Mistakes
 
-- **Inner Loop Range:** Forgetting to use `n - i - 1`, leading to unnecessary comparisons or index errors.
-- **Missing Optimization:** Failing to implement the `swapped` flag, making the Best Case $O(N^2)$ instead of $O(N)$.
 - **User Mistake:** No specific note provided.
+- Forgetting the `swapped` optimization (makes best case O(n²) instead of O(n)).
+- Incorrect inner loop boundary (running `j` to `n-1` instead of `n-i-1`).
+- Using extra space unnecessarily (Bubble sort is strictly in-place).
 
 ---
 
 ## Complexity
 
-- **Time:** $O(N^2)$ Worst/Average; $O(N)$ Best case with optimization.  
-- **Space:** $O(1)$ constant space as sorting is done in-place.
+Time: O(n²) → Two nested loops in the worst case (reverse sorted).  
+Space: O(1) → In-place sorting, only a few variables used.
 
 ---
 
 ## Similar Problems
 
+- [Sort Colors (Dutch National Flag)](https://leetcode.com/problems/sort-colors/) - Medium
+- [Insertion Sort List](https://leetcode.com/problems/insertion-sort-list/) - Medium
 - [Selection Sort](https://www.geeksforgeeks.org/selection-sort/) - Easy
-- [Insertion Sort](https://leetcode.com/problems/insertion-sort-list/) - Medium (List version)
-- [Sort Colors](https://leetcode.com/problems/sort-colors/) - Medium
 
 ---
 
 ## Tags and Properties
-  - #dsa #important #revisit #sorting #arrays
+  - #dsa #important #revisit #sorting #inplace
   - [[Sorting]] [[Array]]
   - **Revision Date:** 2026-04-10
-  - **Problem Link:** [Bubble Sort - GeeksforGeeks](https://www.geeksforgeeks.org/problems/bubble-sort/1)
+  - **Problem Link:** [LeetCode - Sort an Array](https://leetcode.com/problems/sort-an-array/) (Note: Use Bubble Sort logic for learning, though O(n log n) is required for submission)
 
 ---
 ### 🔄 Revision Checklist
