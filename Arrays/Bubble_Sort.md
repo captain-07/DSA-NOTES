@@ -14,7 +14,7 @@ revisions:
 ## Metadata & Placement Tags
 
 - **Target Companies:**
-  - #Microsoft #Amazon #Samsung #Adobe #Infosys #TCS
+  - #Amazon #Microsoft #Samsung #Adobe #Infosys #TCS
 
 - **Confidence Checklist:**
   - [ ] Low  
@@ -26,7 +26,7 @@ revisions:
 
 ## Pattern
 
-In-place Comparison Sorting + Adjacent Swapping
+Adjacent Comparison + In-place Swapping
 
 ---
 ## Difficulty
@@ -38,27 +38,26 @@ Easy
 
 ## ⚡ Key Idea (Core Insight)
 
-Repeatedly step through the list, compare adjacent elements, and swap them if they are in the wrong order. In each complete pass, the largest unsorted element "bubbles up" to its correct final position at the end of the array.
+Iteratively compare adjacent elements and swap them if they are in the wrong order. In each pass, the largest unsorted element "bubbles up" to its correct position at the end of the array.
 
 ---
 
 ## ⚡ Quick Recall (VERY IMPORTANT)
 
-Compare `arr[j]` and `arr[j+1]`; swap if `arr[j] > arr[j+1]`. Use a `swapped` flag to break early if a pass completes without any swaps (array is already sorted).
+Compare `arr[j]` and `arr[j+1]`; swap if `arr[j] > arr[j+1]`. Use a `swapped` flag to exit early if no swaps occur (array is already sorted).
 
 ---
 
 ## Approach
 
 ### Brute Force
-- Run two nested loops: outer loop $N$ times, inner loop $N-1$ times. Always performs $O(N^2)$ comparisons.
-- **Time Complexity:** $O(N^2)$
+- Run two nested loops $N$ times regardless of array state.
+- Time Complexity: $O(N^2)$
+- Space Complexity: $O(1)$
 
-### Optimal (Early Exit)
-- Outer loop runs from $i = 0$ to $N-1$.
-- Inner loop runs from $j = 0$ to $N-i-2$ (ignoring already sorted elements at the end).
-- Use a boolean flag `swapped`. If no elements are swapped in the inner loop, terminate immediately.
-- **Time Complexity:** $O(N^2)$ worst, $O(N)$ best case.
+### Better / Optimal
+- **Optimization:** Introduce a boolean flag `swapped`. If the inner loop completes without any swaps, the array is already sorted—break early.
+- Inner loop range reduces by 1 in each outer iteration (`n - i - 1`) as the end is already sorted.
 
 ---
 
@@ -68,11 +67,11 @@ Compare `arr[j]` and `arr[j+1]`; swap if `arr[j] > arr[j+1]`. Use a `swapped` fl
 class Solution:
     def bubbleSort(self, arr: list[int]) -> list[int]:
         n = len(arr)
-        # Outer loop for each pass
+        # Outer loop for number of passes
         for i in range(n):
             swapped = False
             # Inner loop for adjacent comparisons
-            # n-i-1 because the last i elements are already sorted
+            # Last i elements are already in place
             for j in range(0, n - i - 1):
                 if arr[j] > arr[j + 1]:
                     # Swap if elements are in wrong order
@@ -91,48 +90,47 @@ class Solution:
 
 **Input:** `[5, 1, 4, 2, 8]`
 
-| Step | Current Array | Explanation |
-| :--- | :--- | :--- |
-| **Start** | `[5, 1, 4, 2, 8]` | Initial unsorted array. |
-| **Pass 1** | `[1, 4, 2, 5, 8]` | 5 swaps with 1, 4, 2. Largest element '8' was already at end. '5' is fixed. |
-| **Pass 2** | `[1, 2, 4, 5, 8]` | 4 compares with 2 and swaps. '4' is fixed. |
-| **Pass 3** | `[1, 2, 4, 5, 8]` | No swaps occur. `swapped` flag remains `False`. |
-| **End** | `[1, 2, 4, 5, 8]` | Early exit triggered. Array sorted. |
+| Step | Variables (i, j) | Array State | Explanation |
+| :--- | :--- | :--- | :--- |
+| 1.1 | i=0, j=0 | `[1, 5, 4, 2, 8]` | 5 > 1, Swap |
+| 1.2 | i=0, j=1 | `[1, 4, 5, 2, 8]` | 5 > 4, Swap |
+| 1.3 | i=0, j=2 | `[1, 4, 2, 5, 8]` | 5 > 2, Swap |
+| 1.4 | i=0, j=3 | `[1, 4, 2, 5, 8]` | 5 < 8, No Swap. 8 is locked at end. |
+| 2.1 | i=1, j=1 | `[1, 2, 4, 5, 8]` | 4 > 2, Swap. |
+| 3.1 | i=2 | `[1, 2, 4, 5, 8]` | No swaps in pass i=2. Break early. |
 
 ---
 
 ## Edge Cases
 
-- **Already Sorted Array:** `[1, 2, 3, 4, 5]` -> $O(N)$ time with early exit.
-- **Reverse Sorted Array:** `[5, 4, 3, 2, 1]` -> Max number of swaps ($O(N^2)$).
-- **Single Element/Empty Array:** Handled by loop ranges (no iterations).
-- **Duplicates:** `[3, 1, 2, 1]` -> Correctly handles and maintains stability.
-- **Negative Numbers:** `[-2, 5, -10, 0]` -> Comparison logic handles negatives correctly.
+- **Already Sorted:** `[1, 2, 3, 4, 5]` -> Optimized version finishes in $O(N)$.
+- **Reverse Sorted:** `[5, 4, 3, 2, 1]` -> Requires maximum swaps $O(N^2)$.
+- **All Identical:** `[2, 2, 2]` -> Finishes in one pass $O(N)$.
+- **Single Element:** `[1]` -> Loop doesn't execute; returns correctly.
+- **Negative Numbers:** `[-2, -5, 1, 0]` -> Handled correctly by standard comparison.
 
 ---
 
 ## Mistakes
 
+- **Inner Loop Range:** Forgetting to use `n - i - 1`, leading to unnecessary comparisons or index errors.
+- **Missing Optimization:** Failing to implement the `swapped` flag, making the Best Case $O(N^2)$ instead of $O(N)$.
 - **User Mistake:** No specific note provided.
-- Forgetting the `swapped` flag optimization (leads to unnecessary $O(N^2)$ on sorted data).
-- Incorrect inner loop boundary (`n-i` vs `n-i-1`), causing `IndexOutOfBounds`.
-- Thinking Bubble Sort is efficient for large datasets (it is almost never used in production).
 
 ---
 
 ## Complexity
 
-**Time:** $O(N^2)$ → Average and worst case require nested iterations; $O(N)$ best case with optimization.  
-**Space:** $O(1)$ → Performs swaps in-place without extra data structures.
+- **Time:** $O(N^2)$ Worst/Average; $O(N)$ Best case with optimization.  
+- **Space:** $O(1)$ constant space as sorting is done in-place.
 
 ---
 
 ## Similar Problems
 
-- [Sort an Array](https://leetcode.com/problems/sort-an-array/) - Medium
+- [Selection Sort](https://www.geeksforgeeks.org/selection-sort/) - Easy
+- [Insertion Sort](https://leetcode.com/problems/insertion-sort-list/) - Medium (List version)
 - [Sort Colors](https://leetcode.com/problems/sort-colors/) - Medium
-- [Insertion Sort List](https://leetcode.com/problems/insertion-sort-list/) - Medium
-- [Kth Largest Element in an Array](https://leetcode.com/problems/kth-largest-element-in-an-array/) - Medium
 
 ---
 
