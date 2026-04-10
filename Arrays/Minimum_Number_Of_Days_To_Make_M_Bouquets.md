@@ -1,10 +1,10 @@
 ---
-created: 2026-04-08
+created: 2026-04-10
 revisions:
-  - 2026-04-10
-  - 2026-04-15
-  - 2026-04-23
-  - 2026-05-08
+  - 2026-04-12
+  - 2026-04-17
+  - 2026-04-25
+  - 2026-05-10
 ---
 
 # Minimum Number Of Days To Make M Bouquets
@@ -14,7 +14,7 @@ revisions:
 ## Metadata & Placement Tags
 
 - **Target Companies:**
-  - #Amazon #Google #Bloomberg #Microsoft #Directi
+  - #Amazon #Google #Microsoft #Bloomberg #Uber
 
 - **Confidence Checklist:**
   - [ ] Low  
@@ -22,13 +22,11 @@ revisions:
   - [ ] High  
 
 - **Concepts:**
-  - #binarysearch [[Binary Search]]
-  - #greedy [[Greedy]]
-  - #arrays [[Arrays]]
+  - #binarysearch [[Binary Search]], #greedy [[Greedy]], #array [[Array]]
 
 ## Pattern
 
-Binary Search on Answer (Range Search)
+Binary Search on Answer (Monotonic Function)
 
 ---
 ## Difficulty
@@ -40,102 +38,104 @@ Medium
 
 ## ⚡ Key Idea (Core Insight)
 
-The possible number of days ranges from `min(bloomDay)` to `max(bloomDay)`. Since the ability to make bouquets is **monotonic** (if you can make them on day $D$, you can also make them on $D+1$), we can binary search for the minimum day.
+The problem exhibits a **monotonic property**: if it is possible to make $m$ bouquets on day $D$, it is definitely possible on any day $> D$. This allows us to binary search the answer in the range $[min(bloomDay), max(bloomDay)]$.
 
 ---
 
 ## ⚡ Quick Recall (VERY IMPORTANT)
 
-If `m * k > len(bloomDay)`, return -1. Binary search the answer space; in each step, use a greedy linear scan to count adjacent flowers that have bloomed by `mid` days.
+Binary search for the "minimum day". For each mid-day, use a greedy sliding count to see if you can pick $k$ adjacent flowers $m$ times.
 
 ---
 
 ## Approach
 
 ### Brute Force
-- Check every possible day from $1$ to $\max(bloomDay)$. For each day, count if $m$ bouquets can be formed.
-- **Time Complexity:** $O(\max(bloomDay) \times N)$
+- Iterate through every possible day from $1$ to $10^9$ and check if $m$ bouquets can be formed.
+- **Time Complexity:** $O(max(bloomDay) \times N)$
 
 ### Optimal
-- **Range:** $low = \min(bloomDay)$, $high = \max(bloomDay)$.
-- **Binary Search:** Calculate `mid`. Check if `m` bouquets are possible on `mid` day.
-- **Check Function:** Iterate through `bloomDay`. If `flower <= mid`, increment `count`. When `count == k`, increment `bouquets` and reset `count`.
-- **Logic:** If `bouquets >= m`, `mid` is a potential answer; try smaller days (`high = mid - 1`). Otherwise, increase days (`low = mid + 1`).
-- **Time Complexity:** $O(N \log(\max - \min))$
+- **Binary Search on Answer:** Define a search space between the minimum and maximum bloom days.
+- **Check Function:** In each step, iterate through `bloomDay`. Count contiguous flowers where `bloomDay[i] <= mid`. Every time the count reaches $k$, increment bouquets and reset the count.
+- **Decision:** If bouquets $\ge m$, try a smaller day (move `high`); otherwise, increase the day (move `low`).
+- **Time Complexity:** $O(N \log(max(bloomDay)))$
 
 ---
 
 ## Code (Python)
 
 ```python
-def minDays(bloomDay, m, k):
-    # Impossible case: not enough total flowers
-    if m * k > len(bloomDay):
-        return -1
-    
-    def canMake(day):
-        bouquets = 0
-        count = 0
-        for flower in bloomDay:
-            if flower <= day:
-                count += 1
-                if count == k:
-                    bouquets += 1
-                    count = 0
-            else:
-                count = 0 # Reset if flowers are not adjacent
-        return bouquets >= m
+class Solution:
+    def minDays(self, bloomDay: list[int], m: int, k: int) -> int:
+        # Edge case: Not enough flowers exist in total
+        if m * k > len(bloomDay):
+            return -1
+        
+        def can_make_bouquets(day: int) -> bool:
+            bouquets = 0
+            flowers = 0
+            for bloom in bloomDay:
+                if bloom <= day:
+                    flowers += 1
+                    if flowers == k:
+                        bouquets += 1
+                        flowers = 0
+                else:
+                    # Adjacency broken
+                    flowers = 0
+            return bouquets >= m
 
-    low, high = min(bloomDay), max(bloomDay)
-    ans = high
-    
-    while low <= high:
-        mid = (low + high) // 2
-        if canMake(mid):
-            ans = mid
-            high = mid - 1
-        else:
-            low = mid + 1
-            
-    return ans
+        low, high = min(bloomDay), max(bloomDay)
+        ans = high
+        
+        while low <= high:
+            mid = (low + high) // 2
+            if can_make_bouquets(mid):
+                ans = mid
+                high = mid - 1
+            else:
+                low = mid + 1
+                
+        return ans
 ```
 
 ---
 
 ## Dry Run (Smart Example)
 
-Input: `bloomDay = [7, 7, 7, 7, 12, 7, 7]`, `m = 2`, `k = 3`
+Input: `bloomDay = [7, 7, 7, 7, 12, 7, 7], m = 2, k = 3`
 
-| Step | low | high | mid | bouquets (canMake) | Action |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| 1 | 7 | 12 | 9 | `[7,7,7,7,X,7,7]` -> (1+1) = 2 | `ans=9`, `high=8` |
-| 2 | 7 | 8 | 7 | `[7,7,7,7,X,7,7]` -> (1+1) = 2 | `ans=7`, `high=6` |
-| 3 | 7 | 6 | - | Loop terminates | Result = 7 |
+| Step | Low | High | Mid | Explanation |
+| :--- | :--- | :--- | :--- | :--- |
+| 1 | 7 | 12 | 9 | `can_make(9)`: Flowers $\le 9 \to [T, T, T, T, F, T, T]$. Bouquets: 1. `1 < 2` → False. |
+| 2 | 10 | 12 | 11 | `can_make(11)`: Flowers $\le 11 \to [T, T, T, T, F, T, T]$. Bouquets: 1. `1 < 2` → False. |
+| 3 | 12 | 12 | 12 | `can_make(12)`: Flowers $\le 12 \to [T, T, T, T, T, T, T]$. Bouquets: 2. `2 >= 2` → True. |
+| 4 | 12 | 11 | - | Loop terminates. Result = 12. |
 
 ---
 
 ## Edge Cases
 
-- **Total flowers < m * k:** Immediate return -1.
-- **k = 1:** Each flower is a bouquet; reduces to finding the $m$-th smallest bloom day.
-- **m = 1:** Finding the minimum day to get $k$ consecutive flowers.
-- **All flowers bloom on the same day:** Answer is that day or -1.
+- **$m \times k > n$:** Return -1 immediately (not enough flowers).
+- **$k = 1$:** The problem reduces to finding the $m$-th smallest unique bloom day.
+- **$m = 1$:** Find the minimum day that has at least $k$ contiguous flowers.
+- **All days same:** If $m \times k \le n$, the answer is simply the bloom day value.
 
 ---
 
 ## Mistakes
 
-- **Initial Check:** Forgetting to check `m * k > n` leads to infinite loops or incorrect range logic.
-- **Reset Logic:** Forgetting to reset the `count` to 0 when a flower hasn't bloomed yet (breaks adjacency).
-- **Lower Bound:** Starting `low` at 0 instead of `min(bloomDay)` (minor optimization, but good for interviews).
-- **User Mistake:** No specific note provided.
+- **Greedy Reset:** Forgetting to reset the `flowers` counter to 0 when a flower hasn't bloomed yet (`bloom > day`).
+- **Range Initialization:** Starting `low` at 0 or 1 instead of `min(bloomDay)` (minor optimization, but 0 can lead to errors).
+- **Overflow:** (Not applicable in Python) In C++/Java, `m * k` can overflow an integer.
+- **User mistake:** No specific note provided.
 
 ---
 
 ## Complexity
 
-Time: $O(N \log(\text{max\_bloom\_day}))$ → Binary search takes $\log(\text{Range})$ steps, each with an $O(N)$ check.  
-Space: $O(1)$ → Only a few variables used for tracking.
+Time: $O(N \log(D))$ → where $N$ is array length and $D$ is the range of bloom days.  
+Space: $O(1)$ → No extra data structures used beyond variables.
 
 ---
 
@@ -144,19 +144,18 @@ Space: $O(1)$ → Only a few variables used for tracking.
 - [Koko Eating Bananas](https://leetcode.com/problems/koko-eating-bananas/) - Medium
 - [Capacity To Ship Packages Within D Days](https://leetcode.com/problems/capacity-to-ship-packages-within-d-days/) - Medium
 - [Split Array Largest Sum](https://leetcode.com/problems/split-array-largest-sum/) - Hard
-- [Find the Smallest Divisor Given a Threshold](https://leetcode.com/problems/find-the-smallest-divisor-given-a-threshold/) - Medium
+- [Heaters](https://leetcode.com/problems/heaters/) - Medium
 
 ---
 
 ## Tags and Properties
-- #dsa #important #revisit #binarysearch 
-- [[Binary Search]] [[Greedy]]
-- **Revision Date:** 2026-04-08
-- **Problem Link:** [LeetCode - Minimum Number of Days to Make M Bouquets](https://leetcode.com/problems/minimum-number-of-days-to-make-m-bouquets/)
+  - #dsa #important #revisit #binarysearch #greedy
+  - [[Binary Search]] [[Greedy]] [[Arrays]]
+  - **Problem Link:** [LeetCode 1482 - Minimum Number of Days to Make m Bouquets](https://leetcode.com/problems/minimum-number-of-days-to-make-m-bouquets/)
 
 ---
 ### 🔄 Revision Checklist
-- [ ] Day 2 Revision (2026-04-10)
-- [ ] Day 7 Revision (2026-04-15)
-- [ ] Day 15 Revision (2026-04-23)
-- [ ] Day 30 Revision (2026-05-08)
+- [ ] Day 2 Revision (2026-04-12)
+- [ ] Day 7 Revision (2026-04-17)
+- [ ] Day 15 Revision (2026-04-25)
+- [ ] Day 30 Revision (2026-05-10)
