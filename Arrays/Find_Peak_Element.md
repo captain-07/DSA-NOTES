@@ -14,7 +14,7 @@ revisions:
 ## Metadata & Placement Tags
 
 - **Target Companies:**
-  - #Amazon #Google #Microsoft #Facebook #Apple
+  - #Meta #Google #Amazon #Microsoft #Uber #Bloomberg
 
 - **Confidence Checklist:**
   - [ ] Low  
@@ -22,11 +22,11 @@ revisions:
   - [ ] High  
 
 - **Concepts:**
-  - #binarysearch [[Binary Search]], #array [[Array]]
+  - #binarysearch [[Binary Search]], #arrays [[Arrays]]
 
 ## Pattern
 
-Modified Binary Search (Search on Answer)
+Modified Binary Search (Binary Search on Answer)
 
 ---
 ## Difficulty
@@ -38,29 +38,30 @@ Medium
 
 ## ⚡ Key Idea (Core Insight)
 
-The problem guarantees $nums[i] \neq nums[i+1]$. If $nums[mid] < nums[mid+1]$, an ascending slope exists, ensuring a peak lies to the **right**. Conversely, if $nums[mid] > nums[mid+1]$, a peak exists at or to the **left**.
+Any local maximum is a valid peak. Since the array boundaries effectively drop to $-\infty$, any "uphill" slope (where `nums[i] < nums[i+1]`) is guaranteed to eventually lead to a peak, either at a local maximum or at the end of the array. This allows us to discard half of the search space at each step.
 
 ---
 
 ## ⚡ Quick Recall (VERY IMPORTANT)
 
-Compare `nums[mid]` with `nums[mid+1]`. If increasing, `left = mid + 1`; else `right = mid`.
+If `nums[mid] < nums[mid + 1]`, search right (`left = mid + 1`). Otherwise, search left including `mid` (`right = mid`).
 
 ---
 
 ## Approach
 
 ### Brute Force
-- Linear scan through the array to find the first element $i$ such that $nums[i] > nums[i+1]$.
-- Time: $O(N)$
+- Linear scan to find an index `i` where `nums[i] > nums[i+1]`.
+- Time: O(n)
+- Space: O(1)
 
 ### Optimal
-- Use **Binary Search** to achieve logarithmic time.
-- 1. Initialize `left = 0`, `right = len(nums) - 1`.
-- 2. While `left < right`, calculate `mid`.
-- 3. If `nums[mid] < nums[mid+1]`, the peak is in the right half (`left = mid + 1`).
-- 4. Otherwise, the peak is in the left half including `mid` (`right = mid`).
-- 5. Return `left` (or `right`) as the index.
+- Use **Iterative Binary Search**.
+- Compare `mid` with its immediate right neighbor `mid + 1`.
+- If increasing (`nums[mid] < nums[mid+1]`), a peak must exist to the right.
+- If decreasing (`nums[mid] > nums[mid+1]`), a peak must exist at `mid` or to its left.
+- Time: O(log n)
+- Space: O(1)
 
 ---
 
@@ -69,18 +70,23 @@ Compare `nums[mid]` with `nums[mid+1]`. If increasing, `left = mid + 1`; else `r
 ```python
 class Solution:
     def findPeakElement(self, nums: list[int]) -> int:
+        # Initialize pointers for the search range
         left, right = 0, len(nums) - 1
         
         while left < right:
-            mid = left + (right - left) // 2
+            mid = (left + right) // 2
             
-            # If we are on an upward slope, the peak is to the right
-            if nums[mid] < nums[mid+1]:
+            # Check the slope: if nums[mid] is less than the next element,
+            # we are currently in an 'increasing' part. 
+            # A peak must exist to the right.
+            if nums[mid] < nums[mid + 1]:
                 left = mid + 1
-            # If we are on a downward slope, mid could be the peak or peak is to the left
             else:
+                # If nums[mid] > nums[mid + 1], we are in a 'decreasing' part.
+                # A peak must exist at mid or to its left.
                 right = mid
-                
+        
+        # When left == right, we've converged on a peak element
         return left
 ```
 
@@ -90,51 +96,53 @@ class Solution:
 
 **Input:** `nums = [1, 2, 1, 3, 5, 6, 4]`
 
-| Step | Variables (L, R, M) | Explanation |
+| Step | Variables | Explanation |
 | :--- | :--- | :--- |
-| 1 | L=0, R=6, M=3 | `nums[3]=3`, `nums[4]=5`. `3 < 5` (Upward). `L = M + 1 = 4`. |
-| 2 | L=4, R=6, M=5 | `nums[5]=6`, `nums[6]=4`. `6 > 4` (Downward). `R = M = 5`. |
-| 3 | L=4, R=5, M=4 | `nums[4]=5`, `nums[5]=6`. `5 < 6` (Upward). `L = M + 1 = 5`. |
-| 4 | L=5, R=5 | `L == R`. Loop terminates. Return `L = 5` (Element 6). |
+| 1 | `L=0, R=6, M=3` | `nums[3]=3 < nums[4]=5`. Slope is increasing. Peak is on the right. `L = 4`. |
+| 2 | `L=4, R=6, M=5` | `nums[5]=6 > nums[6]=4`. Slope is decreasing. Peak is at `M` or left. `R = 5`. |
+| 3 | `L=4, R=5, M=4` | `nums[4]=5 < nums[5]=6`. Slope is increasing. Peak is on the right. `L = 5`. |
+| 4 | `L=5, R=5` | `L == R`. Loop terminates. Return index 5 (value 6 is a peak). |
 
 ---
 
 ## Edge Cases
 
-- **Single Element:** `[1]` → Returns index 0.
-- **Strictly Increasing:** `[1, 2, 3]` → Peak is at the end (index 2).
-- **Strictly Decreasing:** `[3, 2, 1]` → Peak is at the start (index 0).
-- **Two Elements:** `[1, 2]` → Returns index 1.
+- **Single Element:** `[1]` -> Binary search correctly returns index 0.
+- **Strictly Increasing:** `[1, 2, 3]` -> Always moves `left` rightward, returns index 2.
+- **Strictly Decreasing:** `[3, 2, 1]` -> Always moves `right` leftward, returns index 0.
+- **Minimum Size:** `[1, 2]` -> `mid` is 0, `nums[0] < nums[1]`, returns index 1.
 
 ---
 
 ## Mistakes
 
-- **Index Out of Bounds:** Ensure `mid + 1` is safe (loop condition `left < right` handles this).
-- **Comparison Logic:** Don't check both neighbors; one neighbor comparison is sufficient to determine slope.
-- **User Mistake:** None.
+- None.
+- Returning the peak value instead of the index.
+- Over-complicating the search by checking both `mid-1` and `mid+1`, which requires extra boundary handling.
+- Using `left <= right` with `mid + 1` can cause out-of-bounds errors if not careful.
 
 ---
 
 ## Complexity
 
-Time: O(log N) → Binary search halves the search space each step.  
-Space: O(1) → Iterative approach uses constant extra space.
+Time: O(log n) → The search space is halved in every iteration.  
+Space: O(1) → Only a few pointers are used.
 
 ---
 
 ## Similar Problems
 
-- [Peak Index in a Mountain Array](https://leetcode.com/problems/peak-index-in-a-mountain-array/) - Medium
-- [Find Minimum in Rotated Sorted Array](https://leetcode.com/problems/find-min-in-rotated-sorted-array/) - Medium
-- [Search in Rotated Sorted Array](https://leetcode.com/problems/search-in-rotated-sorted-array/) - Medium
+- [Peak Index in a Mountain Array](https://leetcode.com/problems/peak-index-in-a-mountain-array/) - Easy
+- [Find Minimum in Rotated Sorted Array](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/) - Medium
+- [Find Peak Element II](https://leetcode.com/problems/find-a-peak-element-ii/) - Hard
+- [Find K Closest Elements](https://leetcode.com/problems/find-k-closest-elements/) - Medium
 
 ---
 
 ## Tags and Properties
-  - #dsa #important #revisit #binarysearch  
-  - [[Binary Search]] [[Array]]
-  - **Revision Date:** 2026-04-10
+  - #dsa #important #revisit #binarysearch #arrays
+  - [[Binary Search]] [[Arrays]]
+  - Revision Date: 2026-04-10
   - **Problem Link:** [LeetCode - Find Peak Element](https://leetcode.com/problems/find-peak-element/)
 
 ---
