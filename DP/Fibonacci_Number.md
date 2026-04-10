@@ -1,10 +1,10 @@
 ---
-created: 2026-04-07
+created: 2026-04-10
 revisions:
-  - 2026-04-09
-  - 2026-04-14
-  - 2026-04-22
-  - 2026-05-07
+  - 2026-04-12
+  - 2026-04-17
+  - 2026-04-25
+  - 2026-05-10
 ---
 
 # Fibonacci Number
@@ -14,7 +14,7 @@ revisions:
 ## Metadata & Placement Tags
 
 - **Target Companies:**
-  - #Amazon #Google #Microsoft #Meta #Apple #Adobe
+  - #Amazon #Google #Microsoft #Apple #Adobe #Meta
 
 - **Confidence Checklist:**
   - [ ] Low  
@@ -22,109 +22,107 @@ revisions:
   - [ ] High  
 
 - **Concepts:**
-  - #dynamicprogramming [[Dynamic Programming]], #recursion [[Recursion]], #math [[Math]]
+  - #recursion [[Recursion]], #dynamicprogramming [[Dynamic Programming]], #memoization [[Memoization]]
 
 ## Pattern
 
-Recursion + Memoization  
-Iterative DP (Space Optimized)
+Dynamic Programming (Bottom-Up) + Space Optimization
 
 ---
 ## Difficulty
 
-Easy  
-#easy
+Easy #easy
 
 ---
 
 ## ⚡ Key Idea (Core Insight)
 
-- The sequence follows the recurrence relation $F(n) = F(n-1) + F(n-2)$.
-- Instead of recomputing the same subproblems, store previous results (Memoization) or build bottom-up (Tabulation).
+The value at `n` is strictly the sum of the two preceding values. Instead of recalculating the entire tree (recursion), we only need to track the **last two states** to compute the current one.
 
 ---
 
 ## ⚡ Quick Recall (VERY IMPORTANT)
 
-- Sum of the previous two numbers; optimize space by using only two variables ($prev1, prev2$) instead of an array.
+Iterate from 2 to `n`, maintaining `prev1` and `prev2`. Update: `new_val = prev1 + prev2`, then slide the window forward.
 
 ---
 
 ## Approach
 
 ### Brute Force
-- Simple recursion: `return fib(n-1) + fib(n-2)`.
-- Time Complexity: $O(2^n)$ due to redundant calculations.
+- Plain Recursion: `return fib(n-1) + fib(n-2)`.
+- **Time:** $O(2^n)$ due to massive redundant subproblems.
+- **Space:** $O(n)$ recursion stack.
 
 ### Better
-- **Memoization (Top-Down):** Use a hash map or array to store results of `fib(n)`.
-- **Tabulation (Bottom-Up):** Use an array of size $n+1$ to store results from $0$ to $n$.
-- Time: $O(n)$, Space: $O(n)$.
+- Memoization (Top-Down): Store results of `fib(i)` in a hashmap/array.
+- **Time:** $O(n)$.
+- **Space:** $O(n)$ for the memo table + $O(n)$ stack.
 
-### Optimal (Space Optimized DP)
-- Only the last two values are needed to calculate the current value.
-- Maintain two variables `a` and `b` to represent $F(i-2)$ and $F(i-1)$.
-- Time: $O(n)$, Space: $O(1)$.
+### Optimal
+- Iterative Space Optimization (Bottom-Up).
+- Use two variables to store $F(n-1)$ and $F(n-2)$ to avoid $O(n)$ space.
 
 ---
 
 ## Code (Python)
 
 ```python
-def fib(n: int) -> int:
-    # Base cases
-    if n <= 1:
-        return n
-    
-    # prev2 is F(i-2), prev1 is F(i-1)
-    prev2, prev1 = 0, 1
-    
-    for i in range(2, n + 1):
-        # Current F(i) = F(i-1) + F(i-2)
-        current = prev1 + prev2
-        # Update pointers for next iteration
-        prev2 = prev1
-        prev1 = current
+class Solution:
+    def fib(self, n: int) -> int:
+        # Base cases: F(0) = 0, F(1) = 1
+        if n <= 1:
+            return n
         
-    return prev1
+        # prev2 is F(i-2), prev1 is F(i-1)
+        prev2, prev1 = 0, 1
+        
+        # Calculate from 2 up to n
+        for _ in range(2, n + 1):
+            current = prev1 + prev2
+            # Update pointers for next iteration
+            prev2 = prev1
+            prev1 = current
+            
+        return prev1
 ```
 
 ---
 
 ## Dry Run (Smart Example)
 
-Input: `n = 4`
+**Input:** `n = 4`
 
-| Step | i | prev2 | prev1 | current | Explanation |
+| Step | Variable `i` | `prev2` | `prev1` | `current` | Explanation |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| Init | - | 0 | 1 | - | Initial base values for F(0) and F(1). |
-| 1 | 2 | 1 | 1 | 1 | `current = 0 + 1`. prev2 becomes 1, prev1 becomes 1. |
-| 2 | 3 | 1 | 2 | 2 | `current = 1 + 1`. prev2 becomes 1, prev1 becomes 2. |
-| 3 | 4 | 2 | 3 | 3 | `current = 2 + 1`. prev2 becomes 2, prev1 becomes 3. |
+| Init | - | 0 | 1 | - | Initial state for F(0), F(1) |
+| 1 | 2 | 1 | 1 | 1 | $0 + 1 = 1$; shift pointers |
+| 2 | 3 | 1 | 2 | 2 | $1 + 1 = 2$; shift pointers |
+| 3 | 4 | 2 | 3 | 3 | $1 + 2 = 3$; Final Answer |
 
 ---
 
 ## Edge Cases
 
-- **n = 0:** Should return 0 (Base case).
-- **n = 1:** Should return 1 (Base case).
-- **Large n:** Python handles large integers automatically, but $O(n)$ time remains efficient.
+- `n = 0`: Should return 0 (Handled by base case).
+- `n = 1`: Should return 1 (Handled by base case).
+- `n = 2`: Minimum loop execution, returns 1.
 
 ---
 
 ## Mistakes
 
-- **Incorrect Base Case:** Forgetting that $F(0)=0$ and $F(1)=1$.
-- **Redundant Work:** Using recursion without memoization (leads to TLE).
-- **Suboptimal Space:** Using an $O(n)$ array when only two variables are needed.
+- **Exponential Time:** Using naive recursion without memoization in an interview.
+- **Off-by-one:** Starting the loop from 1 instead of 2 or incorrect range `(2, n)`.
+- **Space Waste:** Using an array `dp = [0] * (n + 1)` when only two variables are needed.
 - **User Mistake:** No specific note provided.
 
 ---
 
 ## Complexity
 
-Time: $O(n)$ → We iterate from 2 to $n$ exactly once.  
-Space: $O(1)$ → We only store two variables regardless of $n$.
+Time: $O(n)$ → We visit each number from 2 to $n$ exactly once.  
+Space: $O(1)$ → Only two variables are used regardless of input size.
 
 ---
 
@@ -137,14 +135,14 @@ Space: $O(1)$ → We only store two variables regardless of $n$.
 ---
 
 ## Tags and Properties
-  - #dsa #important #revisit #fibonacci #math
-  - [[Dynamic Programming]] [[Recursion]]
-  - **Revision Date:** 2026-04-07
+  - #dsa #important #revisit #fibonacci #dp
+  - [[Dynamic Programming]] [[Space Optimization]]
+  - **Revision Date:** 2026-04-10
   - **Problem Link:** [LeetCode - Fibonacci Number](https://leetcode.com/problems/fibonacci-number/)
 
 ---
 ### 🔄 Revision Checklist
-- [ ] Day 2 Revision (2026-04-09)
-- [ ] Day 7 Revision (2026-04-14)
-- [ ] Day 15 Revision (2026-04-22)
-- [ ] Day 30 Revision (2026-05-07)
+- [ ] Day 2 Revision (2026-04-12)
+- [ ] Day 7 Revision (2026-04-17)
+- [ ] Day 15 Revision (2026-04-25)
+- [ ] Day 30 Revision (2026-05-10)
