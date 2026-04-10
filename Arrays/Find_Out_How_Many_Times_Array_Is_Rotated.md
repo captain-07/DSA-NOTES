@@ -14,7 +14,7 @@ revisions:
 ## Metadata & Placement Tags
 
 - **Target Companies:**
-  - #Amazon #Microsoft #Google #Adobe #Walmart #Flipkart
+  - #Amazon #Microsoft #Google #Adobe #Flipkart #Samsung
 
 - **Confidence Checklist:**
   - [ ] Low  
@@ -22,46 +22,43 @@ revisions:
   - [ ] High  
 
 - **Concepts:**
-  - #binarysearch [[Binary Search]], #arrays [[Arrays]], #modified-binary-search [[Modified Binary Search]]
+  - #binarysearch [[Binary Search]], #arrays [[Arrays]], #searching [[Searching]]
 
 ## Pattern
 
-Modified Binary Search (Finding Inflection Point)
+Binary Search on Sorted Rotated Array
 
 ---
 ## Difficulty
 
-Medium  
-#medium
+Medium #medium
 
 ---
 
 ## ⚡ Key Idea (Core Insight)
 
-- In a sorted array rotated $K$ times, the number of rotations $K$ is **exactly equal to the index of the minimum element**.
-- The minimum element is the only element that is smaller than its predecessor (the "pivot" or "inflection point").
+The number of times a sorted array is rotated is exactly equal to the **index of the minimum element** in that array. In a rotated sorted array, the minimum element is the only element that is smaller than its predecessor (the "pivot").
 
 ---
 
 ## ⚡ Quick Recall (VERY IMPORTANT)
 
-- Rotations = Index of the minimum element. Use Binary Search to find the unsorted half; the minimum always lies in the unsorted part or is the first element of a sorted part.
+Number of Rotations = **Index of Minimum Element**. Use Binary Search to find the pivot point where the sorted property breaks.
 
 ---
 
 ## Approach
 
 ### Brute Force
-- Linearly traverse the array to find the minimum element or the first element where `arr[i] < arr[i-1]`.
+- Linearly traverse the array to find the minimum element. The index of this element is the answer.
 - **Time Complexity:** O(N)
-- **Space Complexity:** O(1)
 
-### Optimal (Binary Search)
-- Use two pointers `low` and `high`.
-- If `arr[low] <= arr[high]`, the array is already sorted in that range; `arr[low]` is the minimum.
-- Otherwise, find `mid`. If the left half `[low...mid]` is sorted (`arr[low] <= arr[mid]`), the minimum must be in the right half. If the right half is sorted, the minimum is in the left half (including `mid`).
+### Optimal
+- Use **Binary Search**. In each step, determine which half of the array is sorted.
+- If `nums[low] <= nums[high]`, the entire range is sorted; `nums[low]` is the minimum.
+- Otherwise, if `nums[low] <= nums[mid]`, the left half is sorted. The minimum must be in the right half, but `nums[low]` is a candidate for the global minimum.
+- If the right half is sorted, the minimum is in the left half (including `mid`).
 - **Time Complexity:** O(log N)
-- **Space Complexity:** O(1)
 
 ---
 
@@ -69,33 +66,35 @@ Medium
 
 ```python
 class Solution:
-    def findKRotation(self, arr: list[int]) -> int:
-        n = len(arr)
-        low, high = 0, n - 1
+    def findKRotation(self, nums: list[int]) -> int:
+        low, high = 0, len(nums) - 1
         ans = float('inf')
         index = 0
         
         while low <= high:
-            # If the current search space is already sorted
-            if arr[low] <= arr[high]:
-                if arr[low] < ans:
-                    index = low
-                    ans = arr[low]
-                break
-            
             mid = (low + high) // 2
             
-            # If left half is sorted, the min is in the right half
-            if arr[low] <= arr[mid]:
-                if arr[low] < ans:
+            # Optimization: If the current search space is already sorted
+            if nums[low] <= nums[high]:
+                if nums[low] < ans:
                     index = low
-                    ans = arr[low]
+                    ans = nums[low]
+                break
+            
+            # Identify which half is sorted
+            if nums[low] <= nums[mid]:
+                # Left half is sorted, nums[low] is the min of this half
+                if nums[low] < ans:
+                    ans = nums[low]
+                    index = low
+                # Minimum must be in the unsorted right half
                 low = mid + 1
-            # If right half is sorted, the min is in the left half
             else:
-                if arr[mid] < ans:
+                # Right half is sorted, nums[mid] is the min of this half
+                if nums[mid] < ans:
+                    ans = nums[mid]
                     index = mid
-                    ans = arr[mid]
+                # Minimum must be in the unsorted left half
                 high = mid - 1
                 
         return index
@@ -105,40 +104,39 @@ class Solution:
 
 ## Dry Run (Smart Example)
 
-**Input:** `arr = [4, 5, 6, 7, 0, 1, 2]`
+Input: `nums = [4, 5, 6, 1, 2, 3]`
 
-| Step | low | high | mid | arr[mid] | Explanation |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| 1 | 0 | 6 | 3 | 7 | `arr[0] <= arr[3]` (4 <= 7). Left is sorted. Min might be `arr[0]=4`. Move `low = 4`. |
-| 2 | 4 | 6 | 5 | 1 | `arr[4] <= arr[6]` (0 <= 2). Search space is sorted. `arr[4]=0` is min. |
-| 3 | 4 | 6 | - | - | `ans = 0`, `index = 4`. Loop breaks. |
-
-**Result:** 4 rotations.
+| Step | Variables | Explanation |
+| :--- | :--- | :--- |
+| 1 | `low=0, high=5, mid=2` | `nums[0]=4`, `nums[2]=6`. Left half `[4,5,6]` is sorted. `ans=4, index=0`. Set `low=3`. |
+| 2 | `low=3, high=5, mid=4` | `nums[3]=1`, `nums[5]=3`. `nums[low] <= nums[high]` is True. `[1,2,3]` is sorted. |
+| 3 | `ans=min(4, 1)=1` | `index=3`. Minimum found at index 3. |
+| 4 | `Break` | Return `index = 3`. |
 
 ---
 
 ## Edge Cases
 
-- **Already Sorted:** `[1, 2, 3]` → Min at index 0, rotations = 0.
-- **Rotated N-1 Times:** `[2, 3, 1]` → Min at index 2, rotations = 2.
-- **Single Element:** `[5]` → Min at index 0, rotations = 0.
-- **Two Elements:** `[2, 1]` → Min at index 1, rotations = 1.
+- **No Rotation:** `[1, 2, 3, 4, 5]` → Returns 0 (Index of 1).
+- **Single Element:** `[10]` → Returns 0.
+- **Max Rotation:** `[2, 3, 4, 5, 1]` → Returns 4 (Index of 1).
+- **Duplicates:** Standard logic requires O(N) if `nums[low] == nums[mid] == nums[high]`.
 
 ---
 
 ## Mistakes
 
-- **Returning the value instead of the index:** Always remember rotations = index.
-- **Handling duplicates:** If duplicates exist, `arr[low] == arr[mid] == arr[high]` case requires shrinking the window (`low++, high--`).
-- **Standard Binary Search:** Forgetting that if the search space is already sorted, the first element is the minimum.
-- **User mistake:** No specific note provided.
+- Forgetting that rotation count = index of the minimum.
+- Returning the minimum value instead of its index.
+- Not handling the case where the array is already sorted (0 rotations).
+- **User Mistake:** No specific note provided.
 
 ---
 
 ## Complexity
 
-Time: O(log N) → Reducing search space by half in each iteration using binary search.  
-Space: O(1) → No extra data structures used; only pointer variables.
+Time: O(log N) → Binary search halves the search space at each step.  
+Space: O(1) → Constant space used for pointers.
 
 ---
 
@@ -146,15 +144,15 @@ Space: O(1) → No extra data structures used; only pointer variables.
 
 - [Find Minimum in Rotated Sorted Array](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/) - Medium
 - [Search in Rotated Sorted Array](https://leetcode.com/problems/search-in-rotated-sorted-array/) - Medium
-- [Find Minimum in Rotated Sorted Array II (with duplicates)](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array-ii/) - Hard
+- [Find Minimum in Rotated Sorted Array II](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array-ii/) - Hard
 
 ---
 
 ## Tags and Properties
-  - #dsa #important #revisit #binarysearch #searching
-  - [[Binary Search]] [[Modified Binary Search]]
+  - #dsa #important #revisit #binarysearch #arrays
+  - [[Binary Search]] [[Arrays]] [[Searching]]
   - **Revision Date:** 2026-04-10
-  - **Problem Link:** [GeeksforGeeks - Rotation](https://www.geeksforgeeks.org/problems/rotation4723/1)
+  - **Problem Link:** [Find Rotation Count (GeeksforGeeks)](https://www.geeksforgeeks.org/find-rotation-count-rotated-sorted-array/)
 
 ---
 ### 🔄 Revision Checklist
