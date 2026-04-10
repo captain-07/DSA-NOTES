@@ -1,10 +1,10 @@
 ---
-created: 2026-04-07
+created: 2026-04-10
 revisions:
-  - 2026-04-09
-  - 2026-04-14
-  - 2026-04-22
-  - 2026-05-07
+  - 2026-04-12
+  - 2026-04-17
+  - 2026-04-25
+  - 2026-05-10
 ---
 
 # Find Nth Root Of A Number
@@ -14,20 +14,18 @@ revisions:
 ## Metadata & Placement Tags
 
 - **Target Companies:**
-  - #Amazon #Google #Microsoft #DEShaw #Flipkart
-
+  - #Amazon #Google #Microsoft #Samsung #Adobe
 - **Confidence Checklist:**
   - [ ] Low  
   - [ ] Medium  
   - [ ] High  
 
 - **Concepts:**
-  - #binarysearch [[Binary Search]]
-  - #mathematics [[Mathematics]]
+  - #binarysearch [[Binary Search]], #math [[Mathematics]]
 
 ## Pattern
 
-Binary Search on Answer (Monotonic Function)
+Binary Search on Answer
 
 ---
 ## Difficulty
@@ -38,71 +36,71 @@ Medium #medium
 
 ## ⚡ Key Idea (Core Insight)
 
-The function $f(x) = x^n$ is **monotonically increasing** for $x \geq 1$. Since the answer must lie between $1$ and $m$, we can treat the range $[1, m]$ as a sorted search space and apply Binary Search to find the value $x$ such that $x^n = m$.
+The function $f(x) = x^n$ is **monotonically increasing** for $x \ge 1$. Since we need to find an integer $x$ such that $x^n = m$, we can perform a binary search over the range $[1, m]$ to find the value that satisfies the equation.
 
 ---
 
 ## ⚡ Quick Recall (VERY IMPORTANT)
 
-Perform Binary Search on range $[1, m]$. For each `mid`, calculate $mid^n$. If it equals $m$, return `mid`; if greater, search left; if smaller, search right.
+Perform **Binary Search** in range $[1, m]$. Use a helper function for $mid^n$ to **avoid overflow** by returning "greater than $m$" immediately if the product exceeds the target.
 
 ---
 
 ## Approach
 
 ### Brute Force
-- Iterate $i$ from $1$ to $m$ and check if $i^n == m$. If $i^n > m$, stop and return $-1$.
-- **Time Complexity:** $O(m \cdot \log n)$
+- Linearly check every number $i$ from $1$ to $m$ if $pow(i, n) == m$.
+- Time Complexity: $O(m \cdot n)$
 
 ### Optimal
-- Use **Binary Search** on the answer range $[1, m]$.
-- Use a helper function `multiply(mid, n, m)` to calculate $mid^n$ while preventing overflow (return 1 if equal, 2 if greater, 0 if smaller).
-- Adjust `low` and `high` pointers based on the helper's output.
-- **Time Complexity:** $O(\log m \cdot \log n)$
+- Use Binary Search on the range $[1, m]$.
+- For each `mid`, calculate $mid^n$ carefully.
+- If $mid^n == m$, return `mid`. If $mid^n < m$, search right; else search left.
+- Time Complexity: $O(n \cdot \log m)$
 
 ---
 
 ## Code (Python)
 
 ```python
-def getNthRoot(n: int, m: int) -> int:
-    # Helper to check mid^n vs m to avoid large number overflow
-    def check(mid, n, m):
-        ans = 1
-        for i in range(1, n + 1):
-            ans = ans * mid
-            if ans > m: return 2 # Greater than m
-        if ans == m: return 1   # Equal to m
-        return 0                # Smaller than m
+class Solution:
+    def nthRoot(self, n: int, m: int) -> int:
+        # Helper to check mid^n vs m without overflow
+        # Returns: 0 if < m, 1 if == m, 2 if > m
+        def compare(mid, n, m):
+            ans = 1
+            for _ in range(n):
+                ans *= mid
+                if ans > m:
+                    return 2
+            return 1 if ans == m else 0
 
-    low = 1
-    high = m
-    
-    while low <= high:
-        mid = (low + high) // 2
-        mid_pow = check(mid, n, m)
-        
-        if mid_pow == 1:
-            return mid
-        elif mid_pow == 0:
-            low = mid + 1
-        else:
-            high = mid - 1
+        low, high = 1, m
+        while low <= high:
+            mid = (low + high) // 2
+            res = compare(mid, n, m)
             
-    return -1
+            if res == 1:
+                return mid
+            elif res == 0:
+                low = mid + 1
+            else:
+                high = mid - 1
+                
+        return -1
 ```
 
 ---
 
 ## Dry Run (Smart Example)
 
-**Input:** `n = 3, m = 27`
+**Input:** $n = 3, m = 27$
 
-| Step | Low | High | Mid | `mid^n` | Explanation |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| 1 | 1 | 27 | 14 | $2744$ | $14^3 > 27$, set `high = 13` |
-| 2 | 1 | 13 | 7 | $343$ | $7^3 > 27$, set `high = 6` |
-| 3 | 1 | 6 | 3 | $27$ | $3^3 == 27$, **Return 3** |
+| Step | Variables | Explanation |
+| :--- | :--- | :--- |
+| 1 | `low=1, high=27, mid=14` | $14^3 = 2744$. Since $2744 > 27$, set `high = 13`. |
+| 2 | `low=1, high=13, mid=7` | $7^3 = 343$. Since $343 > 27$, set `high = 6`. |
+| 3 | `low=1, high=6, mid=3` | $3^3 = 27$. Since $27 == 27$, **Return 3**. |
 
 ---
 
@@ -110,23 +108,23 @@ def getNthRoot(n: int, m: int) -> int:
 
 - **$m = 1$:** Always returns $1$ as $1^n = 1$.
 - **$n = 1$:** Always returns $m$ as $m^1 = m$.
-- **No integer root ($m=5, n=2$):** Should return $-1$.
-- **Large $m$ and $n$:** Handled by the `check` function to prevent overflow.
+- **No Integer Root:** $n=2, m=5 \implies$ Returns $-1$.
+- **Large $m$:** Binary search handles large ranges efficiently ($O(\log m)$).
 
 ---
 
 ## Mistakes
 
-- Using `mid**n` directly in languages like C++/Java which causes integer overflow (use a loop or `pow` with checks).
-- Not returning `-1` if the perfect root doesn't exist.
-- Incorrectly setting `high` to `m/n` (not applicable for roots).
+- **Overflow:** Calculating `pow(mid, n)` directly can crash or overflow before comparison. Use a loop with early exit.
+- **Range:** Don't forget the search space is $[1, m]$, not $[1, n]$.
+- **User Mistake:** No specific note provided.
 
 ---
 
 ## Complexity
 
-- **Time:** $O(\log m \cdot \log n)$ → $\log m$ for binary search and $\log n$ for the power calculation.
-- **Space:** $O(1)$ → No extra space used besides variables.
+Time: $O(n \cdot \log m)$ → Binary search takes $\log m$ steps, each requiring $n$ multiplications.  
+Space: $O(1)$ → Constant space for variables.
 
 ---
 
@@ -134,20 +132,19 @@ def getNthRoot(n: int, m: int) -> int:
 
 - [Sqrt(x)](https://leetcode.com/problems/sqrtx/) - Easy
 - [Pow(x, n)](https://leetcode.com/problems/powx-n/) - Medium
-- [Koko Eating Bananas](https://leetcode.com/problems/koko-eating-bananas/) - Medium
-- [Capacity To Ship Packages Within D Days](https://leetcode.com/problems/capacity-to-ship-packages-within-d-days/) - Medium
+- [Valid Perfect Square](https://leetcode.com/problems/valid-perfect-square/) - Easy
 
 ---
 
 ## Tags and Properties
-- #dsa #important #revisit #binarysearch 
-- [[Binary Search]] [[Mathematics]]
-- **Revision Date:** 2026-04-07
-- **Problem Link:** [GFG: Find Nth Root of M](https://www.geeksforgeeks.org/problems/nth-root-of-m5843/1)
+  - #dsa #important #revisit  
+  - #binarysearch [[Binary Search]] #math [[Mathematics]]
+  - **Revision Date:** 2026-04-10
+  - **Problem Link:** [Nth Root of a Number - GFG](https://www.geeksforgeeks.org/problems/nth-root-of-a-number3235/1)
 
 ---
 ### 🔄 Revision Checklist
-- [ ] Day 2 Revision (2026-04-09)
-- [ ] Day 7 Revision (2026-04-14)
-- [ ] Day 15 Revision (2026-04-22)
-- [ ] Day 30 Revision (2026-05-07)
+- [ ] Day 2 Revision (2026-04-12)
+- [ ] Day 7 Revision (2026-04-17)
+- [ ] Day 15 Revision (2026-04-25)
+- [ ] Day 30 Revision (2026-05-10)
