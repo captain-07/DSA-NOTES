@@ -1,10 +1,10 @@
 ---
-created: 2026-04-07
+created: 2026-04-10
 revisions:
-  - 2026-04-09
-  - 2026-04-14
-  - 2026-04-22
-  - 2026-05-07
+  - 2026-04-12
+  - 2026-04-17
+  - 2026-04-25
+  - 2026-05-10
 ---
 
 # Search Insert Position
@@ -14,7 +14,7 @@ revisions:
 ## Metadata & Placement Tags
 
 - **Target Companies:**
-  - #Amazon #Google #Microsoft #Apple #Adobe #Facebook
+  - #Google #Amazon #Microsoft #Adobe #Apple #Facebook
 
 - **Confidence Checklist:**
   - [ ] Low  
@@ -26,63 +26,64 @@ revisions:
 
 ## Pattern
 
-Binary Search (Sorted Array / Insertion Logic)
+Binary Search (Lower Bound / Search Space Reduction)
 
 ---
 ## Difficulty
 
-Easy / #easy
+Easy  
+#easy
 
 ---
 
 ## ⚡ Key Idea (Core Insight)
 
-Since the array is sorted, we use **Binary Search**. The crucial insight is that if the target is not found, the `left` pointer will naturally converge to the index where the target *should* be inserted to maintain order.
+- Perform a standard binary search on a sorted array.
+- If the target isn't found, the `left` pointer (or `low`) naturally concludes at the index where the target *should* be inserted to maintain sorted order.
 
 ---
 
 ## ⚡ Quick Recall (VERY IMPORTANT)
 
-Standard Binary Search: If `nums[mid] == target`, return `mid`. If the loop finishes without a match, **return `left`**.
+- Binary Search: If `target` not found, `return left`.
 
 ---
 
 ## Approach
 
 ### Brute Force
-- Iterate through the array linearly and return the index of the first element $\ge$ target. If none found, return `len(nums)`.
-- **Time Complexity:** $O(N)$
+- Linear search through the array until `nums[i] >= target`.
+- Time: O(n)
 
 ### Optimal
-- Use a **Low/High** (or Left/Right) pointer approach.
-- Calculate `mid = (left + right) // 2`.
-- Adjust pointers:
-    1. If `nums[mid] == target`, target found at `mid`.
-    2. If `nums[mid] < target`, move `left = mid + 1`.
-    3. If `nums[mid] > target`, move `right = mid - 1`.
-- If the loop exits, `left` represents the smallest index such that `nums[left] > target`.
-- **Time Complexity:** $O(\log N)$
+- Use `left` and `right` pointers. Calculate `mid`.
+- If `nums[mid] == target`, return `mid`.
+- If `nums[mid] < target`, move `left = mid + 1`.
+- If `nums[mid] > target`, move `right = mid - 1`.
+- Return `left` if loop terminates without finding target.
+- Time: O(log n)
 
 ---
 
 ## Code (Python)
 
 ```python
-def searchInsert(nums, target):
-    left, right = 0, len(nums) - 1
-    
-    while left <= right:
-        mid = left + (right - left) // 2
+class Solution:
+    def searchInsert(self, nums: list[int], target: int) -> int:
+        left, right = 0, len(nums) - 1
         
-        if nums[mid] == target:
-            return mid
-        elif nums[mid] < target:
-            left = mid + 1
-        else:
-            right = mid - 1
+        while left <= right:
+            mid = left + (right - left) // 2
             
-    # If not found, 'left' is the insertion index
-    return left
+            if nums[mid] == target:
+                return mid
+            elif nums[mid] < target:
+                left = mid + 1
+            else:
+                right = mid - 1
+                
+        # If target is not found, 'left' is the insertion index
+        return left
 ```
 
 ---
@@ -95,54 +96,53 @@ def searchInsert(nums, target):
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | 1 | 0 | 3 | 1 | 3 | `3 > 2` → `right = mid - 1` (0) |
 | 2 | 0 | 0 | 0 | 1 | `1 < 2` → `left = mid + 1` (1) |
-| 3 | 1 | 0 | - | - | `left > right` → Loop Ends |
-| **Result** | **1** | - | - | - | **Return left (1)** |
+| 3 | 1 | 0 | - | - | `left > right` → Loop ends. |
+| Result | - | - | - | - | **Return left (1)** |
 
 ---
 
 ## Edge Cases
 
-- **Target smaller than all elements:** `left` remains 0, returns 0.
-- **Target larger than all elements:** `left` moves past `len(nums) - 1`, returns `len(nums)`.
-- **Target exists in array:** Returns the exact index.
-- **Empty array:** Loop doesn't run, returns `left` (0).
-- **Single element array:** Correctly handles insert before or after.
+- **Target smaller than all elements:** `left` remains 0.
+- **Target larger than all elements:** `left` moves to `len(nums)`.
+- **Empty array:** (Not possible per LC constraints, but would return 0).
+- **Array with one element:** Correctly handles `target <`, `target >`, or `target ==`.
 
 ---
 
 ## Mistakes
 
-- **Insertion Logic:** Forgetting that `left` is the correct index after the loop fails. Some try to return `mid` or `right`, which is incorrect for boundary cases.
-- **Overflow:** Using `(left + right) // 2` instead of `left + (right - left) // 2` (relevant in languages with fixed integer sizes).
-- **Boundary:** Not using `left <= right` in the while condition, leading to missing the last possible index.
+- Using `right = mid` instead of `right = mid - 1` (can lead to infinite loops).
+- Returning `mid` instead of `left` after the loop.
+- **User Mistake:** No specific note provided.
 
 ---
 
 ## Complexity
 
-Time: $O(\log N)$ → Binary search halves the search space in each iteration.  
-Space: $O(1)$ → Constant space used for pointers.
+Time: O(log n) → Binary search halves the search space each step.  
+Space: O(1) → Only constant extra space for pointers.
 
 ---
 
 ## Similar Problems
 
+- [Binary Search](https://leetcode.com/problems/binary-search/) - Easy
 - [First Bad Version](https://leetcode.com/problems/first-bad-version/) - Easy
 - [Find First and Last Position of Element in Sorted Array](https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/) - Medium
-- [Binary Search](https://leetcode.com/problems/binary-search/) - Easy
 
 ---
 
 ## Tags and Properties
   - #dsa #important #revisit  
-  - #binarysearch #arrays #easy-win
+  - #binarysearch #arrays #searching
   - [[Binary Search]] [[Arrays]]
-  - **Revision Date:** 2026-04-07
-  - **Problem Link:** [Search Insert Position - LeetCode](https://leetcode.com/problems/search-insert-position/)
+  - **Revision Date:** 2026-04-10
+  - **Problem Link:** [LeetCode - Search Insert Position](https://leetcode.com/problems/search-insert-position/)
 
 ---
 ### 🔄 Revision Checklist
-- [ ] Day 2 Revision (2026-04-09)
-- [ ] Day 7 Revision (2026-04-14)
-- [ ] Day 15 Revision (2026-04-22)
-- [ ] Day 30 Revision (2026-05-07)
+- [ ] Day 2 Revision (2026-04-12)
+- [ ] Day 7 Revision (2026-04-17)
+- [ ] Day 15 Revision (2026-04-25)
+- [ ] Day 30 Revision (2026-05-10)
