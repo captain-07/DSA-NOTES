@@ -14,7 +14,7 @@ revisions:
 ## Metadata & Placement Tags
 
 - **Target Companies:**
-  - #Amazon #Microsoft #Facebook #Google #GoldmanSachs #Bloomberg
+  - #Amazon #Google #Microsoft #Facebook #Uber #Adobe
 
 - **Confidence Checklist:**
   - [ ] Low  
@@ -22,11 +22,11 @@ revisions:
   - [ ] High  
 
 - **Concepts:**
-  - #binarysearch [[Binary Search]], #arrays [[Arrays]]
+  - #binarysearch [[Binary Search]], #arrays [[Arrays]], #modifiedbinarysearch [[Modified Binary Search]]
 
 ## Pattern
 
-Binary Search (Modified for Rotated Sorted Array)
+Modified Binary Search (Pivot Detection)
 
 ---
 ## Difficulty
@@ -38,32 +38,30 @@ Medium
 
 ## ⚡ Key Idea (Core Insight)
 
-The array consists of two sorted segments. The minimum element is the "pivot" where the rotation occurred. By comparing `nums[mid]` with the rightmost element `nums[right]`, we can determine if the minimum lies in the left or right part of the current search space.
+A rotated sorted array consists of two sorted subarrays. The minimum element is the "pivot" point where the ascending order breaks. By comparing `nums[mid]` with `nums[right]`, we can determine if the minimum lies in the left or right half.
 
 ---
 
 ## ⚡ Quick Recall (VERY IMPORTANT)
 
-Compare `nums[mid]` with `nums[right]`. If `nums[mid] > nums[right]`, search right (`left = mid + 1`). Otherwise, search left including mid (`right = mid`).
+Compare `mid` with `right`: If `nums[mid] > nums[right]`, search right (`left = mid + 1`). Otherwise, search left including mid (`right = mid`).
 
 ---
 
 ## Approach
 
 ### Brute Force
-- Iterate through the entire array and track the minimum value.
-- **Time:** O(N)
-- **Space:** O(1)
+- Iterate through the entire array to find the minimum element.
+- Time Complexity: O(N)
 
 ### Optimal (Binary Search)
-- Use two pointers `left` and `right`.
-- While `left < right`:
-  - Calculate `mid`.
-  - If `nums[mid] > nums[right]`: The minimum must be in the unsorted right half.
-  - Else: The minimum is either `mid` or in the left half.
-- Return `nums[left]`.
-- **Time:** O(log N)
-- **Space:** O(1)
+1. Initialize `left = 0` and `right = n - 1`.
+2. While `left < right`:
+   - Calculate `mid`.
+   - If `nums[mid] > nums[right]`, the rotation point (and the min) must be to the right of `mid`.
+   - Else, `nums[mid]` could be the minimum or the minimum is to its left.
+3. Return `nums[left]`.
+- Time Complexity: O(log N)
 
 ---
 
@@ -77,12 +75,10 @@ class Solution:
         while left < right:
             mid = left + (right - left) // 2
             
-            # If mid element is greater than rightmost, 
-            # the minimum is in the right half.
+            # If mid is greater than right, pivot is in the right half
             if nums[mid] > nums[right]:
                 left = mid + 1
-            # If mid element is less than or equal to rightmost,
-            # the minimum is at mid or to the left.
+            # If mid is less than or equal to right, pivot is at mid or left
             else:
                 right = mid
                 
@@ -93,39 +89,38 @@ class Solution:
 
 ## Dry Run (Smart Example)
 
-**Input:** `nums = [4, 5, 6, 7, 0, 1, 2]`
+Input: `nums = [4, 5, 6, 7, 0, 1, 2]`
 
-| Step | left | right | mid | nums[mid] | nums[right] | Action | Explanation |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| 1 | 0 | 6 | 3 | 7 | 2 | `left = 4` | `7 > 2`, min is in right half. |
-| 2 | 4 | 6 | 5 | 1 | 2 | `right = 5` | `1 <= 2`, min could be mid or left. |
-| 3 | 4 | 5 | 4 | 0 | 1 | `right = 4` | `0 <= 1`, min could be mid or left. |
-| 4 | 4 | 4 | - | - | - | **End** | `left == right`, return `nums[4]` (0). |
+| Step | Variables | Explanation |
+| :--- | :--- | :--- |
+| 1 | `L=0, R=6, M=3` | `nums[3]=7 > nums[6]=2`. Minimum must be in the right half. `L = M + 1 = 4`. |
+| 2 | `L=4, R=6, M=5` | `nums[5]=1 < nums[6]=2`. Minimum is at index 5 or to its left. `R = M = 5`. |
+| 3 | `L=4, R=5, M=4` | `nums[4]=0 < nums[5]=1`. Minimum is at index 4 or to its left. `R = M = 4`. |
+| 4 | `L=4, R=4` | `L == R`. Loop terminates. Result is `nums[4] = 0`. |
 
 ---
 
 ## Edge Cases
 
-- **Already Sorted:** `[1, 2, 3, 4, 5]` -> Returns index 0.
-- **Single Element:** `[1]` -> Returns index 0.
-- **Two Elements (Sorted):** `[1, 2]` -> Returns index 0.
-- **Two Elements (Rotated):** `[2, 1]` -> Returns index 1.
-- **Rotated at last index:** `[2, 3, 4, 5, 1]` -> Returns index 4.
+- **Single Element `[1]`**: Loop doesn't run, returns `nums[0]`.
+- **Already Sorted `[1, 2, 3]`**: `nums[mid]` will always be `< nums[right]`, `right` keeps moving left until it hits index 0.
+- **Rotated by 1 `[2, 3, 1]`**: Correct handles the pivot at the end.
+- **Two Elements `[2, 1]`**: `mid` will be 0, `nums[0] > nums[1]`, `left` becomes 1, returns `nums[1]`.
 
 ---
 
 ## Mistakes
 
-- **Incorrect Elimination:** Confusing the logic of "eliminating the sorted part". In this problem, we eliminate the sorted part **only if** the minimum cannot exist there. If the right side is sorted, the minimum *could* be the first element of that sorted part (`mid`), so we don't discard `mid`.
-- **Using `left <= right`:** Leads to an infinite loop because `right = mid` doesn't always reduce the search space if the condition isn't carefully managed.
-- **Comparing with `nums[left]`:** Comparing `mid` with `left` is unreliable because the rotation point might be anywhere; comparing with `right` provides a consistent signal for the pivot location.
+- Using `left <= right` with `right = mid - 1` can accidentally skip the minimum element since `mid` itself could be the minimum.
+- Comparing `nums[mid]` with `nums[left]` is unreliable because it doesn't clearly distinguish which half is sorted in all rotation cases.
+- **User Mistake:** No specific note provided.
 
 ---
 
 ## Complexity
 
-Time: O(log N) → Standard binary search halves the search space each iteration.  
-Space: O(1) → Only constant extra space used for pointers.
+Time: O(log N) → The search space is halved in each iteration of the binary search.  
+Space: O(1) → Only a constant amount of extra space is used for pointers.
 
 ---
 
@@ -133,15 +128,16 @@ Space: O(1) → Only constant extra space used for pointers.
 
 - [Search in Rotated Sorted Array](https://leetcode.com/problems/search-in-rotated-sorted-array/) - Medium
 - [Find Minimum in Rotated Sorted Array II](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array-ii/) - Hard
-- [Find Peak Element](https://leetcode.com/problems/find-peak-element/) - Medium
+- [Search in Rotated Sorted Array II](https://leetcode.com/problems/search-in-rotated-sorted-array-ii/) - Medium
 
 ---
 
 ## Tags and Properties
-  - #dsa #important #revisit #binarysearch #arrays
-  - [[Binary Search]] [[Arrays]] [[Divide and Conquer]]
-  - **Revision Date:** 2026-04-10
-  - **Problem Link:** [LeetCode - Find Minimum in Rotated Sorted Array](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/)
+
+- #dsa #important #revisit #binarysearch #leetcode-medium
+- [[Binary Search]] [[Arrays]]
+- **Revision Date:** 2026-04-10
+- **Problem Link:** [LeetCode #153 - Find Minimum in Rotated Sorted Array](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/)
 
 ---
 ### 🔄 Revision Checklist
