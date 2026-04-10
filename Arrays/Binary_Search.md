@@ -14,7 +14,7 @@ revisions:
 ## Metadata & Placement Tags
 
 - **Target Companies:**
-  - #Google #Amazon #Microsoft #Meta #Apple #Uber #Netflix
+  - #Amazon #Google #Microsoft #Meta #Apple #Uber
 
 - **Confidence Checklist:**
   - [ ] Low  
@@ -22,11 +22,12 @@ revisions:
   - [ ] High  
 
 - **Concepts:**
-  - #binarysearch [[Binary Search]], #searching [[Searching]], #divideandconquer [[Divide and Conquer]]
+  - #binarysearch [[Binary Search]], #sorting [[Sorting]], #divideandconquer [[Divide and Conquer]]
 
 ## Pattern
 
-- Decrease and Conquer (Halving the search space)
+- Binary Search (Decrease and Conquer)
+- Two Pointers (Left and Right boundaries)
 
 ---
 ## Difficulty
@@ -38,30 +39,31 @@ Easy
 
 ## ⚡ Key Idea (Core Insight)
 
-Binary Search leverages the **sorted** property of an array to eliminate half of the remaining elements in each step. By comparing the target value to the middle element, we decide whether to search the left or right half.
+In a **sorted** search space, compare the middle element with the target. Based on the comparison, discard exactly half of the remaining elements in each step, reducing the search space logarithmically.
 
 ---
 
 ## ⚡ Quick Recall (VERY IMPORTANT)
 
-Calculate `mid`, if `target > nums[mid]` move `left` to `mid + 1`, else move `right` to `mid - 1`.
+Maintain `left` and `right` pointers. While `left <= right`, check `mid`. If `target > nums[mid]`, search right (`left = mid + 1`); otherwise, search left (`right = mid - 1`).
 
 ---
 
 ## Approach
 
 ### Brute Force
-- Perform a Linear Search by iterating through every element until the target is found.
+- Linear Search: Iterate through every element in the array until the target is found or the end is reached.
 - **Time Complexity:** O(N)
 
-### Optimal (Iterative)
-1. Initialize two pointers: `left = 0` and `right = n - 1`.
-2. While `left <= right`:
-    - Calculate `mid = left + (right - left) // 2` (prevents overflow).
+### Optimal
+- **Initialization:** Set `left = 0` and `right = len(nums) - 1`.
+- **Iteration:** While `left <= right`:
+    - Calculate `mid = left + (right - left) // 2` (prevents overflow in other languages).
     - If `nums[mid] == target`, return `mid`.
-    - If `nums[mid] < target`, discard the left half: `left = mid + 1`.
-    - If `nums[mid] > target`, discard the right half: `right = mid - 1`.
-3. If the loop ends, the target is not in the array; return -1.
+    - If `nums[mid] < target`, move `left = mid + 1`.
+    - If `nums[mid] > target`, move `right = mid - 1`.
+- **Termination:** If the loop ends without finding the target, return -1.
+- **Time Complexity:** O(log N)
 
 ---
 
@@ -73,7 +75,7 @@ class Solution:
         left, right = 0, len(nums) - 1
         
         while left <= right:
-            # Optimal mid calculation to prevent potential overflow
+            # Standard mid calculation
             mid = left + (right - left) // 2
             
             if nums[mid] == target:
@@ -96,26 +98,27 @@ class Solution:
 
 | Step | Variables (L, R, M) | Explanation |
 | :--- | :--- | :--- |
-| 1 | L=0, R=5, M=2 | `nums[2] = 3`. Since `3 < 9`, move `L` to `M + 1` (3). |
-| 2 | L=3, R=5, M=4 | `nums[4] = 9`. Since `9 == 9`, target found. |
-| 3 | - | Return index 4. |
+| 1 | L=0, R=5, M=2 | `nums[2] = 3`. Since `3 < 9`, target is on the right. Move `L = 2 + 1 = 3`. |
+| 2 | L=3, R=5, M=4 | `nums[4] = 9`. `9 == 9`. Target found! |
+| 3 | - | Return index `4`. |
 
 ---
 
 ## Edge Cases
 
-- **Target not present:** The pointers cross (`left > right`), return -1.
-- **Single element array:** Correctly identifies if the single element matches target.
-- **Target at boundaries:** Target is the first (`index 0`) or last (`index n-1`) element.
-- **Empty array:** `left` (0) is not `<= right` (-1), loop never starts, returns -1.
+- **Empty Array:** `nums = []`, should return -1 immediately.
+- **Single Element:** `nums = [5]`, `target = 5`. Loop runs once, returns 0.
+- **Target at Boundaries:** Target is the first or last element.
+- **Target Not Present:** `left` becomes greater than `right`, loop terminates, returns -1.
+- **Large Arrays:** Ensure `mid` calculation doesn't overflow (handled natively in Python).
 
 ---
 
 ## Mistakes
 
-- **Overflow:** Using `(left + right) // 2` instead of `left + (right - left) // 2` in languages with fixed-size integers.
-- **Infinite Loop:** Forgetting to update pointers as `mid + 1` or `mid - 1`, causing the window to never shrink.
-- **Condition:** Using `while left < right` instead of `while left <= right`, missing the last possible element.
+- **Incorrect Loop Condition:** Using `while left < right` instead of `while left <= right` (misses the last element).
+- **Boundary Updates:** Forgetting the `+ 1` or `- 1` when updating `left` or `right`, leading to infinite loops.
+- **Unsorted Input:** Attempting Binary Search on an unsorted array without sorting it first.
 - **User Mistake:** No specific note provided.
 
 ---
@@ -130,18 +133,17 @@ Space: O(1) → Only a constant amount of extra space is used for pointers.
 ## Similar Problems
 
 - [Search Insert Position](https://leetcode.com/problems/search-insert-position/) - Easy
-- [First and Last Position of Element in Sorted Array](https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/) - Medium
+- [Find First and Last Position of Element in Sorted Array](https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/) - Medium
 - [Search in Rotated Sorted Array](https://leetcode.com/problems/search-in-rotated-sorted-array/) - Medium
-- [Find Minimum in Rotated Sorted Array](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/) - Medium
+- [First Bad Version](https://leetcode.com/problems/first-bad-version/) - Easy
 
 ---
 
 ## Tags and Properties
-  - #dsa #important #revisit  
-  - #searching #binarysearch #arrays
-  - [[Binary Search]] [[Arrays]] [[Searching]]
+  - #dsa #important #revisit #searching 
+  - #algorithms [[Binary Search]] [[Searching Algorithms]]
   - **Revision Date:** 2026-04-10
-  - **Problem Link:** [Binary Search - LeetCode](https://leetcode.com/problems/binary-search/)
+  - **Problem Link:** [LeetCode 704 - Binary Search](https://leetcode.com/problems/binary-search/)
 
 ---
 ### 🔄 Revision Checklist
