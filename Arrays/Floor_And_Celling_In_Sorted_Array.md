@@ -1,10 +1,10 @@
 ---
-created: 2026-04-07
+created: 2026-04-10
 revisions:
-  - 2026-04-09
-  - 2026-04-14
-  - 2026-04-22
-  - 2026-05-07
+  - 2026-04-12
+  - 2026-04-17
+  - 2026-04-25
+  - 2026-05-10
 ---
 
 # Floor And Celling In Sorted Array
@@ -14,7 +14,7 @@ revisions:
 ## Metadata & Placement Tags
 
 - **Target Companies:**
-  - #Amazon #Google #Microsoft #Samsung #Adobe
+  - #Amazon #Google #Microsoft #Adobe #Flipkart
 
 - **Confidence Checklist:**
   - [ ] Low  
@@ -22,12 +22,11 @@ revisions:
   - [ ] High  
 
 - **Concepts:**
-  - #binarysearch [[Binary Search]]
-  - #arrays [[Arrays]]
+  - #binarysearch [[Binary Search]], #arrays [[Arrays]], #searching [[Searching]]
 
 ## Pattern
 
-Modified Binary Search (Range Bound Search)
+Binary Search (Boundary Search)
 
 ---
 ## Difficulty
@@ -39,97 +38,105 @@ Easy
 
 ## ⚡ Key Idea (Core Insight)
 
-The floor of $X$ is the largest element $\le X$. The ceiling of $X$ is the smallest element $\ge X$. In a sorted array, Binary Search naturally converges such that when the loop (`low <= high`) ends without finding $X$, `high` points to the **floor** and `low` points to the **ceiling**.
+The problem asks for two boundaries: the largest value $\le X$ (Floor) and the smallest value $\ge X$ (Ceiling). Since the array is sorted, we use **Binary Search** to eliminate half the search space. For Floor, we keep track of the last element $\le X$ while moving right; for Ceiling, we track the last element $\ge X$ while moving left.
 
 ---
 
 ## ⚡ Quick Recall (VERY IMPORTANT)
 
-If target not found: **Floor = arr[high]**, **Ceiling = arr[low]**. Always check if `high < 0` (no floor) or `low >= n` (no ceiling).
+- **Ceiling** is identical to `Lower Bound` (first element $\ge X$).
+- **Floor** is the element at `high` after a standard binary search if $X$ is not found.
+- If $X$ exists in the array, both Floor and Ceiling are $X$.
 
 ---
 
 ## Approach
 
 ### Brute Force
-- Iterate through the array and keep track of the largest element $\le X$ and smallest $\ge X$.
+- Linear scan through the array to find the two boundaries.
 - Time: $O(N)$
 - Space: $O(1)$
 
 ### Optimal
-- Use Binary Search to find the element.
-- If `arr[mid] == X`, both floor and ceiling are $X$.
-- If `arr[mid] < X`, move `low = mid + 1`.
-- If `arr[mid] > X`, move `high = mid - 1`.
-- After the loop, validate `high` and `low` indices.
+- Use two separate Binary Search passes or one modified pass.
+- For **Floor**: If `arr[mid] <= x`, it's a candidate; search right (`low = mid + 1`).
+- For **Ceiling**: If `arr[mid] >= x`, it's a candidate; search left (`high = mid - 1`).
+- Time: $O(\log N)$
+- Space: $O(1)$
 
 ---
 
 ## Code (Python)
 
 ```python
-def find_floor_ceil(arr, x):
-    n = len(arr)
-    low, high = 0, n - 1
-    f, c = -1, -1
-    
-    while low <= high:
-        mid = low + (high - low) // 2
-        
-        if arr[mid] == x:
-            return arr[mid], arr[mid]
-        elif arr[mid] < x:
-            f = arr[mid] # Potential floor
-            low = mid + 1
-        else:
-            c = arr[mid] # Potential ceiling
-            high = mid - 1
-            
-    return f, c
-
-# Usage
-# arr = [1, 2, 8, 10, 10, 12, 19], x = 5
-# Output: (2, 8)
+class Solution:
+    def getFloorAndCeil(self, arr: list[int], n: int, x: int) -> tuple[int, int]:
+        """
+        Returns (floor, ceiling) of x in sorted array arr.
+        -1 if not found.
+        """
+        # Calculate Floor
+        f_ans = -1
+        low, high = 0, n - 1
+        while low <= high:
+            mid = low + (high - low) // 2
+            if arr[mid] <= x:
+                f_ans = arr[mid]
+                low = mid + 1
+            else:
+                high = mid - 1
+                
+        # Calculate Ceiling (Lower Bound)
+        c_ans = -1
+        low, high = 0, n - 1
+        while low <= high:
+            mid = low + (high - low) // 2
+            if arr[mid] >= x:
+                c_ans = arr[mid]
+                high = mid - 1
+            else:
+                low = mid + 1
+                
+        return (f_ans, c_ans)
 ```
 
 ---
 
 ## Dry Run (Smart Example)
 
-**Input:** `arr = [3, 4, 7, 8, 10]`, `x = 5`
+**Input:** `arr = [3, 4, 7, 8, 8, 10]`, `x = 5`
 
-| Step | low | high | mid | arr[mid] | Explanation |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| 1 | 0 | 4 | 2 | 7 | $7 > 5$, so Ceiling = 7, `high = 1` |
-| 2 | 0 | 1 | 0 | 3 | $3 < 5$, so Floor = 3, `low = 1` |
-| 3 | 1 | 1 | 1 | 4 | $4 < 5$, so Floor = 4, `low = 2` |
-| 4 | 2 | 1 | - | - | `low > high`, loop ends. Result: (4, 7) |
+| Step | Variables | Explanation |
+| :--- | :--- | :--- |
+| 1 | `low=0, high=5, mid=2 (arr[2]=7)` | `7 > 5`: Ceiling candidate = 7, search left for Ceil. |
+| 2 | `low=0, high=1, mid=0 (arr[0]=3)` | `3 < 5`: Floor candidate = 3, search right for Floor. |
+| 3 | `low=1, high=1, mid=1 (arr[1]=4)` | `4 < 5`: Floor candidate = 4, search right. |
+| 4 | `low=2, high=1` | Loop terminates. **Floor: 4, Ceil: 7**. |
 
 ---
 
 ## Edge Cases
 
-- **X is smaller than all:** `floor` will be -1, `ceil` will be `arr[0]`.
-- **X is larger than all:** `floor` will be `arr[n-1]`, `ceil` will be -1.
-- **X exists in array:** Both `floor` and `ceil` equal $X$.
-- **Duplicates:** Binary search handles duplicates correctly for floor/ceil values.
-- **Empty Array:** Handled by `low <= high` condition (returns -1, -1).
+- **X smaller than min element:** Floor is -1, Ceiling is `arr[0]`.
+- **X larger than max element:** Floor is `arr[n-1]`, Ceiling is -1.
+- **X exists in array:** Both Floor and Ceiling are $X$.
+- **Empty Array:** Handled by `low <= high` (returns -1, -1).
+- **Duplicate elements:** Binary search correctly identifies the nearest boundary.
 
 ---
 
 ## Mistakes
 
-- **Index Out of Bounds:** Forgetting to check if `high` or `low` went out of range before returning.
-- **Off-by-one:** Using `low < high` instead of `low <= high` in the while loop.
-- **Initialization:** Initializing `f` and `c` with values present in the array instead of a sentinel like -1.
-- **User Mistake:** Ensure revision notes are created for all fundamental BS variations (Lower Bound, Upper Bound, Floor, Ceil).
+- Confusing Floor with Ceiling logic (remember: Floor is "down", Ceiling is "up").
+- Forgetting to handle the case where $X$ is out of array bounds.
+- **Critical:** Not mastering fundamental BS variations (Lower Bound, Upper Bound, Floor, Ceil) which are the building blocks for harder problems.
 
 ---
 
 ## Complexity
 
-Time: $O(\log N)$ → Binary search cuts the search space in half each iteration.  
-Space: $O(1)$ → Constant space used for pointers and variables.
+Time: $O(\log N)$ → We perform two binary searches, each halving the search space.  
+Space: $O(1)$ → No extra space used besides a few variables.
 
 ---
 
@@ -137,19 +144,19 @@ Space: $O(1)$ → Constant space used for pointers and variables.
 
 - [Search Insert Position](https://leetcode.com/problems/search-insert-position/) - Easy
 - [Find First and Last Position of Element in Sorted Array](https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/) - Medium
-- [Find Smallest Letter Greater Than Target](https://leetcode.com/problems/find-smallest-letter-greater-than-target/) - Easy
+- [Smallest Letter Greater Than Target](https://leetcode.com/problems/find-smallest-letter-greater-than-target/) - Easy
 
 ---
 
 ## Tags and Properties
-  - #dsa #important #revisit #binarysearch #searching
-  - [[Binary Search]] [[Arrays]]
-  - **Revision Date:** 2026-04-07
-  - **Problem Link:** [GeeksforGeeks - Floor in Sorted Array](https://www.geeksforgeeks.org/floor-in-a-sorted-array/)
+  - #dsa #important #revisit #binarysearch
+  - [[Binary Search]] [[Lower Bound]] [[Searching]]
+  - **Revision Date:** 2026-04-10
+  - **Problem Link:** [GeeksforGeeks - Floor and Ceil](https://www.geeksforgeeks.org/problems/ceil-the-floor0532/1)
 
 ---
 ### 🔄 Revision Checklist
-- [ ] Day 2 Revision (2026-04-09)
-- [ ] Day 7 Revision (2026-04-14)
-- [ ] Day 15 Revision (2026-04-22)
-- [ ] Day 30 Revision (2026-05-07)
+- [ ] Day 2 Revision (2026-04-12)
+- [ ] Day 7 Revision (2026-04-17)
+- [ ] Day 15 Revision (2026-04-25)
+- [ ] Day 30 Revision (2026-05-10)
