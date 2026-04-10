@@ -1,10 +1,10 @@
 ---
-created: 2026-04-07
+created: 2026-04-10
 revisions:
-  - 2026-04-09
-  - 2026-04-14
-  - 2026-04-22
-  - 2026-05-07
+  - 2026-04-12
+  - 2026-04-17
+  - 2026-04-25
+  - 2026-05-10
 ---
 
 # Reverse An Array
@@ -14,7 +14,7 @@ revisions:
 ## Metadata & Placement Tags
 
 - **Target Companies:**
-  - #Amazon #Google #Microsoft #Meta #Adobe #Apple
+  - #Amazon #Google #Microsoft #Adobe #Meta
 
 - **Confidence Checklist:**
   - [ ] Low  
@@ -22,14 +22,14 @@ revisions:
   - [ ] High  
 
 - **Concepts:**
-  - #arrays [[Arrays]], #twopointers [[Two Pointers]], #inplace [[In-place Algorithms]]
+  - #twopointers [[Two Pointers]], #arrays [[Arrays]]
 
----
 ## Pattern
 
 Two Pointers (Opposite Ends)
 
 ---
+
 ## Difficulty
 
 Easy  
@@ -39,115 +39,110 @@ Easy
 
 ## ⚡ Key Idea (Core Insight)
 
-The symmetry of an array allows us to swap elements from the outside-in. By maintaining two pointers at the boundaries, we can transform the array in-place without requiring extra memory.
+Swap elements from the start and end of the array, moving toward the center until the pointers meet or cross. This achieves an in-place reversal without extra space.
 
 ---
 
 ## ⚡ Quick Recall (VERY IMPORTANT)
 
-Swap `arr[left]` with `arr[right]`, increment `left`, decrement `right`, repeat until they meet.
+Use `left` and `right` pointers; `swap(arr[left], arr[right])` and increment/decrement until `left >= right`.
 
 ---
 
 ## Approach
 
 ### Brute Force
-- Create a new array of the same size. Iterate through the original array from last to first and copy elements into the new array.
-- **Time:** O(N)
-- **Space:** O(N)
+- Create a new array, iterate the original array backwards, and copy elements into the new array.
+- Time: O(N), Space: O(N)
 
-### Better (Recursive)
-- Swap the first and last elements, then recursively call the function for the remaining subarray.
-- **Time:** O(N)
-- **Space:** O(N) due to recursion stack.
-
-### Optimal (Two Pointers)
-1. Initialize `left = 0` and `right = len(arr) - 1`.
-2. While `left < right`:
-   - Swap `arr[left]` and `arr[right]`.
-   - `left += 1`
-   - `right -= 1`
-3. The array is reversed in-place.
+### Optimal
+- Use two pointers: `left = 0` and `right = n - 1`.
+- Swap `arr[left]` and `arr[right]`.
+- Increment `left`, decrement `right`.
+- Stop when `left >= right`.
+- Time: O(N), Space: O(1)
 
 ---
 
 ## Code (Python)
 
 ```python
-def reverse_array(arr):
-    # Initialize pointers at both ends
-    left = 0
-    right = len(arr) - 1
-    
-    # Continue swapping until pointers meet in the middle
-    while left < right:
-        # Pythonic swap: no temp variable needed
-        arr[left], arr[right] = arr[right], arr[left]
+class Solution:
+    def reverseArray(self, arr: list[int]) -> None:
+        """
+        Reverses the input array in-place using two pointers.
+        """
+        left, right = 0, len(arr) - 1
         
-        # Move pointers towards the center
-        left += 1
-        right -= 1
-        
-    return arr
+        while left < right:
+            # Swap elements at both ends
+            arr[left], arr[right] = arr[right], arr[left]
+            
+            # Move pointers towards the middle
+            left += 1
+            right -= 1
 ```
 
 ---
 
 ## Dry Run (Smart Example)
 
-**Input:** `arr = [10, -5, 30, 10, 50]` (Odd length, negatives, and duplicates)
+**Input:** `arr = [1, -2, 3, 3, 5]`
 
-| Step | Pointers (L, R) | Variables (`arr[L]`, `arr[R]`) | Explanation | Resulting Array |
-| :--- | :--- | :--- | :--- | :--- |
-| 1 | 0, 4 | 10, 50 | Swap indices 0 and 4 | `[50, -5, 30, 10, 10]` |
-| 2 | 1, 3 | -5, 10 | Swap indices 1 and 3 | `[50, 10, 30, -5, 10]` |
-| 3 | 2, 2 | 30, 30 | `L == R`, Loop terminates | `[50, 10, 30, -5, 10]` |
+| Step | Variables | Explanation |
+| :--- | :--- | :--- |
+| 1 | `left=0`, `right=4` | Swap `arr[0]` (1) and `arr[4]` (5). Array: `[5, -2, 3, 3, 1]` |
+| 2 | `left=1`, `right=3` | Swap `arr[1]` (-2) and `arr[3]` (3). Array: `[5, 3, 3, -2, 1]` |
+| 3 | `left=2`, `right=2` | `left` is not less than `right`. Loop terminates. |
+| 4 | Final | Result: `[5, 3, 3, -2, 1]` |
 
 ---
 
 ## Edge Cases
 
-- **Empty Array:** Loop condition `left < right` (0 < -1) is false; returns `[]` correctly.
-- **Single Element:** `left == right` initially; no swaps occur.
-- **Even Length:** Pointers cross perfectly (e.g., `L=2, R=3` then `L=3, R=2`).
-- **Already Sorted/Reversed:** Logic remains identical and correct.
+- **Empty Array:** `[]` -> Loop never starts, returns empty.
+- **Single Element:** `[1]` -> `left` and `right` start at 0, loop never starts.
+- **Even Length:** `[1, 2, 3, 4]` -> Pointers cross perfectly.
+- **Odd Length:** `[1, 2, 3]` -> Pointers meet at the middle element (no swap needed).
 
 ---
 
 ## Mistakes
 
-- **Reversing Entirely Twice:** Using a `for i in range(len(arr))` loop without stopping at the middle results in the original array.
-- **Off-by-one Error:** Initializing `right = len(arr)` instead of `len(arr) - 1`.
-- **Inefficient Slicing:** Using `arr[::-1]` is concise but creates a copy (O(N) space); avoid if in-place is required.
-- **User Mistake:** None.
+- Using `left <= right` which performs an unnecessary swap of the middle element with itself.
+- Forgetting to increment/decrement pointers, leading to an infinite loop.
+- Returning a new array instead of modifying in-place (if requested).
+- User Mistake: None.
 
 ---
 
 ## Complexity
 
-- **Time:** O(N) → We visit each element exactly once (N/2 swaps).
-- **Space:** O(1) → Swapping is done in-place without extra data structures.
+Time: O(N) → We visit each element at most once (N/2 swaps).  
+Space: O(1) → Reversal is performed in-place using only two pointer variables.
 
 ---
 
 ## Similar Problems
 
 - [Reverse String](https://leetcode.com/problems/reverse-string/) - Easy
-- [Reverse Vowels of a String](https://leetcode.com/problems/reverse-vowels-of-a-string/) - Easy
-- [Valid Palindrome](https://leetcode.com/problems/valid-palindrome/) - Easy
+- [Reverse Linked List](https://leetcode.com/problems/reverse-linked-list/) - Easy
 - [Rotate Array](https://leetcode.com/problems/rotate-array/) - Medium
+- [Valid Palindrome](https://leetcode.com/problems/valid-palindrome/) - Easy
 
 ---
 
 ## Tags and Properties
+
 - #dsa #important #revisit  
-- #arrays #twopointers [[Arrays]] [[Two Pointers]]
-- **Revision Date:** 2026-04-07
-- **Problem Link:** [LeetCode - Reverse String (Array Variant)](https://leetcode.com/problems/reverse-string/)
+- #arrays #twopointers #inplace  
+- [[Two Pointers]] [[Arrays]]
+- **Revision Date:** 2026-04-10
+- **Problem Link:** [Reverse an Array - GeeksforGeeks](https://www.geeksforgeeks.org/problems/reverse-an-array/0)
 
 ---
 ### 🔄 Revision Checklist
-- [ ] Day 2 Revision (2026-04-09)
-- [ ] Day 7 Revision (2026-04-14)
-- [ ] Day 15 Revision (2026-04-22)
-- [ ] Day 30 Revision (2026-05-07)
+- [ ] Day 2 Revision (2026-04-12)
+- [ ] Day 7 Revision (2026-04-17)
+- [ ] Day 15 Revision (2026-04-25)
+- [ ] Day 30 Revision (2026-05-10)
