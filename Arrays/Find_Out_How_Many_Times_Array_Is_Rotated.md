@@ -1,20 +1,140 @@
 ---
-created: 2026-04-10
+created: 2026-04-11
 revisions:
-  - 2026-04-12
-  - 2026-04-17
-  - 2026-04-25
-  - 2026-05-10
+  - 2026-04-13
+  - 2026-04-18
+  - 2026-04-26
+  - 2026-05-11
 ---
 
 # Find Out How Many Times Array Is Rotated
 
 ---
 
+## Pattern
+
+Binary Search (Pivot Finding)
+
+---
+## Difficulty
+
+Easy/Medium  
+#easy #medium
+
+---
+
+## ⚡ Key Idea (Core Insight)
+
+The number of times a sorted array is rotated is exactly equal to the **index of the minimum element** in the array. In a rotated sorted array, the minimum element is the only element that "breaks" the increasing order (the pivot).
+
+---
+
+## ⚡ Quick Recall (VERY IMPORTANT)
+
+Find the index of the minimum element using Binary Search. If `arr[mid] > arr[high]`, the pivot/min is in the right half; otherwise, it is in the left half (including `mid`).
+
+---
+
+## Approach
+
+### Brute Force
+- Perform a linear search to find the minimum element in the array.
+- Return the index of that minimum element.
+- **Time Complexity:** O(N)
+
+### Optimal
+- Use Binary Search to locate the minimum element.
+- Maintain `low` and `high` pointers. 
+- While `low < high`:
+    1. Calculate `mid`.
+    2. If `arr[mid] > arr[high]`, it means the rotation point is to the right (set `low = mid + 1`).
+    3. Otherwise, the rotation point is at `mid` or to the left (set `high = mid`).
+- The index `low` (or `high`) will be the number of rotations.
+- **Time Complexity:** O(log N)
+
+---
+
+## Code (Python)
+
+```python
+class Solution:
+    def findKRotation(self, arr: list[int]) -> int:
+        low, high = 0, len(arr) - 1
+        
+        # Binary Search to find the index of the minimum element
+        while low < high:
+            # Standard optimization to avoid overflow
+            mid = low + (high - low) // 2
+            
+            # If mid element is greater than the last element, 
+            # the minimum must be in the right half
+            if arr[mid] > arr[high]:
+                low = mid + 1
+            # Otherwise, the minimum is in the left half (including mid)
+            else:
+                high = mid
+                
+        # The index of the minimum element is the rotation count
+        return low
+```
+
+---
+
+## Dry Run (Smart Example)
+
+Input: `arr = [4, 5, 6, 7, 0, 1, 2]`
+
+| Step | low | high | mid | arr[mid] | arr[high] | Comparison | Action |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| 1 | 0 | 6 | 3 | 7 | 2 | 7 > 2 | `low = 4` |
+| 2 | 4 | 6 | 5 | 1 | 2 | 1 < 2 | `high = 5` |
+| 3 | 4 | 5 | 4 | 0 | 1 | 0 < 1 | `high = 4` |
+| End | 4 | 4 | - | - | - | `low == high` | **Return 4** |
+
+---
+
+## Edge Cases
+
+- **Already Sorted:** `[1, 2, 3, 4, 5]` → Index 0 (0 rotations).
+- **Single Element:** `[1]` → Index 0.
+- **Max Rotations (N-1):** `[2, 3, 4, 5, 1]` → Index 4.
+- **Duplicates:** Standard binary search might fail; requires O(N) in worst case (e.g., `[1, 1, 0, 1, 1]`).
+
+---
+
+## Mistakes
+
+- Returning the minimum **value** instead of the **index**.
+- Not handling the condition `low < high` vs `low <= high` correctly, leading to infinite loops.
+- **User Mistake:** No specific note provided. Ensure to track the "why" behind the rotation count logic.
+
+---
+
+## Complexity
+
+Time: O(log N) → Reducing the search space by half in each step of the binary search.  
+Space: O(1) → Only using a few pointers regardless of input size.
+
+---
+
+## Similar Problems
+
+- [Find Minimum in Rotated Sorted Array](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/) - Medium
+- [Search in Rotated Sorted Array](https://leetcode.com/problems/search-in-rotated-sorted-array/) - Medium
+- [Find Minimum in Rotated Sorted Array II (with duplicates)](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array-ii/) - Hard
+
+---
+
+## Tags and Properties
+- #dsa #important #revisit #binarysearch #arrays
+- [[Binary Search]] [[Pivot Element]] [[Rotated Sorted Array]]
+- **Revision Date:** 2026-04-11
+- **Problem Link:** [GeeksforGeeks - Rotation Count](https://www.geeksforgeeks.org/problems/rotation4523/1)
+
 ## Metadata & Placement Tags
 
 - **Target Companies:**
-  - #Amazon #Microsoft #Google #Adobe #Flipkart #Samsung
+  - #Amazon #Microsoft #Flipkart #Adobe #Samsung #Google
 
 - **Confidence Checklist:**
   - [ ] Low  
@@ -24,139 +144,9 @@ revisions:
 - **Concepts:**
   - #binarysearch [[Binary Search]], #arrays [[Arrays]], #searching [[Searching]]
 
-## Pattern
-
-Binary Search on Sorted Rotated Array
-
----
-## Difficulty
-
-Medium #medium
-
----
-
-## ⚡ Key Idea (Core Insight)
-
-The number of times a sorted array is rotated is exactly equal to the **index of the minimum element** in that array. In a rotated sorted array, the minimum element is the only element that is smaller than its predecessor (the "pivot").
-
----
-
-## ⚡ Quick Recall (VERY IMPORTANT)
-
-Number of Rotations = **Index of Minimum Element**. Use Binary Search to find the pivot point where the sorted property breaks.
-
----
-
-## Approach
-
-### Brute Force
-- Linearly traverse the array to find the minimum element. The index of this element is the answer.
-- **Time Complexity:** O(N)
-
-### Optimal
-- Use **Binary Search**. In each step, determine which half of the array is sorted.
-- If `nums[low] <= nums[high]`, the entire range is sorted; `nums[low]` is the minimum.
-- Otherwise, if `nums[low] <= nums[mid]`, the left half is sorted. The minimum must be in the right half, but `nums[low]` is a candidate for the global minimum.
-- If the right half is sorted, the minimum is in the left half (including `mid`).
-- **Time Complexity:** O(log N)
-
----
-
-## Code (Python)
-
-```python
-class Solution:
-    def findKRotation(self, nums: list[int]) -> int:
-        low, high = 0, len(nums) - 1
-        ans = float('inf')
-        index = 0
-        
-        while low <= high:
-            mid = (low + high) // 2
-            
-            # Optimization: If the current search space is already sorted
-            if nums[low] <= nums[high]:
-                if nums[low] < ans:
-                    index = low
-                    ans = nums[low]
-                break
-            
-            # Identify which half is sorted
-            if nums[low] <= nums[mid]:
-                # Left half is sorted, nums[low] is the min of this half
-                if nums[low] < ans:
-                    ans = nums[low]
-                    index = low
-                # Minimum must be in the unsorted right half
-                low = mid + 1
-            else:
-                # Right half is sorted, nums[mid] is the min of this half
-                if nums[mid] < ans:
-                    ans = nums[mid]
-                    index = mid
-                # Minimum must be in the unsorted left half
-                high = mid - 1
-                
-        return index
-```
-
----
-
-## Dry Run (Smart Example)
-
-Input: `nums = [4, 5, 6, 1, 2, 3]`
-
-| Step | Variables | Explanation |
-| :--- | :--- | :--- |
-| 1 | `low=0, high=5, mid=2` | `nums[0]=4`, `nums[2]=6`. Left half `[4,5,6]` is sorted. `ans=4, index=0`. Set `low=3`. |
-| 2 | `low=3, high=5, mid=4` | `nums[3]=1`, `nums[5]=3`. `nums[low] <= nums[high]` is True. `[1,2,3]` is sorted. |
-| 3 | `ans=min(4, 1)=1` | `index=3`. Minimum found at index 3. |
-| 4 | `Break` | Return `index = 3`. |
-
----
-
-## Edge Cases
-
-- **No Rotation:** `[1, 2, 3, 4, 5]` → Returns 0 (Index of 1).
-- **Single Element:** `[10]` → Returns 0.
-- **Max Rotation:** `[2, 3, 4, 5, 1]` → Returns 4 (Index of 1).
-- **Duplicates:** Standard logic requires O(N) if `nums[low] == nums[mid] == nums[high]`.
-
----
-
-## Mistakes
-
-- Forgetting that rotation count = index of the minimum.
-- Returning the minimum value instead of its index.
-- Not handling the case where the array is already sorted (0 rotations).
-- **User Mistake:** No specific note provided.
-
----
-
-## Complexity
-
-Time: O(log N) → Binary search halves the search space at each step.  
-Space: O(1) → Constant space used for pointers.
-
----
-
-## Similar Problems
-
-- [Find Minimum in Rotated Sorted Array](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/) - Medium
-- [Search in Rotated Sorted Array](https://leetcode.com/problems/search-in-rotated-sorted-array/) - Medium
-- [Find Minimum in Rotated Sorted Array II](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array-ii/) - Hard
-
----
-
-## Tags and Properties
-  - #dsa #important #revisit #binarysearch #arrays
-  - [[Binary Search]] [[Arrays]] [[Searching]]
-  - **Revision Date:** 2026-04-10
-  - **Problem Link:** [Find Rotation Count (GeeksforGeeks)](https://www.geeksforgeeks.org/find-rotation-count-rotated-sorted-array/)
-
 ---
 ### 🔄 Revision Checklist
-- [ ] Day 2 Revision (2026-04-12)
-- [ ] Day 7 Revision (2026-04-17)
-- [ ] Day 15 Revision (2026-04-25)
-- [ ] Day 30 Revision (2026-05-10)
+- [ ] Day 2 Revision (2026-04-13)
+- [ ] Day 7 Revision (2026-04-18)
+- [ ] Day 15 Revision (2026-04-26)
+- [ ] Day 30 Revision (2026-05-11)
