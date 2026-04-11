@@ -1,29 +1,15 @@
 ---
-created: 2026-04-10
+created: 2026-04-11
 revisions:
-  - 2026-04-12
-  - 2026-04-17
-  - 2026-04-25
-  - 2026-05-10
+  - 2026-04-13
+  - 2026-04-18
+  - 2026-04-26
+  - 2026-05-11
 ---
 
 # Check If String Is Palindrome Or Not
 
 ---
-
-## Metadata & Placement Tags
-
-- **Target Companies:**
-  - #Amazon #Google #Microsoft #Meta #Apple #Adobe
-
-- **Confidence Checklist:**
-  - [ ] Low  
-  - [ ] Medium  
-  - [ ] High  
-
-- **Concepts:**
-  - #twopointers [[Two Pointers]]
-  - #strings [[Strings]]
 
 ## Pattern
 
@@ -38,27 +24,29 @@ Easy #easy
 
 ## ⚡ Key Idea (Core Insight)
 
-A palindrome is a symmetric sequence. By placing one pointer at the start and another at the end, we can verify symmetry by comparing characters while moving both pointers toward the center.
+A palindrome is a mirror image of itself. The character at index `i` must match the character at index `n - 1 - i`. By using two pointers starting from the extremities and moving inward, we can validate this symmetry in a single pass.
 
 ---
 
 ## ⚡ Quick Recall (VERY IMPORTANT)
 
-Compare `left` and `right` pointers; if any pair mismatches, it is not a palindrome. Stop when `left >= right`.
+Initialize `left = 0` and `right = len - 1`. While `left < right`, if `s[left] != s[right]`, return `False`.
 
 ---
 
 ## Approach
 
 ### Brute Force
-- Create a reversed copy of the string and compare it with the original.
-- **Time:** O(N) | **Space:** O(N) due to the new string.
+- Reverse the entire string and compare it with the original.
+- **Time:** O(N)  
+- **Space:** O(N) (to store the reversed string)
 
-### Optimal (Two Pointers)
-- Use two pointers, `i = 0` and `j = n-1`.
-- While `i < j`, compare `s[i]` and `s[j]`.
-- If the problem requires ignoring case and non-alphanumeric characters, skip invalid characters and normalize case before/during comparison.
-- **Time:** O(N) | **Space:** O(1)
+### Optimal
+- Use two pointers, `left` and `right`, at both ends.
+- Move pointers toward the center, comparing characters at each step.
+- Handle case sensitivity and non-alphanumeric characters by skipping or converting if the problem context requires it.
+- **Time:** O(N)
+- **Space:** O(1) (in-place comparison)
 
 ---
 
@@ -67,7 +55,7 @@ Compare `left` and `right` pointers; if any pair mismatches, it is not a palindr
 ```python
 class Solution:
     def isPalindrome(self, s: str) -> bool:
-        # Standard implementation (handles alphanumeric + case sensitivity)
+        # Standard interview version: Handle alphanumeric + Case insensitive
         left, right = 0, len(s) - 1
         
         while left < right:
@@ -78,7 +66,7 @@ class Solution:
             while left < right and not s[right].isalnum():
                 right -= 1
             
-            # Compare normalized characters
+            # Compare lowercase versions
             if s[left].lower() != s[right].lower():
                 return False
             
@@ -86,11 +74,6 @@ class Solution:
             right -= 1
             
         return True
-
-    def isPalindromeSimple(self, s: str) -> bool:
-        # Pythonic approach (Optimal for clean strings)
-        # Space O(N) due to slicing
-        return s == s[::-1]
 ```
 
 ---
@@ -99,60 +82,72 @@ class Solution:
 
 **Input:** `"A man, a plan, a canal: Panama"`
 
-| Step | Left | Right | s[left] | s[right] | Explanation |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| 1 | 0 | 29 | 'A' | 'a' | Match (ignore case), move both. |
-| 2 | 2 | 28 | 'm' | 'm' | Skip space at index 1. Match 'm'. |
-| 3 | 5 | 23 | 'n' | 'n' | Skip comma/space. Match 'n'. |
-| 4 | 10 | 18 | 'p' | 'p' | Skip spaces/colons. Match 'p'. |
-| 5 | ... | ... | ... | ... | Continues until pointers meet at 'a'. |
+| Step | Variables | Explanation |
+| :--- | :--- | :--- |
+| 1 | `L=0('A'), R=29('a')` | Both are 'a' after `lower()`. Move pointers. |
+| 2 | `L=2('m'), R=27('m')` | Skipped space/comma. 'm' matches 'm'. |
+| 3 | `L=5('n'), R=24('n')` | Skipped spaces. 'n' matches 'n'. |
+| 4 | `L=15('c'), R=15('c')` | Pointers meet at 'c'. Loop terminates. |
 
 ---
 
 ## Edge Cases
 
-- **Empty String:** Usually considered a valid palindrome.
-- **Single Character:** Always a palindrome.
-- **Only Special Characters:** Becomes an empty string after filtering; valid palindrome.
+- **Empty String:** Usually considered a valid palindrome (True).
+- **Single Character:** Always a palindrome (True).
 - **Case Sensitivity:** "Racecar" should be True (requires `.lower()`).
-- **Numeric Characters:** "12321" is a palindrome.
+- **Special Characters:** " " or ".,!" should be handled (True if empty after filtering).
+- **All Same Characters:** "aaaaa" (True).
 
 ---
 
 ## Mistakes
 
-- **Case Sensitivity:** Forgetting to convert characters to lowercase before comparison.
-- **Non-Alphanumeric:** Failing to skip spaces, commas, or colons.
-- **Pointer Bounds:** Not checking `left < right` inside the nested while loops, leading to `IndexError`.
+- Not converting characters to lowercase before comparison.
+- Forgetting to increment/decrement pointers inside the `while` loop, leading to infinite loops.
+- Not handling non-alphanumeric characters (if the problem follows LeetCode "Valid Palindrome" rules).
 - **User Mistake:** No specific note provided.
 
 ---
 
 ## Complexity
 
-Time: O(N) → We traverse the string at most once with two pointers.  
-Space: O(1) → We use only a few pointers regardless of input size (in-place comparison).
+Time: O(N) → Each character is visited at most twice (once by each pointer).  
+Space: O(1) → Constant extra space used for pointers.
 
 ---
 
 ## Similar Problems
 
-- [Valid Palindrome II](https://leetcode.com/problems/valid-palindrome-ii/) - Easy
+- [Valid Palindrome](https://leetcode.com/problems/valid-palindrome/) - Easy
 - [Palindrome Number](https://leetcode.com/problems/palindrome-number/) - Easy
+- [Valid Palindrome II](https://leetcode.com/problems/valid-palindrome-ii/) - Easy
 - [Longest Palindromic Substring](https://leetcode.com/problems/longest-palindromic-substring/) - Medium
-- [Palindromic Substrings](https://leetcode.com/problems/palindromic-substrings/) - Medium
 
 ---
 
 ## Tags and Properties
-  - #dsa #important #revisit #strings #twopointers
-  - [[Two Pointers]] [[String Manipulation]]
-  - **Revision Date:** 2026-04-10
+  - #dsa #important #revisit #string #twopointers
+  - [[Strings]] [[Two Pointers]]
+  - **Revision Date:** 2026-04-11
   - **Problem Link:** [LeetCode - Valid Palindrome](https://leetcode.com/problems/valid-palindrome/)
+
+## Metadata & Placement Tags
+
+- **Target Companies:**
+  - #Amazon #Google #Microsoft #Meta #Apple #Adobe
+
+- **Confidence Checklist:**
+  - [ ] Low  
+  - [ ] Medium  
+  - [ ] High  
+
+- **Concepts:**
+  - #string [[Strings]], #twopointers [[Two Pointers]]
 
 ---
 ### 🔄 Revision Checklist
-- [ ] Day 2 Revision (2026-04-12)
-- [ ] Day 7 Revision (2026-04-17)
-- [ ] Day 15 Revision (2026-04-25)
-- [ ] Day 30 Revision (2026-05-10)
+- [ ] Day 2 Revision (2026-04-13)
+- [ ] Day 7 Revision (2026-04-18)
+- [ ] Day 15 Revision (2026-04-26)
+- [ ] Day 30 Revision (2026-05-11)
