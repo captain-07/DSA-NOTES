@@ -1,10 +1,10 @@
 ---
-created: 2026-04-10
+created: 2026-04-11
 revisions:
-  - 2026-04-12
-  - 2026-04-17
-  - 2026-04-25
-  - 2026-05-10
+  - 2026-04-13
+  - 2026-04-18
+  - 2026-04-26
+  - 2026-05-11
 ---
 
 # Two Sum
@@ -14,7 +14,7 @@ revisions:
 ## Metadata & Placement Tags
 
 - **Target Companies:**
-  - #Amazon #Google #Microsoft #Facebook #Adobe #Apple #Bloomberg
+  - #Amazon #Google #Microsoft #Adobe #Apple #Facebook #Uber
 
 - **Confidence Checklist:**
   - [ ] Low  
@@ -22,11 +22,11 @@ revisions:
   - [ ] High  
 
 - **Concepts:**
-  - #hashmap [[HashMap]], #array [[Array]], #searching [[Searching]]
+  - #hashmap [[HashMap]], #array [[Arrays]], #searching [[Searching]]
 
 ## Pattern
 
-HashMap (Complement Lookup)
+Complement Search + HashMap
 
 ---
 ## Difficulty
@@ -38,30 +38,29 @@ Easy
 
 ## ⚡ Key Idea (Core Insight)
 
-Instead of searching for a pair, iterate once and store the **complement** (`target - current_val`) in a HashMap. If the current value already exists in the map as a complement, the pair is found.
+Instead of searching for two numbers, iterate once and look for the **complement** (`target - current_value`) in a hash map. This converts a search problem from $O(N)$ to $O(1)$ lookup.
 
 ---
 
 ## ⚡ Quick Recall (VERY IMPORTANT)
 
-One-pass HashMap: `seen[value] = index`. Check `target - num` in `seen` before adding `num`.
+Store `value: index` in a map. For each `x`, if `target - x` is in the map, you've found the pair.
 
 ---
 
 ## Approach
 
 ### Brute Force
-- Nested loops checking every possible pair $(i, j)$.
-- Time: $O(n^2)$, Space: $O(1)$.
+- Use two nested loops to check every possible pair `(i, j)` where `i != j`.
+- **Time Complexity:** $O(N^2)$
 
-### Better
-- Sort the array and use Two Pointers.
-- Mention: Requires $O(n \log n)$ time and loses original indices unless tracked.
-
-### Optimal
-- **One-pass HashMap**: Traverse the array once. For each element, check if its complement exists in the map.
-- If yes, return indices. If no, store current value and index.
-- Time: $O(n)$, Space: $O(n)$.
+### Optimal (One-Pass Hash Map)
+- Maintain a dictionary `seen` to map values to their indices.
+- For each number `num` at index `i`:
+    1. Calculate `diff = target - num`.
+    2. If `diff` exists in `seen`, return `[seen[diff], i]`.
+    3. Otherwise, add `num` to `seen` with index `i`.
+- **Time Complexity:** $O(N)$
 
 ---
 
@@ -70,76 +69,79 @@ One-pass HashMap: `seen[value] = index`. Check `target - num` in `seen` before a
 ```python
 class Solution:
     def twoSum(self, nums: list[int], target: int) -> list[int]:
-        # Hash map to store: value -> index
-        prev_map = {} 
+        # Map to store number: index
+        seen = {}
         
-        for i, n in enumerate(nums):
-            diff = target - n
-            # If complement exists, we found the pair
-            if diff in prev_map:
-                return [prev_map[diff], i]
+        for i, num in enumerate(nums):
+            complement = target - num
+            
+            # Check if complement was already encountered
+            if complement in seen:
+                return [seen[complement], i]
             
             # Store current number and its index
-            prev_map[n] = i
-        return []
+            seen[num] = i
+            
+        return [] # Should not happen per constraints
 ```
 
 ---
 
 ## Dry Run (Smart Example)
 
-**Input:** `nums = [3, 4, 3, 6]`, `target = 6`
+**Input:** `nums = [3, 2, 4]`, `target = 6`
 
-| Step | Current (n, i) | Diff (6 - n) | `prev_map` State | Explanation |
-| :--- | :--- | :--- | :--- | :--- |
-| 1 | (3, 0) | 3 | `{3: 0}` | 3 not in map. Add 3. |
-| 2 | (4, 1) | 2 | `{3: 0, 4: 1}` | 2 not in map. Add 4. |
-| 3 | (3, 2) | 3 | **Found!** | 3 exists in map at index 0. Return [0, 2]. |
+| Step | Variables | Explanation |
+| :--- | :--- | :--- |
+| 1 | `i=0, num=3, diff=3` | `3` not in `seen`. Add `{3: 0}`. |
+| 2 | `i=1, num=2, diff=4` | `4` not in `seen`. Add `{3: 0, 2: 1}`. |
+| 3 | `i=2, num=4, diff=2` | `2` is in `seen` at index `1`. Return `[1, 2]`. |
 
 ---
 
 ## Edge Cases
 
-- **Duplicates:** Handled by HashMap (as seen in dry run).
-- **Negative Numbers:** `nums = [-3, 4, 1], target = 1` → returns `[0, 1]`.
-- **Target is double an element:** `[3, 2, 4], target = 6` → Must not use `3` twice.
-- **Minimum Array Size:** Array always has at least 2 elements per constraints.
+- **Duplicates:** `[3, 3], target=6` (Ensure you don't use the same index twice).
+- **Negative Numbers:** `[-1, -2, -3], target=-5` (Logic remains identical).
+- **Large Inputs:** Hash map handles $O(N)$ efficiently without timeout.
+- **First/Last Pair:** `[1, 5, 8], target=9` (Algorithm catches extremes).
 
 ---
 
 ## Mistakes
 
-- **Same Element Twice:** Using the same index twice (e.g., if `target = 6` and `nums[i] = 3`, returning `[i, i]`). Avoided by checking map *before* adding the current element.
-- **Sorting First:** Sorting loses original indices unless storing `(value, index)` pairs, adding unnecessary $O(n \log n)$ overhead.
-- **Two-Pass HashMap:** Building the full map first, then iterating. This risks using the same element twice unless specifically checked (`if map[diff] != i`).
+- **Using the same element twice:** Forgetting that an element cannot be reused unless it appears twice in the array.
+- **Sorting first:** Sorting loses the original indices, requiring extra $O(N)$ space to store index-value pairs.
+- **Initial test:** Basic sanity check of the environment and logic.
 
 ---
 
 ## Complexity
 
-Time: $O(n)$ → Single traversal of the array; HashMap lookups are $O(1)$ on average.  
-Space: $O(n)$ → In the worst case, we store $n-1$ elements in the HashMap.
+Time: $O(N)$ → Single pass through the array.  
+Space: $O(N)$ → In the worst case, we store almost all elements in the hash map.
 
 ---
 
 ## Similar Problems
 
+- [Two Sum II - Input Array Is Sorted](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/) - Medium
 - [3Sum](https://leetcode.com/problems/3sum/) - Medium
 - [4Sum](https://leetcode.com/problems/4sum/) - Medium
-- [Two Sum II - Input Array Is Sorted](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/) - Medium
 - [Subarray Sum Equals K](https://leetcode.com/problems/subarray-sum-equals-k/) - Medium
 
 ---
 
 ## Tags and Properties
-- #dsa #important #revisit #blind75 #leetcode1
-- #hashmap [[HashMap]] #arrays [[Arrays]]
-- **Revision Date:** 2026-04-10
-- **Problem Link:** [Two Sum - LeetCode](https://leetcode.com/problems/two-sum/)
+  - #dsa #important #revisit  
+  - #hashmap #arrays #leetcode1  
+  - [[HashMap]] [[Arrays]] [[Searching]]
+  - **Revision Date:** 2026-04-11
+  - **Problem Link:** [LeetCode - Two Sum](https://leetcode.com/problems/two-sum/)
 
 ---
 ### 🔄 Revision Checklist
-- [ ] Day 2 Revision (2026-04-12)
-- [ ] Day 7 Revision (2026-04-17)
-- [ ] Day 15 Revision (2026-04-25)
-- [ ] Day 30 Revision (2026-05-10)
+- [ ] Day 2 Revision (2026-04-13)
+- [ ] Day 7 Revision (2026-04-18)
+- [ ] Day 15 Revision (2026-04-26)
+- [ ] Day 30 Revision (2026-05-11)
