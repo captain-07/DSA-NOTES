@@ -7,7 +7,7 @@ revisions:
   - 2026-05-11
 ---
 
-I will generate the high-signal markdown note for "Find First and Last Position of Element in a Sorted Array" following your strict structural requirements and Obsidian-friendly formatting.
+I will generate the high-signal DSA note for "Find First And Last Position Of Element In A Sorted Array" and save it to your Obsidian vault as mandated.
 
 # Find First And Last Position Of Element In A Sorted Array
 
@@ -15,44 +15,45 @@ I will generate the high-signal markdown note for "Find First and Last Position 
 
 ## Pattern
 
-Binary Search (Modified for Boundaries)
+Modified Binary Search (Boundary Finding)
 
 ---
 ## Difficulty
 
-Medium  
-#medium
+Medium #medium
 
 ---
 
 ## ⚡ Key Idea (Core Insight)
 
-- In a sorted array, the first and last positions are the **leftmost** and **rightmost** boundaries of the target.
-- Standard Binary Search finds *any* occurrence; to find boundaries, continue searching in the left half for the "first" and the right half for the "last" even after finding the target.
+The array is sorted, but contains duplicates. Standard binary search finds *any* occurrence. To find boundaries, when `nums[mid] == target`, **continue searching** in the left half for the start index and in the right half for the end index, storing the "last seen" valid index.
 
 ---
 
 ## ⚡ Quick Recall (VERY IMPORTANT)
 
-- Run Binary Search twice: one to find `bisect_left` (first occurrence) and one for `bisect_right - 1` (last occurrence).
+Run Binary Search twice. Use a flag `findFirst`:
+- If `findFirst` and `nums[mid] == target`, set `ans = mid` and `high = mid - 1`.
+- If `!findFirst` and `nums[mid] == target`, set `ans = mid` and `low = mid + 1`.
 
 ---
 
 ## Approach
 
 ### Brute Force
-- Linear scan from left to right to find the first index, then from right to left for the last index.
-- Time: O(N)
+- Linear scan from left to find first, then from right to find last.
+- Time: $O(n)$
+- Space: $O(1)$
 
 ### Better
-- Use a single Binary Search to find any instance of the target, then expand outwards to find boundaries.
-- Time: O(N) in worst case (all elements are the same).
+- Binary search to find any index, then expand left and right linearly.
+- Time: $O(n)$ worst case (e.g., all elements are the target).
+- Space: $O(1)$
 
 ### Optimal
-- Two independent Binary Searches.
-- **First Search:** If `nums[mid] >= target`, move `right = mid - 1` to find the leftmost index.
-- **Second Search:** If `nums[mid] <= target`, move `left = mid + 1` to find the rightmost index.
-- Only update the result index when `nums[mid] == target`.
+- Two independent Binary Searches to find the lower and upper bounds.
+- Time: $O(\log n)$
+- Space: $O(1)$
 
 ---
 
@@ -61,89 +62,90 @@ Medium
 ```python
 class Solution:
     def searchRange(self, nums: list[int], target: int) -> list[int]:
-        def find_bound(is_first: bool) -> int:
-            left, right = 0, len(nums) - 1
-            bound = -1
+        def findBound(isFirst: bool) -> int:
+            low, high = 0, len(nums) - 1
+            ans = -1
             
-            while left <= right:
-                mid = (left + right) // 2
+            while low <= high:
+                mid = (low + high) // 2
                 
                 if nums[mid] == target:
-                    bound = mid
-                    if is_first:
-                        right = mid - 1 # Keep looking left
+                    ans = mid
+                    # If looking for first, narrow search to the left
+                    if isFirst:
+                        high = mid - 1
+                    # If looking for last, narrow search to the right
                     else:
-                        left = mid + 1  # Keep looking right
+                        low = mid + 1
                 elif nums[mid] < target:
-                    left = mid + 1
+                    low = mid + 1
                 else:
-                    right = mid - 1
-            return bound
-
-        return [find_bound(True), find_bound(False)]
+                    high = mid - 1
+            return ans
+        
+        return [findBound(True), findBound(False)]
 ```
 
 ---
 
 ## Dry Run (Smart Example)
 
-**Input:** `nums = [5, 7, 7, 8, 8, 10]`, `target = 8`
+**Input:** `nums = [5, 7, 7, 8, 8, 10], target = 8`
 
-| Step | Search Type | Variables (L, R, M) | nums[M] | Action | Bound |
+| Step | `isFirst` | `low`, `high`, `mid` | `nums[mid]` | `ans` | Explanation |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| 1 | First (Left) | L=0, R=5, M=2 | 7 | 7 < 8, L = M + 1 | -1 |
-| 2 | First (Left) | L=3, R=5, M=4 | 8 | 8 == 8, R = M - 1 | 4 |
-| 3 | First (Left) | L=3, R=3, M=3 | 8 | 8 == 8, R = M - 1 | 3 |
-| 4 | Second (Right)| L=0, R=5, M=2 | 7 | 7 < 8, L = M + 1 | -1 |
-| 5 | Second (Right)| L=3, R=5, M=4 | 8 | 8 == 8, L = M + 1 | 4 |
-| 6 | Second (Right)| L=5, R=5, M=5 | 10| 10 > 8, R = M - 1 | 4 |
+| 1 | True | 0, 5, 2 | 7 | -1 | `7 < 8`, move `low` to 3 |
+| 2 | True | 3, 5, 4 | 8 | 4 | Found 8, move `high` to 3 to find earlier |
+| 3 | True | 3, 3, 3 | 8 | 3 | Found 8 at index 3, move `high` to 2 |
+| 4 | False | 0, 5, 2 | 7 | -1 | `7 < 8`, move `low` to 3 |
+| 5 | False | 3, 5, 4 | 8 | 4 | Found 8, move `low` to 5 to find later |
+| 6 | False | 5, 5, 5 | 10 | 4 | `10 > 8`, move `high` to 4. Loop ends. |
 
 ---
 
 ## Edge Cases
 
 - **Empty Array:** `nums = []` → Return `[-1, -1]`.
-- **Target Not Present:** `nums = [1, 2, 4]`, `target = 3` → Return `[-1, -1]`.
-- **Target is All Elements:** `nums = [5, 5, 5]`, `target = 5` → Return `[0, 2]`.
-- **Single Element (Match):** `nums = [1]`, `target = 1` → Return `[0, 0]`.
-- **Single Element (No Match):** `nums = [1]`, `target = 2` → Return `[-1, -1]`.
+- **Target Not Present:** `nums = [1, 2, 4], target = 3` → Return `[-1, -1]`.
+- **Single Element (Match):** `nums = [5], target = 5` → Return `[0, 0]`.
+- **All Elements are Target:** `nums = [8, 8, 8], target = 8` → Return `[0, 2]`.
 
 ---
 
 ## Mistakes
 
-- Using standard `binary_search` and then expanding linearly (degrades to O(N)).
-- Forgetting to handle the "not found" case correctly.
-- Off-by-one errors in `mid` calculation or boundary updates.
+- Using standard `bisect_left` or `bisect_right` without checking if the returned index actually matches the target.
+- Returning immediately after finding one instance of the target.
+- Incorrectly handling the case where `nums` is empty.
 - **User Mistake:** No specific note provided.
 
 ---
 
 ## Complexity
 
-Time: O(log N) → Two binary search passes, each taking logarithmic time.  
-Space: O(1) → Constant space used for pointers and boundaries.
+Time: $O(\log n)$ → Two binary searches take $2 \times O(\log n)$.  
+Space: $O(1)$ → Only a few pointers used.
 
 ---
 
 ## Similar Problems
 
-- [Search Insert Position](https://leetcode.com/problems/search-insert-position/) - Easy
+- [Search in Rotated Sorted Array](https://leetcode.com/problems/search-in-rotated-sorted-array/) - Medium
 - [First Bad Version](https://leetcode.com/problems/first-bad-version/) - Easy
-- [Find Minimum in Rotated Sorted Array](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/) - Medium
+- [Search Insert Position](https://leetcode.com/problems/search-insert-position/) - Easy
 
 ---
 
 ## Tags and Properties
-  - #dsa #important #revisit #binarysearch #leetcode34
+  - #dsa #important #revisit #binarysearch #array
   - [[Binary Search]] [[Array]]
   - **Revision Date:** 2026-04-11
-  - **Problem Link:** [LeetCode - Find First and Last Position of Element in a Sorted Array](https://leetcode.com/problems/find-first-and-last-position-of-element-in-a-sorted-array/)
+  - **Problem Link:** [LeetCode 34 - Find First and Last Position of Element in Sorted Array](https://leetcode.com/problems/find-first-and-last-position-of-element-in-a-sorted-array/)
 
 ## Metadata & Placement Tags
 
 - **Target Companies:**
-  - #Amazon #Google #Microsoft #Facebook #Bloomberg #Uber
+  - #Google #Amazon #Facebook #Microsoft #LinkedIn #Uber
 
 - **Confidence Checklist:**
   - [ ] Low  
@@ -151,7 +153,7 @@ Space: O(1) → Constant space used for pointers and boundaries.
   - [ ] High  
 
 - **Concepts:**
-  - #binarysearch [[Binary Search]], #array [[Array]], #rangequery [[Range Query]]
+  - #binarysearch [[Binary Search]], #array [[Array]]
 
 ---
 ### 🔄 Revision Checklist
