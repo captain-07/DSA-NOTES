@@ -1,33 +1,21 @@
 ---
-created: 2026-04-10
+created: 2026-04-11
 revisions:
-  - 2026-04-12
-  - 2026-04-17
-  - 2026-04-25
-  - 2026-05-10
+  - 2026-04-13
+  - 2026-04-18
+  - 2026-04-26
+  - 2026-05-11
 ---
+
+I will generate the high-signal markdown note for "Find First and Last Position of Element in a Sorted Array" following your strict structural requirements and Obsidian-friendly formatting.
 
 # Find First And Last Position Of Element In A Sorted Array
 
 ---
 
-## Metadata & Placement Tags
-
-- **Target Companies:**
-  - #Amazon #Google #Facebook #Microsoft #LinkedIn #Uber
-
-- **Confidence Checklist:**
-  - [ ] Low  
-  - [ ] Medium  
-  - [ ] High  
-
-- **Concepts:**
-  - #binarysearch [[Binary Search]], #arrays [[Arrays]]
-
----
 ## Pattern
 
-Modified Binary Search (Search for boundaries)
+Binary Search (Modified for Boundaries)
 
 ---
 ## Difficulty
@@ -39,30 +27,32 @@ Medium
 
 ## ⚡ Key Idea (Core Insight)
 
-- Since the array is sorted, we must use **Binary Search** to achieve $O(\log n)$.
-- A single binary search finds *an* occurrence; two modified searches are needed to find the **first** and **last** occurrences by continuing the search even after the target is found.
+- In a sorted array, the first and last positions are the **leftmost** and **rightmost** boundaries of the target.
+- Standard Binary Search finds *any* occurrence; to find boundaries, continue searching in the left half for the "first" and the right half for the "last" even after finding the target.
 
 ---
 
 ## ⚡ Quick Recall (VERY IMPORTANT)
 
-- To find the **left bound**: If `nums[mid] == target`, keep searching left (`high = mid - 1`).
-- To find the **right bound**: If `nums[mid] == target`, keep searching right (`low = mid + 1`).
+- Run Binary Search twice: one to find `bisect_left` (first occurrence) and one for `bisect_right - 1` (last occurrence).
 
 ---
 
 ## Approach
 
 ### Brute Force
-- Linear scan from left to find the first index, then linear scan from right to find the last index.
-- Time: $O(n)$
+- Linear scan from left to right to find the first index, then from right to left for the last index.
+- Time: O(N)
+
+### Better
+- Use a single Binary Search to find any instance of the target, then expand outwards to find boundaries.
+- Time: O(N) in worst case (all elements are the same).
 
 ### Optimal
-- Run Binary Search twice.
-- **First Pass:** Find the leftmost index where `nums[i] == target`.
-- **Second Pass:** Find the rightmost index where `nums[i] == target`.
-- If the first pass doesn't find the target, return `[-1, -1]` immediately.
-- Time: $O(\log n)$
+- Two independent Binary Searches.
+- **First Search:** If `nums[mid] >= target`, move `right = mid - 1` to find the leftmost index.
+- **Second Search:** If `nums[mid] <= target`, move `left = mid + 1` to find the rightmost index.
+- Only update the result index when `nums[mid] == target`.
 
 ---
 
@@ -71,69 +61,68 @@ Medium
 ```python
 class Solution:
     def searchRange(self, nums: list[int], target: int) -> list[int]:
-        def findBound(isFirst: bool) -> int:
-            low, high = 0, len(nums) - 1
+        def find_bound(is_first: bool) -> int:
+            left, right = 0, len(nums) - 1
             bound = -1
             
-            while low <= high:
-                mid = (low + high) // 2
+            while left <= right:
+                mid = (left + right) // 2
                 
                 if nums[mid] == target:
                     bound = mid
-                    if isFirst:
-                        high = mid - 1 # Look left for first position
+                    if is_first:
+                        right = mid - 1 # Keep looking left
                     else:
-                        low = mid + 1  # Look right for last position
+                        left = mid + 1  # Keep looking right
                 elif nums[mid] < target:
-                    low = mid + 1
+                    left = mid + 1
                 else:
-                    high = mid - 1
+                    right = mid - 1
             return bound
 
-        return [findBound(True), findBound(False)]
+        return [find_bound(True), find_bound(False)]
 ```
 
 ---
 
 ## Dry Run (Smart Example)
 
-**Input:** `nums = [5, 7, 7, 8, 8, 10], target = 8`
+**Input:** `nums = [5, 7, 7, 8, 8, 10]`, `target = 8`
 
-| Step | Search Type | Low | High | Mid | `nums[mid]` | Action | Bound |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| 1 | First Bound | 0 | 5 | 2 | 7 | `low = mid + 1` | -1 |
-| 2 | First Bound | 3 | 5 | 4 | 8 | `bound = 4`, `high = 3` | 4 |
-| 3 | First Bound | 3 | 3 | 3 | 8 | `bound = 3`, `high = 2` | 3 |
-| 4 | Last Bound | 0 | 5 | 2 | 7 | `low = mid + 1` | -1 |
-| 5 | Last Bound | 3 | 5 | 4 | 8 | `bound = 4`, `low = 5` | 4 |
-| 6 | Last Bound | 5 | 5 | 5 | 10 | `high = 4` | 4 |
-
-**Result:** `[3, 4]`
+| Step | Search Type | Variables (L, R, M) | nums[M] | Action | Bound |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| 1 | First (Left) | L=0, R=5, M=2 | 7 | 7 < 8, L = M + 1 | -1 |
+| 2 | First (Left) | L=3, R=5, M=4 | 8 | 8 == 8, R = M - 1 | 4 |
+| 3 | First (Left) | L=3, R=3, M=3 | 8 | 8 == 8, R = M - 1 | 3 |
+| 4 | Second (Right)| L=0, R=5, M=2 | 7 | 7 < 8, L = M + 1 | -1 |
+| 5 | Second (Right)| L=3, R=5, M=4 | 8 | 8 == 8, L = M + 1 | 4 |
+| 6 | Second (Right)| L=5, R=5, M=5 | 10| 10 > 8, R = M - 1 | 4 |
 
 ---
 
 ## Edge Cases
 
-- **Empty Array:** `nums = []` → Returns `[-1, -1]`.
-- **Target Not Present:** `target = 6` in `[5, 7, 8]` → Returns `[-1, -1]`.
-- **Single Element:** `nums = [8], target = 8` → Returns `[0, 0]`.
-- **All Elements are Target:** `nums = [8, 8, 8], target = 8` → Returns `[0, 2]`.
+- **Empty Array:** `nums = []` → Return `[-1, -1]`.
+- **Target Not Present:** `nums = [1, 2, 4]`, `target = 3` → Return `[-1, -1]`.
+- **Target is All Elements:** `nums = [5, 5, 5]`, `target = 5` → Return `[0, 2]`.
+- **Single Element (Match):** `nums = [1]`, `target = 1` → Return `[0, 0]`.
+- **Single Element (No Match):** `nums = [1]`, `target = 2` → Return `[-1, -1]`.
 
 ---
 
 ## Mistakes
 
-- **Off-by-one errors:** Forgetting to update `low` or `high` correctly in the modified binary search.
-- **Early Exit:** Stopping search immediately after finding the target once.
-- **Empty Array:** Not checking if `nums` is empty before processing.
-- **User mistake:** No specific note provided.
+- Using standard `binary_search` and then expanding linearly (degrades to O(N)).
+- Forgetting to handle the "not found" case correctly.
+- Off-by-one errors in `mid` calculation or boundary updates.
+- **User Mistake:** No specific note provided.
 
 ---
 
 ## Complexity
 
-Time: $O(\log n)$ → We perform two independent binary searches.  
-Space: $O(1)$ → Only a few pointers are used regardless of input size.
+Time: O(log N) → Two binary search passes, each taking logarithmic time.  
+Space: O(1) → Constant space used for pointers and boundaries.
 
 ---
 
@@ -146,14 +135,27 @@ Space: $O(1)$ → Only a few pointers are used regardless of input size.
 ---
 
 ## Tags and Properties
-  - #dsa #important #revisit #binarysearch #arrays
+  - #dsa #important #revisit #binarysearch #leetcode34
   - [[Binary Search]] [[Array]]
-  - **Revision Date:** 2026-04-10
-  - **Problem Link:** [LeetCode - Find First and Last Position of Element in Sorted Array](https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/)
+  - **Revision Date:** 2026-04-11
+  - **Problem Link:** [LeetCode - Find First and Last Position of Element in a Sorted Array](https://leetcode.com/problems/find-first-and-last-position-of-element-in-a-sorted-array/)
+
+## Metadata & Placement Tags
+
+- **Target Companies:**
+  - #Amazon #Google #Microsoft #Facebook #Bloomberg #Uber
+
+- **Confidence Checklist:**
+  - [ ] Low  
+  - [ ] Medium  
+  - [ ] High  
+
+- **Concepts:**
+  - #binarysearch [[Binary Search]], #array [[Array]], #rangequery [[Range Query]]
 
 ---
 ### 🔄 Revision Checklist
-- [ ] Day 2 Revision (2026-04-12)
-- [ ] Day 7 Revision (2026-04-17)
-- [ ] Day 15 Revision (2026-04-25)
-- [ ] Day 30 Revision (2026-05-10)
+- [ ] Day 2 Revision (2026-04-13)
+- [ ] Day 7 Revision (2026-04-18)
+- [ ] Day 15 Revision (2026-04-26)
+- [ ] Day 30 Revision (2026-05-11)
