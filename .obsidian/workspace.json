@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Arrays/Check_If_String_Is_Palindrome_Or_Not.md",
+                "file": "Arrays/Quick_Sort.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Check_If_String_Is_Palindrome_Or_Not"
+              "title": "Quick_Sort"
             }
           }
         ]
@@ -40,7 +40,7 @@
             "state": {
               "type": "file-explorer",
               "state": {
-                "sortOrder": "alphabetical",
+                "sortOrder": "byCreatedTimeReverse",
                 "autoReveal": false
               },
               "icon": "lucide-folder-closed",
@@ -183,8 +183,24 @@
       "bases:Create new base": false
     }
   },
-  "active": "f86da9d9565dda56",
+  "active": "34611754fe71715e",
   "lastOpenFiles": [
+    "Arrays/Kth_Element_Of_2_Sorted_Arrays.md",
+    "DP/Find_Peak_Element_II.md",
+    "Math/Reverse_A_Number.md",
+    "DP/Count_All_Digits_Of_A_Number.md",
+    "DP/Check_If_The_Number_Is_Armstrong.md",
+    "Arrays/Quick_Sort.md",
+    "Arrays/Merge_Sort.md",
+    "Arrays/Insertion_Sort.md",
+    "Arrays/Search_In_A_2d_Matrix_II.md",
+    "Arrays/Search_In_A_2d_Matrix.md",
+    "Arrays/Find_Peak_Element.md",
+    "Arrays/Find_Minimum_In_Rotated_Sorted_Array.md",
+    "Arrays/Lower_Bound.md",
+    "Arrays/Minimize_Max_Distance_To_Gas_Station.md",
+    "Arrays/Median_Of_2_Sorted_Arrays.md",
+    "Arrays/Check_If_String_Is_Palindrome_Or_Not.md",
     "Arrays/Capacity_To_Ship_Packages_Within_D_Days.md",
     "Arrays/Bubble_Sort.md",
     "Arrays/Binary_Search.md",

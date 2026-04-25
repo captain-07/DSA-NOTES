@@ -7,7 +7,7 @@ revisions:
   - 2026-05-22
 ---
 
-# Search In A 2d Matrix-Ii
+# Search In A 2d Matrix-II
 
 ---
 
