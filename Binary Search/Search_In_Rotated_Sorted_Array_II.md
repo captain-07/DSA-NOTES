@@ -7,10 +7,7 @@ revisions:
   - 2026-05-10
 ---
 
-I will start by reading `config.json` and `dsa/router.py` to ensure the note is saved in the correct vault path and category as per the project mandates.
-I will now generate the markdown note for the problem "Search In Rotated Sorted Array 2 [Duplicate Values]" and save it to the Obsidian vault as per the project mandates.
-
-# Search In Rotated Sorted Array 2 [Duplicate Values]
+# Search In Rotated Sorted Array II
 
 ---
 

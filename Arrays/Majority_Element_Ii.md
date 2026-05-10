@@ -7,7 +7,7 @@ revisions:
   - 2026-05-25
 ---
 
-# Majority Element-Ii
+# Majority Element II
 
 ---
 

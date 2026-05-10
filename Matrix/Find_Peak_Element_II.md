@@ -7,7 +7,7 @@ revisions:
   - 2026-05-24
 ---
 
-# Find Peak Element-II
+# Find Peak Element II
 
 ---
 
