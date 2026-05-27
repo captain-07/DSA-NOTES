@@ -7,7 +7,7 @@ revisions:
   - 2026-06-26
 ---
 
-# Sort A Linked List Of 0'S 1'S And 2'S
+# Sort A Linked List Of 0s 1s And 2s
 
 ---
 

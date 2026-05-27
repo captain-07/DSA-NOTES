@@ -7,7 +7,7 @@ revisions:
   - 2026-05-28
 ---
 
-# Isomorphic String
+# Isomorphic Strings
 
 ---
 

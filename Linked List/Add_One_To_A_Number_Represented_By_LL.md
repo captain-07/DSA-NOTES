@@ -7,7 +7,7 @@ revisions:
   - 2026-06-26
 ---
 
-# Add One To A Number Represented By Ll
+# Add One To A Number Represented By LL
 
 ---
 

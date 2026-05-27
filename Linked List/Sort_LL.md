@@ -7,7 +7,7 @@ revisions:
   - 2026-06-17
 ---
 
-# Sort Ll
+# Sort LL
 
 ---
 
