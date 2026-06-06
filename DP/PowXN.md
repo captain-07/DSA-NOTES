@@ -14,7 +14,7 @@ revisions:
 ## Metadata & Placement Tags
 
 - **Target Companies:**
-  - #Google #Facebook #Amazon #LinkedIn #Bloomberg #Microsoft
+  - #Amazon #Google #Microsoft #Facebook #Bloomberg #LinkedIn
 
 - **Confidence Checklist:**
   - [ ] Low  
@@ -22,32 +22,30 @@ revisions:
   - [ ] High  
 
 - **Concepts:**
-  - #binaryexponentiation [[Binary Exponentiation]]
-  - #divideandconquer [[Divide and Conquer]]
-  - #recursion [[Recursion]]
-  - #bitmanipulation [[Bit Manipulation]]
+  - #math [[Mathematics]], #recursion [[Recursion]], #binary-exponentiation [[Binary Exponentiation]]
 
----
 ## Pattern
 
-Binary Exponentiation (Divide and Conquer)
+Binary Exponentiation (Exponentiation by Squaring)  
+Divide and Conquer  
 
 ---
 ## Difficulty
 
-Medium #medium
+Medium  
+#medium
 
 ---
 
 ## ⚡ Key Idea (Core Insight)
 
-The core insight is **Binary Exponentiation**: reduce the number of multiplications from $O(n)$ to $O(\log n)$ by observing that $x^n = (x^2)^{n/2}$ if $n$ is even, and $x^n = x \cdot (x^2)^{(n-1)/2}$ if $n$ is odd.
+The naive $O(N)$ multiplication is too slow. Use the property $x^n = (x^2)^{n/2}$ for even $n$, and $x \cdot x^{n-1}$ for odd $n$. This reduces the number of multiplications to $O(\log N)$ by halving the exponent at each step.
 
 ---
 
 ## ⚡ Quick Recall (VERY IMPORTANT)
 
-**Halve the power, square the base.** If $n$ is odd, multiply the result by the current base once. Handle negative $n$ by using $1/x$ and $-n$.
+Square the base and halve the exponent. If the exponent is odd, multiply the result by the current base once before continuing.
 
 ---
 
@@ -55,21 +53,17 @@ The core insight is **Binary Exponentiation**: reduce the number of multiplicati
 
 ### Brute Force
 - Multiply $x$ by itself $n$ times using a loop.
-- Time Complexity: $O(n)$
-- Space Complexity: $O(1)$
+- Time: $O(n)$
 
 ### Better (Recursive)
-- Use recursion to compute `half = pow(x, n // 2)`.
-- If $n$ is even, return `half * half`. If odd, return `x * half * half`.
-- Time Complexity: $O(\log n)$
-- Space Complexity: $O(\log n)$ due to recursion stack.
+- Use recursion: `f(x, n) = f(x*x, n//2)`. Handle $n < 0$ by using $1/x$ and $-n$.
+- Time: $O(\log n)$, Space: $O(\log n)$ due to recursion stack.
 
 ### Optimal (Iterative)
-- Use a loop while $n > 0$. 
-- If $n$ is odd, multiply `ans` by `x`. 
-- Square `x` and halve `n` (using integer division or bit shift) in every step.
-- Time Complexity: $O(\log n)$
-- Space Complexity: $O(1)$
+- Use a `while n > 0` loop.
+- If $n$ is odd, multiply `ans` by `x`.
+- Always square `x` and integer-divide `n` by 2 in each iteration.
+- Handle negative $n$ by converting $x = 1/x$ and $n = -n$ at the start.
 
 ---
 
@@ -83,75 +77,75 @@ class Solution:
             x = 1 / x
             n = -n
         
-        ans = 1.0
+        res = 1
         current_product = x
         
         while n > 0:
-            # If n is odd, multiply the result by current_product
+            # If n is odd, multiply res by current_product
             if n % 2 == 1:
-                ans *= current_product
+                res *= current_product
             
             # Square the base and halve the exponent
             current_product *= current_product
             n //= 2
             
-        return ans
+        return res
 ```
 
 ---
 
 ## Dry Run (Smart Example)
 
-**Input:** `x = 2.0`, `n = 10`
+**Input:** `x = 2.0, n = 10`
 
-| Step | n | x (current_product) | ans | Explanation |
+| Step | `n` | `current_product` | `res` | Explanation |
 | :--- | :--- | :--- | :--- | :--- |
-| 1 | 10 | 2.0 | 1.0 | $n$ is even. $x = 2.0^2 = 4.0$, $n = 10//2 = 5$. |
-| 2 | 5 | 4.0 | 4.0 | $n$ is odd. $ans = 1.0 \times 4.0 = 4.0$, $x = 4.0^2 = 16.0$, $n = 5//2 = 2$. |
-| 3 | 2 | 16.0 | 4.0 | $n$ is even. $x = 16.0^2 = 256.0$, $n = 2//2 = 1$. |
-| 4 | 1 | 256.0 | 1024.0 | $n$ is odd. $ans = 4.0 \times 256.0 = 1024.0$, $n = 1//2 = 0$. |
+| Start | 10 | 2.0 | 1.0 | Initial state |
+| 1 | 5 | 4.0 | 1.0 | $n$ was even: $x \to x^2, n \to n/2$ |
+| 2 | 2 | 16.0 | 4.0 | $n$ was odd: $res \times 4.0, x \to x^2, n \to n/2$ |
+| 3 | 1 | 256.0 | 4.0 | $n$ was even: $x \to x^2, n \to n/2$ |
+| 4 | 0 | 65536.0 | 1024.0 | $n$ was odd: $res \times 256.0$, Loop Ends |
 
 ---
 
 ## Edge Cases
 
-- **$n = 0$:** Always returns $1.0$.
-- **$n < 0$:** Compute $(1/x)^{-n}$. Note: In some languages (C++), $-(-2^{31})$ overflows; Python handles this automatically.
-- **$x = 0$:** $0^n$ is $0$ (for $n > 0$), but $0^0$ is usually $1$.
-- **$x = 1$ or $x = -1$:** Result cycles between $1$ and $-1$.
-- **Large $n$:** $O(\log n)$ is essential to avoid TLE.
+- **$n = 0$**: Result is always 1.0 (except $0^0$ which is usually 1 in programming).
+- **$n < 0$**: Reciprocal the base ($1/x$) and make $n$ positive.
+- **$x = 1.0$**: Result is always 1.0 regardless of $n$.
+- **$x = 0$**: Result is 0 for $n > 0$; undefined/error for $n < 0$.
+- **$n = \text{Min Int}$**: In some languages (C++/Java), $-n$ overflows; Python handles this automatically.
 
 ---
 
 ## Mistakes
 
-- **Linear multiplication:** Using $O(n)$ loop results in Time Limit Exceeded (TLE).
-- **Ignoring negative $n$:** Forgetting to convert $x$ to $1/x$.
-- **Recursion depth:** Recursive approach might hit stack limits for very large $n$ in some environments.
-- **User mistake:** No specific note provided (ensure standard structure is followed).
+- **Forgetting Negative Exponents**: Must handle $x^{-n} = (1/x)^n$.
+- **Linear Complexity**: Using a simple loop results in TLE for large $n$.
+- **Integer Division**: Using `/` instead of `//` in Python for $n$.
+- **User Mistake**: No specific note provided.
 
 ---
 
 ## Complexity
 
-Time: $O(\log n)$ → The exponent is halved in each iteration of the loop.  
-Space: $O(1)$ → Iterative approach uses only a constant amount of extra space.
+Time: $O(\log n)$ → The exponent $n$ is halved in every iteration of the loop.  
+Space: $O(1)$ → Iterative approach uses a constant amount of extra space.
 
 ---
 
 ## Similar Problems
 
-- [Super Pow](https://leetcode.com/problems/super-pow/) - Medium
 - [Sqrt(x)](https://leetcode.com/problems/sqrtx/) - Easy
+- [Super Pow](https://leetcode.com/problems/super-pow/) - Medium
 - [Count Good Numbers](https://leetcode.com/problems/count-good-numbers/) - Medium
-- [Modular Exponentiation](https://www.geeksforgeeks.org/modular-exponentiation-power-in-modular-arithmetic/) - Medium
 
 ---
 
 ## Tags and Properties
-  - #dsa #important #revisit #math #binary_exponentiation
-  - [[Binary Exponentiation]] [[Divide and Conquer]]
-  - **Revision Date:** 2026-06-06
+  - #dsa #important #revisit  
+  - #binary-exponentiation #math #fast-power
+  - [[Binary Exponentiation]] [[Recursion]] [[Divide and Conquer]]
   - **Problem Link:** [LeetCode - Pow(x, n)](https://leetcode.com/problems/powx-n/)
 
 ---
