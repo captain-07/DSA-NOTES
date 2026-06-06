@@ -7,7 +7,7 @@ revisions:
   - 2026-06-26
 ---
 
-# Find The Intersection Point Of Two Ll
+# Find The Intersection Point Of Two LL
 
 ---
 

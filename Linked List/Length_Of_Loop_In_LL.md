@@ -7,7 +7,7 @@ revisions:
   - 2026-06-11
 ---
 
-# Length Of Loop In Ll
+# Length Of Loop In LL
 
 ---
 

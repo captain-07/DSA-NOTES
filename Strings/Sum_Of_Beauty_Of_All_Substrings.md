@@ -7,7 +7,7 @@ revisions:
   - 2026-06-02
 ---
 
-# Sum Of Beauty Of All Substring
+# Sum Of Beauty Of All Substrings
 
 ---
 

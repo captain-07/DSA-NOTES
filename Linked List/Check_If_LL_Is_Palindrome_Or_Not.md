@@ -7,7 +7,7 @@ revisions:
   - 2026-06-14
 ---
 
-# Check If Ll Is Palindrome Or Not
+# Check If LL Is Palindrome Or Not
 
 ---
 

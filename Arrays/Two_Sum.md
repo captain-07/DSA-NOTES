@@ -138,7 +138,7 @@ Space: $O(N)$ → Worst case stores all elements in the hash map.
 ---
 
 ## Tags and Properties
-- #dsa #important #revisit #hashmap [[Hash Map]] [[Arrays]]
+- #dsa #important #revisit #hashmap #blind75 [[Hash Map]] [[Arrays]]
 - **Revision Date:** 2026-04-25
 - **Problem Link:** [LeetCode - 2 Sum](https://leetcode.com/problems/two-sum/)
 

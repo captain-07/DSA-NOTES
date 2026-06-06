@@ -7,7 +7,7 @@ revisions:
   - 2026-06-11
 ---
 
-# Linked Cycle Ii
+# Linked List Cycle II
 
 ---
 

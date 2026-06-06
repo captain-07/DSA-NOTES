@@ -7,7 +7,7 @@ revisions:
   - 2026-06-16
 ---
 
-# Delete The Middle Node In Ll
+# Delete The Middle Node In LL
 
 ---
 
