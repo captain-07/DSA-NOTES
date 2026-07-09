@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Arrays/Sort_An_Array_0s_1s_And_2s.md",
+                "file": "Hashing/Two_Sum.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Sort_An_Array_0s_1s_And_2s"
+              "title": "Two_Sum"
             }
           }
         ]
@@ -53,7 +53,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "reverse",
+                "query": "two",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": true,
@@ -185,6 +185,7 @@
   },
   "active": "34611754fe71715e",
   "lastOpenFiles": [
+    "Arrays/Sort_An_Array_0s_1s_And_2s.md",
     "Math/Reverse_A_Number.md",
     "DP/Fibonacci_Number.md",
     "Arrays/Stock_Buy_And_Sell.md",
@@ -204,7 +205,6 @@
     "Binary Search/Aggressive_Cows.md",
     "Arrays/Majority_Element_II.md",
     "Arrays/Majority_Element.md",
-    "Arrays/Sort_An_Array_0s_1s_And_2s.md",
     "Arrays/Kadanes_Algorithm.md",
     "Arrays/Majority_Element_I.md",
     "Binary Search/Painters_Partition.md",
