@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Hashing/Two_Sum.md",
+                "file": "Recursion/Generate_Binary_Strings_Without_Consecutive_1s.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Two_Sum"
+              "title": "Generate_Binary_Strings_Without_Consecutive_1s"
             }
           }
         ]
@@ -183,8 +183,10 @@
       "bases:Create new base": false
     }
   },
-  "active": "34611754fe71715e",
+  "active": "f86da9d9565dda56",
   "lastOpenFiles": [
+    "Hashing/Two_Sum.md",
+    "Recursion/Generate_Binary_Strings_Without_Consecutive_1s.md",
     "Arrays/Sort_An_Array_0s_1s_And_2s.md",
     "Math/Reverse_A_Number.md",
     "DP/Fibonacci_Number.md",
@@ -195,7 +197,6 @@
     "Sorting/Merge_Sort.md",
     "Sorting/Bubble_Sort.md",
     "Sorting/Selection_Sort.md",
-    "Hashing/Two_Sum.md",
     "Hashing/Longest_Subarray_With_Sum_K.md",
     "Hashing/Largest_Subarray_With_Sum_0.md",
     "Hashing/Count_Subarrays_With_Given_Sum.md",
@@ -210,7 +211,6 @@
     "Binary Search/Painters_Partition.md",
     "Arrays/Maximum_Product_Subarray_In_An_Array.md",
     "Arrays/Pascal_Triangle.md",
-    "Arrays/KadaneS_Algorithm.md",
     "Sorting",
     "Matrix",
     "Binary Search",
