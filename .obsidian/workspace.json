@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Recursion/Generate_Binary_Strings_Without_Consecutive_1s.md",
+                "file": "Recursion/Generate_Parentheses.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Generate_Binary_Strings_Without_Consecutive_1s"
+              "title": "Generate_Parentheses"
             }
           }
         ]
@@ -185,8 +185,9 @@
   },
   "active": "f86da9d9565dda56",
   "lastOpenFiles": [
-    "Hashing/Two_Sum.md",
     "Recursion/Generate_Binary_Strings_Without_Consecutive_1s.md",
+    "Recursion/Generate_Parentheses.md",
+    "Hashing/Two_Sum.md",
     "Arrays/Sort_An_Array_0s_1s_And_2s.md",
     "Math/Reverse_A_Number.md",
     "DP/Fibonacci_Number.md",
@@ -210,7 +211,6 @@
     "Arrays/Majority_Element_I.md",
     "Binary Search/Painters_Partition.md",
     "Arrays/Maximum_Product_Subarray_In_An_Array.md",
-    "Arrays/Pascal_Triangle.md",
     "Sorting",
     "Matrix",
     "Binary Search",
