@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Trees/Combination_Sum.md",
+                "file": "Arrays/Minimum_Total_Cost_To_Process_All_Elements.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Combination_Sum"
+              "title": "Minimum_Total_Cost_To_Process_All_Elements"
             }
           }
         ]
@@ -185,6 +185,8 @@
   },
   "active": "f86da9d9565dda56",
   "lastOpenFiles": [
+    "Untitled.md",
+    "Trees/Combination_Sum.md",
     "Math/Power_Set.md",
     "Recursion/Generate_Parentheses.md",
     "Recursion/Generate_Binary_Strings_Without_Consecutive_1s.md",
@@ -209,8 +211,6 @@
     "Arrays/Majority_Element_II.md",
     "Arrays/Majority_Element.md",
     "Arrays/Kadanes_Algorithm.md",
-    "Arrays/Majority_Element_I.md",
-    "Binary Search/Painters_Partition.md",
     "Sorting",
     "Matrix",
     "Binary Search",
