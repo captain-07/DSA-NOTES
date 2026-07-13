@@ -65,31 +65,25 @@ Use greedy simulation; check if current resources < `nums[i]`, find required ope
 
 ```python
 class Solution:
-    def minimumCost(self, nums: list[int], k: int) -> int:
-        MOD = 10**9 + 7
-        current_resources = k
-        total_cost = 0
-        ops_done = 0
+    def minimumCost(self, nums: List[int], k: int) -> int:
+        ops = 0
+        res = k
+        
+        for x in nums:
+            if res < x:
+	            # ceiling division
+                add = (x - res + k - 1) // k
+                ops += add
+                res += add * k
+            res -= x
 
-        for x in nums:
-            # Check if current resource pool is insufficient
-            if current_resources < x:
-                # Ceiling division to calculate number of operations needed
-                needed = (x - current_resources + k - 1) // k
+        MOD = 10**9 + 7
+        ops = ops % MOD
 
-                # Calculate the cost of the operations using AP sum formula
-                first = ops_done + 1
-                last = ops_done + needed
-                current_cost = (needed * (first + last)) // 2
+        if ops % 2 == 0:
+            return (((ops // 2)) * ((ops + 1))) % MOD
 
-                total_cost = (total_cost + current_cost) % MOD
-                current_resources += needed * k
-                ops_done += needed
-
-            # Consume resources for the current element
-            current_resources -= x
-
-        return total_cost
+        return ((ops) * (((ops + 1) // 2))) % MOD
 ```
 
 ---
@@ -115,7 +109,6 @@ Input: `nums = [1, 1, 7, 14]`, `k = 4`
 ---
 ## Mistakes
 
-- Confounding this problem with "Minimum Total Cost to Make Arrays Unequal" (LeetCode 2499) which has different swap logic and constraints.
 - Performing incremental recharges in a loop instead of calculating `needed` recharges in $O(1)$ time, leading to Time Limit Exceeded (TLE).
 - Forgetting to apply modulo $10^9 + 7$ to the accumulated costs.
 
