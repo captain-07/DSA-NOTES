@@ -66,24 +66,24 @@ Medium
 ```python
 class Solution:
     def generateString(self, n: int) -> list[str]:
-        res = []
-
-        def backtrack(curr_str: str, last_char: str):
-            # Base Case: valid string of length n generated
-            if len(curr_str) == n:
-                res.append(curr_str)
-                return
-
-            # '0' can always be appended regardless of the last character
-            backtrack(curr_str + "0", "0")
-
-            # '1' can only be appended if the last character was '0' or empty
-            if not last_char or last_char == "0":
-                backtrack(curr_str + "1", "1")
-
+        self.res = []
+        self.n = n
         # Start recursion with empty string and empty last_char state
-        backtrack("", "")
-        return res
+        self.backtrack("", "")
+        return self.res
+
+    def backtrack(self, curr_str: str, last_char: str):
+        # Base Case: valid string of length n generated
+        if len(curr_str) == self.n:
+            self.res.append(curr_str)
+            return
+
+        # '0' can always be appended regardless of the last character
+        self.backtrack(curr_str + "0", "0")
+
+        # '1' can only be appended if the last character was '0' or empty
+        if not last_char or last_char == "0":
+            self.backtrack(curr_str + "1", "1")
 ```
 
 ---

@@ -129,7 +129,6 @@ Sorted candidates: `[1, 2, 2, 2, 5]`
 
 - **Forgetting to sort:** Sorting is mandatory for the adjacent duplicate check `candidates[i] == candidates[i-1]` to work.
 - **Not using a for loop:** Using direct index inclusion/exclusion (binary decision tree) makes it extremely hard to skip duplicates efficiently.
-- **Writing nested functions:** Keep the code clean and modular by defining backtracking as a separate method of the `Solution` class.
 - **Incorrect duplicate check condition:** Using `i > 0` instead of `i > start`. `i > start` ensures we skip duplicates at the *same* recursion level, but allows the same duplicate value to be chosen across different depths.
 
 ---

@@ -69,18 +69,7 @@ class Solution:
     def solve(self, n, k, stalls):
         # Sorting is mandatory for greedy placement
         stalls.sort()
-        
-        def is_possible(dist):
-            count = 1 # Place first cow at stalls[0]
-            last_pos = stalls[0]
-            
-            for i in range(1, n):
-                if stalls[i] - last_pos >= dist:
-                    count += 1
-                    last_pos = stalls[i]
-            
-            # Key check: Can we place at least k cows?
-            return count >= k
+        self.k = k
 
         low = 1
         high = stalls[-1] - stalls[0]
@@ -88,13 +77,25 @@ class Solution:
         
         while low <= high:
             mid = (low + high) // 2
-            if is_possible(mid):
+            if self.is_possible(stalls, mid):
                 ans = mid # Potential answer, try for more
                 low = mid + 1
             else:
                 high = mid - 1
                 
         return ans
+
+    def is_possible(self, stalls, dist):
+        count = 1 # Place first cow at stalls[0]
+        last_pos = stalls[0]
+        
+        for i in range(1, len(stalls)):
+            if stalls[i] - last_pos >= dist:
+                count += 1
+                last_pos = stalls[i]
+        
+        # Key check: Can we place at least k cows?
+        return count >= self.k
 ```
 
 ---

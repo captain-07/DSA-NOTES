@@ -87,21 +87,20 @@ class Solution:
         k = k % n
         if k == 0: return
         
-        # Helper function for reversing sub-segments
-        def reverse(start: int, end: int) -> None:
-            while start < end:
-                arr[start], arr[end] = arr[end], arr[start]
-                start += 1
-                end -= 1
-        
         # Step 2: Reverse first k elements [0...k-1]
-        reverse(0, k - 1)
+        self._reverse(arr, 0, k - 1)
         
         # Step 3: Reverse remaining elements [k...n-1]
-        reverse(k, n - 1)
+        self._reverse(arr, k, n - 1)
         
         # Step 4: Reverse the whole array [0...n-1]
-        reverse(0, n - 1)
+        self._reverse(arr, 0, n - 1)
+
+    def _reverse(self, arr: list[int], start: int, end: int) -> None:
+        while start < end:
+            arr[start], arr[end] = arr[end], arr[start]
+            start += 1
+            end -= 1
 ```
 
 ---

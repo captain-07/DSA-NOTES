@@ -66,24 +66,24 @@ Backtrack by passing counts: add `(` if `open < n`, add `)` if `close < open`. S
 ```python
 class Solution:
     def generateParenthesis(self, n: int) -> list[str]:
-        result = []
+        self.result = []
+        self.n = n
+        self.backtrack("", 0, 0)
+        return self.result
 
-        def backtrack(current_str: str, open_count: int, close_count: int):
-            # Base case: valid combination found
-            if len(current_str) == 2 * n:
-                result.append(current_str)
-                return
+    def backtrack(self, current_str: str, open_count: int, close_count: int):
+        # Base case: valid combination found
+        if len(current_str) == 2 * self.n:
+            self.result.append(current_str)
+            return
 
-            # Pruning branch 1: add open parenthesis
-            if open_count < n:
-                backtrack(current_str + "(", open_count + 1, close_count)
+        # Pruning branch 1: add open parenthesis
+        if open_count < self.n:
+            self.backtrack(current_str + "(", open_count + 1, close_count)
 
-            # Pruning branch 2: add close parenthesis
-            if close_count < open_count:
-                backtrack(current_str + ")", open_count, close_count + 1)
-
-        backtrack("", 0, 0)
-        return result
+        # Pruning branch 2: add close parenthesis
+        if close_count < open_count:
+            self.backtrack(current_str + ")", open_count, close_count + 1)
 ```
 
 ---

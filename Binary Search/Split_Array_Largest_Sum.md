@@ -78,23 +78,14 @@ class Solution:
     def splitArray(self, nums: list[int], k: int) -> int:
         # Range of the answer
         low, high = max(nums), sum(nums)
+        self.nums = nums
+        self.k = k
         ans = high
-        
-        def can_split(max_sum: int) -> bool:
-            subarrays = 1
-            current_sum = 0
-            for num in nums:
-                if current_sum + num > max_sum:
-                    subarrays += 1
-                    current_sum = num
-                else:
-                    current_sum += num
-            return subarrays <= k
 
         while low <= high:
             mid = (low + high) // 2
             # If possible to split with max sum 'mid', try smaller
-            if can_split(mid):
+            if self.can_split(mid):
                 ans = mid
                 high = mid - 1
             else:
@@ -102,6 +93,17 @@ class Solution:
                 low = mid + 1
         
         return ans # or return low
+
+    def can_split(self, max_sum: int) -> bool:
+        subarrays = 1
+        current_sum = 0
+        for num in self.nums:
+            if current_sum + num > max_sum:
+                subarrays += 1
+                current_sum = num
+            else:
+                current_sum += num
+        return subarrays <= self.k
 ```
 
 ---

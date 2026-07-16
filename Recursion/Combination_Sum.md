@@ -67,29 +67,28 @@ N/A (Standard backtracking is the optimal approach).
 ```python
 class Solution:
     def combinationSum(self, candidates: list[int], target: int) -> list[list[int]]:
-        results = []
+        self.results = []
         candidates.sort()  # Sort to enable early pruning
+        self.backtrack(candidates, 0, target, [])
+        return self.results
 
-        def backtrack(index: int, current_target: int, path: list[int]):
-            if current_target == 0:
-                results.append(list(path))  # Store copy of valid path
-                return
+    def backtrack(self, candidates: list[int], index: int, current_target: int, path: list[int]):
+        if current_target == 0:
+            self.results.append(list(path))  # Store copy of valid path
+            return
 
-            if index >= len(candidates):
-                return
+        if index >= len(candidates):
+            return
 
-            # Choice 1: Pick the current element (unlimited reuse)
-            if candidates[index] <= current_target:
-                path.append(candidates[index])
-                # Recursion staying at 'index' allows reuse
-                backtrack(index, current_target - candidates[index], path)
-                path.pop()  # Backtrack: pop last element to restore state
+        # Choice 1: Pick the current element (unlimited reuse)
+        if candidates[index] <= current_target:
+            path.append(candidates[index])
+            # Recursion staying at 'index' allows reuse
+            self.backtrack(candidates, index, current_target - candidates[index], path)
+            path.pop()  # Backtrack: pop last element to restore state
 
-            # Choice 2: No Pick / Skip the current element
-            backtrack(index + 1, current_target, path)
-
-        backtrack(0, target, [])
-        return results
+        # Choice 2: No Pick / Skip the current element
+        self.backtrack(candidates, index + 1, current_target, path)
 ```
 
 ---

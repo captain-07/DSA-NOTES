@@ -83,21 +83,14 @@ class Solution:
         if not s or len(s) < 1:
             return ""
         
+        self.s = s
         start, end = 0, 0
-        
-        def expand(left: int, right: int) -> int:
-            # Expand as long as characters match and indices are in bounds
-            while left >= 0 and right < len(s) and s[left] == s[right]:
-                left -= 1
-                right += 1
-            # Return length of the palindrome found
-            return right - left - 1
 
         for i in range(len(s)):
             # Case 1: Odd length (center is s[i])
-            len1 = expand(i, i)
+            len1 = self.expand(i, i)
             # Case 2: Even length (center is between s[i] and s[i+1])
-            len2 = expand(i, i + 1)
+            len2 = self.expand(i, i + 1)
             
             max_len = max(len1, len2)
             
@@ -107,6 +100,14 @@ class Solution:
                 end = i + max_len // 2
                 
         return s[start:end + 1]
+
+    def expand(self, left: int, right: int) -> int:
+        # Expand as long as characters match and indices are in bounds
+        while left >= 0 and right < len(self.s) and self.s[left] == self.s[right]:
+            left -= 1
+            right += 1
+        # Return length of the palindrome found
+        return right - left - 1
 ```
 
 ---

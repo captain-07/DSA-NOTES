@@ -66,24 +66,23 @@ Think of a binary decision tree: at each index, you branch by either adding the 
 class Solution:
     def subsets(self, nums: list[int]) -> list[list[int]]:
         # Approach 1: Backtracking (Decision Tree)
-        result = []
+        self.result = []
+        self.backtrack(nums, 0, [])
+        return self.result
 
-        def backtrack(index: int, current_path: list[int]):
-            # Base Case: processed all elements
-            if index == len(nums):
-                result.append(current_path.copy())
-                return
+    def backtrack(self, nums: list[int], index: int, current_path: list[int]):
+        # Base Case: processed all elements
+        if index == len(nums):
+            self.result.append(current_path.copy())
+            return
 
-            # Choice 1: Include nums[index]
-            current_path.append(nums[index])
-            backtrack(index + 1, current_path)
+        # Choice 1: Include nums[index]
+        current_path.append(nums[index])
+        self.backtrack(nums, index + 1, current_path)
 
-            # Choice 2: Exclude nums[index] (Backtrack)
-            current_path.pop()
-            backtrack(index + 1, current_path)
-
-        backtrack(0, [])
-        return result
+        # Choice 2: Exclude nums[index] (Backtrack)
+        current_path.pop()
+        self.backtrack(nums, index + 1, current_path)
 
     def subsets_bitmask(self, nums: list[int]) -> list[list[int]]:
         # Approach 2: Bit Manipulation

@@ -76,27 +76,26 @@ Result = `(pow(5, (n + 1) // 2, MOD) * pow(4, n // 2, MOD)) % MOD`. Use modular 
 
 ```python
 class Solution:
-    def countGoodNumbers(self, n: int) -> int:
-        MOD = 10**9 + 7
-        
-        # Binary Exponentiation function: (base^exp) % mod
-        def fast_pow(base, exp):
-            res = 1
-            base %= MOD
-            while exp > 0:
-                if exp % 2 == 1:
-                    res = (res * base) % MOD
-                base = (base * base) % MOD
-                exp //= 2
-            return res
+    MOD = 10**9 + 7
 
+    def countGoodNumbers(self, n: int) -> int:
         # Even positions: 0, 2, 4... (Total: ceil(n/2))
         # Odd positions: 1, 3, 5... (Total: floor(n/2))
         even_pos = (n + 1) // 2
         odd_pos = n // 2
         
         # Choices: 5 for even indices, 4 for odd indices
-        return (fast_pow(5, even_pos) * fast_pow(4, odd_pos)) % MOD
+        return (self.fast_pow(5, even_pos) * self.fast_pow(4, odd_pos)) % self.MOD
+
+    def fast_pow(self, base, exp):
+        res = 1
+        base %= self.MOD
+        while exp > 0:
+            if exp % 2 == 1:
+                res = (res * base) % self.MOD
+            base = (base * base) % self.MOD
+            exp //= 2
+        return res
 ```
 
 ---

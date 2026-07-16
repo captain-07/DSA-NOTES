@@ -78,32 +78,32 @@ class Solution:
         i, j = 0, 0
         res = []
         
-        def add_to_res(val):
-            # Only add if res is empty or val is not a duplicate of the last element
-            if not res or res[-1] != val:
-                res.append(val)
-        
         while i < n and j < m:
             if a[i] <= b[j]:
-                add_to_res(a[i])
+                self._add_to_res(res, a[i])
                 if a[i] == b[j]:
                     j += 1 # Move j if elements are identical
                 i += 1
             else:
-                add_to_res(b[j])
+                self._add_to_res(res, b[j])
                 j += 1
         
         # Add remaining elements from array a
         while i < n:
-            add_to_res(a[i])
+            self._add_to_res(res, a[i])
             i += 1
             
         # Add remaining elements from array b
         while j < m:
-            add_to_res(b[j])
+            self._add_to_res(res, b[j])
             j += 1
             
         return res
+
+    def _add_to_res(self, res, val):
+        # Only add if res is empty or val is not a duplicate of the last element
+        if not res or res[-1] != val:
+            res.append(val)
 ```
 
 ---
