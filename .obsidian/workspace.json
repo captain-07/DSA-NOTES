@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Recursion/Reverse_A_Stack.md",
+                "file": "Recursion/Subsets_Ii.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Reverse_A_Stack"
+              "title": "Subsets_Ii"
             }
           }
         ]
@@ -183,8 +183,10 @@
       "bases:Create new base": false
     }
   },
-  "active": "34611754fe71715e",
+  "active": "f86da9d9565dda56",
   "lastOpenFiles": [
+    "Recursion/Reverse_A_Stack.md",
+    "Recursion/Subsets_Ii.md",
     "Linked List/Sort_A_LL_Of_0s_1s_And_2s.md",
     "Linked List/Segregate_Odd_And_Even_Nodes_In_LL.md",
     "Linked List/Reverse_A_LL.md",
@@ -209,8 +211,6 @@
     "Arrays/Sort_An_Array_0s_1s_And_2s.md",
     "Math/Reverse_A_Number.md",
     "DP/Fibonacci_Number.md",
-    "Arrays/Stock_Buy_And_Sell.md",
-    "Recursion/Sort_A_Stack_Using_Recursion.md",
     "Sorting",
     "Matrix",
     "Binary Search",

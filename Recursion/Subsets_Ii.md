@@ -13,121 +13,113 @@ revisions:
 
 ## Metadata & Placement Tags
 
-- **Target Companies:**
-  - #Amazon #Google #Microsoft #Facebook #Bloomberg
-
+- **Target Companies:** #Amazon #Facebook #Google #Microsoft #Uber
 - **Confidence Checklist:**
   - [ ] Low
   - [ ] Medium
   - [ ] High
-
-- **Concepts:**
-  - #backtracking [[Backtracking]], #recursion [[Recursion]], #sorting [[Sorting]]
+- **Concepts:** #backtracking [[Backtracking]], #sorting [[Sorting]], #recursion [[Recursion]]
 
 ## Pattern
 
-Backtracking + Sorting for duplicate elimination
+Backtracking + Sorting
 
 ---
 ## Difficulty
 
-Medium #medium
+Medium
+#medium
 
 ---
-
 ## ⚡ Key Idea (Core Insight)
 
-Sort the input array to group duplicate elements. In recursion at index `ind`, choose any element `i` from `ind` to `n-1`. Skip duplicate elements at the *current* decision level by checking if `i > ind` and `nums[i] == nums[i-1]`.
+To avoid duplicate subsets, sort the array first. In the backtracking loop, skip duplicate elements at the current recursion level. The condition `i > ind` ensures we only skip duplicates *horizontally* (same level), but still allows them *vertically* (nested levels).
 
 ---
-
 ## ⚡ Quick Recall (VERY IMPORTANT)
 
-Sort first. Loop `i` from `ind` to `n-1`. Skip duplicates with `if i > ind and nums[i] == nums[i-1]: continue` to ensure a duplicate element is only picked once as the first choice at that recursion level.
+Sort first. Backtrack with loop: skip if `i > ind` and `nums[i] == nums[i-1]`.
 
 ---
-
 ## Approach
 
 ### Brute Force
-- Generate all subset combinations (power set) using backtracking, insert into a set to remove duplicates, and convert back to list.
-- Time Complexity: O(2^N * N log N)
+- Generate all possible subsets using standard backtracking, insert them into a hash set to remove duplicates, and convert the set back to a list.
+- Time Complexity: O(N * 2^N log(2^N))
 
 ### Better
-- Count frequencies of each unique element. Perform backtracking using unique elements and branching based on their count options (0 to count).
-- Time Complexity: O(2^N)
+- N/A
 
 ### Optimal
-- Sort the array. Recurse by starting a loop from `ind` to `n-1`. For any iteration, if `nums[i]` is a duplicate of `nums[i-1]` and `i` is not the first index of the loop (`i > ind`), skip to avoid generating duplicate branches.
-- Time Complexity: O(2^N * N)
+1. Sort the input array `nums`.
+2. Implement recursive helper `backtrack(ind, path)`.
+3. Add a copy of `path` to results at the start of each call.
+4. Iterate `i` from `ind` to `len(nums) - 1`.
+5. If `i > ind` and `nums[i] == nums[i-1]`, skip the iteration.
+6. Push `nums[i]` to `path`, recurse with `backtrack(i + 1, path)`, then pop `nums[i]`.
 
 ---
-
 ## Code (Python)
 
 ```python
 class Solution:
     def subsetsWithDup(self, nums: list[int]) -> list[list[int]]:
         res = []
-        nums.sort()  # Crucial to group duplicates together
-
-        def backtrack(ind: int, path: list[int]):
-            res.append(list(path))  # Add current subset copy
-
-            for i in range(ind, len(nums)):
-                # If current element is duplicate of previous, and not the first in this recursion level
-                if i > ind and nums[i] == nums[i-1]:
-                    continue
-                path.append(nums[i])
-                backtrack(i + 1, path)  # Recurse with next index
-                path.pop()  # Backtrack
-
-        backtrack(0, [])
+        nums.sort()  # Crucial to group duplicates
+        self.backtrack(0, nums, [], res)
         return res
+
+    def backtrack(self, ind: int, nums: list[int], path: list[int], res: list[list[int]]):
+        res.append(list(path))  # Copy path to avoid reference sharing
+
+        for i in range(ind, len(nums)):
+            # Skip duplicate elements at the same recursion depth
+            if i > ind and nums[i] == nums[i - 1]:
+                continue
+
+            path.append(nums[i])
+            self.backtrack(i + 1, nums, path, res)
+            path.pop()  # Backtrack
 ```
 
 ---
-
 ## Dry Run (Smart Example)
 
 Input: `nums = [1, 2, 2]`
 
 | Step | Variables | Explanation |
 | :--- | :--- | :--- |
-| 1 | `ind=0, path=[]` | Add `[]` to `res`. Loop `i` starts. `i=0`: push `1`, path=`[1]`, recurse to `ind=1`. |
-| 2 | `ind=1, path=[1]` | Add `[1]` to `res`. Loop `i` starts. `i=1`: push `2`, path=`[1,2]`, recurse to `ind=2`. |
-| 3 | `ind=2, path=[1,2]` | Add `[1,2]` to `res`. Loop `i` starts. `i=2`: push `2`, path=`[1,2,2]`, recurse to `ind=3`. |
-| 4 | `ind=3, path=[1,2,2]` | Add `[1,2,2]` to `res`. Recursion base case reached. Return. Backtrack: pop `2`, pop `2`. |
-| 5 | `ind=1, i=2` | In `ind=1` frame, `i` increments to 2. Since `i > ind` (2 > 1) and `nums[2] == nums[1]`, skip. Return. Backtrack: pop `1`. |
-| 6 | `ind=0, i=1` | In `ind=0` frame, `i` increments to 1. Push `2`, path=`[2]`, recurse to `ind=2`. Add `[2]` to `res`. |
-| 7 | `ind=2, path=[2]` | Loop `i` starts. `i=2`: push `2`, path=`[2,2]`, recurse to `ind=3`. Add `[2,2]` to `res`. Return. Backtrack: pop `2`, pop `2`. |
-| 8 | `ind=0, i=2` | In `ind=0` frame, `i` increments to 2. Since `i > ind` (2 > 0) and `nums[2] == nums[1]`, skip. Done. |
+| 1 | `ind=0`, `path=[]` | Append `[]` to `res`. Start loop `i` from 0 to 2. |
+| 2 | `i=0`, `path=[1]` | Recurse `ind=1`. Append `[1]` to `res`. Start loop `i` from 1 to 2. |
+| 3 | `i=1`, `path=[1, 2]` | Recurse `ind=2`. Append `[1, 2]` to `res`. Start loop `i` from 2 to 2. |
+| 4 | `i=2`, `path=[1, 2, 2]` | Recurse `ind=3`. Append `[1, 2, 2]` to `res`. Recurse ends. Pop -> `[1, 2]`. |
+| 5 | `i=2`, `path=[1]` | Back to `ind=1` level. Loop `i=2`. Skipped because `i > ind` (2 > 1) and `nums[2] == nums[1]` (2 == 2). Pop -> `[]`. |
+| 6 | `i=1`, `path=[2]` | Back to `ind=0` level. Loop `i=1`. Recurse `ind=2`. Append `[2]` to `res`. Loop `i` from 2 to 2. |
+| 7 | `i=2`, `path=[2, 2]` | Recurse `ind=3`. Append `[2, 2]` to `res`. Recurse ends. Pop -> `[2]`. |
+| 8 | `i=2`, `path=[]` | Back to `ind=0` level. Loop `i=2`. Skipped because `i > ind` (2 > 0) and `nums[2] == nums[1]` (2 == 2). |
 
 ---
-
 ## Edge Cases
 
-- **Empty input array:** Handled correctly, returns `[[]]`.
-- **All elements identical (`[2, 2, 2]`):** Correctly skips duplicate branches, returns subsets of lengths 0, 1, 2, and 3.
-- **No duplicates (`[1, 2, 3]`):** Behaves like normal subset generation, producing all 8 combinations.
-- **Negative numbers present:** Sorting handles negative integers correctly, placing them adjacently.
+- **Empty Array (`[]`):** Returns `[[]]` correctly.
+- **All Duplicates (`[2, 2, 2]`):** Generates `[[], [2], [2,2], [2,2,2]]` without duplicate arrays.
+- **Single Element (`[1]`):** Returns `[[], [1]]`.
+- **Negative Elements (`[-1, -1, 2]`):** Handled correctly due to initial sorting.
 
 ---
-
 ## Mistakes
 
-- **Forgetting to sort:** Without sorting, duplicates are not adjacent, and the `nums[i] == nums[i-1]` check fails.
-- **Using `i > 0` instead of `i > ind`:** `i > 0` globally prevents picking duplicates at any level. `i > ind` only prevents picking duplicates at the *current* level of decision-making while still allowing the first duplicate to be chosen.
+- **Incorrect check `i > 0` instead of `i > ind`:** Using `i > 0` skips valid duplicates at nested levels (e.g. preventing `[1, 2, 2]` from including the second `2` when the first `2` is already in the subset). `i > ind` ensures we only skip duplicates among sibling branches at the same depth.
+- **Forgetting to sort `nums`:** The duplicate-skipping check relies on identical elements being adjacent.
+- **Not copying the path list:** Appending `path` directly (e.g., `res.append(path)`) stores references, causing empty lists in the final result.
 
 ---
-
 ## Complexity
 
-Time: O(2^N * N) → There are 2^N subsets, and copying each subset to the result takes O(N) time.
-Space: O(N) → Auxiliary stack space for recursion has a maximum depth of N, and the path list takes O(N) space.
+Time: O(N * 2^N) → There are 2^N possible subsets. We copy each subset in O(N) time. Sorting takes O(N log N).
+Space: O(N * 2^N) → To store the output list of subsets, plus O(N) recursion stack depth.
 
 ---
-
 ## Similar Problems
 
 - [Subsets](https://leetcode.com/problems/subsets/) - Medium
@@ -135,11 +127,13 @@ Space: O(N) → Auxiliary stack space for recursion has a maximum depth of N, an
 - [Permutations II](https://leetcode.com/problems/permutations-ii/) - Medium
 
 ---
-
 ## Tags and Properties
 
-- #dsa #important #revisit #backtracking #recursion #sorting [[Backtracking]] [[Recursion]] [[Sorting]]
-- **Problem Link:** [LeetCode - Subsets II](https://leetcode.com/problems/subsets-ii/)
+- #dsa #important #revisit
+- #backtracking [[Backtracking]]
+- #sorting [[Sorting]]
+- **Revision Date:** 2026-07-17
+- **Problem Link:** [Subsets II - LeetCode](https://leetcode.com/problems/subsets-ii/)
 
 ---
 ### 🔄 Revision Checklist
