@@ -7,7 +7,7 @@ revisions:
   - 2026-05-11
 ---
 
-# Count Occurance In Sorted Array
+# Count Occurrence In Sorted Array
 
 ---
 

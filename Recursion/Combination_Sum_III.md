@@ -7,7 +7,7 @@ revisions:
   - 2026-08-16
 ---
 
-# Combination Sum Iii
+# Combination Sum III
 
 ---
 

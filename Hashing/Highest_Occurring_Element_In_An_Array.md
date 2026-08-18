@@ -7,7 +7,7 @@ revisions:
   - 2026-05-10
 ---
 
-# Highest Occuring Element In An Array
+# Highest Occurring Element In An Array
 
 ---
 

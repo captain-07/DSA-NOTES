@@ -7,7 +7,7 @@ revisions:
   - 2026-05-02
 ---
 
-# Gcd Of Two Numbers
+# GCD Of Two Numbers
 
 ---
 

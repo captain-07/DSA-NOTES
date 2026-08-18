@@ -7,7 +7,7 @@ revisions:
   - 2026-05-10
 ---
 
-# Floor And Celling In Sorted Array
+# Floor And Ceiling In Sorted Array
 
 ---
 

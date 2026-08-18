@@ -7,7 +7,7 @@ revisions:
   - 2026-07-06
 ---
 
-# Pow(X,N)
+# Pow(X, N)
 
 ---
 

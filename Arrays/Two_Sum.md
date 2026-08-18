@@ -7,7 +7,7 @@ revisions:
   - 2026-05-25
 ---
 
-# 2 Sum
+# Two Sum
 
 ---
 
@@ -130,7 +130,7 @@ Space: $O(N)$ → Worst case stores all elements in the hash map.
 
 ## Similar Problems
 
-- [2 Sum II - Input Array Is Sorted](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/) - Medium
+- [Two Sum II - Input Array Is Sorted](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/) - Medium
 - [3 Sum](https://leetcode.com/problems/3sum/) - Medium
 - [4 Sum](https://leetcode.com/problems/4sum/) - Medium
 - [Subarray Sum Equals K](https://leetcode.com/problems/subarray-sum-equals-k/) - Medium
@@ -140,7 +140,7 @@ Space: $O(N)$ → Worst case stores all elements in the hash map.
 ## Tags and Properties
 - #dsa #important #revisit #hashmap #blind75 [[Hash Map]] [[Arrays]]
 - **Revision Date:** 2026-04-25
-- **Problem Link:** [LeetCode - 2 Sum](https://leetcode.com/problems/two-sum/)
+- **Problem Link:** [LeetCode - Two Sum](https://leetcode.com/problems/two-sum/)
 
 ---
 ### 🔄 Revision Checklist

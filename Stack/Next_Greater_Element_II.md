@@ -7,7 +7,7 @@ revisions:
   - 2026-09-01
 ---
 
-# Next Greater Element - 2
+# Next Greater Element II
 
 ---
 

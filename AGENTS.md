@@ -7,3 +7,4 @@ When I ask you to "compile DSA notes" or "build NotebookLM file":
 4. Mention total number of files merged at above.
 5. Combine them by the order they have been created. 
 6. Notify me when completed with the total file count merged.
+7. Also organize the notes like fixing spelling, titles casing, folder, category, tags correction etc.

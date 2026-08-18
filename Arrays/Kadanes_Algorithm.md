@@ -7,7 +7,7 @@ revisions:
   - 2026-05-25
 ---
 
-# Kadane'S Algorithm
+# Kadane's Algorithm
 
 ---
 

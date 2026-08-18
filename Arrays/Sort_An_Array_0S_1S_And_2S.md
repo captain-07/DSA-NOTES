@@ -7,7 +7,7 @@ revisions:
   - 2026-05-25
 ---
 
-# Sort An Array 0'S 1'S And 2'S
+# Sort An Array Of 0s 1s And 2s
 
 ---
 

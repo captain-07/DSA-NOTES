@@ -7,7 +7,7 @@ revisions:
   - 2026-05-10
 ---
 
-# Koko Eating Banana
+# Koko Eating Bananas
 
 ---
 

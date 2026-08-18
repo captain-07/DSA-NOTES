@@ -7,7 +7,7 @@ revisions:
   - 2026-05-27
 ---
 
-# Remove Outermost Parenthes
+# Remove Outermost Parentheses
 
 ---
 

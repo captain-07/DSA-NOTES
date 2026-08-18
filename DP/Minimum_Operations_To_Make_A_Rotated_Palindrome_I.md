@@ -7,7 +7,7 @@ revisions:
   - 2026-09-14
 ---
 
-# Minimum Operations To Make A Rotated Palindrome I©Leetcode
+# Minimum Operations To Make A Rotated Palindrome I
 
 ---
 

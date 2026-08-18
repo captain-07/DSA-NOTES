@@ -7,7 +7,7 @@ revisions:
   - 2026-08-16
 ---
 
-# Subsets Ii
+# Subsets II
 
 ---
 
