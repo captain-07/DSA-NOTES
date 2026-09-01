@@ -1,10 +1,10 @@
 ---
-created: 2026-08-31
+created: 2026-09-01
 revisions:
-  - 2026-09-02
-  - 2026-09-07
-  - 2026-09-15
-  - 2026-09-30
+  - 2026-09-03
+  - 2026-09-08
+  - 2026-09-16
+  - 2026-10-01
 ---
 
 Error: invalid model selection (--model "auto" --effort ""): model auto is not recognized as a known model or custom model in settings
@@ -23,7 +23,7 @@ Available models:
 
 ---
 ### 🔄 Revision Checklist
-- [ ] Day 2 Revision (2026-09-02)
-- [ ] Day 7 Revision (2026-09-07)
-- [ ] Day 15 Revision (2026-09-15)
-- [ ] Day 30 Revision (2026-09-30)
+- [ ] Day 2 Revision (2026-09-03)
+- [ ] Day 7 Revision (2026-09-08)
+- [ ] Day 15 Revision (2026-09-16)
+- [ ] Day 30 Revision (2026-10-01)
