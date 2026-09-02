@@ -7,7 +7,7 @@ revisions:
   - 2026-09-30
 ---
 
-# Traversal Of Binary Tree
+# Traversal Of Binary Tree Recursive
 
 ---
 
