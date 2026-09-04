@@ -14,18 +14,19 @@ revisions:
 ## Metadata & Placement Tags
 
 - **Folder:** Trees
-- **Target Companies:** #Amazon #Facebook #Google #Microsoft #Bloomberg
+- **Target Companies:** #Amazon #Facebook #Google #Microsoft #Bloomberg #Apple
+
 - **Confidence Checklist:**
   - [ ] Low
   - [ ] Medium
   - [ ] High
 
 - **Concepts:**
-  - #dfs [[Depth-First Search]], #binarytree [[Binary Tree]], #recursion [[Recursion]]
+  - #trees [[Trees]], #dfs [[Depth First Search]], #binarytree [[Binary Tree]], #recursion [[Recursion]]
 
 ## Pattern
 
-Post-Order Traversal (Bottom-Up DFS)
+DFS / Tree Depth Calculation (Bottom-Up Postorder Traversal)
 
 ---
 ## Difficulty
@@ -37,39 +38,38 @@ Easy
 
 ## ⚡ Key Idea (Core Insight)
 
-The diameter of a binary tree is the maximum length path between any two nodes, which equals the maximum value of `(left_depth + right_depth)` across all nodes. We compute maximum depths bottom-up using DFS while maintaining a global maximum diameter.
+The diameter at any node is the sum of the maximum depths of its left and right subtrees (`left_height + right_height`). We compute the height of every node recursively using postorder traversal while updating a global maximum diameter.
 
 ---
 
 ## ⚡ Quick Recall (VERY IMPORTANT)
 
-For every node, path length through it = `left_height + right_height`. Return `1 + max(left_height, right_height)` to parent while updating maximum diameter.
+Diameter at node = `height(left) + height(right)`. Return `1 + max(height(left), height(right))` to parent.
 
 ---
 
 ## Approach
 
 ### Brute Force
-- Compute height of left and right subtrees for every node separately using recursive `height()` function.
-- Time: $O(N^2)$, Space: $O(H)$ where $H$ is tree height.
+- Calculate the height of left and right subtrees for every node separately using a standalone height function.
+- Time: O(N²) | Space: O(H) where H is tree height.
 
 ### Optimal
-- Calculate subtree heights in a single bottom-up post-order DFS traversal.
-- Update the global maximum diameter `(left_height + right_height)` at each node during recursion.
-- Time: $O(N)$, Space: $O(H)$.
+- Use a single postorder DFS traversal to calculate heights bottom-up.
+- At each node, compute `left_height` and `right_height`, update global maximum diameter (`left_height + right_height`), and return node's height `1 + max(left_height, right_height)`.
+- Time: O(N) | Space: O(H).
 
 ---
 
 ## Code (Python)
 
 ```python
-from typing import Optional
-
-class TreeNode:
-    def __init__(self, val=0, left=None, right=None):
-        self.val = val
-        self.left = left
-        self.right = right
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
 
 class Solution:
     def diameterOfBinaryTree(self, root: Optional[TreeNode]) -> int:
@@ -81,14 +81,17 @@ class Solution:
         if not node:
             return 0
 
-        # Post-order traversal: process subtrees first
+        # Bottom-up recursion: find height of left and right subtrees
         left_height = self._calculate_height(node.left)
         right_height = self._calculate_height(node.right)
 
-        # Diameter at current node is sum of left and right subtree heights
-        self.max_diameter = max(self.max_diameter, left_height + right_height)
+        # Path passing through current node as root of subtree
+        current_diameter = left_height + right_height
 
-        # Return height of subtree rooted at node
+        # Update global maximum diameter found so far
+        self.max_diameter = max(self.max_diameter, current_diameter)
+
+        # Return height of subtree rooted at current node
         return 1 + max(left_height, right_height)
 ```
 
@@ -96,40 +99,40 @@ class Solution:
 
 ## Dry Run (Smart Example)
 
-Input tree: `1` -> left `2`, right `3`. `2` -> left `4`, right `5`.
+Tree: `[1, 2, 3, 4, 5]`
+Structure: Node 1 has left 2, right 3. Node 2 has left 4, right 5.
 
-| Step | Node | Left Height | Right Height | Diameter at Node | Updated Max Diameter | Return Height |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| 1 | `4` | 0 | 0 | 0 | 0 | 1 |
-| 2 | `5` | 0 | 0 | 0 | 0 | 1 |
-| 3 | `2` | 1 | 1 | 2 | 2 | 2 |
-| 4 | `3` | 0 | 0 | 0 | 2 | 1 |
-| 5 | `1` | 2 | 1 | 3 | 3 | 3 |
+| Step | Node | Variables | Explanation |
+| :--- | :--- | :--- | :--- |
+| 1 | `4` & `5` | `lh=0, rh=0` | Leaf nodes return height `1`. `max_diameter = max(0, 0+0) = 0`. |
+| 2 | `2` | `lh=1, rh=1` | Subtrees 4 & 5 return 1. `max_diameter = max(0, 1+1) = 2`. Returns height `2`. |
+| 3 | `3` | `lh=0, rh=0` | Leaf node returns height `1`. `max_diameter = max(2, 0+0) = 2`. |
+| 4 | `1` | `lh=2, rh=1` | Subtree 2 returns 2, Subtree 3 returns 1. `max_diameter = max(2, 2+1) = 3`. |
 
 ---
 
 ## Edge Cases
 
-- **Single Node:** Root has no children; diameter is `0`.
-- **Skewed Tree (Line graph):** Path goes from root to bottom leaf; height equals recursion depth $O(N)$.
-- **Balanced Full Binary Tree:** Max path passes through root node.
-- **Diameter Not Passing Through Root:** Longest path exists entirely within a subtree.
+- **Single Node Tree:** Returns `0` diameter as there are no edges.
+- **Skewed Tree (Line graph):** Correctly traverses down single path, height equals diameter.
+- **Empty Tree (`root = None`):** Returns `0`.
+- **Diameter path does NOT pass through the root:** Handled automatically because `max_diameter` is updated at every internal node.
 
 ---
 
 ## Mistakes
 
 - User mistake: No specific note provided.
-- Forgetting that diameter is measured by number of **edges**, not number of nodes.
-- Re-calculating subtree heights redundantly inside helper calls ($O(N^2)$ mistake).
+- Forgetting that diameter is measured in **edges** (number of nodes - 1 along the longest path).
 - Assuming the longest path must pass through the root node.
+- Re-calculating height at each node creating an unnecessary O(N²) time complexity.
 
 ---
 
 ## Complexity
 
-Time: $O(N)$ → Visits every node exactly once during DFS traversal.
-Space: $O(H)$ → Call stack depth proportional to tree height ($O(\log N)$ for balanced, $O(N)$ for skewed).
+Time: O(N) → Visits each node exactly once.
+Space: O(H) → Recursion call stack uses O(H) memory, where H is tree height (O(N) worst case, O(log N) balanced).
 
 ---
 
@@ -137,16 +140,15 @@ Space: $O(H)$ → Call stack depth proportional to tree height ($O(\log N)$ for 
 
 - [Balanced Binary Tree](https://leetcode.com/problems/balanced-binary-tree/) - Easy
 - [Binary Tree Maximum Path Sum](https://leetcode.com/problems/binary-tree-maximum-path-sum/) - Hard
-- [Diameter of N-Ary Tree](https://leetcode.com/problems/diameter-of-n-ary-tree/) - Medium
 - [Longest Path With Different Adjacent Characters](https://leetcode.com/problems/longest-path-with-different-adjacent-characters/) - Hard
 
 ---
 
 ## Tags and Properties
 
-- #dsa #important #revisit #dfs #binarytree
-- Concepts: [[Binary Tree]], [[Depth-First Search]], [[Recursion]]
-- Revision Date: 2026-09-04
+- #dsa #important #revisit
+- #trees [[Trees]], #dfs [[Depth First Search]]
+- Last Revised: 2026-09-04
 - **Problem Link:** [Diameter of Binary Tree - LeetCode](https://leetcode.com/problems/diameter-of-binary-tree/)
 
 ---
