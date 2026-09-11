@@ -14,51 +14,52 @@ revisions:
 ## Metadata & Placement Tags
 
 - **Folder:** Trees
-- **Target Companies:** #Amazon #Microsoft #Google #Adobe
+- **Target Companies:** #Amazon #Google #Microsoft #Facebook #LeetCode
 - **Confidence Checklist:**
   - [ ] Low
   - [ ] Medium
-  - [x] High
+  - [ ] High
 
 - **Concepts:**
-  - #binarysearchtree [[Binary Search Tree]], #trees [[Trees]], #iteration [[Iteration]]
+  - #bst [[Binary Search Tree]], #trees [[Trees]], #binarysearch [[Binary Search]], #iteration [[Iteration]]
 
----
 ## Pattern
 
-Binary Search Tree Traversal / Binary Search Logic
+Binary Search Tree Invariant Traversal / Binary Search
 
 ---
 ## Difficulty
 
-Easy
-#easy
+Easy #easy
 
 ---
 
 ## ⚡ Key Idea (Core Insight)
 
-Leverage the BST property: for any node, all left subtree values are smaller and all right subtree values are larger. Traverse left if `target < node.val`, right if `target > node.val`, and return the node if `target == node.val`.
+Leverage the BST property: for any node, all left subtree values are strictly smaller and all right subtree values are strictly larger. Compare target `val` with `root.val` to eliminate half the tree at each step.
 
 ---
 
 ## ⚡ Quick Recall (VERY IMPORTANT)
 
-Iterate using standard BST binary search logic (`curr = curr.left` or `curr = curr.right`) until `curr` is null or `curr.val == val`.
+Compare target with `curr.val`: go left if `val < curr.val`, go right if `val > curr.val`. Iterative is preferred over recursive to achieve $O(1)$ auxiliary space.
 
 ---
 
 ## Approach
 
 ### Brute Force
-- Traverse every node in the tree using DFS/BFS ignoring BST properties.
-- Time: $O(N)$, Space: $O(N)$
+- Perform a full Tree Traversal (DFS/BFS) ignoring BST properties.
+- Time Complexity: $O(N)$, Space Complexity: $O(N)$ due to stack/queue call overhead.
 
-### Optimal (Iterative)
-- Start at the root node.
-- Use a `while` loop while `root` is not `None` and `root.val != val`.
-- Move `root` to `root.left` if `val < root.val`, else move to `root.right`.
-- Return `root` (either the matching node or `None`).
+### Optimal 1: Recursive
+- Standard recursive BST traversal going left or right depending on node value.
+- Time Complexity: $O(H)$, Space Complexity: $O(H)$ recursion call stack.
+
+### Optimal 2: Iterative (Recommended)
+- Traverse using a `while root` loop updating `root = root.left` or `root = root.right`.
+- Eliminates function call overhead and saves call stack memory.
+- Time Complexity: $O(H)$, Space Complexity: $O(1)$.
 
 ---
 
@@ -73,54 +74,56 @@ Iterate using standard BST binary search logic (`curr = curr.left` or `curr = cu
 #         self.right = right
 
 class Solution:
-    def searchBST(self, root: TreeNode, val: int) -> TreeNode:
-        # Traverse the BST iteratively using BST property
-        current_node = root
+    def searchBST(self, root: Optional[TreeNode], val: int) -> Optional[TreeNode]:
+        curr = root
 
-        while current_node is not None and current_node.val != val:
-            if val < current_node.val:
-                current_node = current_node.left
+        # Traverse the BST iteratively until node is found or reach null
+        while curr is not None:
+            if curr.val == val:
+                return curr  # Found target node
+            elif val < curr.val:
+                curr = curr.left  # Target is smaller, search left subtree
             else:
-                current_node = current_node.right
+                curr = curr.right  # Target is larger, search right subtree
 
-        return current_node
+        return None  # Value does not exist in BST
 ```
 
 ---
 
 ## Dry Run (Smart Example)
 
-Input: `root = [4,2,7,1,3]`, `val = 2`
+Input BST: `root = [4, 2, 7, 1, 3]`, `val = 2`
 
 | Step | Variables | Explanation |
 | :--- | :--- | :--- |
-| 1 | `current_node = Node(4)` | `4 != 2` and `2 < 4`, so move to `left` |
-| 2 | `current_node = Node(2)` | `2 == 2`, while loop condition `current_node.val != val` fails |
-| 3 | `current_node = Node(2)` | Loop terminates. Return `current_node` |
+| 1 | `curr = Node(4)` | `2 < 4`, move left to `curr.left` |
+| 2 | `curr = Node(2)` | `2 == 2`, target matched |
+| 3 | Return `Node(2)` | Search terminates successfully, return subtree rooted at 2 |
 
 ---
 
 ## Edge Cases
 
-- **Empty Tree (`root = None`):** Returns `None` immediately without error.
-- **Value Not Present:** Returns `None` after reaching a leaf's child (`None`).
-- **Target at Root:** Loop condition fails immediately, returns `root`.
-- **Target is a Leaf Node:** Correctly traverses down to leaf and returns it.
+- **Empty Tree (`root = None`):** Loop condition fails immediately, returns `None`.
+- **Target Not Present:** Loop runs until `curr` becomes `None`, returns `None`.
+- **Single Node Tree:** Returns node if value matches, else returns `None`.
+- **Skewed BST (Line Graph):** Worst-case depth traversal works correctly.
 
 ---
 
 ## Mistakes
 
-- Using a recursive approach: iterative approach is better because it avoids call stack overhead ($O(1)$ auxiliary space vs $O(H)$).
-- Treating it like a general binary tree and exploring both left and right subtrees.
-- Not handling the case where `val` is not present in the BST (causes `AttributeError` if checking `.val` on `None`).
+- Using recursive approach unnecessarily, leading to $O(H)$ extra stack space.
+- Iterative approach is better because it avoids recursion call stack overhead ($O(1)$ space).
+- Forgetting that BST nodes strictly follow `left < root < right`.
 
 ---
 
 ## Complexity
 
-Time: $O(H)$ where $H$ is the height of the BST ($O(\log N)$ average, $O(N)$ worst-case skew tree) — eliminates subtrees at each step.
-Space: $O(1)$ — iterative search uses no extra call stack memory.
+Time: $O(H)$ where $H$ is tree height ($O(\log N)$ average/balanced, $O(N)$ worst-case skewed).
+Space: $O(1)$ iterative uses constant extra memory.
 
 ---
 
@@ -129,14 +132,15 @@ Space: $O(1)$ — iterative search uses no extra call stack memory.
 - [Insert into a Binary Search Tree](https://leetcode.com/problems/insert-into-a-binary-search-tree/) - Medium
 - [Delete Node in a BST](https://leetcode.com/problems/delete-node-in-a-bst/) - Medium
 - [Validate Binary Search Tree](https://leetcode.com/problems/validate-binary-search-tree/) - Medium
+- [Kth Smallest Element in a BST](https://leetcode.com/problems/kth-smallest-element-in-a-bst/) - Medium
 
 ---
 
 ## Tags and Properties
 
 - #dsa #important #revisit
-- #bst #binarytree #trees
-- [[Binary Search Tree]] [[Tree Traversal]]
+- #binarytree #bst #iteration #tree-search
+- [[Binary Search Tree]], [[Trees]], [[Binary Search]]
 - **Revision Date:** 2026-09-11
 - **Problem Link:** [Search in a Binary Search Tree - LeetCode](https://leetcode.com/problems/search-in-a-binary-search-tree/)
 
