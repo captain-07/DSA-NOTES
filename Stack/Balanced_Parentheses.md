@@ -7,7 +7,7 @@ revisions:
   - 2026-08-28
 ---
 
-# Balanced Parenthesis
+# Balanced Parentheses
 
 ---
 

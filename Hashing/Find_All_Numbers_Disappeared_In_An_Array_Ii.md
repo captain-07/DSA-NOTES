@@ -7,7 +7,7 @@ revisions:
   - 2026-09-22
 ---
 
-# Find All Numbers Disappeared In An Array Ii
+# Find All Numbers Disappeared In An Array II
 
 ---
 

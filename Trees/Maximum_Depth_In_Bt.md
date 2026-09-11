@@ -7,7 +7,7 @@ revisions:
   - 2026-10-04
 ---
 
-# Maximum Depth In Bt
+# Maximum Depth of Binary Tree
 
 ---
 
