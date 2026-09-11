@@ -14,52 +14,50 @@ revisions:
 ## Metadata & Placement Tags
 
 - **Folder:** Trees
-- **Target Companies:** #Amazon #Microsoft #Google #Adobe #Meta
+- **Target Companies:** #Amazon #Microsoft #Google #Meta #Adobe
 - **Confidence Checklist:**
   - [ ] Low
   - [ ] Medium
-  - [ ] High
+  - [x] High
 
 - **Concepts:**
-  - #bst [[Binary Search Tree]], #trees [[Tree Search]], #iteration [[Iterative BST Traversal]]
+  - #bst [[Binary Search Tree]], #trees [[Tree Search]], #iteration [[Iterative Search]]
 
 ## Pattern
 
-Binary Search Tree Search (Divide & Conquer / Elimination)
+Binary Search Tree Traversal / Binary Search Logic
 
 ---
 ## Difficulty
 
-Easy
-Tag: #easy
+Easy / #easy
 
 ---
 
 ## ⚡ Key Idea (Core Insight)
 
-- Leverage the **BST property**: values in left subtree < `val`, values in right subtree > `val`.
-- At each node, compare `val` with node's value to eliminate half of the remaining search space.
+- Leverage BST property: values in left subtree are smaller, values in right subtree are larger.
+- Compare target with current node value: go left if target is smaller, go right if target is larger.
 
 ---
 
 ## ⚡ Quick Recall (VERY IMPORTANT)
 
-- Traverse down: go `left` if `val < root.val`, go `right` if `val > root.val`, stop when `root` matches or is `None`.
+- Treat BST search like binary search on an array: navigate left or right without exploring both subtrees.
 
 ---
 
 ## Approach
 
 ### Brute Force
-- Perform a standard Tree Traversal (DFS/BFS) without using BST properties, searching every node.
-- Time: $O(N)$ | Space: $O(N)$ stack space.
+- Traverse entire tree (e.g., DFS/BFS ignoring BST property) until target is found.
+- Time: O(N), Space: O(N) stack/queue space.
 
 ### Optimal
-1. Start at the `root`.
-2. While `curr` node is not `None` and `curr.val != val`:
-   - If `val < curr.val`, move to `curr.left`.
-   - Else, move to `curr.right`.
-3. Return `curr` (either the matching node or `None`).
+1. Start at `root`.
+2. While `node` is not `None` and `node.val != val`:
+   - Move to `node.left` if `val < node.val`, else move to `node.right`.
+3. Return `node`.
 
 ---
 
@@ -75,53 +73,51 @@ Tag: #easy
 
 class Solution:
     def searchBST(self, root: TreeNode, val: int) -> TreeNode:
-        curr = root
+        current_node = root
 
-        # Traverse the tree using BST property iteratively
-        while curr is not None and curr.val != val:
-            if val < curr.val:
-                curr = curr.left   # Target is smaller, go to left subtree
+        # Traverse the BST iteratively using BST property
+        while current_node is not None and current_node.val != val:
+            if val < current_node.val:
+                current_node = current_node.left  # Search left subtree
             else:
-                curr = curr.right  # Target is larger, go to right subtree
+                current_node = current_node.right  # Search right subtree
 
-        return curr
+        return current_node
 ```
 
 ---
 
 ## Dry Run (Smart Example)
 
-Input: `root = [4, 2, 7, 1, 3]`, `val = 2`
+Input: `root = [4,2,7,1,3]`, `val = 2`
 
 | Step | Variables | Explanation |
-| :--- | :--- | :--- |
-| 1 | `curr = Node(4)` | `4 != 2`. Target `2 < 4`, move to `curr.left`. |
-| 2 | `curr = Node(2)` | `2 == 2`. Loop terminates. |
-| 3 | Return `curr` | Returns reference to node with value `2`. |
+|---|---|---|
+| 1 | `current_node.val = 4` | Target `2 < 4`, move left to `node 2`. |
+| 2 | `current_node.val = 2` | Target `2 == 2`, loop condition breaks. |
+| 3 | `current_node.val = 2` | Returns subtree rooted at node `2`. |
 
 ---
 
 ## Edge Cases
 
-- `root` is `None`: Returns `None` immediately.
-- `val` not present in BST: Iterates until `curr` becomes `None` and returns `None`.
-- `val` is at `root`: Loop condition fails immediately, returns `root`.
-- Single-node tree (match/no-match): Correctly handles both in 1 step.
+- `root` is `None`: Immediately returns `None`.
+- Target value not in tree: Traverses until `current_node` becomes `None` and returns `None`.
+- Single node tree: Correctly checks single node and returns result.
 
 ---
 
 ## Mistakes
 
-- Using recursion instead of iteration; **iterative approach is better** because it saves $O(H)$ memory by operating in $O(1)$ auxiliary space.
-- Not checking if `root` is `None` before accessing `root.val`.
-- Treating the tree as a binary tree instead of taking advantage of BST properties.
+- Using recursive approach unnecessarily: Iterative approach is better as it uses O(1) auxiliary space instead of O(H) recursion stack space.
+- Searching both left and right subtrees like a normal binary tree instead of taking advantage of BST ordering.
 
 ---
 
 ## Complexity
 
-Time: $O(H)$ → where $H$ is tree height ($O(\log N)$ average, $O(N)$ worst-case skew tree).
-Space: $O(1)$ → iterative traversal requires no call stack or extra memory.
+Time: O(H) where H is tree height → O(log N) for balanced BST, O(N) for skewed tree.
+Space: O(1) → Iterative approach uses constant auxiliary space.
 
 ---
 
@@ -129,16 +125,17 @@ Space: $O(1)$ → iterative traversal requires no call stack or extra memory.
 
 - [Insert into a Binary Search Tree](https://leetcode.com/problems/insert-into-a-binary-search-tree/) - Medium
 - [Delete Node in a BST](https://leetcode.com/problems/delete-node-in-a-bst/) - Medium
-- [Lowest Common Ancestor of a Binary Search Tree](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/) - Medium
+- [Search in Rotated Sorted Array](https://leetcode.com/problems/search-in-rotated-sorted-array/) - Medium
 
 ---
 
 ## Tags and Properties
 
-- #dsa #important #revisit #bst #trees
-- [[Binary Search Tree]] [[Iterative Traversal]]
-- **Revision Date:** 2026-09-11
-- **Problem Link:** [Search in a Binary Search Tree - LeetCode](https://leetcode.com/problems/search-in-a-binary-search-tree/)
+  - #dsa #important #revisit
+  - #bst #trees #binarysearch
+  - obsidian links: [[Binary Search Tree]], [[Tree Traversal]]
+  - Revision Date: 2026-09-11
+  - **Problem Link:** [Search in a Binary Search Tree - LeetCode](https://leetcode.com/problems/search-in-a-binary-search-tree/)
 
 ---
 ### 🔄 Revision Checklist
