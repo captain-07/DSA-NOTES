@@ -147,6 +147,6 @@ Space: O(1) → Only constant extra space for pointers.
 ---
 ### 🔄 Revision Checklist
 - [x] Day 2 Revision (2026-04-12)
-- [ ] Day 7 Revision (2026-04-17)
+- [x] Day 7 Revision (2026-04-17)
 - [ ] Day 15 Revision (2026-04-25)
 - [ ] Day 30 Revision (2026-05-10)

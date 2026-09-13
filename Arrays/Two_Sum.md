@@ -144,7 +144,7 @@ Space: $O(N)$ → Worst case stores all elements in the hash map.
 
 ---
 ### 🔄 Revision Checklist
-- [ ] Day 2 Revision (2026-04-27)
+- [x] Day 2 Revision (2026-04-27)
 - [ ] Day 7 Revision (2026-05-02)
 - [ ] Day 15 Revision (2026-05-10)
 - [ ] Day 30 Revision (2026-05-25)

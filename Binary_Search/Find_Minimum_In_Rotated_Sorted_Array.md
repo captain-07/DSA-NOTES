@@ -152,6 +152,6 @@ Space: O(1) → Only a few pointers used regardless of input size.
 ---
 ### 🔄 Revision Checklist
 - [x] Day 2 Revision (2026-04-13)
-- [ ] Day 7 Revision (2026-04-18)
+- [x] Day 7 Revision (2026-04-18)
 - [ ] Day 15 Revision (2026-04-26)
 - [ ] Day 30 Revision (2026-05-11)
