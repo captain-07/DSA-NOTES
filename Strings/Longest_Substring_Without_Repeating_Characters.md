@@ -149,7 +149,7 @@ Space: O(min(N, M)) → Storage for HashMap, bounded by charset size M (e.g., 12
 
 ---
 ### 🔄 Revision Checklist
-- [ ] Day 2 Revision (2026-09-15)
+- [x] Day 2 Revision (2026-09-15)
 - [ ] Day 7 Revision (2026-09-20)
 - [ ] Day 15 Revision (2026-09-28)
 - [ ] Day 30 Revision (2026-10-13)
