@@ -13,6 +13,7 @@ revisions:
 
 ## Metadata & Placement Tags
 
+- **Folder:** Greedy
 - **Target Companies:**
   - #Amazon #Microsoft #Google #Facebook #Uber #Salesforce
 

@@ -13,6 +13,7 @@ revisions:
 
 ## Metadata & Placement Tags
 
+- **Folder:** Sliding Window
 - **Target Companies:**
   - #Amazon #Google #Microsoft #Meta #Apple
 

@@ -13,7 +13,7 @@ revisions:
 
 ## Metadata & Placement Tags
 
-- **Folder:** Strings
+- **Folder:** Sliding Window
 - **Target Companies:** #Amazon #Google #Microsoft #Facebook #Apple
 - **Confidence Checklist:**
   - [ ] Low

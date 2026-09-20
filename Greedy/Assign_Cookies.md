@@ -13,7 +13,7 @@ revisions:
 
 ## Metadata & Placement Tags
 
-- **Folder:** Two Pointers
+- **Folder:** Greedy
 - **Target Companies:**
   - #Amazon #Google #Microsoft #Apple #Bloomberg
 
