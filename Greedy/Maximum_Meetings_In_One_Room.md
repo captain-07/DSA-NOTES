@@ -18,7 +18,7 @@ revisions:
 - **Confidence Checklist:**
   - [ ] Low
   - [ ] Medium
-  - [x] High
+  - [ ] High
 - **Concepts:** #greedy [[Greedy]], #sorting [[Sorting]], #customcomparator [[Custom Comparator]]
 
 ## Pattern
