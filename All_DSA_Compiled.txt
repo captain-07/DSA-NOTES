@@ -1,4 +1,4 @@
-Total files merged: 181
+Total files merged: 193
 ================================================================================
 
 ================================================================================
@@ -2066,7 +2066,7 @@ class Solution:
 
 
 ================================================================================
-# File: Arrays/Maximum_Consecutive_Ones.md
+# File: Sliding Window/Maximum_Consecutive_Ones.md
 ================================================================================
 
 ---
@@ -2084,6 +2084,7 @@ revisions:
 
 ## Metadata & Placement Tags
 
+- **Folder:** Sliding Window
 - **Target Companies:**
   - #Amazon #Google #Microsoft #Meta #Apple
 
@@ -2222,7 +2223,7 @@ Space: O(1) → We only use two integer variables (`max_count`, `current_count`)
 
 
 ================================================================================
-# File: Arrays/Stock_Buy_And_Sell.md
+# File: Greedy/Stock_Buy_And_Sell.md
 ================================================================================
 
 ---
@@ -2240,6 +2241,7 @@ revisions:
 
 ## Metadata & Placement Tags
 
+- **Folder:** Greedy
 - **Target Companies:**
   - #Amazon #Microsoft #Google #Adobe #GoldmanSachs #Facebook
 
@@ -6560,7 +6562,7 @@ Space: O(min(M, N)) → Size of the map is bound by size of the string N and the
 
 
 ================================================================================
-# File: Arrays/Fruit_Into_Baskets.md
+# File: Sliding Window/Fruit_Into_Baskets.md
 ================================================================================
 
 ---
@@ -6578,6 +6580,7 @@ revisions:
 
 ## Metadata & Placement Tags
 
+- **Folder:** Sliding Window
 - **Target Companies:**
   - #Google #Amazon #Microsoft #Uber #Leads
 
@@ -6901,6 +6904,7 @@ Space: O(1) → Only a few integer variables are used.
 - [ ] Day 7 Revision (2026-08-18)
 - [ ] Day 15 Revision (2026-08-26)
 - [ ] Day 30 Revision (2026-09-10)
+
 
 ================================================================================
 # File: Heaps/Kth_Largest_Element_In_An_Array.md
@@ -7716,7 +7720,7 @@ Space: $O(K)$ → The heap stores at most $K$ nodes (one from each list) at any 
 
 
 ================================================================================
-# File: Math/Task_Scheduler.md
+# File: Greedy/Task_Scheduler.md
 ================================================================================
 
 ---
@@ -7734,6 +7738,7 @@ revisions:
 
 ## Metadata & Placement Tags
 
+- **Folder:** Greedy
 - **Target Companies:** #Amazon #Google #Microsoft #Facebook #Uber
 - **Confidence Checklist:**
   - [ ] Low
@@ -10489,7 +10494,7 @@ Space: O(N) → Auxiliary memory for `LMin` and `RMax` arrays of size N.
 
 
 ================================================================================
-# File: Strings/Longest_Substring_Without_Repeating_Characters.md
+# File: Sliding Window/Longest_Substring_Without_Repeating_Characters.md
 ================================================================================
 
 ---
@@ -10507,7 +10512,7 @@ revisions:
 
 ## Metadata & Placement Tags
 
-- **Folder:** Strings
+- **Folder:** Sliding Window
 - **Target Companies:** #Amazon #Google #Microsoft #Facebook #Apple
 - **Confidence Checklist:**
   - [ ] Low
@@ -15843,6 +15848,7 @@ revisions:
 
 ## Metadata & Placement Tags
 
+- **Folder:** Hashing
 - **Target Companies:**
   - #Amazon #Google #Microsoft #Facebook #GoldmanSachs
 
@@ -16832,7 +16838,7 @@ class Solution:
 
 
 ================================================================================
-# File: Arrays/Merge_Overlapping_Subintervals.md
+# File: Greedy/Merge_Overlapping_Subintervals.md
 ================================================================================
 
 ---
@@ -16850,6 +16856,7 @@ revisions:
 
 ## Metadata & Placement Tags
 
+- **Folder:** Greedy
 - **Target Companies:**
   - #Amazon #Microsoft #Google #Facebook #Uber #Salesforce
 
@@ -18613,7 +18620,7 @@ Space: $O(1)$ → Constant space for the 26-character frequency array (or $O(K)$
 
 
 ================================================================================
-# File: Strings/Count_Number_Of_Substrings.md
+# File: Sliding Window/Count_Number_Of_Substrings.md
 ================================================================================
 
 ---
@@ -18631,6 +18638,7 @@ revisions:
 
 ## Metadata & Placement Tags
 
+- **Folder:** Sliding Window
 - **Target Companies:**
   - #Amazon #Microsoft #Google #Samsung #Walmart
 
@@ -18807,6 +18815,7 @@ revisions:
 
 ## Metadata & Placement Tags
 
+- **Folder:** Strings
 - **Target Companies:**
   - #Amazon #Microsoft #Adobe #Google #Facebook
 
@@ -21763,6 +21772,7 @@ revisions:
 
 ## Metadata & Placement Tags
 
+- **Folder:** Strings
 - **Target Companies:**
   - #Amazon #Microsoft #Google #GoldmanSachs #Adobe
 
@@ -24541,7 +24551,7 @@ Space: O(N) → Worst-case stack stores all N asteroids.
 
 
 ================================================================================
-# File: Stack/Remove_K_Digits.md
+# File: Greedy/Remove_K_Digits.md
 ================================================================================
 
 ---
@@ -24559,6 +24569,7 @@ revisions:
 
 ## Metadata & Placement Tags
 
+- **Folder:** Greedy
 - **Target Companies:**
   - #Google
   - #Amazon
@@ -31163,4 +31174,1958 @@ Space: $O(N)$ → HashMap stores at most $N$ prefix sums.
 - [ ] Day 7 Revision (2026-05-02)
 - [ ] Day 15 Revision (2026-05-10)
 - [ ] Day 30 Revision (2026-05-25)
+
+
+================================================================================
+# File: Greedy/Assign_Cookies.md
+================================================================================
+
+---
+created: 2026-09-19
+revisions:
+  - 2026-09-21
+  - 2026-09-26
+  - 2026-10-04
+  - 2026-10-19
+---
+
+# Assign Cookies
+
+---
+
+## Metadata & Placement Tags
+
+- **Folder:** Greedy
+- **Target Companies:**
+  - #Amazon #Google #Microsoft #Apple #Bloomberg
+
+- **Confidence Checklist:**
+  - [ ] Low
+  - [ ] Medium
+  - [ ] High
+
+- **Concepts:**
+  - #greedy [[Greedy]]
+  - #twopointers [[Two Pointers]]
+  - #sorting [[Sorting]]
+
+## Pattern
+
+Two Pointers + Sorting (Greedy Allocation)
+
+---
+## Difficulty
+
+Easy
+#easy
+
+---
+
+## ⚡ Key Idea (Core Insight)
+
+Sort both children's greed factors `g` and cookie sizes `s` in ascending order. Use a greedy approach to satisfy the child with the smallest greed factor using the smallest possible cookie that meets or exceeds their requirement.
+
+---
+
+## ⚡ Quick Recall (VERY IMPORTANT)
+
+Sort both arrays, advance cookie pointer every step, and advance child pointer only when the cookie satisfies the child (`s[cookie_idx] >= g[child_idx]`).
+
+---
+
+## Approach
+
+### Brute Force
+- Try every permutation of cookie assignments to find the maximum satisfied children.
+- Time Complexity: O(N! * M) where N is number of children and M is number of cookies.
+
+### Better
+- Sort the cookies array and for each child, use binary search to find the smallest valid cookie, removing it once used.
+- Time Complexity: O(M log M + N * M) due to array element removals.
+
+### Optimal
+- Sort both `g` and `s`.
+- Use two pointers: `child_idx` for children and `cookie_idx` for cookies.
+- Iterate through cookies: if `s[cookie_idx] >= g[child_idx]`, move `child_idx` forward.
+- Always move `cookie_idx` forward.
+- Return `child_idx` as the total count of satisfied children.
+
+---
+
+## Code (Python)
+
+```python
+class Solution:
+    def findContentChildren(self, g: list[int], s: list[int]) -> int:
+        # Sort both greed factors and cookie sizes
+        g.sort()
+        s.sort()
+
+        child_idx = 0
+        cookie_idx = 0
+
+        # Traverse both arrays using two pointers
+        while child_idx < len(g) and cookie_idx < len(s):
+            # If current cookie can satisfy current child's greed
+            if s[cookie_idx] >= g[child_idx]:
+                child_idx += 1  # Move to the next child
+            cookie_idx += 1     # Always try the next cookie
+
+        return child_idx
+```
+
+---
+
+## Dry Run (Smart Example)
+
+Input: `g = [1, 2, 3]`, `s = [1, 1]`
+Sorted: `g = [1, 2, 3]`, `s = [1, 1]`
+
+| Step | Variables | Explanation |
+| :--- | :--- | :--- |
+| 1 | `child_idx = 0` (`g[0]=1`), `cookie_idx = 0` (`s[0]=1`) | `s[0] >= g[0]` (1 >= 1) is True. Child 0 satisfied. `child_idx` becomes 1, `cookie_idx` becomes 1. |
+| 2 | `child_idx = 1` (`g[1]=2`), `cookie_idx = 1` (`s[1]=1`) | `s[1] >= g[1]` (1 >= 2) is False. Cookie too small. `child_idx` remains 1, `cookie_idx` becomes 2. |
+| 3 | `child_idx = 1`, `cookie_idx = 2` | `cookie_idx == len(s)`. Loop terminates. Result is `child_idx = 1`. |
+
+---
+
+## Edge Cases
+
+- `len(s) == 0`: No cookies available; loop exits immediately, returns `0`.
+- `len(g) == 0`: No children to satisfy; returns `0`.
+- All cookie sizes smaller than minimum greed: Returns `0`.
+- All cookie sizes larger than maximum greed: Satisfies `min(len(g), len(s))` children.
+
+---
+
+## Mistakes
+
+- User Mistake: No specific note provided.
+- Forgetting to sort both arrays before applying the two-pointer greedy traversal.
+- Wasting larger cookies on children with low greed instead of using the smallest possible matching cookie.
+- Incrementing `child_idx` when a cookie is insufficient (cookie is consumed/skipped, not the child).
+
+---
+
+## Complexity
+
+Time: O(N log N + M log M) → dominated by sorting both arrays of sizes N and M.
+Space: O(1) or O(N + M) → auxiliary space depends on the sorting algorithm implementation.
+
+---
+
+## Similar Problems
+
+- [Array Partition](https://leetcode.com/problems/array-partition/) - Easy
+- [Maximum Units on a Truck](https://leetcode.com/problems/maximum-units-on-a-truck/) - Easy
+- [Boats to Save People](https://leetcode.com/problems/boats-to-save-people/) - Medium
+- [Bag of Tokens](https://leetcode.com/problems/bag-of-tokens/) - Medium
+
+---
+
+## Tags and Properties
+
+- #dsa #important #revisit #greedy #twopointers #sorting
+- [[Greedy]] [[Two Pointers]] [[Sorting]]
+- **Last Revised:** 2026-09-19
+- **Problem Link:** [Assign Cookies - LeetCode](https://leetcode.com/problems/assign-cookies/)
+
+---
+### 🔄 Revision Checklist
+- [ ] Day 2 Revision (2026-09-21)
+- [ ] Day 7 Revision (2026-09-26)
+- [ ] Day 15 Revision (2026-10-04)
+- [ ] Day 30 Revision (2026-10-19)
+
+
+================================================================================
+# File: Greedy/Fractional_Knapsack.md
+================================================================================
+
+---
+created: 2026-09-20
+revisions:
+  - 2026-09-22
+  - 2026-09-27
+  - 2026-10-05
+  - 2026-10-20
+---
+
+# Fractional Knapsack
+
+---
+
+## Metadata & Placement Tags
+
+- **Folder:** Greedy
+- **Target Companies:** #Amazon #Microsoft #Flipkart #Adobe #Paytm
+- **Confidence Checklist:**
+  - [ ] Low
+  - [ ] Medium
+  - [ ] High
+
+- **Concepts:**
+  - #greedy [[Greedy]], #sorting [[Sorting]], #heap [[Heaps]]
+
+## Pattern
+
+Greedy + Sorting (by Value-to-Weight Ratio)
+
+---
+## Difficulty
+
+Medium
+Tag: #medium
+
+---
+
+## ⚡ Key Idea (Core Insight)
+
+- Calculate the value-to-weight ratio (`value / weight`) for each item.
+- Sort items in descending order of this ratio and pick items greedily.
+- If an item cannot fit completely into the remaining capacity, take the fraction of it that fits.
+
+---
+
+## ⚡ Quick Recall (VERY IMPORTANT)
+
+- Sort by ratio `v/w` descending. Take full items until capacity runs out, then take the partial fraction of the next item.
+
+---
+
+## Approach
+
+### Brute Force
+- Try all combinations of subsets and fractions using continuous search/backtracking.
+- Time Complexity: O(2^N) or unbounded continuous search.
+
+### Optimal
+- Compute ratio for all items, sort in descending order.
+- Iterate through sorted items, adding whole items to the knapsack until capacity is exceeded.
+- Fill remaining capacity with a fraction of the current item and terminate.
+
+---
+
+## Code (Python)
+
+```python
+class Item:
+    def __init__(self, value: int, weight: int):
+        self.value = value
+        self.weight = weight
+
+class Solution:
+    def fractional_knapsack(self, capacity: int, values: list[int], weights: list[int]) -> float:
+        # Create list of items
+        items = []
+        for index in range(len(values)):
+            items.append(Item(values[index], weights[index]))
+
+        # Sort items based on value-to-weight ratio in descending order
+        items.sort(key=lambda item: item.value / item.weight, reverse=True)
+
+        total_value = 0.0
+        current_capacity = capacity
+
+        for item in items:
+            # If full item can fit, take it entirely
+            if item.weight <= current_capacity:
+                current_capacity -= item.weight
+                total_value += item.value
+            else:
+                # Take fractional part of the item to fill remaining capacity
+                fraction = current_capacity / item.weight
+                total_value += item.value * fraction
+                current_capacity = 0
+                break  # Knapsack is now full
+
+        return total_value
+```
+
+---
+
+## Dry Run (Smart Example)
+
+Input: `values = [60, 100, 120]`, `weights = [10, 20, 30]`, `capacity = 50`
+Ratios: Item 0 = 6.0, Item 1 = 5.0, Item 2 = 4.0
+
+| Step | Variables | Explanation |
+|---|---|---|
+| 1 | `item=(60,10)`, `capacity=50`, `total_val=0.0` | Weight 10 <= 50. Take full item. `capacity` becomes 40, `total_val` becomes 60.0. |
+| 2 | `item=(100,20)`, `capacity=40`, `total_val=60.0` | Weight 20 <= 40. Take full item. `capacity` becomes 20, `total_val` becomes 160.0. |
+| 3 | `item=(120,30)`, `capacity=20`, `total_val=160.0` | Weight 30 > 20. Take fraction (20/30). `total_val` += 120 * (20/30) = 80. Total = 240.0. Break. |
+
+---
+
+## Edge Cases
+
+- **Capacity is 0:** Loop doesn't add anything; returns `0.0`.
+- **Total items weight <= Capacity:** All items fit completely; returns sum of all values.
+- **Single Item:** Takes min of full weight or fraction of capacity.
+- **Items with identical ratios:** Sorting handles ties consistently without changing result.
+
+---
+
+## Mistakes
+
+- Direct and actionable
+- MUST include user mistake: No specific note provided.
+- Forgetting to sort by `value / weight` ratio instead of pure value or weight alone.
+- Using integer division instead of floating point division for fractional parts.
+
+---
+
+## Complexity
+
+Time: O(N log N) → Driven by the sorting step of N items.
+Space: O(N) → Auxiliary memory to store item objects/ratios for sorting.
+
+---
+
+## Similar Problems
+
+- [0/1 Knapsack Problem](https://practice.geeksforgeeks.org/problems/0-1-knapsack-problem0945/1) - Medium
+- [Maximum Units on a Truck](https://leetcode.com/problems/maximum-units-on-a-truck/) - Easy
+- [Partition Equal Subset Sum](https://leetcode.com/problems/partition-equal-subset-sum/) - Medium
+
+---
+
+## Tags and Properties
+
+- #dsa #important #revisit
+- #greedy #fractional-knapsack #sorting
+- Obsidian links: [[Greedy]], [[Sorting]], [[Fractional Knapsack]]
+- **Revision Date:** 2026-09-20
+- **Problem Link:** [GeeksforGeeks - Fractional Knapsack](https://practice.geeksforgeeks.org/problems/fractional-knapsack-1587115620/1)
+
+---
+### 🔄 Revision Checklist
+- [ ] Day 2 Revision (2026-09-22)
+- [ ] Day 7 Revision (2026-09-27)
+- [ ] Day 15 Revision (2026-10-05)
+- [ ] Day 30 Revision (2026-10-20)
+
+
+================================================================================
+# File: Greedy/Jump_Game_I.md
+================================================================================
+
+---
+created: 2026-09-21
+revisions:
+  - 2026-09-23
+  - 2026-09-28
+  - 2026-10-06
+  - 2026-10-21
+---
+
+# Jump Game - I
+
+---
+
+## Metadata & Placement Tags
+
+- **Folder:** Greedy
+- **Target Companies:** #Amazon #Google #Microsoft #Facebook #Apple
+- **Confidence Checklist:**
+  - [ ] Low
+  - [ ] Medium
+  - [ ] High
+
+- **Concepts:**
+  - #greedy [[Greedy]], #array [[Arrays]], #dynamicprogramming [[Dynamic Programming]]
+
+## Pattern
+
+Greedy Max Reach / Interval Coverage
+
+---
+## Difficulty
+
+Medium
+#medium
+
+---
+
+## ⚡ Key Idea (Core Insight)
+
+Maintain a `max_reachable` index as you iterate through the array. At each index `i`, if `i` exceeds `max_reachable`, you're stuck; otherwise, update `max_reachable = max(max_reachable, i + nums[i])`.
+
+---
+
+## ⚡ Quick Recall (VERY IMPORTANT)
+
+Track the furthest index reachable. If current index `i > max_reachable`, return `False`. If `max_reachable >= len(nums) - 1`, return `True`.
+
+---
+
+## Approach
+
+### Brute Force
+- Recursively check all reachable jump paths starting from index 0 to the end.
+- Time: O(2^N) | Space: O(N)
+
+### Better
+- Dynamic Programming (Top-Down with Memoization / Bottom-Up DP table storing boolean reachability per index).
+- Time: O(N^2) | Space: O(N)
+
+### Optimal
+- **Greedy approach**: Iterate through the array keeping track of the `max_reachable` boundary.
+- If current position `i` is within `max_reachable`, update `max_reachable`.
+- Stop early if `max_reachable` reaches or exceeds the target last index.
+
+---
+
+## Code (Python)
+
+```python
+class Solution:
+    def canJump(self, nums: list[int]) -> bool:
+        max_reachable = 0
+        target_index = len(nums) - 1
+
+        for current_index in range(len(nums)):
+            # If current position cannot be reached, return False
+            if current_index > max_reachable:
+                return False
+
+            # Update the maximum reachable index from current position
+            max_reachable = max(max_reachable, current_index + nums[current_index])
+
+            # Optimization: If target is reached, return early
+            if max_reachable >= target_index:
+                return True
+
+        return True
+```
+
+---
+
+## Dry Run (Smart Example)
+
+Input: `nums = [2, 3, 1, 0, 4]`
+
+| Step | Variables | Explanation |
+|---|---|---|
+| Initial | `max_reachable = 0` | Start at index 0 |
+| i = 0 | `nums[0] = 2`, `max_reachable = 2` | `0 <= 0`, reach updated to `0 + 2 = 2` |
+| i = 1 | `nums[1] = 3`, `max_reachable = 4` | `1 <= 2`, reach updated to `1 + 3 = 4` |
+| i = 2 | `max_reachable = 4 >= target (4)` | Early termination, target is reachable |
+
+---
+
+## Edge Cases
+
+- **Single element (`[0]`):** Immediately return `True` (already at end).
+- **Starting with zero (`[0, 2, 3]`):** `max_reachable` stays 0; returns `False` at index 1.
+- **Zeros causing roadblock (`[3, 2, 1, 0, 4]`):** `max_reachable` caps at index 3; fails to cross index 3.
+- **Large jumps (`[10, 0, 0, 0]`):** Instantly reaches end on first iteration.
+
+---
+
+## Mistakes
+
+- Using O(N^2) DP when a single O(N) pass is sufficient.
+- Forgetting to check if `i > max_reachable` before processing index `i`.
+- User mistake: No specific note provided.
+
+---
+
+## Complexity
+
+Time: O(N) → Single pass through the array.
+Space: O(1) → Uses only a few variables for tracking indices.
+
+---
+
+## Similar Problems
+
+- [Jump Game II](https://leetcode.com/problems/jump-game-ii/) - Medium
+- [Jump Game VII](https://leetcode.com/problems/jump-game-vii/) - Medium
+- [Gas Station](https://leetcode.com/problems/gas-station/) - Medium
+
+---
+
+## Tags and Properties
+
+- #dsa #important #revisit #greedy #arrays
+- Obsidian links: [[Greedy]], [[Arrays]], [[Dynamic Programming]]
+- **Revision Date:** 2026-09-21
+- **Problem Link:** [Jump Game - LeetCode](https://leetcode.com/problems/jump-game/)
+
+---
+### 🔄 Revision Checklist
+- [ ] Day 2 Revision (2026-09-23)
+- [ ] Day 7 Revision (2026-09-28)
+- [ ] Day 15 Revision (2026-10-06)
+- [ ] Day 30 Revision (2026-10-21)
+
+
+================================================================================
+# File: Greedy/Shortest_Job_First.md
+================================================================================
+
+---
+created: 2026-09-21
+revisions:
+  - 2026-09-23
+  - 2026-09-28
+  - 2026-10-06
+  - 2026-10-21
+---
+
+# Shortest Job First
+
+---
+
+## Metadata & Placement Tags
+
+- **Folder:** Greedy
+- **Target Companies:** #Amazon #Microsoft #Flipkart #Google
+- **Confidence Checklist:**
+  - [ ] Low
+  - [ ] Medium
+  - [ ] High
+
+- **Concepts:**
+  - #greedy [[Greedy]], #sorting [[Sorting]], #array [[Array]]
+
+## Pattern
+
+Sorting + Greedy
+
+---
+## Difficulty
+
+Medium #medium
+
+---
+
+## ⚡ Key Idea (Core Insight)
+
+To minimize the total waiting time, always process the process with the shortest burst time first (Shortest Job First scheduling). Sorting execution times in non-decreasing order ensures that shorter jobs reduce the waiting time overhead for all subsequent jobs.
+
+---
+
+## ⚡ Quick Recall (VERY IMPORTANT)
+
+Sort burst times ascending. Maintain `current_wait_time` (accumulated time spent waiting before current process) and add it to `total_wait_time` at each step.
+
+---
+
+## Approach
+
+### Brute Force
+- Try all permutations of process execution order to find the one with minimum total waiting time.
+- Time Complexity: O(N!)
+- Space Complexity: O(N)
+
+### Optimal
+- Sort burst times in non-decreasing order.
+- Iterate through sorted burst times:
+  1. Add `current_wait_time` to `total_wait_time`.
+  2. Increase `current_wait_time` by the current process's burst time.
+- Calculate average waiting time as `total_wait_time // N`.
+- Time Complexity: O(N log N)
+- Space Complexity: O(1) or O(N) depending on sort implementation.
+
+---
+
+## Code (Python)
+
+```python
+class Solution:
+    def solve(self, bt: list[int]) -> int:
+        # Sort burst times to execute shortest jobs first
+        bt.sort()
+
+        total_wait_time = 0
+        current_wait_time = 0
+
+        # Calculate waiting time for each process
+        for burst_time in bt:
+            # Add time waited by the current process before execution
+            total_wait_time += current_wait_time
+            # Increment elapsed time for the next process
+            current_wait_time += burst_time
+
+        # Return average waiting time (integer division)
+        return total_wait_time // len(bt)
+```
+
+---
+
+## Dry Run (Smart Example)
+
+Input: `bt = [4, 3, 7, 1, 2]`
+Sorted Input: `[1, 2, 3, 4, 7]`
+
+| Step | Variables | Explanation |
+| :--- | :--- | :--- |
+| **Init** | `total_wait_time = 0`, `current_wait_time = 0` | Initial state |
+| **1 (bt=1)** | `total_wait_time += 0` → `0`<br>`current_wait_time += 1` → `1` | Process 1 waits `0`. Elapsed time becomes `1`. |
+| **2 (bt=2)** | `total_wait_time += 1` → `1`<br>`current_wait_time += 2` → `3` | Process 2 waits `1`. Elapsed time becomes `3`. |
+| **3 (bt=3)** | `total_wait_time += 3` → `4`<br>`current_wait_time += 3` → `6` | Process 3 waits `3`. Elapsed time becomes `6`. |
+| **4 (bt=4)** | `total_wait_time += 6` → `10`<br>`current_wait_time += 4` → `10` | Process 4 waits `6`. Elapsed time becomes `10`. |
+| **5 (bt=7)** | `total_wait_time += 10` → `20`<br>`current_wait_time += 7` → `17` | Process 5 waits `10`. Elapsed time becomes `17`. |
+| **Final** | `20 // 5` → `4` | Average waiting time is `4`. |
+
+---
+
+## Edge Cases
+
+- **Single Process (`bt = [5]`):** Waiting time is `0`. Handled correctly (`0 // 1 = 0`).
+- **All Identical Elements (`bt = [2, 2, 2]`):** Order doesn't matter; accumulated correctly.
+- **Large Input Values:** Ensure `total_wait_time` accumulator does not overflow (Python handles arbitrary-precision integers natively).
+
+---
+
+## Mistakes
+
+- Adding burst time directly to `total_wait_time` instead of tracking elapsed time.
+- **Main Funda:** The main funda is to keep track of current waiting time along with the total waiting time.
+- Forgetting to return integer division (floor value) as per standard problem requirements.
+
+---
+
+## Complexity
+
+Time: O(N log N) → Dominated by sorting the burst time array.
+Space: O(1) → In-place sort (or O(N) depending on language sorting allocation).
+
+---
+
+## Similar Problems
+
+- [Minimum Number of Taps to Open to Water a Garden](https://leetcode.com/problems/minimum-number-of-taps-to-open-to-water-a-garden/) - Hard
+- [Assign Cookies](https://leetcode.com/problems/assign-cookies/) - Easy
+- [Shortest Job First (CPU Scheduling)](https://www.geeksforgeeks.org/problems/shortest-job-first/1) - Medium
+
+---
+
+## Tags and Properties
+
+- #dsa #important #revisit
+- #greedy #cpu-scheduling [[Greedy Algorithms]], [[Sorting]]
+- **Last Revised:** 2026-09-21
+- **Problem Link:** [GeeksforGeeks - Shortest Job First](https://www.geeksforgeeks.org/problems/shortest-job-first/1)
+
+---
+### 🔄 Revision Checklist
+- [ ] Day 2 Revision (2026-09-23)
+- [ ] Day 7 Revision (2026-09-28)
+- [ ] Day 15 Revision (2026-10-06)
+- [ ] Day 30 Revision (2026-10-21)
+
+
+================================================================================
+# File: Greedy/Job_Sequencing_Problem.md
+================================================================================
+
+---
+created: 2026-09-22
+revisions:
+  - 2026-09-24
+  - 2026-09-29
+  - 2026-10-07
+  - 2026-10-22
+---
+
+# Job Sequencing Problem
+
+---
+
+## Metadata & Placement Tags
+
+- **Folder:** Greedy
+- **Target Companies:** #Amazon #Microsoft #Flipkart #Directi
+- **Confidence Checklist:**
+  - [ ] Low
+  - [ ] Medium
+  - [ ] High
+
+- **Concepts:**
+  - #greedy [[Greedy]], #disjointset [[Disjoint Set Union]], #sorting [[Sorting]]
+
+## Pattern
+
+Greedy + Disjoint Set Union (DSU) / Slot Finding
+
+---
+## Difficulty
+
+Medium
+Tag: #medium
+
+---
+
+## ⚡ Key Idea (Core Insight)
+
+To maximize total profit, sort jobs by profit in descending order and greedily schedule each job on the latest available time slot before or on its deadline. Using DSU speeds up finding the latest available slot in $O(\alpha(N))$ time instead of linear search.
+
+---
+
+## ⚡ Quick Recall (VERY IMPORTANT)
+
+Sort by profit descending. Place job at deadline slot; if occupied, use DSU parent pointer to jump instantly to the next available earlier slot.
+
+---
+
+## Approach
+
+### Brute Force
+- Iterate over each job (sorted by profit) and search linearly backwards from `min(max_deadline, deadline)` to 1 to find an empty slot.
+- Time Complexity: $O(N \log N + N \times \text{max\_deadline})$ | Space: $O(\text{max\_deadline})$
+
+### Optimal (DSU)
+- Sort jobs by profit descending.
+- Initialize DSU where each slot points to itself.
+- For each job with `deadline`, find its representative parent `available_slot`. If `available_slot > 0`, schedule the job and union `available_slot` with `available_slot - 1`.
+
+---
+
+## Code (Python)
+
+```python
+class Job:
+    def __init__(self, job_id, deadline, profit):
+        self.id = job_id
+        self.deadline = deadline
+        self.profit = profit
+
+class Solution:
+    def find_parent(self, parent, i):
+        # Path compression
+        if parent[i] == i:
+            return i
+        parent[i] = self.find_parent(parent, parent[i])
+        return parent[i]
+
+    def JobScheduling(self, jobs, n):
+        # Sort jobs based on profit in descending order
+        jobs.sort(key=lambda x: x.profit, reverse=True)
+
+        # Find maximum deadline to size DSU table
+        max_deadline = max(job.deadline for job in jobs)
+
+        # Initialize parent array for DSU (1-indexed up to max_deadline)
+        parent = [i for i in range(max_deadline + 1)]
+
+        count_jobs = 0
+        total_profit = 0
+
+        for job in jobs:
+            # Find latest available slot <= job.deadline
+            available_slot = self.find_parent(parent, min(max_deadline, job.deadline))
+
+            # If slot > 0, we can schedule this job
+            if available_slot > 0:
+                count_jobs += 1
+                total_profit += job.profit
+                # Merge current slot with available slot on the left
+                parent[available_slot] = self.find_parent(parent, available_slot - 1)
+
+        return [count_jobs, total_profit]
+```
+
+---
+
+## Dry Run (Smart Example)
+
+Input Jobs: `[(1, 4, 20), (2, 1, 10), (3, 1, 40), (4, 1, 30)]`
+Sorted by profit: `J3(d=1, p=40), J4(d=1, p=30), J1(d=4, p=20), J2(d=1, p=10)`
+`max_deadline = 4`, DSU `parent = [0, 1, 2, 3, 4]`
+
+| Step | Current Job | Available Slot (find) | Action & DSU Update | Count / Profit |
+| :--- | :--- | :--- | :--- | :--- |
+| 1 | J3 (deadline=1, profit=40) | 1 | Occupy slot 1. Union(1, 0) -> `parent[1]=0`. | Count=1, Profit=40 |
+| 2 | J4 (deadline=1, profit=30) | 0 (`find(1)` -> 0) | Slot 0 invalid. Skip job. | Count=1, Profit=40 |
+| 3 | J1 (deadline=4, profit=20) | 4 | Occupy slot 4. Union(4, 3) -> `parent[4]=3`. | Count=2, Profit=60 |
+| 4 | J2 (deadline=1, profit=10) | 0 (`find(1)` -> 0) | Slot 0 invalid. Skip job. | Count=2, Profit=60 |
+
+---
+
+## Edge Cases
+
+- **All deadlines are 1:** Only one highest-profit job can be completed.
+- **Deadlines larger than total jobs:** Handled smoothly by limiting slots to `max_deadline`.
+- **Jobs with duplicate profits/deadlines:** Handled correctly via strict descending sort order.
+- **Single job:** Processed in 1 step, returns `[1, profit]`.
+
+---
+
+## Mistakes
+
+- Using two `for` loops (linear backward scan) is intuitive, but fails to reach optimal time complexity; use DSU for $O(\alpha(N))$ slot lookup.
+- Allocating array indexed by job count instead of `max_deadline`.
+- Forgetting path compression in DSU, degenerating performance to linear time.
+
+---
+
+## Complexity
+
+Time: $O(N \log N + N \cdot \alpha(M))$ → Sorting takes $O(N \log N)$ and DSU find operations take near-constant time $O(\alpha(M))$ where $M$ is max deadline.
+Space: $O(M)$ → DSU parent array of size `max_deadline + 1`.
+
+---
+
+## Similar Problems
+
+- [Task Scheduler](https://leetcode.com/problems/task-scheduler/) - Medium
+- [Maximum Profit in Job Scheduling](https://leetcode.com/problems/maximum-profit-in-job-scheduling/) - Hard
+- [Course Schedule III](https://leetcode.com/problems/course-schedule-iii/) - Hard
+
+---
+
+## Tags and Properties
+
+- #dsa #important #revisit
+- #greedy [[Greedy]] #disjointset [[Disjoint Set Union]]
+- **Revision Date:** 2026-09-22
+- **Problem Link:** [Job Sequencing Problem - GeeksforGeeks](https://www.geeksforgeeks.org/problems/job-sequencing-problem-1587115620/1)
+
+---
+### 🔄 Revision Checklist
+- [ ] Day 2 Revision (2026-09-24)
+- [ ] Day 7 Revision (2026-09-29)
+- [ ] Day 15 Revision (2026-10-07)
+- [ ] Day 30 Revision (2026-10-22)
+
+
+================================================================================
+# File: Greedy/Maximum_Meetings_In_One_Room.md
+================================================================================
+
+---
+created: 2026-09-22
+revisions:
+  - 2026-09-24
+  - 2026-09-29
+  - 2026-10-07
+  - 2026-10-22
+---
+
+# Maximum Meetings In One Room
+
+---
+
+## Metadata & Placement Tags
+
+- **Folder:** Greedy
+- **Target Companies:** #Amazon #Microsoft #Flipkart #Atlassian
+- **Confidence Checklist:**
+  - [ ] Low
+  - [ ] Medium
+  - [ ] High
+- **Concepts:** #greedy [[Greedy]], #sorting [[Sorting]], #customcomparator [[Custom Comparator]]
+
+## Pattern
+
+Greedy (Interval Scheduling / Activity Selection) + Sorting
+
+---
+## Difficulty
+
+Medium #medium
+
+---
+
+## ⚡ Key Idea (Core Insight)
+
+To maximize the total number of non-overlapping meetings, **always choose the meeting that ends earliest**. Finishing early leaves the maximum possible time remaining for subsequent meetings.
+
+---
+
+## ⚡ Quick Recall (VERY IMPORTANT)
+
+Sort meetings by **finish time** (and by original index as tie-breaker for lexicographical order), then greedily select non-overlapping ones.
+
+---
+
+## Approach
+
+### Brute Force
+- Generate all possible subsets of meetings, check if they overlap, and find the largest valid subset.
+- Time Complexity: O(2^N * N)
+
+### Optimal
+1. Store meeting start time, end time, and original 1-based index as a tuple/structure.
+2. Sort the list primarily by end time ascending. If end times are equal, sort by original index ascending.
+3. Keep track of the end time of the last selected meeting.
+4. Iterate through the sorted meetings; if a meeting's start time is strictly greater than the last selected meeting's end time, select it.
+5. Sort the selected meeting indices to return them in increasing order.
+
+---
+
+## Code (Python)
+
+```python
+class Solution:
+    def maxMeetings(self, number_of_meetings: int, start_times: list[int], end_times: list[int]) -> list[int]:
+        # Step 1: Combine start time, end time, and 1-based index
+        meetings = []
+        for index in range(number_of_meetings):
+            meetings.append((start_times[index], end_times[index], index + 1))
+
+        # Step 2: Sort by finish time ascending; tie-break by original index
+        meetings.sort(key=lambda meeting: (meeting[1], meeting[2]))
+
+        selected_meeting_indices = []
+        last_end_time = -1
+
+        # Step 3: Greedily pick non-overlapping meetings
+        for start, end, original_index in meetings:
+            if start > last_end_time:
+                selected_meeting_indices.append(original_index)
+                last_end_time = end
+
+        # Step 4: Sort indices to return them in increasing order as per problem requirement
+        selected_meeting_indices.sort()
+        return selected_meeting_indices
+```
+
+---
+
+## Dry Run (Smart Example)
+
+Input: `start_times = [1, 3, 0, 5, 8, 5]`, `end_times = [2, 4, 6, 7, 9, 9]`
+Meetings after sorting by end time: `[(1,2,1), (3,4,2), (0,6,3), (5,7,4), (8,9,5), (5,9,6)]`
+
+| Step | Variables | Explanation |
+| :--- | :--- | :--- |
+| 1 | `start=1, end=2, idx=1`, `last_end=-1` | `1 > -1` -> Select meeting 1. `last_end` becomes 2. Selected: `[1]` |
+| 2 | `start=3, end=4, idx=2`, `last_end=2` | `3 > 2` -> Select meeting 2. `last_end` becomes 4. Selected: `[1, 2]` |
+| 3 | `start=0, end=6, idx=3`, `last_end=4` | `0 <= 4` -> Skip meeting 3 (overlaps). |
+| 4 | `start=5, end=7, idx=4`, `last_end=4` | `5 > 4` -> Select meeting 4. `last_end` becomes 7. Selected: `[1, 2, 4]` |
+| 5 | `start=8, end=9, idx=5`, `last_end=7` | `8 > 7` -> Select meeting 5. `last_end` becomes 9. Selected: `[1, 2, 4, 5]` |
+
+Result: `[1, 2, 4, 5]`
+
+---
+
+## Edge Cases
+
+- **Meetings share end and start boundaries (e.g., [1, 2] and [2, 3]):** Problem specifies strictly `start > last_end` for non-overlapping, so ignore or pick accordingly based on problem constraints.
+- **Single meeting:** Returns `[1]` directly.
+- **Multiple meetings with identical start and end times:** Custom sort by index ensures consistent lexicographical order selection.
+- **All meetings overlap:** Picks only 1 meeting (the one ending earliest).
+
+---
+
+## Mistakes
+
+- Sorting by start time instead of end time (fails because a long meeting starting early blocks many short ones).
+- Forgetting to track original 1-based indices before sorting.
+- Failing to sort the final list of selected meeting indices.
+- **`class Solution:`** Writing solution without maintaining `class Solution:` wrapper or nesting inner helper methods instead of using proper class methods.
+
+---
+
+## Complexity
+
+Time: O(N log N) → Sorting N meetings takes O(N log N) time, iterating through takes O(N).
+Space: O(N) → Storing meeting objects and result array requires O(N) space.
+
+---
+
+## Similar Problems
+
+- [N Meetings In One Room](https://www.geeksforgeeks.org/problems/n-meetings-in-one-room-1587115620/1) - Easy
+- [Non-overlapping Intervals](https://leetcode.com/problems/non-overlapping-intervals/) - Medium
+- [Minimum Number of Arrows to Burst Balloons](https://leetcode.com/problems/minimum-number-of-arrows-to-burst-balloons/) - Medium
+- [Meeting Rooms](https://leetcode.com/problems/meeting-rooms/) - Easy
+
+---
+
+## Tags and Properties
+
+- #dsa #important #revisit #greedy #interval-scheduling
+- Concept Links: [[Greedy]], [[Sorting]], [[Intervals]]
+- **Revision Date:** 2026-09-22
+- **Problem Link:** [Maximum Meetings In One Room - GeeksforGeeks](https://www.geeksforgeeks.org/problems/maximum-meetings-in-one-room/1)
+
+---
+### 🔄 Revision Checklist
+- [ ] Day 2 Revision (2026-09-24)
+- [ ] Day 7 Revision (2026-09-29)
+- [ ] Day 15 Revision (2026-10-07)
+- [ ] Day 30 Revision (2026-10-22)
+
+
+================================================================================
+# File: Greedy/Non_Overlapping_Intervals.md
+================================================================================
+
+---
+created: 2026-09-23
+revisions:
+  - 2026-09-25
+  - 2026-09-30
+  - 2026-10-08
+  - 2026-10-23
+---
+
+# Non-Overlapping Intervals
+
+---
+
+## Metadata & Placement Tags
+
+- **Folder:** Greedy
+- **Target Companies:** #Amazon #Facebook #Microsoft #Google #Apple
+- **Confidence Checklist:**
+  - [ ] Low
+  - [ ] Medium
+  - [ ] High
+
+- **Concepts:**
+  - #greedy [[Greedy]], #sorting [[Sorting]], #intervals [[Intervals]]
+
+## Pattern
+
+Sorting + Greedy (Interval Scheduling)
+
+---
+## Difficulty
+
+Medium #medium
+
+---
+
+## ⚡ Key Idea (Core Insight)
+
+To minimize removals, greedily pick intervals that end as early as possible. Sorting by end time leaves maximum room for subsequent intervals, avoiding overlaps.
+
+---
+
+## ⚡ Quick Recall (VERY IMPORTANT)
+
+Sort by **end time**. Keep track of the end time of the last non-overlapping interval. If current `start < last_end`, increment remove count; else update `last_end = end`.
+
+---
+
+## Approach
+
+### Brute Force
+- Generate all possible subsets of intervals and check if any contain overlapping intervals. Find the largest valid subset and subtract its size from total intervals.
+- **Time Complexity:** $O(2^N \cdot N)$
+
+### Optimal
+- Sort intervals by their ending times.
+- Iterate through intervals maintaining `last_end`.
+- If `start < last_end`, we must remove current interval (increment count).
+- Otherwise, update `last_end = end`.
+- **Time Complexity:** $O(N \log N)$
+
+---
+
+## Code (Python)
+
+```python
+class Solution:
+    def eraseOverlapIntervals(self, intervals: list[list[int]]) -> int:
+        if not intervals:
+            return 0
+
+        # Sort intervals based on their end times
+        intervals.sort(key=lambda x: x[1])
+
+        count_removed = 0
+        last_end_time = intervals[0][1]
+
+        # Iterate from the second interval onwards
+        for i in range(1, len(intervals)):
+            current_start = intervals[i][0]
+            current_end = intervals[i][1]
+
+            # If overlap occurs with previous selected interval
+            if current_start < last_end_time:
+                count_removed += 1
+            else:
+                # Update end time to current non-overlapping interval's end time
+                last_end_time = current_end
+
+        return count_removed
+```
+
+---
+
+## Dry Run (Smart Example)
+
+Input: `intervals = [[1, 100], [11, 22], [1, 11], [2, 12]]`
+Sorted by End Time: `[[1, 11], [2, 12], [11, 22], [1, 100]]`
+
+| Step | Variables | Explanation |
+|---|---|---|
+| 0 | `last_end = 11`, `count = 0` | Pick first interval `[1, 11]`. |
+| 1 | `curr = [2, 12]` | `start (2) < last_end (11)` $\rightarrow$ Overlap! Increment `count = 1`. |
+| 2 | `curr = [11, 22]` | `start (11) >= last_end (11)` $\rightarrow$ No overlap. Update `last_end = 22`. |
+| 3 | `curr = [1, 100]` | `start (1) < last_end (22)` $\rightarrow$ Overlap! Increment `count = 2`. |
+
+**Result:** `2` removals needed.
+
+---
+
+## Edge Cases
+
+- **Empty or single interval:** Return 0 immediately.
+- **Intervals touching at endpoints (e.g., `[1, 2]` & `[2, 3]`):** Not considered overlapping.
+- **Identical intervals:** Force removal of duplicates.
+- **Negative coordinates (e.g., `[-50, -20]`, `[-30, -10]`):** Sorting correctly handles negative numbers.
+
+---
+
+## Mistakes
+
+- Sorting by start time instead of end time (requires additional tricky logic).
+- Treating touching boundaries (e.g., `start == end`) as overlapping (`start < last_end` vs `start <= last_end`).
+- User Mistake: No specific note provided.
+
+---
+
+## Complexity
+
+Time: $O(N \log N)$ → Dominated by sorting $N$ intervals.
+Space: $O(1)$ or $O(N)$ → Dependent on the space complexity of Python's Timsort algorithm.
+
+---
+
+## Similar Problems
+
+- [Merge Intervals](https://leetcode.com/problems/merge-intervals/) - Medium
+- [Insert Interval](https://leetcode.com/problems/insert-interval/) - Medium
+- [Minimum Number of Arrows to Burst Balloons](https://leetcode.com/problems/minimum-number-of-arrows-to-burst-balloons/) - Medium
+- [Meeting Rooms II](https://leetcode.com/problems/meeting-rooms-ii/) - Medium
+
+---
+
+## Tags and Properties
+
+- #dsa #important #revisit #greedy #sorting #intervals
+- [[Greedy Algorithm]] [[Interval Scheduling]] [[Sorting]]
+- **Revision Date:** 2026-09-23
+- **Problem Link:** [LeetCode - Non-Overlapping Intervals](https://leetcode.com/problems/non-overlapping-intervals/)
+
+---
+### 🔄 Revision Checklist
+- [ ] Day 2 Revision (2026-09-25)
+- [ ] Day 7 Revision (2026-09-30)
+- [ ] Day 15 Revision (2026-10-08)
+- [ ] Day 30 Revision (2026-10-23)
+
+
+================================================================================
+# File: Greedy/Insert_Interval.md
+================================================================================
+
+---
+created: 2026-09-24
+revisions:
+  - 2026-09-26
+  - 2026-10-01
+  - 2026-10-09
+  - 2026-10-24
+---
+
+# Insert Interval
+
+---
+
+## Metadata & Placement Tags
+
+- **Folder:** Arrays
+- **Target Companies:** #Google #Amazon #Microsoft #Meta #Apple #LinkedIn
+- **Confidence Checklist:**
+  - [ ] Low
+  - [ ] Medium
+  - [ ] High
+
+- **Concepts:**
+  - #arrays [[Arrays]], #intervals [[Intervals]], #sorting [[Sorting]]
+
+## Pattern
+
+Intervals + Iterative Merging
+
+---
+## Difficulty
+
+Medium #medium
+
+---
+
+## ⚡ Key Idea (Core Insight)
+
+The existing intervals are already sorted and non-overlapping. Process intervals sequentially into three phases: add non-overlapping intervals before the new interval, merge all overlapping intervals into one combined new interval, and append remaining non-overlapping intervals after it.
+
+---
+
+## ⚡ Quick Recall (VERY IMPORTANT)
+
+Three linear loops/phases: Left (ends before `newInterval` starts), Merge (overlaps with `newInterval`), Right (starts after `newInterval` ends).
+
+---
+
+## Approach
+
+### Brute Force
+- Append `newInterval` to `intervals`, sort the array by start times, then perform standard Interval Merge.
+- Time: O(N log N) | Space: O(N)
+
+### Optimal
+- Process intervals in a single linear scan:
+  1. Add intervals ending before `newInterval.start` directly to result.
+  2. While intervals start before/at `newInterval.end`, expand `newInterval` boundaries (`min(start)`, `max(end)`).
+  3. Add expanded `newInterval`, then append all remaining intervals.
+- Time: O(N) | Space: O(N) for output array.
+
+---
+
+## Code (Python)
+
+```python
+class Solution:
+    def insert(self, intervals: list[list[int]], newInterval: list[int]) -> list[list[int]]:
+        result = []
+        index = 0
+        total_intervals = len(intervals)
+
+        # Phase 1: Add all intervals that end before newInterval starts
+        while index < total_intervals and intervals[index][1] < newInterval[0]:
+            result.append(intervals[index])
+            index += 1
+
+        # Phase 2: Merge all overlapping intervals with newInterval
+        while index < total_intervals and intervals[index][0] <= newInterval[1]:
+            newInterval[0] = min(newInterval[0], intervals[index][0])
+            newInterval[1] = max(newInterval[1], intervals[index][1])
+            index += 1
+
+        # Add the merged newInterval
+        result.append(newInterval)
+
+        # Phase 3: Add all remaining intervals after newInterval
+        while index < total_intervals:
+            result.append(intervals[index])
+            index += 1
+
+        return result
+```
+
+---
+
+## Dry Run (Smart Example)
+
+Input: `intervals = [[1, 2], [3, 5], [6, 7], [8, 10], [12, 16]]`, `newInterval = [4, 8]`
+
+| Step | Variables | Explanation |
+| :--- | :--- | :--- |
+| 1 | `index = 0`, `[1, 2]` | `2 < 4` (ends before `newInterval`), add `[1, 2]`. `result = [[1, 2]]`. |
+| 2 | `index = 1`, `[3, 5]` | `3 <= 8` (overlaps), merge: `newInterval` becomes `[min(4,3), max(8,5)] = [3, 8]`. |
+| 3 | `index = 2`, `[6, 7]` | `6 <= 8` (overlaps), merge: `newInterval` becomes `[min(3,6), max(8,7)] = [3, 8]`. |
+| 4 | `index = 3`, `[8, 10]` | `8 <= 8` (overlaps), merge: `newInterval` becomes `[min(3,8), max(8,10)] = [3, 10]`. |
+| 5 | `index = 4`, `[12, 16]` | `12 > 10` (no overlap), loop ends. Add `[3, 10]`. Append remaining `[12, 16]`. |
+
+Output: `[[1, 2], [3, 10], [12, 16]]`
+
+---
+
+## Edge Cases
+
+- **Empty intervals array:** Returns `[newInterval]`.
+- **New interval inserted at start/end without overlapping:** Inserted cleanly without modifying existing bounds.
+- **New interval completely spans across all existing intervals:** Merges everything into single range `[min_start, max_end]`.
+- **New interval fully contained inside an existing interval:** Existing interval absorbs `newInterval`.
+
+---
+
+## Mistakes
+
+- No specific note provided.
+- Forgetting that overlap check is `intervals[i][0] <= newInterval[1]` (using `<` instead of `<=`).
+- Mutating original array in-place inefficiently via array slicing instead of building result linearly.
+
+---
+
+## Complexity
+
+Time: O(N) → Single pass through the list of `N` intervals.
+Space: O(N) → Result list stores `N + 1` intervals in the worst case.
+
+---
+
+## Similar Problems
+
+- [Merge Intervals](https://leetcode.com/problems/merge-intervals/) - Medium
+- [Non-overlapping Intervals](https://leetcode.com/problems/non-overlapping-intervals/) - Medium
+- [Interval List Intersections](https://leetcode.com/problems/interval-list-intersections/) - Medium
+
+---
+
+## Tags and Properties
+
+- #dsa #important #revisit #intervals #arrays
+- Obsidian Links: [[Intervals]], [[Arrays]], [[Sorting]]
+- **Last Revised:** 2026-09-24
+- **Problem Link:** [Insert Interval - LeetCode](https://leetcode.com/problems/insert-interval/)
+
+---
+### 🔄 Revision Checklist
+- [ ] Day 2 Revision (2026-09-26)
+- [ ] Day 7 Revision (2026-10-01)
+- [ ] Day 15 Revision (2026-10-09)
+- [ ] Day 30 Revision (2026-10-24)
+
+
+================================================================================
+# File: Greedy/Merge_Intervals.md
+================================================================================
+
+---
+created: 2026-09-24
+revisions:
+  - 2026-09-26
+  - 2026-10-01
+  - 2026-10-09
+  - 2026-10-24
+---
+
+# Merge Intervals
+
+---
+
+## Metadata & Placement Tags
+
+- **Folder:** Sorting
+- **Target Companies:** #Amazon #Google #Microsoft #Facebook #Apple #Bloomberg
+- **Confidence Checklist:**
+  - [ ] Low
+  - [ ] Medium
+  - [ ] High
+
+- **Concepts:**
+  - #sorting [[Sorting]], #intervals [[Intervals]], #greedy [[Greedy]]
+
+## Pattern
+
+Sorting + Greedy Sweep
+
+---
+
+## Difficulty
+
+Medium #medium
+
+---
+
+## ⚡ Key Idea (Core Insight)
+
+- Sorting intervals by their start time aligns potential overlaps sequentially.
+- If `current_interval.start <= previous_interval.end`, they overlap and can be merged by updating the previous interval's end to `max(previous.end, current.end)`.
+
+---
+
+## ⚡ Quick Recall (VERY IMPORTANT)
+
+- Sort by start time. Iterate through intervals and compare current start with last merged end; merge if overlapping, else append.
+
+---
+
+## Approach
+
+### Brute Force
+- Compare every interval with every other interval to check for overlaps and merge recursively/repeatedly until no overlaps remain.
+- Time Complexity: $O(N^2)$ or $O(N^3)$
+
+### Optimal
+1. Sort the intervals list based on the starting value of each interval.
+2. Initialize an empty list `merged_intervals` to hold the result.
+3. Iterate through each interval:
+   - If `merged_intervals` is empty or the current interval does not overlap with the last interval in `merged_intervals`, append it.
+   - If it overlaps, update the end time of the last interval in `merged_intervals` to `max(last_interval.end, current_interval.end)`.
+
+---
+
+## Code (Python)
+
+```python
+class Solution:
+    def merge(self, intervals: list[list[int]]) -> list[list[int]]:
+        # Handle edge case for empty or single element input
+        if len(intervals) <= 1:
+            return intervals
+
+        # Step 1: Sort intervals by their starting times
+        intervals.sort(key=lambda interval: interval[0])
+
+        merged_intervals = []
+
+        # Step 2: Iterate through intervals and merge overlapping ones
+        for current_interval in intervals:
+            # If merged_intervals is empty or no overlap exists
+            if not merged_intervals or merged_intervals[-1][1] < current_interval[0]:
+                merged_intervals.append(current_interval)
+            else:
+                # Overlap detected: merge by expanding the end boundary
+                merged_intervals[-1][1] = max(merged_intervals[-1][1], current_interval[1])
+
+        return merged_intervals
+```
+
+---
+
+## Dry Run (Smart Example)
+
+Input: `intervals = [[1, 3], [2, 6], [8, 10], [15, 18], [9, 11]]`
+After Sorting: `[[1, 3], [2, 6], [8, 10], [9, 11], [15, 18]]`
+
+| Step | Variables | Explanation |
+| :--- | :--- | :--- |
+| 1 | `current = [1, 3]`, `merged = []` | `merged` is empty $\rightarrow$ Append `[1, 3]`. `merged = [[1, 3]]` |
+| 2 | `current = [2, 6]`, `last = [1, 3]` | Overlap ($2 \le 3$) $\rightarrow$ Update end: $\max(3, 6) = 6$. `merged = [[1, 6]]` |
+| 3 | `current = [8, 10]`, `last = [1, 6]` | No overlap ($8 > 6$) $\rightarrow$ Append `[8, 10]`. `merged = [[1, 6], [8, 10]]` |
+| 4 | `current = [9, 11]`, `last = [8, 10]` | Overlap ($9 \le 10$) $\rightarrow$ Update end: $\max(10, 11) = 11$. `merged = [[1, 6], [8, 11]]` |
+| 5 | `current = [15, 18]`, `last = [8, 11]` | No overlap ($15 > 11$) $\rightarrow$ Append `[15, 18]`. `merged = [[1, 6], [8, 11], [15, 18]]` |
+
+---
+
+## Edge Cases
+
+- **Single interval:** Input like `[[1, 4]]` returns `[[1, 4]]`.
+- **Already non-overlapping:** Input like `[[1, 2], [3, 4]]` remains unchanged.
+- **Fully covered intervals:** Input like `[[1, 10], [2, 3]]` merges into `[[1, 10]]`.
+- **Same endpoints:** Input like `[[1, 4], [4, 5]]` merges into `[[1, 5]]`.
+
+---
+
+## Mistakes
+
+- User mistake: No specific note provided.
+- Forgetting to sort intervals prior to the single-pass sweep.
+- Comparing start times instead of checking if `current_start <= last_end`.
+- Updating the end time to `current.end` directly without taking `max(last_end, current.end)`.
+
+---
+
+## Complexity
+
+Time: $O(N \log N)$ → Dominated by the sorting step where $N$ is the number of intervals.
+Space: $O(N)$ → Required for output storage or sorting algorithms implementation details.
+
+---
+
+## Similar Problems
+
+- [Insert Interval](https://leetcode.com/problems/insert-interval/) - Medium
+- [Non-overlapping Intervals](https://leetcode.com/problems/non-overlapping-intervals/) - Medium
+- [Meeting Rooms II](https://leetcode.com/problems/meeting-rooms-ii/) - Medium
+- [Interval List Intersections](https://leetcode.com/problems/interval-list-intersections/) - Medium
+
+---
+
+## Tags and Properties
+
+- #dsa #important #revisit
+- #intervals #sorting #greedy
+- Concepts: [[Sorting]], [[Intervals]], [[Greedy]]
+- Revision Date: 2026-09-24
+- **Problem Link:** [Merge Intervals - LeetCode](https://leetcode.com/problems/merge-intervals/)
+
+---
+### 🔄 Revision Checklist
+- [ ] Day 2 Revision (2026-09-26)
+- [ ] Day 7 Revision (2026-10-01)
+- [ ] Day 15 Revision (2026-10-09)
+- [ ] Day 30 Revision (2026-10-24)
+
+
+================================================================================
+# File: Greedy/Divide_Intervals_Into_Minimum_Number_Of_Groups.md
+================================================================================
+
+---
+created: 2026-09-24
+revisions:
+  - 2026-09-26
+  - 2026-10-01
+  - 2026-10-09
+  - 2026-10-24
+---
+
+# Divide Intervals Into Minimum Number Of Groups
+
+---
+
+## Metadata & Placement Tags
+
+- **Folder:** Greedy
+- **Target Companies:** #Amazon #Google #Microsoft #Meta #Uber
+- **Confidence Checklist:**
+  - [ ] Low
+  - [ ] Medium
+  - [ ] High
+
+- **Concepts:**
+  - #greedy [[Greedy]], #sorting [[Sorting]], #heaps [[Heaps]], #line-sweep [[Line Sweep]]
+
+## Pattern
+
+Line Sweep (Difference Array / Event Points) OR Min-Heap + Sorting
+
+---
+## Difficulty
+
+Medium #medium
+
+---
+
+## ⚡ Key Idea (Core Insight)
+
+The minimum number of groups needed is equal to the **maximum number of overlapping intervals** at any point in time. We can process events (start/end) in chronological order or track group end times using a min-heap.
+
+---
+
+## ⚡ Quick Recall (VERY IMPORTANT)
+
+Sort start/end events (or end times in min-heap). Max concurrent overlapping intervals = minimum groups required.
+
+---
+
+## Approach
+
+### Brute Force
+- For each interval, check existing groups to see if it can fit without overlap; if not, create a new group.
+- Time: $O(N^2)$, Space: $O(N)$
+
+### Optimal 1: Min-Heap + Sorting
+1. Sort intervals by start time.
+2. Use a min-heap to store the end times of active groups.
+3. For each interval, if `start_time > min_heap[0]` (smallest end time), reuse that group (pop heap).
+4. Push current interval's end time to heap. Heap size at end is the result.
+
+### Optimal 2: Line Sweep (Chronological Events)
+1. Split each interval `[start, end]` into two events: `(start, +1)` and `(end + 1, -1)`.
+2. Sort all events by time. If times tie, process `-1` (end) before `+1` (start).
+3. Sweep through events maintaining a running count of active intervals. Peak count is the result.
+
+---
+
+## Code (Python)
+
+```python
+import heapq
+
+class Solution:
+    def minGroups(self, intervals: list[list[int]]) -> int:
+        # Sort intervals primarily by start time
+        intervals.sort(key=lambda x: x[0])
+
+        # Min-heap to keep track of the end times of each group
+        min_heap = []
+
+        for start, end in intervals:
+            # If the earliest ending group ends before current start, reuse it
+            if min_heap and min_heap[0] < start:
+                heapq.heappop(min_heap)
+
+            # Add current interval's end time to the heap
+            heapq.heappush(min_heap, end)
+
+        # The number of elements in the heap represents total groups needed
+        return len(min_heap)
+```
+
+---
+
+## Dry Run (Smart Example)
+
+Input: `intervals = [[5,10],[1,5],[5,6],[2,3],[5,10]]`
+Sorted intervals: `[[1,5], [2,3], [5,6], [5,10], [5,10]]`
+
+| Step | Current Interval `[start, end]` | `min_heap` Before | Action / Reason | `min_heap` After |
+| :--- | :--- | :--- | :--- | :--- |
+| 1 | `[1, 5]` | `[]` | Heap empty; add end `5` | `[5]` |
+| 2 | `[2, 3]` | `[5]` | `start (2) <= min_heap[0] (5)` → cannot reuse group; push end `3` | `[3, 5]` |
+| 3 | `[5, 6]` | `[3, 5]` | `start (5) > min_heap[0] (3)` → reuse group; pop `3`, push `6` | `[5, 6]` |
+| 4 | `[5, 10]` | `[5, 6]` | `start (5) <= min_heap[0] (5)` → overlaps (starts at 5, previous ends at 5); push `10` | `[5, 6, 10]` |
+| 5 | `[5, 10]` | `[5, 6, 10]` | `start (5) <= min_heap[0] (5)` → overlaps; push `10` | `[5, 6, 10, 10]` |
+
+Result: `len(min_heap) = 4`
+
+---
+
+## Edge Cases
+
+- **Intervals touching at boundary `[1,5]` and `[5,6]`:** Count as overlapping per problem description (requires strictly greater start time to reuse group).
+- **Single interval `[[1,1]]`:** Returns `1`.
+- **All intervals completely overlapping `[[1,10],[1,10]]`:** Returns number of intervals ($N$).
+- **Disjoint intervals `[[1,2],[3,4],[5,6]]`:** Returns `1`.
+
+---
+
+## Mistakes
+
+- **User Mistake:** Tried using two pointers approach (e.g., standard two-pointer array iteration without sorting events or maintaining dynamic end states fails because multiple active end times need constant tracking).
+- Treating `start == end` as non-overlapping when the problem specifies intersection includes boundary points.
+- Sorting only by end time instead of start time when using heap.
+
+---
+
+## Complexity
+
+Time: $O(N \log N)$ → Sorting takes $O(N \log N)$, heap operations take $O(N \log N)$.
+Space: $O(N)$ → Heap stores at most $N$ elements.
+
+---
+
+## Similar Problems
+
+- [Meeting Rooms II](https://leetcode.com/problems/meeting-rooms-ii/) - Medium
+- [Minimum Number of Arrows to Burst Balloons](https://leetcode.com/problems/minimum-number-of-arrows-to-burst-balloons/) - Medium
+- [Car Pooling](https://leetcode.com/problems/car-pooling/) - Medium
+- [Describe the Painting](https://leetcode.com/problems/describe-the-painting/) - Medium
+
+---
+
+## Tags and Properties
+
+- #dsa #important #revisit
+- #intervals #heap #sweep-line
+- [[Sorting]], [[Heaps]], [[Line Sweep]]
+- **Revision Date:** 2026-09-24
+- **Problem Link:** [Divide Intervals Into Minimum Number Of Groups](https://leetcode.com/problems/divide-intervals-into-minimum-number-of-groups/)
+
+---
+### 🔄 Revision Checklist
+- [ ] Day 2 Revision (2026-09-26)
+- [ ] Day 7 Revision (2026-10-01)
+- [ ] Day 15 Revision (2026-10-09)
+- [ ] Day 30 Revision (2026-10-24)
+
+
+================================================================================
+# File: Two Pointers/Divide_Intervals_Into_Minimum_Number_Of_Groups.md
+================================================================================
+
+---
+created: 2026-09-24
+revisions:
+  - 2026-09-26
+  - 2026-10-01
+  - 2026-10-09
+  - 2026-10-24
+---
+
+# Divide Intervals Into Minimum Number Of Groups
+
+---
+
+## Metadata & Placement Tags
+
+- **Folder:** Two Pointers
+- **Target Companies:**
+  - #Google #Amazon #Microsoft #Bloomberg #Meta
+- **Confidence Checklist:**
+  - [ ] Low
+  - [ ] Medium
+  - [ ] High
+- **Concepts:**
+  - #twopointers [[Two Pointers]], #sorting [[Sorting]], #greedy [[Greedy]], #heaps [[Heaps]]
+
+## Pattern
+
+Two Pointers + Sorting (Chronological Events / Sweep Line)
+
+---
+## Difficulty
+
+Medium
+#medium
+
+---
+
+## ⚡ Key Idea (Core Insight)
+
+The minimum number of groups required equals the **maximum number of overlapping intervals** at any single point in time. Each overlap at the same time requires a distinct group.
+
+---
+
+## ⚡ Quick Recall (VERY IMPORTANT)
+
+Sort `start` and `end` times independently. Use two pointers to simulate chronological arrival and departure; count active concurrent intervals (`start <= end` increments count, else decrements).
+
+---
+
+## Approach
+
+### Brute Force
+- Check every integer point covered by intervals and count overlaps by iterating over all intervals.
+- Time Complexity: $O(N \times \text{Range})$
+
+### Better (Min-Heap)
+- Sort intervals by start time; push end times into a min-heap. If current `start > heap[0]`, pop the root (reuse group), then push current `end`.
+- Time Complexity: $O(N \log N)$, Space: $O(N)$
+
+### Optimal (Two Pointers / Chronological Events)
+1. Extract all `start` times and `end` times into two separate arrays and sort both.
+2. Initialize two pointers: `start_ptr = 0`, `end_ptr = 0`, tracking `active_groups = 0` and `max_groups = 0`.
+3. If `start[start_ptr] <= end[end_ptr]`, an interval begins before another ends $\rightarrow$ increment `active_groups` and advance `start_ptr`.
+4. Otherwise, an interval has ended $\rightarrow$ decrement `active_groups` and advance `end_ptr`.
+5. Return the maximum `active_groups` encountered.
+
+---
+
+## Code (Python)
+
+```python
+class Solution:
+    def minGroups(self, intervals: list[list[int]]) -> int:
+        # Extract and sort start and end points independently
+        start_times = sorted([interval[0] for interval in intervals])
+        end_times = sorted([interval[1] for interval in intervals])
+
+        start_ptr = 0
+        end_ptr = 0
+        active_groups = 0
+        max_groups = 0
+
+        total_intervals = len(intervals)
+
+        # Traverse chronologically through all start times
+        while start_ptr < total_intervals:
+            # Inclusive condition: if an interval starts before or at the end of another
+            if start_times[start_ptr] <= end_times[end_ptr]:
+                active_groups += 1
+                max_groups = max(max_groups, active_groups)
+                start_ptr += 1
+            else:
+                active_groups -= 1
+                end_ptr += 1
+
+        return max_groups
+```
+
+---
+
+## Dry Run (Smart Example)
+
+**Input:** `intervals = [[5, 10], [6, 8], [1, 5], [2, 3]]`
+`start_times = [1, 2, 5, 6]`, `end_times = [3, 5, 8, 10]`
+
+| Step | Variables (`start_ptr`, `end_ptr`, `active_groups`) | Explanation |
+| :--- | :--- | :--- |
+| 1 | `start_ptr=0` (1), `end_ptr=0` (3), `active=1` | `1 <= 3` $\rightarrow$ Interval starts. `active=1`, `max_groups=1`. Advance `start_ptr`. |
+| 2 | `start_ptr=1` (2), `end_ptr=0` (3), `active=2` | `2 <= 3` $\rightarrow$ Interval starts. `active=2`, `max_groups=2`. Advance `start_ptr`. |
+| 3 | `start_ptr=2` (5), `end_ptr=0` (3), `active=1` | `5 > 3` $\rightarrow$ Interval ends. `active=1`. Advance `end_ptr`. |
+| 4 | `start_ptr=2` (5), `end_ptr=1` (5), `active=2` | `5 <= 5` (inclusive overlap) $\rightarrow$ New interval starts before prev clears. `active=2`, `max_groups=2`. Advance `start_ptr`. |
+| 5 | `start_ptr=3` (6), `end_ptr=1` (5), `active=1` | `6 > 5` $\rightarrow$ Interval ends. `active=1`. Advance `end_ptr`. |
+| 6 | `start_ptr=3` (6), `end_ptr=2` (8), `active=2` | `6 <= 8` $\rightarrow$ Interval starts. `active=2`, `max_groups=2`. Advance `start_ptr`. |
+
+**Result:** `2`
+
+---
+
+## Edge Cases
+
+- **Single interval:** `[[1, 1]]` $\rightarrow$ Returns `1`.
+- **Touching endpoints (inclusive):** `[[1, 5], [5, 10]]` $\rightarrow$ Overlaps at `5`, requires `2` groups (`start <= end` handles this).
+- **All disjoint intervals:** `[[1, 2], [3, 4], [5, 6]]` $\rightarrow$ Returns `1`.
+- **All identical intervals:** `[[2, 4], [2, 4], [2, 4]]` $\rightarrow$ Returns `3`.
+
+---
+
+## Mistakes
+
+- User Mistake: Forgetting that two pointers on sorted start and end arrays provides the cleanest $O(N \log N)$ chronological events approach without needing extra event tags (+1/-1 tuples).
+- Using `<` instead of `<=` when checking `start <= end`, failing to account for inclusive endpoints overlapping.
+- Trying to track which specific interval belongs to which group instead of realizing the answer is simply the maximum concurrent overlap count.
+
+---
+
+## Complexity
+
+Time: $O(N \log N)$ → Sorting start and end time arrays dominates the two-pointer traversal.
+Space: $O(N)$ → Storing separated start and end time arrays.
+
+---
+
+## Similar Problems
+
+- [Meeting Rooms II](https://leetcode.com/problems/meeting-rooms-ii/) - Medium
+- [Minimum Number of Arrows to Burst Balloons](https://leetcode.com/problems/minimum-number-of-arrows-to-burst-balloons/) - Medium
+- [Car Pooling](https://leetcode.com/problems/car-pooling/) - Medium
+- [Corporate Flight Bookings](https://leetcode.com/problems/corporate-flight-bookings/) - Medium
+
+---
+
+## Tags and Properties
+
+- #dsa #important #revisit
+- #intervals #sweepline #twopointers #sorting
+- Concepts: [[Two Pointers]], [[Sorting]], [[Greedy]], [[Sweep Line]]
+- Revision Date: 2026-09-24
+- **Problem Link:** [LeetCode - Divide Intervals Into Minimum Number of Groups](https://leetcode.com/problems/divide-intervals-into-minimum-number-of-groups/)
+
+---
+### 🔄 Revision Checklist
+- [ ] Day 2 Revision (2026-09-26)
+- [ ] Day 7 Revision (2026-10-01)
+- [ ] Day 15 Revision (2026-10-09)
+- [ ] Day 30 Revision (2026-10-24)
+
+
+================================================================================
+# File: Sliding Window/Number_Of_Substrings_Containing_All_Three_Characters.md
+================================================================================
+
+---
+created: 2026-09-25
+revisions:
+  - 2026-09-27
+  - 2026-10-02
+  - 2026-10-10
+  - 2026-10-25
+---
+
+# Number Of Substrings Containing All Three Characters
+
+---
+
+## Metadata & Placement Tags
+
+- **Folder:** Sliding Window
+- **Target Companies:** #Amazon #Microsoft #Google #Adobe
+- **Confidence Checklist:**
+  - [ ] Low
+  - [ ] Medium
+  - [ ] High
+
+- **Concepts:**
+  - #slidingwindow [[Sliding Window]], #twopointers [[Two Pointers]], #hashmap [[HashMap]]
+
+## Pattern
+
+Sliding Window (At Most / Shrinking Window) or Last Seen Index Tracking
+
+---
+## Difficulty
+
+Medium #medium
+
+---
+
+## ⚡ Key Idea (Core Insight)
+
+For any valid window `[left, right]` containing at least one `'a'`, `'b'`, and `'c'`, all substrings starting from `0` to `left` and ending at `right` are also valid. Thus, adding `left + 1` (or `min(last_a, last_b, last_c) + 1`) to the total count gives all valid substrings ending at `right`.
+
+---
+
+## ⚡ Quick Recall (VERY IMPORTANT)
+
+Track the last seen index of characters `'a'`, `'b'`, and `'c'`. For each index `i`, valid substrings ending at `i` count is `min(last['a'], last['b'], last['c']) + 1`.
+
+---
+
+## Approach
+
+### Brute Force
+- Generate all possible substrings using nested loops and check if each contains `'a'`, `'b'`, and `'c'`.
+- Time: $O(N^2)$ or $O(N^3)$ | Space: $O(1)$
+
+### Better
+- Use a sliding window to maintain character counts. Expand `right` until valid, then increment `count` by `len(s) - right` and shrink `left`.
+- Time: $O(N)$ | Space: $O(1)$
+
+### Optimal
+- Iterate `right` pointer from `0` to `n - 1`. Update the last seen index of `s[right]`.
+- At each step, add `min(last_seen['a'], last_seen['b'], last_seen['c']) + 1` to `total_count` (if all three have been seen).
+- Time: $O(N)$ | Space: $O(1)$
+
+---
+
+## Code (Python)
+
+```python
+class Solution:
+    def numberOfSubstrings(self, s: str) -> int:
+        # Track the last seen 0-based index of 'a', 'b', and 'c'
+        last_seen = {'a': -1, 'b': -1, 'c': -1}
+        total_substrings = 0
+
+        for current_index, char in enumerate(s):
+            # Update the last seen position of the current character
+            last_seen[char] = current_index
+
+            # Find the leftmost start index among 'a', 'b', and 'c'
+            min_last_index = min(last_seen['a'], last_seen['b'], last_seen['c'])
+
+            # If all 3 characters have appeared at least once, min_last_index >= 0
+            if min_last_index != -1:
+                # All substrings starting from 0 up to min_last_index and ending at current_index are valid
+                total_substrings += min_last_index + 1
+
+        return total_substrings
+```
+
+---
+
+## Dry Run (Smart Example)
+
+Input: `s = "abcabc"`
+
+| Step | `current_index` (`char`) | `last_seen` (`a, b, c`) | `min_last_index` | `total_substrings` Added | Total |
+|---|---|---|---|---|---|
+| 1 | 0 (`'a'`) | `{0, -1, -1}` | -1 | 0 (incomplete) | 0 |
+| 2 | 1 (`'b'`) | `{0, 1, -1}` | -1 | 0 (incomplete) | 0 |
+| 3 | 2 (`'c'`) | `{0, 1, 2}` | 0 | 0 + 1 = 1 | 1 |
+| 4 | 3 (`'a'`) | `{3, 1, 2}` | 1 | 1 + 1 = 2 | 3 |
+| 5 | 4 (`'b'`) | `{3, 4, 2}` | 2 | 2 + 1 = 3 | 6 |
+| 6 | 5 (`'c'`) | `{3, 4, 5}` | 3 | 3 + 1 = 4 | 10 |
+
+---
+
+## Edge Cases
+
+- **Minimum Length String (`"abc"`):** Returns `1` correctly.
+- **Missing Character (`"aabb"`):** No character `'c'` seen, returns `0`.
+- **Repeated Prefix (`"aaabc"`):** Works correctly as `min_last_index` picks the latest valid position of `'a'`.
+
+---
+
+## Mistakes
+
+- Using nested loops leading to TLE ($O(N^2)$).
+- Forgetting that all prefixes before `left` in a valid sliding window form valid substrings.
+- User mistake: No specific note provided.
+
+---
+
+## Complexity
+
+Time: $O(N)$ → Single pass through string of length $N$.
+Space: $O(1)$ → Fixed auxiliary space for storing indices of 3 characters.
+
+---
+
+## Similar Problems
+
+- [Subarrays with K Different Integers](https://leetcode.com/problems/subarrays-with-k-different-integers/) - Hard
+- [Fruit Into Baskets](https://leetcode.com/problems/fruit-into-baskets/) - Medium
+- [Longest Substring Without Repeating Characters](https://leetcode.com/problems/longest-substring-without-repeating-characters/) - Medium
+
+---
+
+## Tags and Properties
+
+- #dsa #important #revisit #slidingwindow #strings
+- [[Sliding Window]] [[Two Pointers]]
+- **Revision Date:** 2026-09-25
+- **Problem Link:** [Number of Substrings Containing All Three Characters - LeetCode](https://leetcode.com/problems/number-of-substrings-containing-all-three-characters/)
+
+---
+### 🔄 Revision Checklist
+- [ ] Day 2 Revision (2026-09-27)
+- [ ] Day 7 Revision (2026-10-02)
+- [ ] Day 15 Revision (2026-10-10)
+- [ ] Day 30 Revision (2026-10-25)
 
