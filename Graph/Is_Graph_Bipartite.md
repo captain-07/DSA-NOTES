@@ -1,18 +1,18 @@
 ---
-created: 2026-10-10
+created: 2026-10-12
 revisions:
-  - 2026-10-12
-  - 2026-10-17
-  - 2026-10-25
-  - 2026-11-09
+  - 2026-10-14
+  - 2026-10-19
+  - 2026-10-27
+  - 2026-11-11
 ---
 
-error: Individual quota reached. Please upgrade your subscription to increase your limits. Resets in 94h45m26s.
-AGY_ERROR: {"short_error":"RESOURCE_EXHAUSTED (code 429): Individual quota reached. Please upgrade your subscription to increase your limits. Resets in 94h45m26s.","status":"RESOURCE_EXHAUSTED","error_code":429,"code_kind":"http","retryable":true,"error_id":"9067e148-0cfa-4ed6-8c08-581359a25c12-1"}
+error: Individual quota reached. Please upgrade your subscription to increase your limits. Resets in 47h5m10s.
+AGY_ERROR: {"short_error":"RESOURCE_EXHAUSTED (code 429): Individual quota reached. Please upgrade your subscription to increase your limits. Resets in 47h5m10s.","status":"RESOURCE_EXHAUSTED","error_code":429,"code_kind":"http","retryable":true,"error_id":"33a89385-0aeb-4d8c-89c1-a3ea752f1155-1"}
 
 ---
 ### 🔄 Revision Checklist
-- [ ] Day 2 Revision (2026-10-12)
-- [ ] Day 7 Revision (2026-10-17)
-- [ ] Day 15 Revision (2026-10-25)
-- [ ] Day 30 Revision (2026-11-09)
+- [ ] Day 2 Revision (2026-10-14)
+- [ ] Day 7 Revision (2026-10-19)
+- [ ] Day 15 Revision (2026-10-27)
+- [ ] Day 30 Revision (2026-11-11)
