@@ -1,10 +1,10 @@
 ---
-created: 2026-10-13
+created: 2026-10-14
 revisions:
-  - 2026-10-15
-  - 2026-10-20
-  - 2026-10-28
-  - 2026-11-12
+  - 2026-10-16
+  - 2026-10-21
+  - 2026-10-29
+  - 2026-11-13
 ---
 
 error: invalid model selection (--model "Gemini 3.6 Flash (Low)" --effort ""): model Gemini 3.6 Flash (Low) is not recognized as a known model or custom model in settings
@@ -18,7 +18,7 @@ Available models:
 
 ---
 ### 🔄 Revision Checklist
-- [ ] Day 2 Revision (2026-10-15)
-- [ ] Day 7 Revision (2026-10-20)
-- [ ] Day 15 Revision (2026-10-28)
-- [ ] Day 30 Revision (2026-11-12)
+- [ ] Day 2 Revision (2026-10-16)
+- [ ] Day 7 Revision (2026-10-21)
+- [ ] Day 15 Revision (2026-10-29)
+- [ ] Day 30 Revision (2026-11-13)
