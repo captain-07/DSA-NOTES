@@ -7,12 +7,13 @@ revisions:
   - 2026-10-02
 ---
 
-# Traversal Of Binary Tree Iterative
+# Traversal of Binary Tree (Iterative)
 
 ---
 
 ## Metadata & Placement Tags
 
+- **Folder:** Trees
 - **Target Companies:**
   - #Amazon #Google #Microsoft #Facebook #Apple
 

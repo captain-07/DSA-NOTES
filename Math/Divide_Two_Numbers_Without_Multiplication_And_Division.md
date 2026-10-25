@@ -7,12 +7,13 @@ revisions:
   - 2026-08-21
 ---
 
-# Divide Two Numbers Without Multiplication And Division
+# Divide Two Numbers Without Multiplication and Division
 
 ---
 
 ## Metadata & Placement Tags
 
+- **Folder:** Math
 - **Target Companies:**
   - #Google #Facebook #Amazon #Microsoft #Bloomberg
 

@@ -7,12 +7,13 @@ revisions:
   - 2026-06-14
 ---
 
-# Check If LL Is Palindrome Or Not
+# Check If LL Is Palindrome or Not
 
 ---
 
 ## Metadata & Placement Tags
 
+- **Folder:** Linked List
 - **Target Companies:**
   - #Amazon #Microsoft #Google #LinkedIn #Adobe #Bloomberg
 

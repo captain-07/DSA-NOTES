@@ -7,12 +7,13 @@ revisions:
   - 2026-08-24
 ---
 
-# Xor Of Numbers In A Given Range
+# XOR of Numbers in a Given Range
 
 ---
 
 ## Metadata & Placement Tags
 
+- **Folder:** Arrays
 - **Target Companies:**
   - #Amazon #Google #Microsoft #Directi
 

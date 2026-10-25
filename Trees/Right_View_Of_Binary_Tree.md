@@ -7,7 +7,7 @@ revisions:
   - 2026-10-08
 ---
 
-# Right View Of Binary Tree
+# Right View of Binary Tree
 
 ---
 

@@ -7,12 +7,13 @@ revisions:
   - 2026-05-10
 ---
 
-# Minimum Number Of Days To Make M Bouquets
+# Minimum Number of Days to Make M Bouquets
 
 ---
 
 ## Metadata & Placement Tags
 
+- **Folder:** Binary Search
 - **Target Companies:**
   - #Amazon #Google #Microsoft #Bloomberg #Uber
 
@@ -22,7 +23,7 @@ revisions:
   - [ ] High  
 
 - **Concepts:**
-  - #binarysearch [[Binary Search]], #greedy [[Greedy]], #array [[Array]]
+  - #binarysearch [[Binary Search]], #greedy [[Greedy]], #arrays [[Array]]
 
 ## Pattern
 

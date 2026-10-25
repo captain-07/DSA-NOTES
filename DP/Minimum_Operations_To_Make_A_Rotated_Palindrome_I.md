@@ -7,18 +7,19 @@ revisions:
   - 2026-09-14
 ---
 
-# Minimum Operations To Make A Rotated Palindrome I
+# Minimum Operations to Make a Rotated Palindrome I
 
 ---
 
 ## Metadata & Placement Tags
 
+- **Folder:** DP
 - **Target Companies:** #Google #Meta #Microsoft #Amazon
 - **Confidence Checklist:**
   - [ ] Low
   - [ ] Medium
   - [ ] High
-- **Concepts:** #dynamic-programming [[Dynamic Programming]], #string [[String]], #palindrome [[Palindrome]]
+- **Concepts:** #dynamicprogramming [[Dynamic Programming]], #strings [[String]], #palindrome [[Palindrome]]
 
 ---
 ## Pattern
@@ -138,7 +139,7 @@ Input: `s = "aab"` (Length $N = 3$), Doubled $T = \text{"aabaab"}$
 ---
 ## Tags and Properties
 
-- #dsa #important #revisit #dynamic-programming #string-rotation
+- #dsa #important #revisit #dynamicprogramming #string-rotation
 - [[Dynamic Programming]]
 - [[String Algorithms]]
 - **Revision Date:** 2026-08-15

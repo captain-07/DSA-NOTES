@@ -7,12 +7,13 @@ revisions:
   - 2026-06-26
 ---
 
-# Add One To A Number Represented By LL
+# Add One to a Number Represented by LL
 
 ---
 
 ## Metadata & Placement Tags
 
+- **Folder:** Linked List
 - **Target Companies:**
   - #Amazon #Microsoft #Flipkart #Accolite #Adobe
 

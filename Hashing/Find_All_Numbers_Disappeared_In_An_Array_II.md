@@ -7,12 +7,13 @@ revisions:
   - 2026-09-22
 ---
 
-# Find All Numbers Disappeared In An Array II
+# Find All Numbers Disappeared in an Array II
 
 ---
 
 ## Metadata & Placement Tags
 
+- **Folder:** Hashing
 - **Target Companies:**
   - #Amazon #Google #Microsoft #Facebook
 

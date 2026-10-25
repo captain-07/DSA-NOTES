@@ -7,7 +7,7 @@ revisions:
   - 2026-10-30
 ---
 
-# Number Of Provinces
+# Number of Provinces
 
 ---
 

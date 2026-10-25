@@ -13,6 +13,7 @@ revisions:
 
 ## Metadata & Placement Tags
 
+- **Folder:** Heaps
 - **Target Companies:**
   - #Amazon #Google #Microsoft #Facebook #Bloomberg
 - **Confidence Checklist:**

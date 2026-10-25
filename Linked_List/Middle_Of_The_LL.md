@@ -7,12 +7,13 @@ revisions:
   - 2026-06-08
 ---
 
-# Middle Of The Linked List
+# Middle of the Linked List
 
 ---
 
 ## Metadata & Placement Tags
 
+- **Folder:** Linked List
 - **Target Companies:**
   - #Amazon #Google #Microsoft #Adobe #Facebook #Qualcomm
 

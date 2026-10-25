@@ -7,12 +7,13 @@ revisions:
   - 2026-05-25
 ---
 
-# Left Rotate Array By One
+# Left Rotate Array by One
 
 ---
 
 ## Metadata & Placement Tags
 
+- **Folder:** Arrays
 - **Target Companies:**
   - #Amazon #Microsoft #TCS #Infosys #Wipro
 

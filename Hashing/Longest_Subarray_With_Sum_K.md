@@ -7,7 +7,7 @@ revisions:
   - 2026-05-25
 ---
 
-# Longest Subarray With Sum K
+# Longest Subarray with Sum K
 
 ---
 

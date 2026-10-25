@@ -13,12 +13,13 @@ revisions:
 
 ## Metadata & Placement Tags
 
+- **Folder:** Recursion
 - **Target Companies:** #Amazon #Microsoft #Paytm #Samsung
 - **Confidence Checklist:**
   - [ ] Low
   - [ ] Medium
   - [ ] High
-- **Concepts:** #recursion [[Recursion]], #backtracking [[Backtracking]], #bit-manipulation [[Bit Manipulation]]
+- **Concepts:** #recursion [[Recursion]], #backtracking [[Backtracking]], #bitmanipulation [[Bit Manipulation]]
 
 ---
 ## Pattern

@@ -7,7 +7,7 @@ revisions:
   - 2026-10-16
 ---
 
-# Delete Node In A Bst
+# Delete Node in a BST
 
 ---
 
@@ -20,7 +20,7 @@ revisions:
   - [ ] Medium
   - [ ] High
 
-- **Concepts:** #bst [[Binary Search Tree]], #recursion [[Recursion]], #tree [[Trees]]
+- **Concepts:** #bst [[Binary Search Tree]], #recursion [[Recursion]], #trees [[Trees]]
 
 ---
 

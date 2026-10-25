@@ -13,6 +13,7 @@ revisions:
 
 ## Metadata & Placement Tags
 
+- **Folder:** Binary Search
 - **Target Companies:**
   - #Amazon #Microsoft #Flipkart #Samsung #GoldmanSachs
 

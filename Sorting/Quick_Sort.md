@@ -13,6 +13,7 @@ revisions:
 
 ## Metadata & Placement Tags
 
+- **Folder:** Sorting
 - **Target Companies:**
   - #Amazon #Google #Microsoft #Meta #Adobe #GoldmanSachs
 

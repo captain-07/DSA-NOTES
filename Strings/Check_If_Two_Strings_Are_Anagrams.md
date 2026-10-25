@@ -7,12 +7,13 @@ revisions:
   - 2026-05-28
 ---
 
-# Check If Two Strings Are Anagram Of Each Other
+# Check If Two Strings Are Anagram of Each Other
 
 ---
 
 ## Metadata & Placement Tags
 
+- **Folder:** Strings
 - **Target Companies:**
   - #Amazon #Google #Microsoft #Facebook #Adobe #GoldmanSachs
 

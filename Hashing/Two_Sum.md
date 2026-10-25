@@ -20,7 +20,7 @@ revisions:
   - [ ] Medium
   - [ ] High
 
-- **Concepts:** #hashmap [[HashMap]], #array [[Array]]
+- **Concepts:** #hashmap [[HashMap]], #arrays [[Array]]
 
 ---
 ## Pattern
@@ -51,6 +51,11 @@ Store `(value -> index)` in Hash Map. For current number, check if `target - cur
 ### Brute Force
 - Check all pairs using two nested loops.
 - Time: $O(N^2)$, Space: $O(1)$
+
+### Better (Sort + Two Pointers)
+- Sort the array and use two pointers (left and right) to converge on `target`.
+- Note: this returns the values, not the original indices (unless indices are stored before sorting).
+- Time: $O(N \log N)$, Space: $O(1)$ (ignoring sort space).
 
 ### Optimal
 1. Initialize an empty Hash Map `seen = {}`.
@@ -132,9 +137,9 @@ Space: $O(N)$ → Up to $N$ elements stored in the Hash Map.
 ## Tags and Properties
 
 - #dsa #important #revisit
-- #array #hashmap #twosum
+- #arrays #hashmap #twosum #blind75
 - [[HashMap]] [[Array]]
-- **Last Revised:** 2026-09-13
+- **Revision Date:** 2026-09-13
 - **Problem Link:** [LeetCode - Two Sum](https://leetcode.com/problems/two-sum/)
 
 ---

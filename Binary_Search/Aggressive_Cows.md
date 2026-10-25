@@ -13,6 +13,7 @@ revisions:
 
 ## Metadata & Placement Tags
 
+- **Folder:** Binary Search
 - **Target Companies:**
   - #Amazon #Google #Microsoft #Zomato #Paytm #GoldmanSachs
 
@@ -22,7 +23,7 @@ revisions:
   - [ ] High  
 
 - **Concepts:**
-  - #binary-search [[Binary Search]]
+  - #binarysearch [[Binary Search]]
   - #sorting [[Sorting]]
   - #greedy [[Greedy]]
 

@@ -7,7 +7,7 @@ revisions:
   - 2026-10-04
 ---
 
-# Diameter Of Binary Tree
+# Diameter of Binary Tree
 
 ---
 

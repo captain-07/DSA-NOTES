@@ -7,12 +7,13 @@ revisions:
   - 2026-05-02
 ---
 
-# GCD Of Two Numbers
+# GCD of Two Numbers
 
 ---
 
 ## Metadata & Placement Tags
 
+- **Folder:** Math
 - **Target Companies:**
   - #Amazon #Microsoft #Google #TCS #Adobe #Oracle
 

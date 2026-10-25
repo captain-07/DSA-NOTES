@@ -13,6 +13,7 @@ revisions:
 
 ## Metadata & Placement Tags
 
+- **Folder:** Linked List
 - **Target Companies:**
   - #Amazon #Google #Microsoft #Apple #Adobe #Bloomberg
 

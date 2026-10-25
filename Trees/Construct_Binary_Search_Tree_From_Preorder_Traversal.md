@@ -7,7 +7,7 @@ revisions:
   - 2026-10-17
 ---
 
-# Construct Binary Search Tree From Preorder Traversal
+# Construct Binary Search Tree from Preorder Traversal
 
 ---
 
@@ -21,7 +21,7 @@ revisions:
   - [ ] High
 
 - **Concepts:**
-  - #tree [[Trees]], #bst [[Binary Search Tree]], #recursion [[Recursion]], #stack [[Monotonic Stack]]
+  - #trees [[Trees]], #bst [[Binary Search Tree]], #recursion [[Recursion]], #stack [[Monotonic Stack]]
 
 ## Pattern
 

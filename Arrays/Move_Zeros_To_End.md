@@ -7,12 +7,13 @@ revisions:
   - 2026-05-25
 ---
 
-# Move Zeros To End
+# Move Zeros to End
 
 ---
 
 ## Metadata & Placement Tags
 
+- **Folder:** Arrays
 - **Target Companies:**
   - #Amazon #Microsoft #Google #Meta #Bloomberg #Apple #Uber
 
@@ -22,7 +23,7 @@ revisions:
   - [ ] High  
 
 - **Concepts:**
-  - #array [[Array]]
+  - #arrays [[Array]]
   - #twopointers [[Two Pointers]]
   - #inplace [[In-place Operations]]
 

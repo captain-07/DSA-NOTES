@@ -13,6 +13,7 @@ revisions:
 
 ## Metadata & Placement Tags
 
+- **Folder:** Arrays
 - **Target Companies:**
   - #Amazon #Google #Microsoft #Facebook #Adobe #Apple
 
@@ -23,7 +24,7 @@ revisions:
 
 - **Concepts:**
   - #math [[Math]]
-  - #bit-manipulation [[Bit Manipulation]]
+  - #bitmanipulation [[Bit Manipulation]]
   - #arrays [[Arrays]]
 
 ## Pattern

@@ -7,12 +7,13 @@ revisions:
   - 2026-05-31
 ---
 
-# String To Integer(Atoi)
+# String to Integer (atoi)
 
 ---
 
 ## Metadata & Placement Tags
 
+- **Folder:** Strings
 - **Target Companies:**
   - #Amazon #Microsoft #Facebook #LinkedIn #Bloomberg #GoldmanSachs
 

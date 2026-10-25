@@ -137,6 +137,7 @@ Space: O(1) → Only constant extra variables used.
 
 ## Metadata & Placement Tags
 
+- **Folder:** Binary Search
 - **Target Companies:**
   - #Amazon #Facebook #Google #Microsoft #Walmart
 
@@ -146,7 +147,7 @@ Space: O(1) → Only constant extra variables used.
   - [ ] High  
 
 - **Concepts:**
-  - #binarysearch [[Binary Search]], #array [[Array]]
+  - #binarysearch [[Binary Search]], #arrays [[Array]]
 
 ---
 ### 🔄 Revision Checklist

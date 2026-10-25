@@ -13,6 +13,7 @@ revisions:
 
 ## Metadata & Placement Tags
 
+- **Folder:** Arrays
 - **Target Companies:**
   - #Google #Amazon #Microsoft #Adobe #Uber
 
@@ -149,7 +150,7 @@ Space: O(1) → Only a few integer variables are used.
 
 ## Tags and Properties
   - #dsa #important #revisit
-  - #slidingwindow #two-pointers #array-streak
+  - #slidingwindow #twopointers #array-streak
   - [[Arrays]] [[Sliding Window]] [[Two Pointers]]
   - **Revision Date:** 2026-08-11
   - **Problem Link:** [LeetCode - Max Consecutive Ones III](https://leetcode.com/problems/max-consecutive-ones-iii/)

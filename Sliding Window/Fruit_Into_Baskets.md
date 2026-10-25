@@ -7,7 +7,7 @@ revisions:
   - 2026-09-11
 ---
 
-# Fruit Into Baskets
+# Fruit into Baskets
 
 ---
 
@@ -23,7 +23,7 @@ revisions:
   - [ ] High
 
 - **Concepts:**
-  - #slidingwindow [[Sliding Window]], #hashmap [[HashMap]], #array [[Array]]
+  - #slidingwindow [[Sliding Window]], #hashmap [[HashMap]], #arrays [[Array]]
 
 ## Pattern
 Two Pointers / Sliding Window (Variable Size)
@@ -158,7 +158,7 @@ Space: O(1) → The hash map stores at most 3 distinct elements.
 
 ## Tags and Properties
 - #dsa #important #revisit
-- #slidingwindow #hashmap #two-pointers
+- #slidingwindow #hashmap #twopointers
 - [[Sliding Window]], [[HashMap]], [[Two Pointers]]
 - **Revision Date:** 2026-08-12
 - **Problem Link:** [LeetCode - Fruit Into Baskets](https://leetcode.com/problems/fruit-into-baskets/)

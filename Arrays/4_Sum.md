@@ -13,6 +13,7 @@ revisions:
 
 ## Metadata & Placement Tags
 
+- **Folder:** Arrays
 - **Target Companies:**
   - #Amazon #Meta #Google #Microsoft #Apple #Adobe
 
@@ -22,7 +23,7 @@ revisions:
   - [ ] High  
 
 - **Concepts:**
-  - #sorting [[Sorting]], #twopointers [[Two Pointers]], #array [[Array]]
+  - #sorting [[Sorting]], #twopointers [[Two Pointers]], #arrays [[Array]]
 
 ## Pattern
 

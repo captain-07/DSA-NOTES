@@ -13,6 +13,7 @@ revisions:
 
 ## Metadata & Placement Tags
 
+- **Folder:** Matrix
 - **Target Companies:**
   - #Amazon #Microsoft #Google #Facebook #Apple #Adobe
 
@@ -151,7 +152,7 @@ Input: `[[0, 1, 2, 0], [3, 4, 5, 2], [1, 3, 1, 5]]`
 ---
 
 ## Tags and Properties
-- #dsa #important #revisit #matrix #in-place
+- #dsa #important #revisit #matrix #inplace
 - [[Matrix]] [[Space Optimization]]
 - **Revision Date:** 2026-04-25
 - **Problem Link:** [LeetCode - Set Matrix Zeroes](https://leetcode.com/problems/set-matrix-zeroes/)

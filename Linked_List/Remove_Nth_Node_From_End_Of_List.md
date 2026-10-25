@@ -7,12 +7,13 @@ revisions:
   - 2026-06-14
 ---
 
-# Remove Nth Node From The End Of The List
+# Remove Nth Node from the End of the List
 
 ---
 
 ## Metadata & Placement Tags
 
+- **Folder:** Linked List
 - **Target Companies:**
   - #Amazon #Google #Microsoft #Facebook #Apple #Adobe
 

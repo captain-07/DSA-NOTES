@@ -7,12 +7,13 @@ revisions:
   - 2026-05-31
 ---
 
-# Maximum Nesting Depth Of The Parentheses
+# Maximum Nesting Depth of the Parentheses
 
 ---
 
 ## Metadata & Placement Tags
 
+- **Folder:** Strings
 - **Target Companies:**
   - #Amazon #Facebook #Google #Microsoft #Adobe
 
@@ -23,7 +24,7 @@ revisions:
 
 - **Concepts:**
   - #stack [[Stack]]
-  - #string [[String]]
+  - #strings [[String]]
   - #simulation [[Simulation]]
 
 ## Pattern

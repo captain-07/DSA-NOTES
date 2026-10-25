@@ -7,12 +7,13 @@ revisions:
   - 2026-05-25
 ---
 
-# Reverse A Number
+# Reverse a Number
 
 ---
 
 ## Metadata & Placement Tags
 
+- **Folder:** Math
 - **Target Companies:**
   - #Amazon #Microsoft #Bloomberg #Apple #Adobe
 

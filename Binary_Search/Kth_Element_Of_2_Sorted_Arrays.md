@@ -7,12 +7,13 @@ revisions:
   - 2026-05-20
 ---
 
-# Kth Element Of 2 Sorted Arrays
+# Kth Element of 2 Sorted Arrays
 
 ---
 
 ## Metadata & Placement Tags
 
+- **Folder:** Binary Search
 - **Target Companies:**
   - #Amazon #Google #Microsoft #Flipkart #Apple #Adobe
 

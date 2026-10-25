@@ -153,9 +153,9 @@ Space: O(N) → Auxiliary memory for `LMin` and `RMax` arrays of size N.
 ## Tags and Properties
 
 - #dsa #important #revisit
-- #array #twopointers #precomputation
+- #arrays #twopointers #precomputation
 - Concept Links: [[Two Pointers]], [[Precomputation]], [[Arrays]]
-- **Last Revised:** 2026-09-13
+- **Revision Date:** 2026-09-13
 - **Problem Link:** [GeeksforGeeks - Maximum Index](https://www.geeksforgeeks.org/problems/maximum-index-1587115620/1)
 
 ---

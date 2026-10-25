@@ -7,7 +7,7 @@ revisions:
   - 2026-05-11
 ---
 
-# Capacity To Ship Packages Within D Days
+# Capacity to Ship Packages Within D Days
 
 ---
 
@@ -139,6 +139,7 @@ Space: $O(1)$ → Constant extra space used for pointers and greedy check.
 
 ## Metadata & Placement Tags
 
+- **Folder:** Binary Search
 - **Target Companies:**
   - #Google #Amazon #Microsoft #Facebook #Apple
 

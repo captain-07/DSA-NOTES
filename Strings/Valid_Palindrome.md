@@ -13,6 +13,7 @@ revisions:
 
 ## Metadata & Placement Tags
 
+- **Folder:** Strings
 - **Target Companies:**
   - #Amazon #Microsoft #Google #Meta #Apple #Adobe
 
@@ -23,7 +24,7 @@ revisions:
 
 - **Concepts:**
   - #twopointers [[Two Pointers]]
-  - #string [[String Manipulation]]
+  - #strings [[String Manipulation]]
 
 ## Pattern
 

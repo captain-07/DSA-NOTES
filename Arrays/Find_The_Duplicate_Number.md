@@ -7,7 +7,7 @@ revisions:
   - 2026-10-18
 ---
 
-# Find The Duplicate Number
+# Find the Duplicate Number
 
 ---
 

@@ -13,6 +13,7 @@ revisions:
 
 ## Metadata & Placement Tags
 
+- **Folder:** Math
 - **Target Companies:**
   - #Google #Amazon #Microsoft #Facebook #Adobe #Apple
 

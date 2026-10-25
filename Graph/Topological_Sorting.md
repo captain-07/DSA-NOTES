@@ -193,7 +193,7 @@ Space: $O(V + E)$ → Adjacency list, in-degree/state array, and queue/recursion
 ## Tags and Properties
 
 - #dsa #important #revisit
-- #topological-sort #dag #graph-traversal
+- #topologicalsort #dag #graph-traversal
 - Concepts: [[Graph]], [[Topological Sort]], [[Kahn's Algorithm]], [[Cycle Detection]]
 - **Revision Date:** 2026-10-14
 - **Problem Link:** [Course Schedule II (LeetCode)](https://leetcode.com/problems/course-schedule-ii/)

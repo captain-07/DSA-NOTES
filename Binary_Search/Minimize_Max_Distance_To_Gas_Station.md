@@ -7,12 +7,13 @@ revisions:
   - 2026-05-20
 ---
 
-# Minimize Max Distance To Gas Station
+# Minimize Max Distance to Gas Station
 
 ---
 
 ## Metadata & Placement Tags
 
+- **Folder:** Binary Search
 - **Target Companies:**
   - #Google #Amazon #Microsoft #Directi
 
@@ -23,7 +24,7 @@ revisions:
 
 - **Concepts:**
   - #binarysearch [[Binary Search]]
-  - #heap [[Heap]]
+  - #heaps [[Heap]]
   - #greedy [[Greedy]]
 
 ## Pattern

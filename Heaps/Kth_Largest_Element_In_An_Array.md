@@ -7,12 +7,13 @@ revisions:
   - 2026-09-17
 ---
 
-# Kth Largest Element In An Array
+# Kth Largest Element in an Array
 
 ---
 
 ## Metadata & Placement Tags
 
+- **Folder:** Heaps
 - **Target Companies:**
   - #Amazon #Google #Microsoft #Facebook
 - **Confidence Checklist:**
@@ -20,7 +21,7 @@ revisions:
   - [ ] Medium
   - [ ] High
 - **Concepts:**
-  - #heap [[Heap]], #divideandconquer [[Divide and Conquer]], #sorting [[Sorting]]
+  - #heaps [[Heap]], #divideandconquer [[Divide and Conquer]], #sorting [[Sorting]]
 
 ## Pattern
 Heap (Min-Heap) + Quickselect
@@ -150,7 +151,7 @@ Input: `nums = [3, 2, -1, 5, 4, 3]`, `k = 3` (Expected: `3`)
 
 ---
 ## Tags and Properties
-- #dsa #important #revisit #heap #quickselect
+- #dsa #important #revisit #heaps #quickselect
 - Obsidian links: [[Heap]] [[Divide and Conquer]] [[Sorting]]
 - Revision Date: 2026-08-18
 - **Problem Link:** [LeetCode - Kth Largest Element in an Array](https://leetcode.com/problems/kth-largest-element-in-an-array/)

@@ -7,7 +7,7 @@ revisions:
   - 2026-05-11
 ---
 
-# Count Occurrence In Sorted Array
+# Count Occurrence in Sorted Array
 
 ---
 
@@ -139,13 +139,14 @@ Space: O(1) → Constant space used for pointers.
 ---
 
 ## Tags and Properties
-  - #dsa #important #revisit #binarysearch #array #sorting
+  - #dsa #important #revisit #binarysearch #arrays #sorting
   - [[Binary Search]] [[Array]] [[Sorting]]
   - **Revision Date:** 2026-04-11
   - **Problem Link:** [Count occurrences of a number in a sorted array - GeeksforGeeks](https://www.geeksforgeeks.org/problems/count-occurences-of-number-in-sorted-array4751/1)
 
 ## Metadata & Placement Tags
 
+- **Folder:** Binary Search
 - **Target Companies:**
   - #Amazon #Google #Microsoft #Adobe #Samsung #Walmart #Flipkart
 - **Confidence Checklist:**
@@ -154,7 +155,7 @@ Space: O(1) → Constant space used for pointers.
   - [ ] High  
 
 - **Concepts:**
-  - #binarysearch [[Binary Search]], #array [[Array]], #sorting [[Sorting]]
+  - #binarysearch [[Binary Search]], #arrays [[Array]], #sorting [[Sorting]]
 
 ---
 ### 🔄 Revision Checklist

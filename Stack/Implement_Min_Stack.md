@@ -13,6 +13,7 @@ revisions:
 
 ## Metadata & Placement Tags
 
+- **Folder:** Stack
 - **Target Companies:**
   - #Amazon #Google #Microsoft #Bloomberg #Apple #Adobe
 

@@ -7,7 +7,7 @@ revisions:
   - 2026-10-30
 ---
 
-# Connected Components In An Undirected Graph
+# Connected Components in an Undirected Graph
 
 ---
 

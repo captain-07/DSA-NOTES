@@ -7,12 +7,13 @@ revisions:
   - 2026-05-25
 ---
 
-# Search X In Sorted Array
+# Search X in Sorted Array
 
 ---
 
 ## Metadata & Placement Tags
 
+- **Folder:** Binary Search
 - **Target Companies:**
   - #Amazon #Google #Microsoft #Meta #Apple #Uber
 
@@ -23,7 +24,7 @@ revisions:
 
 - **Concepts:**
   - #binarysearch [[Binary Search]]
-  - #array [[Array]]
+  - #arrays [[Array]]
   - #divideandconquer [[Divide and Conquer]]
 
 ## Pattern

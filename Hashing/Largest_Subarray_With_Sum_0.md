@@ -1,65 +1,67 @@
 ---
-created: 2026-04-25
+created: 2026-09-13
 revisions:
-  - 2026-04-27
-  - 2026-05-02
-  - 2026-05-10
-  - 2026-05-25
+  - 2026-09-15
+  - 2026-09-20
+  - 2026-09-28
+  - 2026-10-13
 ---
 
-# Largest Subarray With Sum 0
+# Largest Subarray with Sum 0
 
 ---
 
 ## Metadata & Placement Tags
 
-- **Target Companies:**
-  - #Amazon #Google #Microsoft #Facebook #Ola #Uber
-
+- **Folder:** Hashing
+- **Target Companies:** #Amazon #Microsoft #MakeMyTrip #Paytm
 - **Confidence Checklist:**
-  - [ ] Low  
-  - [ ] Medium  
-  - [ ] High  
+  - [ ] Low
+  - [ ] Medium
+  - [ ] High
 
 - **Concepts:**
-  - #prefixsum [[Prefix Sum]], #hashmap [[HashMap]]
+  - #hashmap [[HashMap]], #prefixsum [[Prefix Sum]], #arrays [[Arrays]]
 
 ## Pattern
 
-Prefix Sum + HashMap (Difference Pattern)
+Prefix Sum + HashMap
 
 ---
 ## Difficulty
 
-Medium  
+Medium
 #medium
 
 ---
 
 ## ⚡ Key Idea (Core Insight)
 
-If the **Prefix Sum** at index `i` is $S$ and the Prefix Sum at index `j` is also $S$, the sum of the subarray between $i+1$ and $j$ must be **zero**. We use a HashMap to store the *first* occurrence of each prefix sum to maximize the distance.
+If prefix sum up to index `i` is equal to prefix sum up to index `j` (`j > i`), then the sum of elements from index `i + 1` to `j` is 0. Storing the first occurrence of each prefix sum in a hash map allows us to find the maximum distance between identical prefix sums.
 
 ---
 
 ## ⚡ Quick Recall (VERY IMPORTANT)
 
-Store `prefix_sum` in a map. If seen again, calculate `current_index - first_occurrence_index`. Handle `sum == 0` separately as length `i + 1`.
+Track cumulative prefix sum. Store `sum -> first_index` in hash map. If sum repeats, subarray length is `current_index - first_index`.
 
 ---
 
 ## Approach
 
 ### Brute Force
-- Check all possible subarrays $(i, j)$ and calculate their sum.
-- Time Complexity: $O(N^2)$
+- Check all possible subarrays, compute their sum, and track the maximum length where sum equals 0.
+- **Time:** O(N²) | **Space:** O(1)
 
 ### Optimal
-1. Maintain `curr_sum` while iterating through the array.
-2. If `curr_sum == 0`, the largest subarray so far is `i + 1`.
-3. If `curr_sum` exists in the HashMap, a zero-sum subarray exists. Update `max_len = max(max_len, i - map[curr_sum])`.
-4. If `curr_sum` is NOT in the HashMap, store it with its current index: `map[curr_sum] = i`.
-5. **Note:** We only store the *first* occurrence to ensure we get the *longest* subarray.
+- Maintain a running prefix sum and a hash map storing `{prefix_sum: first_seen_index}`.
+- Initialize `max_len = 0` and prefix sum `0` at index `-1`.
+- Iterate through the array:
+  1. Add current element to prefix sum.
+  2. If prefix sum is 0, subarray from index 0 to `i` has sum 0 (`max_len = i + 1`).
+  3. If prefix sum is already in hash map, update `max_len = max(max_len, i - hashmap[prefix_sum])`.
+  4. If prefix sum is NOT in hash map, store `hashmap[prefix_sum] = i`.
+- Return `max_len`.
 
 ---
 
@@ -67,90 +69,91 @@ Store `prefix_sum` in a map. If seen again, calculate `current_index - first_occ
 
 ```python
 class Solution:
-    def maxLen(self, n, arr):
-        # Map to store the first occurrence of prefix_sum
-        hash_map = {}
-        max_len = 0
-        curr_sum = 0
-        
-        for i in range(n):
-            curr_sum += arr[i]
-            
-            if curr_sum == 0:
-                # Subarray starts from index 0
-                max_len = i + 1
-            
-            if curr_sum in hash_map:
-                # Calculate distance from first occurrence
-                max_len = max(max_len, i - hash_map[curr_sum])
+    def maxLen(self, arr: list[int], n: int) -> int:
+        # Map to store first occurrence of prefix sum: {prefix_sum: index}
+        prefix_sum_map = {}
+
+        max_length = 0
+        current_sum = 0
+
+        for index in range(n):
+            current_sum += arr[index]
+
+            # Case 1: Subarray starting from index 0 has sum 0
+            if current_sum == 0:
+                max_length = index + 1
+
+            # Case 2: Prefix sum seen before -> subarray between first occurrence and now sums to 0
+            elif current_sum in prefix_sum_map:
+                previous_index = prefix_sum_map[current_sum]
+                max_length = max(max_length, index - previous_index)
+
+            # Case 3: First time seeing this prefix sum -> store index
             else:
-                # Only store the first time we see this sum
-                hash_map[curr_sum] = i
-                
-        return max_len
+                prefix_sum_map[current_sum] = index
+
+        return max_length
 ```
 
 ---
 
 ## Dry Run (Smart Example)
 
-Input: `arr = [1, 2, -2, 4, -4]`
+Input: `arr = [15, -2, 2, -8, 1, 7, 10, 23]`, `n = 8`
 
-| Step | Index | Val | `curr_sum` | HashMap `{Sum: Index}` | `max_len` | Explanation |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| 1 | 0 | 1 | 1 | `{1: 0}` | 0 | First sum, add to map. |
-| 2 | 1 | 2 | 3 | `{1: 0, 3: 1}` | 0 | New sum, add to map. |
-| 3 | 2 | -2 | 1 | `{1: 0, 3: 1}` | $2-0 = 2$ | `1` seen at index 0. |
-| 4 | 3 | 4 | 5 | `{1: 0, 3: 1, 5: 3}` | 2 | New sum, add to map. |
-| 5 | 4 | -4 | 1 | `{1: 0, 3: 1, 5: 3}` | $4-0 = 4$ | `1` seen at index 0. |
-
-Final Result: **4** (Subarray: `[2, -2, 4, -4]`)
+| Step | Index | Value | Current Sum | Map State `{sum: idx}` | Action / Explanation | `max_len` |
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| 1 | 0 | 15 | 15 | `{15: 0}` | First seen 15, store index 0 | 0 |
+| 2 | 1 | -2 | 13 | `{15: 0, 13: 1}` | First seen 13, store index 1 | 0 |
+| 3 | 2 | 2 | 15 | `{15: 0, 13: 1}` | 15 seen at index 0 -> len = 2 - 0 = 2 | 2 |
+| 4 | 3 | -8 | 7 | `{15: 0, 13: 1, 7: 3}` | First seen 7, store index 3 | 2 |
+| 5 | 4 | 1 | 8 | `{..., 8: 4}` | First seen 8, store index 4 | 2 |
+| 6 | 5 | 7 | 15 | `{...}` | 15 seen at index 0 -> len = 5 - 0 = 5 | 5 |
 
 ---
 
 ## Edge Cases
 
-- **All zeros:** Returns array length.
-- **No zero sum:** Returns 0.
-- **Single element 0:** Returns 1.
-- **Sum becomes 0 at the end:** Handled by `curr_sum == 0` check.
-- **Large negatives/positives:** Handled by `curr_sum` logic.
+- **All zero array `[0, 0, 0]`:** Output should be length of array (3).
+- **No subarray with sum 0 `[1, 2, 3]`:** Output should be 0.
+- **Entire array sums to 0 `[1, -1, 2, -2]`:** Handled when `current_sum == 0`.
+- **Single element array `[0]` vs `[5]`:** Returns 1 for `[0]` and 0 for `[5]`.
 
 ---
 
 ## Mistakes
 
-- **Updating index in HashMap:** Never update the index if the sum is already present; you want the *earliest* index for maximum length.
-- **Forgetting `curr_sum == 0`:** If the sum is zero, the subarray starts from the very beginning (index 0).
-- **User Mistake:** No specific note provided.
+- Updating the hash map index when a prefix sum is seen again (must ONLY store the *first* occurrence to maximize length).
+- Forgetting to handle the case where prefix sum itself becomes `0`.
+- User mistake: No specific note provided.
 
 ---
 
 ## Complexity
 
-Time: $O(N)$ → Single pass through the array.  
-Space: $O(N)$ → HashMap stores at most $N$ prefix sums.
+Time: O(N) → Single pass traversal over array with O(1) hash map operations.
+Space: O(N) → Extra space used by hash map to store up to N prefix sums.
 
 ---
 
 ## Similar Problems
 
 - [Subarray Sum Equals K](https://leetcode.com/problems/subarray-sum-equals-k/) - Medium
-- [Longest Subarray with Sum K](https://www.geeksforgeeks.org/longest-sub-array-sum-k/) - Medium
-- [Subarray Sums Divisible by K](https://leetcode.com/problems/subarray-sums-divisible-by-k/) - Medium
-- [Contiguous Array (Binary Array 0s and 1s)](https://leetcode.com/problems/contiguous-array/) - Medium
+- [Continuous Subarray Sum](https://leetcode.com/problems/continuous-subarray-sum/) - Medium
+- [Contiguous Array](https://leetcode.com/problems/contiguous-array/) - Medium
 
 ---
 
 ## Tags and Properties
-- #dsa #important #revisit #prefixsum #hashmap
-- [[Prefix Sum]] [[HashMap]]
-- **Revision Date:** 2026-04-25
-- **Problem Link:** [Largest subarray with 0 sum - GFG](https://www.geeksforgeeks.org/problems/largest-subarray-with-0-sum/1)
+
+- #dsa #important #revisit
+- #prefixsum [[Prefix Sum]] #hashmap [[HashMap]] #arrays [[Arrays]]
+- **Revision Date:** 2026-09-13
+- **Problem Link:** [GeeksforGeeks - Largest Subarray With 0 Sum](https://www.geeksforgeeks.org/problems/largest-subarray-with-0-sum/1)
 
 ---
 ### 🔄 Revision Checklist
-- [ ] Day 2 Revision (2026-04-27)
-- [ ] Day 7 Revision (2026-05-02)
-- [ ] Day 15 Revision (2026-05-10)
-- [ ] Day 30 Revision (2026-05-25)
+- [x] Day 2 Revision (2026-09-15)
+- [ ] Day 7 Revision (2026-09-20)
+- [ ] Day 15 Revision (2026-09-28)
+- [ ] Day 30 Revision (2026-10-13)

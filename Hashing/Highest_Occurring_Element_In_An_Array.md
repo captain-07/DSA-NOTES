@@ -7,12 +7,13 @@ revisions:
   - 2026-05-10
 ---
 
-# Highest Occurring Element In An Array
+# Highest Occurring Element in an Array
 
 ---
 
 ## Metadata & Placement Tags
 
+- **Folder:** Hashing
 - **Target Companies:**
   - #Amazon #Google #Microsoft #Adobe #Samsung
 

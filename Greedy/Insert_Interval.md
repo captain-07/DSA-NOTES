@@ -13,7 +13,7 @@ revisions:
 
 ## Metadata & Placement Tags
 
-- **Folder:** Arrays
+- **Folder:** Greedy
 - **Target Companies:** #Google #Amazon #Microsoft #Meta #Apple #LinkedIn
 - **Confidence Checklist:**
   - [ ] Low
@@ -146,7 +146,7 @@ Space: O(N) → Result list stores `N + 1` intervals in the worst case.
 
 - #dsa #important #revisit #intervals #arrays
 - Obsidian Links: [[Intervals]], [[Arrays]], [[Sorting]]
-- **Last Revised:** 2026-09-24
+- **Revision Date:** 2026-09-24
 - **Problem Link:** [Insert Interval - LeetCode](https://leetcode.com/problems/insert-interval/)
 
 ---

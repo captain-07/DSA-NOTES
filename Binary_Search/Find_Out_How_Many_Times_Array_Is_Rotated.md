@@ -140,6 +140,7 @@ Space: O(1) → Only a few pointers are used.
 
 ## Metadata & Placement Tags
 
+- **Folder:** Binary Search
 - **Target Companies:**
   - #Amazon #Microsoft #Adobe #Google #Flipkart
 

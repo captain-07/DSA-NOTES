@@ -7,7 +7,7 @@ revisions:
   - 2026-10-22
 ---
 
-# Maximum Meetings In One Room
+# Maximum Meetings in One Room
 
 ---
 

@@ -13,12 +13,13 @@ revisions:
 
 ## Metadata & Placement Tags
 
+- **Folder:** Arrays
 - **Target Companies:** #Amazon #Google #Microsoft #Meta #Apple
 - **Confidence Checklist:**
   - [ ] Low
   - [ ] Medium
   - [ ] High
-- **Concepts:** #twopointers [[Two Pointers]], #array [[Array]], #dynamicprogramming [[Dynamic Programming]], #stack [[Monotonic Stack]]
+- **Concepts:** #twopointers [[Two Pointers]], #arrays [[Array]], #dynamicprogramming [[Dynamic Programming]], #stack [[Monotonic Stack]]
 
 ## Pattern
 
@@ -135,7 +136,7 @@ Space: O(1) $\rightarrow$ Constant memory usage.
 ## Tags and Properties
 
 - #dsa #important #revisit
-- #twopointers [[Two Pointers]] #array [[Array]]
+- #twopointers [[Two Pointers]] #arrays [[Array]]
 - **Revision Date:** 2026-08-05
 - **Problem Link:** [LeetCode - Trapping Rain Water](https://leetcode.com/problems/trapping-rain-water/)
 

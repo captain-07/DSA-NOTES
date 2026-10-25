@@ -7,12 +7,13 @@ revisions:
   - 2026-07-06
 ---
 
-# Sort A Stack Using Recursion
+# Sort a Stack Using Recursion
 
 ---
 
 ## Metadata & Placement Tags
 
+- **Folder:** Recursion
 - **Target Companies:**
   - #Amazon #Microsoft #GoldmanSachs #Adobe #Walmart
 

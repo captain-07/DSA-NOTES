@@ -7,12 +7,13 @@ revisions:
   - 2026-05-25
 ---
 
-# Rearrange Array Elements By Sign
+# Rearrange Array Elements by Sign
 
 ---
 
 ## Metadata & Placement Tags
 
+- **Folder:** Arrays
 - **Target Companies:**
   - #Amazon #Microsoft #Meta #Adobe #Google
 

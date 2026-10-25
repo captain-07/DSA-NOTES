@@ -7,12 +7,13 @@ revisions:
   - 2026-08-21
 ---
 
-# Check If A Number Is Power Of 2 Or Not
+# Check If a Number Is Power of 2 or Not
 
 ---
 
 ## Metadata & Placement Tags
 
+- **Folder:** Math
 - **Target Companies:** #Amazon #Google #Microsoft #Meta #Apple
 - **Confidence Checklist:**
   - [ ] Low

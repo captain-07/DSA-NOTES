@@ -7,12 +7,13 @@ revisions:
   - 2026-05-22
 ---
 
-# Find Row With Maximum 1s
+# Find Row with Maximum 1s
 
 ---
 
 ## Metadata & Placement Tags
 
+- **Folder:** Matrix
 - **Target Companies:**
   - #Amazon #Microsoft #Samsung #Media.net #Adobe
 

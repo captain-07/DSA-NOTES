@@ -7,12 +7,13 @@ revisions:
   - 2026-05-25
 ---
 
-# Print The Matrix In Spiral Manner
+# Print the Matrix in Spiral Manner
 
 ---
 
 ## Metadata & Placement Tags
 
+- **Folder:** Matrix
 - **Target Companies:**
   - #Amazon #Microsoft #Google #Apple #Adobe #Uber
 

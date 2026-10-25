@@ -13,7 +13,7 @@ revisions:
 
 ## Metadata & Placement Tags
 
-- **Folder:** Sorting
+- **Folder:** Greedy
 - **Target Companies:** #Amazon #Google #Microsoft #Facebook #Apple #Bloomberg
 - **Confidence Checklist:**
   - [ ] Low

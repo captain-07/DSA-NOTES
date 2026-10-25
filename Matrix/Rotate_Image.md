@@ -7,12 +7,13 @@ revisions:
   - 2026-05-25
 ---
 
-# Rotate Matrix By 90 Degrees
+# Rotate Matrix by 90 Degrees
 
 ---
 
 ## Metadata & Placement Tags
 
+- **Folder:** Matrix
 - **Target Companies:**
   - #Amazon #Google #Microsoft #Apple #Adobe #Facebook #GoldmanSachs
 
@@ -22,7 +23,7 @@ revisions:
   - [ ] High  
 
 - **Concepts:**
-  - #matrix [[Matrix]] #arrays [[Arrays]] #in-place [[In-place]]
+  - #matrix [[Matrix]] #arrays [[Arrays]] #inplace [[In-place]]
 
 ## Pattern
 

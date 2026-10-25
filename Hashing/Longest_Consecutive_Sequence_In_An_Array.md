@@ -7,12 +7,13 @@ revisions:
   - 2026-05-25
 ---
 
-# Longest Consecutive Sequence In An Array
+# Longest Consecutive Sequence in an Array
 
 ---
 
 ## Metadata & Placement Tags
 
+- **Folder:** Hashing
 - **Target Companies:**
   - #Amazon #Google #Microsoft #Meta #Salesforce #GoldmanSachs
 
@@ -23,7 +24,7 @@ revisions:
 
 - **Concepts:**
   - #hashset [[HashSet]]
-  - #array [[Array]]
+  - #arrays [[Array]]
   - #sorting [[Sorting]]
 
 ---

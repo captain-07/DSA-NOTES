@@ -7,12 +7,13 @@ revisions:
   - 2026-05-25
 ---
 
-# Count Subarrays With Given Xor K
+# Count Subarrays with Given XOR K
 
 ---
 
 ## Metadata & Placement Tags
 
+- **Folder:** Hashing
 - **Target Companies:**
   - #Amazon #Google #Microsoft #Ola #OYO
 
@@ -22,7 +23,7 @@ revisions:
   - [ ] High  
 
 - **Concepts:**
-  - #hashmap [[HashMap]], #bit-manipulation [[Bit Manipulation]], #prefix-sum [[Prefix Sum]]
+  - #hashmap [[HashMap]], #bitmanipulation [[Bit Manipulation]], #prefixsum [[Prefix Sum]]
 
 ## Pattern
 

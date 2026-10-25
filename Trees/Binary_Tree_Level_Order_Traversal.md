@@ -13,12 +13,13 @@ revisions:
 
 ## Metadata & Placement Tags
 
+- **Folder:** Trees
 - **Target Companies:** #Amazon #Microsoft #Google #Meta #Apple
 - **Confidence Checklist:**
   - [ ] Low
   - [ ] Medium
   - [ ] High
-- **Concepts:** #bfs [[Breadth-First Search]], #tree [[Tree]], #queue [[Queue]]
+- **Concepts:** #bfs [[Breadth-First Search]], #trees [[Tree]], #queue [[Queue]]
 
 ---
 
@@ -153,7 +154,7 @@ Space: O(N) → Queue stores at most max leaf nodes at bottom level (up to N/2 n
 
 - #dsa #important #revisit #bfs #binarytree
 - [[Breadth-First Search]] [[Binary Tree]] [[Queue]]
-- **Last Revised:** 2026-09-02
+- **Revision Date:** 2026-09-02
 - **Problem Link:** [Binary Tree Level Order Traversal - LeetCode](https://leetcode.com/problems/binary-tree-level-order-traversal/)
 
 ---

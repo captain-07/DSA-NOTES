@@ -7,7 +7,7 @@ revisions:
   - 2026-05-25
 ---
 
-# Stock Buy And Sell
+# Stock Buy and Sell
 
 ---
 
@@ -23,7 +23,7 @@ revisions:
   - [ ] High  
 
 - **Concepts:**
-  - #array [[Array]]
+  - #arrays [[Array]]
   - #greedy [[Greedy]]
   - #dynamicprogramming [[Dynamic Programming]]
 

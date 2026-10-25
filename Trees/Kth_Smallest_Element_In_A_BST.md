@@ -7,7 +7,7 @@ revisions:
   - 2026-10-16
 ---
 
-# Kth Smallest Element In A Bst
+# Kth Smallest Element in a BST
 
 ---
 
@@ -19,7 +19,7 @@ revisions:
   - [ ] Low
   - [ ] Medium
   - [ ] High
-- **Concepts:** #bst [[Binary Search Tree]], #inorder [[Inorder Traversal]], #tree [[Tree]]
+- **Concepts:** #bst [[Binary Search Tree]], #inorder [[Inorder Traversal]], #trees [[Tree]]
 
 ---
 
@@ -165,7 +165,7 @@ Tree structure:
 
 - #dsa #important #revisit #bst #inorder
 - [[Binary Search Tree]] [[Inorder Traversal]] [[Tree]]
-- **Last Revised:** 2026-09-16
+- **Revision Date:** 2026-09-16
 - **Problem Link:** [LeetCode - Kth Smallest Element in a BST](https://leetcode.com/problems/kth-smallest-element-in-a-bst/)
 
 ---

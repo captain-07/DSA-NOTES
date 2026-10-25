@@ -7,7 +7,7 @@ revisions:
   - 2026-10-07
 ---
 
-# Vertical Order Traversal Of A Binary Tree
+# Vertical Order Traversal of a Binary Tree
 
 ---
 
@@ -21,7 +21,7 @@ revisions:
   - [ ] High
 
 - **Concepts:**
-  - #bfs [[Breadth-First Search]], #dfs [[Depth-First Search]], #hashtable [[Hash Table]], #sorting [[Sorting]], #tree [[Binary Tree]]
+  - #bfs [[Breadth-First Search]], #dfs [[Depth-First Search]], #hashtable [[Hash Table]], #sorting [[Sorting]], #trees [[Binary Tree]]
 
 ## Pattern
 

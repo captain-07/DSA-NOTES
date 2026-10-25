@@ -145,7 +145,7 @@ Space: O(1) or O(N + M) → auxiliary space depends on the sorting algorithm imp
 
 - #dsa #important #revisit #greedy #twopointers #sorting
 - [[Greedy]] [[Two Pointers]] [[Sorting]]
-- **Last Revised:** 2026-09-19
+- **Revision Date:** 2026-09-19
 - **Problem Link:** [Assign Cookies - LeetCode](https://leetcode.com/problems/assign-cookies/)
 
 ---

@@ -7,12 +7,13 @@ revisions:
   - 2026-08-16
 ---
 
-# Letter Combinations Of A Phone Number
+# Letter Combinations of a Phone Number
 
 ---
 
 ## Metadata & Placement Tags
 
+- **Folder:** Recursion
 - **Target Companies:**
   - #Amazon #Google #Microsoft #Meta #Uber
 
@@ -22,7 +23,7 @@ revisions:
   - [ ] High
 
 - **Concepts:**
-  - #backtracking [[Backtracking]], #recursion [[Recursion]], #string [[String]]
+  - #backtracking [[Backtracking]], #recursion [[Recursion]], #strings [[String]]
 
 ---
 ## Pattern

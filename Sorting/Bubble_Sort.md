@@ -138,6 +138,7 @@ Space: $O(1)$ → In-place sorting; no auxiliary data structures used.
 
 ## Metadata & Placement Tags
 
+- **Folder:** Sorting
 - **Target Companies:**
   - #Amazon #Microsoft #Infosys #TCS #Wipro
 

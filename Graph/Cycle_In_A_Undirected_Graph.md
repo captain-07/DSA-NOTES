@@ -7,7 +7,7 @@ revisions:
   - 2026-11-07
 ---
 
-# Cycle In A Undirected Graph
+# Cycle in an Undirected Graph
 
 ---
 

@@ -7,7 +7,7 @@ revisions:
   - 2026-10-25
 ---
 
-# Number Of Substrings Containing All Three Characters
+# Number of Substrings Containing All Three Characters
 
 ---
 

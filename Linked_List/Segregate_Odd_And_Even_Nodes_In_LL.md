@@ -7,12 +7,13 @@ revisions:
   - 2026-06-14
 ---
 
-# Segregate Odd And Even Nodes In Linked List
+# Segregate Odd and Even Nodes in Linked List
 
 ---
 
 ## Metadata & Placement Tags
 
+- **Folder:** Linked List
 - **Target Companies:**
   - #Amazon #Microsoft #Google #Facebook #Bloomberg
 

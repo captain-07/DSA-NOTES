@@ -7,12 +7,13 @@ revisions:
   - 2026-06-26
 ---
 
-# Sort A Linked List Of 0s 1s And 2s
+# Sort a Linked List of 0s 1s and 2s
 
 ---
 
 ## Metadata & Placement Tags
 
+- **Folder:** Linked List
 - **Target Companies:**
   - #Amazon #Microsoft #Adobe #Flipkart #MakeMyTrip #Qualcomm
 

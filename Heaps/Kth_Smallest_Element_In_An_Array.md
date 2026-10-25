@@ -7,12 +7,13 @@ revisions:
   - 2026-09-18
 ---
 
-# Kth Smallest Element In An Array
+# Kth Smallest Element in an Array
 
 ---
 
 ## Metadata & Placement Tags
 
+- **Folder:** Heaps
 - **Target Companies:** #Amazon #Google #Microsoft #Facebook #Bloomberg
 - **Confidence Checklist:**
   - [ ] Low

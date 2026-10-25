@@ -7,12 +7,13 @@ revisions:
   - 2026-05-25
 ---
 
-# Check If The Number Is Armstrong
+# Check If the Number Is Armstrong
 
 ---
 
 ## Metadata & Placement Tags
 
+- **Folder:** Math
 - **Target Companies:**
   - #Amazon #Microsoft #Infosys #TCS #Wipro
 

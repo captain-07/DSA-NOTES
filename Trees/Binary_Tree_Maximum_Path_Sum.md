@@ -145,7 +145,7 @@ Space: $O(H)$ → Recursion stack uses space proportional to tree height $H$ ($O
 
 ## Tags and Properties
 
-- #dsa #important #revisit #trees #dfs #binary-tree #interview-prep
+- #dsa #important #revisit #trees #dfs #binarytree #interview-prep
 - [[Trees]], [[Depth-First Search]], [[Recursion]]
 - **Revision Date:** 2026-09-05
 - **Problem Link:** [Binary Tree Maximum Path Sum - LeetCode](https://leetcode.com/problems/binary-tree-maximum-path-sum/)

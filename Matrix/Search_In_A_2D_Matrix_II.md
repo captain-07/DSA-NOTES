@@ -7,12 +7,13 @@ revisions:
   - 2026-05-22
 ---
 
-# Search In A 2d Matrix II
+# Search in a 2D Matrix II
 
 ---
 
 ## Metadata & Placement Tags
 
+- **Folder:** Matrix
 - **Target Companies:**
   - #Amazon #Microsoft #Google #Apple #Oracle #Adobe
 

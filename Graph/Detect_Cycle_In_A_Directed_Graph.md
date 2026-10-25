@@ -7,7 +7,7 @@ revisions:
   - 2026-11-13
 ---
 
-# Detect Cycle In A Directed Graph
+# Detect Cycle in a Directed Graph
 
 ---
 
@@ -194,7 +194,7 @@ Space: $O(V)$ → Auxiliary arrays (`visited`, `in_path` or `in_degree`) and que
 
 - #dsa #important #revisit #graph #dfs #bfs #topologicalsort
 - [[Graph]] [[Depth First Search]] [[Breadth First Search]] [[Topological Sort]]
-- **Last Revised:** 2026-10-14
+- **Revision Date:** 2026-10-14
 - **Problem Link:** [Course Schedule - LeetCode](https://leetcode.com/problems/course-schedule/)
 
 ---

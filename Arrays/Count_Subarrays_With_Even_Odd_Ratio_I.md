@@ -7,12 +7,13 @@ revisions:
   - 2026-09-02
 ---
 
-# Count Subarrays With Even Odd Ratio I
+# Count Subarrays with Even Odd Ratio I
 
 ---
 
 ## Metadata & Placement Tags
 
+- **Folder:** Arrays
 - **Target Companies:**
   - #Amazon #Google #Microsoft #Uber
 
@@ -22,7 +23,7 @@ revisions:
   - [ ] High
 
 - **Concepts:**
-  - #prefix-sum [[Prefix Sum]], #fenwick-tree [[Fenwick Tree]], #hashmap [[HashMap]]
+  - #prefixsum [[Prefix Sum]], #fenwick-tree [[Fenwick Tree]], #hashmap [[HashMap]]
 
 ## Pattern
 

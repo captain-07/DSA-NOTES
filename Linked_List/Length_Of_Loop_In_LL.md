@@ -7,12 +7,13 @@ revisions:
   - 2026-06-11
 ---
 
-# Length Of Loop In LL
+# Length of Loop in LL
 
 ---
 
 ## Metadata & Placement Tags
 
+- **Folder:** Linked List
 - **Target Companies:**
   - #Amazon #Microsoft #Samsung #Adobe #Walmart
 

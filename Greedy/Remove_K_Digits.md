@@ -28,7 +28,7 @@ revisions:
 - **Concepts:**
   - #monotonicstack [[Monotonic Stack]]
   - #greedy [[Greedy Algorithms]]
-  - #string [[String]]
+  - #strings [[String]]
 
 ## Pattern
 

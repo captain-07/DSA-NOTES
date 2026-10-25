@@ -7,12 +7,13 @@ revisions:
   - 2026-05-25
 ---
 
-# Union Of Two Sorted Arrays
+# Union of Two Sorted Arrays
 
 ---
 
 ## Metadata & Placement Tags
 
+- **Folder:** Arrays
 - **Target Companies:**
   - #Amazon #Microsoft #Google #GoldmanSachs #TCS
 

@@ -7,12 +7,13 @@ revisions:
   - 2026-05-25
 ---
 
-# Left Rotate Array By K Places
+# Left Rotate Array by K Places
 
 ---
 
 ## Metadata & Placement Tags
 
+- **Folder:** Arrays
 - **Target Companies:**
   - #Amazon #Microsoft #Samsung #Adobe #TCS #Infosys
 
@@ -22,7 +23,7 @@ revisions:
   - [ ] High  
 
 - **Concepts:**
-  - #array [[Arrays]]
+  - #arrays [[Arrays]]
   - #twopointers [[Two Pointers]]
   - #reversal [[Reversal Algorithm]]
 

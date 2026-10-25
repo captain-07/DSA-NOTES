@@ -7,12 +7,13 @@ revisions:
   - 2026-08-22
 ---
 
-# Minimum Bit Flips To Convert Number
+# Minimum Bit Flips to Convert Number
 
 ---
 
 ## Metadata & Placement Tags
 
+- **Folder:** Math
 - **Target Companies:**
   - #Amazon #Google #Microsoft #Bloomberg
 

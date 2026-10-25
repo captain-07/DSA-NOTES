@@ -7,7 +7,7 @@ revisions:
   - 2026-10-31
 ---
 
-# Number Of Islands
+# Number of Islands
 
 ---
 
@@ -160,7 +160,7 @@ Space: O(M * N) → In the worst case (all land), call stack depth can grow up t
 - #dsa #important #revisit
 - #grid #graph-traversal #dfs
 - [[Graph]], [[Breadth-First Search]], [[Depth-First Search]]
-- **Last Revised:** 2026-10-01
+- **Revision Date:** 2026-10-01
 - **Problem Link:** [Number of Islands - LeetCode](https://leetcode.com/problems/number-of-islands/)
 
 ---

@@ -7,12 +7,13 @@ revisions:
   - 2026-05-10
 ---
 
-# Reverse An Array
+# Reverse an Array
 
 ---
 
 ## Metadata & Placement Tags
 
+- **Folder:** Arrays
 - **Target Companies:**
   - #Amazon #Google #Microsoft #Adobe #Meta
 

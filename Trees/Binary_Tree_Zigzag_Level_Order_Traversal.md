@@ -21,7 +21,7 @@ revisions:
   - [ ] High
 
 - **Concepts:**
-  - #tree [[Trees]], #bfs [[Breadth-First Search]], #queue [[Queue]], #bitmanipulation [[Bit Manipulation]]
+  - #trees [[Trees]], #bfs [[Breadth-First Search]], #queue [[Queue]], #bitmanipulation [[Bit Manipulation]]
 
 ## Pattern
 

@@ -7,7 +7,7 @@ revisions:
   - 2026-10-11
 ---
 
-# Find Min/Max In Bst
+# Find Min/Max in BST
 
 ---
 
@@ -21,7 +21,7 @@ revisions:
   - [ ] Medium
   - [ ] High
 
-- **Concepts:** #bst [[Binary Search Tree]], #tree [[Tree Traversal]], #recursion [[Recursion]]
+- **Concepts:** #bst [[Binary Search Tree]], #trees [[Tree Traversal]], #recursion [[Recursion]]
 
 ## Pattern
 
@@ -144,7 +144,7 @@ Input BST: Root = `15`, Left = `10` (Left child of 10 is `-5`), Right = `20` (Ri
 
 ## Tags and Properties
 
-- #dsa #important #revisit #bst #tree
+- #dsa #important #revisit #bst #trees
 - Concepts: [[Binary Search Tree]], [[Tree Traversal]]
 - Revision Date: 2026-09-11
 - **Problem Link:** [GeeksforGeeks - Minimum element in BST](https://www.geeksforgeeks.org/problems/minimum-element-in-bst/1)

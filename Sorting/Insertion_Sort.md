@@ -13,6 +13,7 @@ revisions:
 
 ## Metadata & Placement Tags
 
+- **Folder:** Sorting
 - **Target Companies:**
   - #Amazon #Microsoft #Google #TCS #Infosys (Common in foundational/online assessments)
 

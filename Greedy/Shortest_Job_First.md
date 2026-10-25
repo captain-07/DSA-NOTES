@@ -21,7 +21,7 @@ revisions:
   - [ ] High
 
 - **Concepts:**
-  - #greedy [[Greedy]], #sorting [[Sorting]], #array [[Array]]
+  - #greedy [[Greedy]], #sorting [[Sorting]], #arrays [[Array]]
 
 ## Pattern
 
@@ -140,7 +140,7 @@ Space: O(1) → In-place sort (or O(N) depending on language sorting allocation)
 
 - #dsa #important #revisit
 - #greedy #cpu-scheduling [[Greedy Algorithms]], [[Sorting]]
-- **Last Revised:** 2026-09-21
+- **Revision Date:** 2026-09-21
 - **Problem Link:** [GeeksforGeeks - Shortest Job First](https://www.geeksforgeeks.org/problems/shortest-job-first/1)
 
 ---

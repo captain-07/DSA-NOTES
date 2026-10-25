@@ -7,7 +7,7 @@ revisions:
   - 2026-11-13
 ---
 
-# Course Schedule Ii
+# Course Schedule II
 
 ---
 

@@ -13,6 +13,7 @@ revisions:
 
 ## Metadata & Placement Tags
 
+- **Folder:** Arrays
 - **Target Companies:**
   - #Amazon #Microsoft #TCS #Infosys #Wipro
 
@@ -22,7 +23,7 @@ revisions:
   - [x] High  
 
 - **Concepts:**
-  - #array [[Array]]
+  - #arrays [[Array]]
   - #traversal [[Linear Traversal]]
 
 ---

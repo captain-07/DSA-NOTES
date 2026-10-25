@@ -7,12 +7,13 @@ revisions:
   - 2026-05-10
 ---
 
-# Search In Rotated Sorted Array II
+# Search in Rotated Sorted Array II
 
 ---
 
 ## Metadata & Placement Tags
 
+- **Folder:** Binary Search
 - **Target Companies:**
   - #Amazon #Google #Microsoft #Facebook #LinkedIn #Adobe
 

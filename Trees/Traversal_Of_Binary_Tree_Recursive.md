@@ -7,12 +7,13 @@ revisions:
   - 2026-09-30
 ---
 
-# Traversal Of Binary Tree Recursive
+# Traversal of Binary Tree (Recursive)
 
 ---
 
 ## Metadata & Placement Tags
 
+- **Folder:** Trees
 - **Target Companies:**
   - #Amazon #Google #Microsoft #Meta #Adobe
 

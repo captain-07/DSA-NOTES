@@ -13,6 +13,7 @@ revisions:
 
 ## Metadata & Placement Tags
 
+- **Folder:** Sorting
 - **Target Companies:**
   - #Google #Amazon #Microsoft #Meta #Apple #Uber
 

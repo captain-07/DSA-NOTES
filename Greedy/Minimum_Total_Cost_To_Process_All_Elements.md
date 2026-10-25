@@ -7,12 +7,13 @@ revisions:
   - 2026-08-11
 ---
 
-# Minimum Total Cost To Process All Elements
+# Minimum Total Cost to Process All Elements
 
 ---
 
 ## Metadata & Placement Tags
 
+- **Folder:** Greedy
 - **Target Companies:**
   #Google #Amazon #Uber
 

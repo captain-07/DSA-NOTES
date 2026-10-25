@@ -7,12 +7,13 @@ revisions:
   - 2026-05-31
 ---
 
-# Sort Characters By Frequency
+# Sort Characters by Frequency
 
 ---
 
 ## Metadata & Placement Tags
 
+- **Folder:** Strings
 - **Target Companies:**
   - #Amazon #Google #Microsoft #Bloomberg #Facebook
 
@@ -24,7 +25,7 @@ revisions:
 - **Concepts:**
   - #hashmap [[HashMap]]
   - #sorting [[Sorting]]
-  - #heap [[Heap]]
+  - #heaps [[Heap]]
   - #bucketsort [[Bucket Sort]]
 
 ## Pattern
@@ -140,7 +141,7 @@ class Solution:
 
 ## Tags and Properties
 - #dsa #important #revisit
-- #hashmap [[HashMap]] #bucketsort [[Bucket Sort]] #string [[String]]
+- #hashmap [[HashMap]] #bucketsort [[Bucket Sort]] #strings [[String]]
 - **Revision Date:** 2026-05-01
 - **Problem Link:** [LeetCode - Sort Characters By Frequency](https://leetcode.com/problems/sort-characters-by-frequency/)
 

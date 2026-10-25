@@ -13,6 +13,7 @@ revisions:
 
 ## Metadata & Placement Tags
 
+- **Folder:** Strings
 - **Target Companies:**
   - #LinkedIn #Google #Amazon #Microsoft #Adobe
 
@@ -22,7 +23,7 @@ revisions:
   - [ ] High  
 
 - **Concepts:**
-  - #hashmap [[HashMap]], #string [[String]], #bijection [[One-to-One Mapping]]
+  - #hashmap [[HashMap]], #strings [[String]], #bijection [[One-to-One Mapping]]
 
 ---
 ## Pattern
@@ -151,7 +152,7 @@ Space: O(1) or O(K) → The number of unique characters is capped by the charact
 
 ## Tags and Properties
 - #dsa #important #revisit
-- #string #hashmap [[HashMap]]
+- #strings #hashmap [[HashMap]]
 - **Revision Date:** 2026-04-28
 - **Problem Link:** [LeetCode - Isomorphic Strings](https://leetcode.com/problems/isomorphic-strings/)
 

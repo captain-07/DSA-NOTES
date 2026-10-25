@@ -7,7 +7,7 @@ revisions:
   - 2026-11-21
 ---
 
-# Shortest Path In Undirected Graph With Unit Weights
+# Shortest Path in Undirected Graph with Unit Weights
 
 ---
 
@@ -155,7 +155,7 @@ Space: $O(V + E)$ → Required for adjacency list, queue, and distance array.
 
 - #dsa #important #revisit #bfs #shortestpath #graphs
 - [[Graph]] [[Breadth-First Search]] [[Queue]]
-- **Last Revised:** 2026-10-22
+- **Revision Date:** 2026-10-22
 - **Problem Link:** [Shortest Path in Undirected Graph with Unit Weights - GeeksforGeeks](https://www.geeksforgeeks.org/problems/shortest-path-in-undirected-graph-having-unit-distance/1)
 
 ---

@@ -7,7 +7,7 @@ revisions:
   - 2026-10-04
 ---
 
-# Check For Balanced Binary Tree
+# Check for Balanced Binary Tree
 
 ---
 

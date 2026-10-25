@@ -7,12 +7,13 @@ revisions:
   - 2026-05-10
 ---
 
-# Find Nth Root Of A Number
+# Find Nth Root of a Number
 
 ---
 
 ## Metadata & Placement Tags
 
+- **Folder:** Binary Search
 - **Target Companies:**
   - #Amazon #Google #Microsoft #Samsung #Adobe
 - **Confidence Checklist:**

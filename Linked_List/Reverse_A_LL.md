@@ -7,12 +7,13 @@ revisions:
   - 2026-06-08
 ---
 
-# Reverse A Linked List
+# Reverse a Linked List
 
 ---
 
 ## Metadata & Placement Tags
 
+- **Folder:** Linked List
 - **Target Companies:**
   - #Amazon #Google #Microsoft #Meta #Apple #Adobe #Uber
 

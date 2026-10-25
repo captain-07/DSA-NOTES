@@ -7,12 +7,13 @@ revisions:
   - 2026-05-25
 ---
 
-# Sort An Array Of 0s 1s And 2s
+# Sort an Array of 0s 1s and 2s
 
 ---
 
 ## Metadata & Placement Tags
 
+- **Folder:** Arrays
 - **Target Companies:**
   - #Amazon #Microsoft #Adobe #Walmart #Flipkart #Google
 

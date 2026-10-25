@@ -7,12 +7,13 @@ revisions:
   - 2026-06-26
 ---
 
-# Find The Intersection Point Of Two LL
+# Find the Intersection Point of Two LL
 
 ---
 
 ## Metadata & Placement Tags
 
+- **Folder:** Linked List
 - **Target Companies:**
   - #Amazon #Microsoft #Adobe #LinkedIn #GoldmanSachs #Google
 

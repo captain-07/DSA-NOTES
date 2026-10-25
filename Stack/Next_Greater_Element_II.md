@@ -13,12 +13,13 @@ revisions:
 
 ## Metadata & Placement Tags
 
+- **Folder:** Stack
 - **Target Companies:** #Amazon #Google #Microsoft #Bloomberg #Adobe
 - **Confidence Checklist:**
   - [ ] Low
   - [ ] Medium
   - [ ] High
-- **Concepts:** #monotonicstack [[Monotonic Stack]], #array [[Array]]
+- **Concepts:** #monotonicstack [[Monotonic Stack]], #arrays [[Array]]
 
 ---
 ## Pattern

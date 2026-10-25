@@ -7,12 +7,13 @@ revisions:
   - 2026-05-20
 ---
 
-# Median Of 2 Sorted Arrays
+# Median of 2 Sorted Arrays
 
 ---
 
 ## Metadata & Placement Tags
 
+- **Folder:** Binary Search
 - **Target Companies:**
   - #Google #Amazon #Microsoft #Apple #GoldmanSachs #Adobe
 

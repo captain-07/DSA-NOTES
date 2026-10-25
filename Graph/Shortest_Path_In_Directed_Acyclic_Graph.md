@@ -7,7 +7,7 @@ revisions:
   - 2026-11-21
 ---
 
-# Shortest Path In Directed Acyclic Graph
+# Shortest Path in Directed Acyclic Graph
 
 ---
 

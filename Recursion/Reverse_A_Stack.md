@@ -7,12 +7,13 @@ revisions:
   - 2026-07-06
 ---
 
-# Reverse A Stack
+# Reverse a Stack
 
 ---
 
 ## Metadata & Placement Tags
 
+- **Folder:** Recursion
 - **Target Companies:**
   - #Amazon #Microsoft #Adobe #GoldmanSachs #Walmart
 

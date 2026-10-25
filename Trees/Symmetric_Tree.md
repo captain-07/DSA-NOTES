@@ -147,7 +147,7 @@ Space: O(H) → Recursion call stack bounded by tree height $H$ (O(N) worst-case
 - #dsa #important #revisit
 - #binarytree #dfs #recursion
 - [[Binary Tree]] [[Depth First Search]] [[Recursion]]
-- **Last Revised:** 2026-09-09
+- **Revision Date:** 2026-09-09
 - **Problem Link:** [Symmetric Tree - LeetCode](https://leetcode.com/problems/symmetric-tree/)
 
 ---

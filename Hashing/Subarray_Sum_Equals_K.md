@@ -7,12 +7,13 @@ revisions:
   - 2026-05-25
 ---
 
-# Count Subarrays With Given Sum
+# Count Subarrays with Given Sum
 
 ---
 
 ## Metadata & Placement Tags
 
+- **Folder:** Hashing
 - **Target Companies:**
   - #Amazon #Google #Microsoft #Facebook #GoldmanSachs
 

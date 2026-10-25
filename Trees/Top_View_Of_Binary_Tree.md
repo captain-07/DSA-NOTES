@@ -7,7 +7,7 @@ revisions:
   - 2026-10-08
 ---
 
-# Top View Of Binary Tree
+# Top View of Binary Tree
 
 ---
 
@@ -21,7 +21,7 @@ revisions:
   - [ ] High
 
 - **Concepts:**
-  - #tree [[Trees]], #bfs [[Breadth First Search]], #hashmap [[HashMap]], #queue [[Queue]]
+  - #trees [[Trees]], #bfs [[Breadth First Search]], #hashmap [[HashMap]], #queue [[Queue]]
 
 ## Pattern
 
@@ -176,7 +176,7 @@ Space: O(N) → Queue and Hash Map store at most N elements.
 ## Tags and Properties
 
 - #dsa #important #revisit
-- #binary-tree #top-view #level-order-traversal
+- #binarytree #top-view #level-order-traversal
 - [[Trees]] [[Breadth First Search]] [[HashMap]]
 - **Revision Date:** 2026-09-08
 - **Problem Link:** [GeeksforGeeks - Top View of Binary Tree](https://www.geeksforgeeks.org/problems/top-view-of-binary-tree/1)

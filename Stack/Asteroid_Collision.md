@@ -13,6 +13,7 @@ revisions:
 
 ## Metadata & Placement Tags
 
+- **Folder:** Stack
 - **Target Companies:**
   - #Amazon #Google #Microsoft #Netflix
 
@@ -139,7 +140,7 @@ Space: O(N) → Worst-case stack stores all N asteroids.
 
 ## Tags and Properties
 - #dsa #important #revisit
-- #stack [[Stack]] #simulation [[Simulation]] #array [[Array]]
+- #stack [[Stack]] #simulation [[Simulation]] #arrays [[Array]]
 - Revision Date: 2026-08-08
 - **Problem Link:** [LeetCode - Asteroid Collision](https://leetcode.com/problems/asteroid-collision/)
 

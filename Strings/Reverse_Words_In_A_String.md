@@ -7,12 +7,13 @@ revisions:
   - 2026-05-27
 ---
 
-# Reverse Words In A String
+# Reverse Words in a String
 
 ---
 
 ## Metadata & Placement Tags
 
+- **Folder:** Strings
 - **Target Companies:**
   - #Amazon #Microsoft #Google #Meta #Apple #Adobe
 
@@ -22,8 +23,8 @@ revisions:
   - [ ] High  
 
 - **Concepts:**
-  - #string [[String Manipulation]]
-  - #array [[Array]]
+  - #strings [[String Manipulation]]
+  - #arrays [[Array]]
 
 ## Pattern
 

@@ -19,7 +19,7 @@ revisions:
   - [ ] Low
   - [ ] Medium
   - [ ] High
-- **Concepts:** #greedy [[Greedy]], #heap [[Heap]], #math [[Math]]
+- **Concepts:** #greedy [[Greedy]], #heaps [[Heap]], #math [[Math]]
 
 ---
 ## Pattern

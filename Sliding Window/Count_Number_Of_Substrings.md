@@ -7,7 +7,7 @@ revisions:
   - 2026-05-31
 ---
 
-# Count Number Of Substrings
+# Count Number of Substrings
 
 ---
 

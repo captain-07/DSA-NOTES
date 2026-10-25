@@ -7,12 +7,13 @@ revisions:
   - 2026-05-07
 ---
 
-MCP issues detected. Run /mcp list for status.# Check For Prime Numbers
+# Check for Prime Numbers
 
 ---
 
 ## Metadata & Placement Tags
 
+- **Folder:** Math
 - **Target Companies:**
   - #Amazon #Google #Microsoft #TCS #Infosys #GoldmanSachs
 

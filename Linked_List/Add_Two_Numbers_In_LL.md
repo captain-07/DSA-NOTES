@@ -7,12 +7,13 @@ revisions:
   - 2026-06-26
 ---
 
-# Add Two Numbers In Linked List
+# Add Two Numbers in Linked List
 
 ---
 
 ## Metadata & Placement Tags
 
+- **Folder:** Linked List
 - **Target Companies:**
   - #Amazon #Microsoft #Google #Meta #Apple #Adobe #Bloomberg
 

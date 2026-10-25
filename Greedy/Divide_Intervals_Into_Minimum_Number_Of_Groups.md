@@ -7,7 +7,7 @@ revisions:
   - 2026-10-24
 ---
 
-# Divide Intervals Into Minimum Number Of Groups
+# Divide Intervals into Minimum Number of Groups
 
 ---
 
@@ -63,6 +63,13 @@ Sort start/end events (or end times in min-heap). Max concurrent overlapping int
 2. Sort all events by time. If times tie, process `-1` (end) before `+1` (start).
 3. Sweep through events maintaining a running count of active intervals. Peak count is the result.
 
+### Optimal 3: Two Pointers on Sorted Starts / Ends
+1. Extract all `start` times and all `end` times into two separate arrays and sort both.
+2. Use `start_ptr` and `end_ptr`, tracking `active_groups` and `max_groups`.
+3. If `starts[start_ptr] <= ends[end_ptr]`, an interval begins before another ends → increment `active_groups` and advance `start_ptr`.
+4. Otherwise an interval has ended → decrement `active_groups` and advance `end_ptr`.
+5. Return the maximum `active_groups` seen (equivalent to peak overlap).
+
 ---
 
 ## Code (Python)
@@ -88,6 +95,31 @@ class Solution:
 
         # The number of elements in the heap represents total groups needed
         return len(min_heap)
+
+
+class SolutionTwoPointers:
+    def minGroups(self, intervals: list[list[int]]) -> int:
+        # Extract and sort start and end points independently
+        start_times = sorted([interval[0] for interval in intervals])
+        end_times = sorted([interval[1] for interval in intervals])
+
+        start_ptr = 0
+        end_ptr = 0
+        active_groups = 0
+        max_groups = 0
+
+        # Traverse chronologically through all start times
+        while start_ptr < len(intervals):
+            # Inclusive condition: an interval starting at/before another's end needs a new group
+            if start_times[start_ptr] <= end_times[end_ptr]:
+                active_groups += 1
+                max_groups = max(max_groups, active_groups)
+                start_ptr += 1
+            else:
+                active_groups -= 1
+                end_ptr += 1
+
+        return max_groups
 ```
 
 ---
@@ -145,7 +177,7 @@ Space: $O(N)$ → Heap stores at most $N$ elements.
 ## Tags and Properties
 
 - #dsa #important #revisit
-- #intervals #heap #sweep-line
+- #intervals #heaps #sweep-line
 - [[Sorting]], [[Heaps]], [[Line Sweep]]
 - **Revision Date:** 2026-09-24
 - **Problem Link:** [Divide Intervals Into Minimum Number Of Groups](https://leetcode.com/problems/divide-intervals-into-minimum-number-of-groups/)

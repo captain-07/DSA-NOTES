@@ -7,12 +7,13 @@ revisions:
   - 2026-05-25
 ---
 
-# Leaders In An Array
+# Leaders in an Array
 
 ---
 
 ## Metadata & Placement Tags
 
+- **Folder:** Arrays
 - **Target Companies:**
   - #Amazon #Microsoft #Adobe #GoldmanSachs #Google
 
@@ -22,7 +23,7 @@ revisions:
   - [ ] High  
 
 - **Concepts:**
-  - #array [[Array]]
+  - #arrays [[Array]]
   - #greedy [[Greedy]]
   - #suffix-max [[Suffix Maximum]]
 
@@ -150,7 +151,7 @@ class Solution:
 
 ## Tags and Properties
 - #dsa #important #revisit
-- #array [[Array]] #suffix-max [[Suffix Maximum]]
+- #arrays [[Array]] #suffix-max [[Suffix Maximum]]
 - **Revision Date:** 2026-04-25
 - **Problem Link:** [GeeksforGeeks: Leaders in an array](https://www.geeksforgeeks.org/problems/leaders-in-an-array-1587115620/1)
 

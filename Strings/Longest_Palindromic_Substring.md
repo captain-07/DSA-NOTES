@@ -13,6 +13,7 @@ revisions:
 
 ## Metadata & Placement Tags
 
+- **Folder:** Strings
 - **Target Companies:**
   - #Amazon #Google #Microsoft #Meta #Apple #Adobe #Uber
 
@@ -22,7 +23,7 @@ revisions:
   - [ ] High  
 
 - **Concepts:**
-  - #string [[String]]
+  - #strings [[String]]
   - #dynamicprogramming [[Dynamic Programming]]
   - #twopointers [[Two Pointers]]
 

@@ -7,12 +7,13 @@ revisions:
   - 2026-05-25
 ---
 
-# Maximum Product Subarray In An Array
+# Maximum Product Subarray in an Array
 
 ---
 
 ## Metadata & Placement Tags
 
+- **Folder:** Arrays
 - **Target Companies:**
   - #Amazon #Google #Microsoft #Adobe #LinkedIn
 
@@ -23,7 +24,7 @@ revisions:
 
 - **Concepts:**
   - #dynamicprogramming [[Dynamic Programming]]
-  - #array [[Array]]
+  - #arrays [[Array]]
   - #kadane [[Kadane's Algorithm]]
 
 ---
@@ -156,7 +157,7 @@ Space: $O(1)$ → Only a few variables used regardless of input size.
 ## Tags and Properties
 - #dsa #important #revisit
 - #dynamicprogramming [[Dynamic Programming]]
-- #array [[Array]]
+- #arrays [[Array]]
 - **Revision Date:** 2026-04-25
 - **Problem Link:** [LeetCode - Maximum Product Subarray](https://leetcode.com/problems/maximum-product-subarray/)
 

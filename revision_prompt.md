@@ -118,6 +118,7 @@ For example, entries contain structures such as:
 
 ## Metadata & Placement Tags
 
+- **Folder:** DSA
 ## Pattern
 
 ## Difficulty

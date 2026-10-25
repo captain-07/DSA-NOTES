@@ -21,7 +21,7 @@ revisions:
   - [ ] High
 
 - **Concepts:**
-  - #greedy [[Greedy]], #sorting [[Sorting]], #heap [[Heaps]]
+  - #greedy [[Greedy]], #sorting [[Sorting]], #heaps [[Heaps]]
 
 ## Pattern
 

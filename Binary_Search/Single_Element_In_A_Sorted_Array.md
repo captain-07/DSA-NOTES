@@ -7,12 +7,13 @@ revisions:
   - 2026-05-10
 ---
 
-# Single Element In A Sorted Array
+# Single Element in a Sorted Array
 
 ---
 
 ## Metadata & Placement Tags
 
+- **Folder:** Binary Search
 - **Target Companies:**
   - #Amazon #Google #Microsoft #Facebook #Adobe #Uber
 
@@ -22,7 +23,7 @@ revisions:
   - [ ] High  
 
 - **Concepts:**
-  - #binarysearch [[Binary Search]], #array [[Array]], #bitmanipulation [[Bit Manipulation]]
+  - #binarysearch [[Binary Search]], #arrays [[Array]], #bitmanipulation [[Bit Manipulation]]
 
 ## Pattern
 
@@ -144,7 +145,7 @@ Space: O(1) → Constant space for pointers.
 ---
 
 ## Tags and Properties
-  - #dsa #important #revisit #binarysearch #array
+  - #dsa #important #revisit #binarysearch #arrays
   - [[Binary Search]] [[Array]]
   - **Revision Date:** 2026-04-10
   - **Problem Link:** [LeetCode - Single Element in a Sorted Array](https://leetcode.com/problems/single-element-in-a-sorted-array/)

@@ -13,6 +13,7 @@ revisions:
 
 ## Metadata & Placement Tags
 
+- **Folder:** Arrays
 - **Target Companies:**
   - #Amazon #TCS #Infosys #Accenture #Microsoft #Google
 
@@ -22,7 +23,7 @@ revisions:
   - [ ] High  
 
 - **Concepts:**
-  - #array [[Array]]
+  - #arrays [[Array]]
   - #linearsearch [[Linear Search]]
 
 ## Pattern

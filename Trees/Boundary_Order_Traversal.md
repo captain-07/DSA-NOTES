@@ -22,7 +22,7 @@ revisions:
   - [ ] High
 
 - **Concepts:**
-  - #tree [[Trees]], #dfs [[DFS]], #bfs [[BFS]], #recursion [[Recursion]]
+  - #trees [[Trees]], #dfs [[DFS]], #bfs [[BFS]], #recursion [[Recursion]]
 
 ## Pattern
 

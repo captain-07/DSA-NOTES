@@ -7,7 +7,7 @@ revisions:
   - 2026-10-21
 ---
 
-# Jump Game - I
+# Jump Game I
 
 ---
 
@@ -21,7 +21,7 @@ revisions:
   - [ ] High
 
 - **Concepts:**
-  - #greedy [[Greedy]], #array [[Arrays]], #dynamicprogramming [[Dynamic Programming]]
+  - #greedy [[Greedy]], #arrays [[Arrays]], #dynamicprogramming [[Dynamic Programming]]
 
 ## Pattern
 

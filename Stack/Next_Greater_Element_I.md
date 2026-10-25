@@ -13,6 +13,7 @@ revisions:
 
 ## Metadata & Placement Tags
 
+- **Folder:** Stack
 - **Target Companies:**
   - #Amazon #Google #Microsoft #Adobe #Bloomberg
 
@@ -24,7 +25,7 @@ revisions:
 - **Concepts:**
   - #stack [[Stack]]
   - #hashmap [[HashMap]]
-  - #monotonic-stack [[Monotonic Stack]]
+  - #monotonicstack [[Monotonic Stack]]
 
 ---
 ## Pattern
@@ -138,7 +139,7 @@ Space: O(M) → The stack and the hashmap store at most $M$ elements.
 - #dsa #important #revisit
 - #stack [[Stack]]
 - #hashmap [[HashMap]]
-- #monotonic-stack [[Monotonic Stack]]
+- #monotonicstack [[Monotonic Stack]]
 - **Revision Date:** 2026-07-31
 - **Problem Link:** [LeetCode - Next Greater Element I](https://leetcode.com/problems/next-greater-element-i/)
 

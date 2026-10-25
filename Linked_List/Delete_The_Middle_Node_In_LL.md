@@ -7,12 +7,13 @@ revisions:
   - 2026-06-16
 ---
 
-# Delete The Middle Node In LL
+# Delete the Middle Node in LL
 
 ---
 
 ## Metadata & Placement Tags
 
+- **Folder:** Linked List
 - **Target Companies:**
   - #Amazon #Microsoft #Adobe #Google #Facebook
 

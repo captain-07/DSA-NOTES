@@ -126,6 +126,7 @@ Space: $O(1)$ → Iterative approach uses constant extra space.
 
 ## Metadata & Placement Tags
 
+- **Folder:** Binary Search
 - **Target Companies:**
   - #Google #Facebook #Amazon #Microsoft #Uber
 
@@ -135,7 +136,7 @@ Space: $O(1)$ → Iterative approach uses constant extra space.
   - [ ] High  
 
 - **Concepts:**
-  - #binarysearch [[Binary Search]], #array [[Array]]
+  - #binarysearch [[Binary Search]], #arrays [[Array]]
 
 ---
 

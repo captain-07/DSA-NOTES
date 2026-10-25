@@ -13,6 +13,7 @@ revisions:
 
 ## Metadata & Placement Tags
 
+- **Folder:** DP
 - **Target Companies:**
   - #Amazon #Google #Microsoft #Apple #Adobe #Meta
 

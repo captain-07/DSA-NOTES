@@ -7,7 +7,7 @@ revisions:
   - 2026-05-11
 ---
 
-# Find Minimum In Rotated Sorted Array
+# Find Minimum in Rotated Sorted Array
 
 ---
 
@@ -138,6 +138,7 @@ Space: O(1) → Only a few pointers used regardless of input size.
 
 ## Metadata & Placement Tags
 
+- **Folder:** Binary Search
 - **Target Companies:**
   - #Amazon #Google #Microsoft #Facebook #Uber #Apple #GoldmanSachs
 

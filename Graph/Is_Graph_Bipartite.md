@@ -158,7 +158,7 @@ Space: O(V) → Recursion call stack and `colors` array of size $V$.
 
 - #dsa #important #revisit #graph #dfs #bfs #coloring
 - Concepts: [[Graph]], [[Depth-First Search]], [[Breadth-First Search]], [[Bipartite Graph]]
-- **Last Revised:** 2026-10-14
+- **Revision Date:** 2026-10-14
 - **Problem Link:** [LeetCode - Is Graph Bipartite?](https://leetcode.com/problems/is-graph-bipartite/)
 
 ---

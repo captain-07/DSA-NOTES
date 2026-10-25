@@ -7,7 +7,7 @@ revisions:
   - 2026-10-11
 ---
 
-# Search In A Binary Search Tree
+# Search in a Binary Search Tree
 
 ---
 

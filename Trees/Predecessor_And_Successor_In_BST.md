@@ -7,7 +7,7 @@ revisions:
   - 2026-10-18
 ---
 
-# Predecessor And Successor In Bst
+# Predecessor and Successor in BST
 
 ---
 
@@ -161,7 +161,7 @@ Space: O(1) auxiliary space using iterative traversal.
 
 - #dsa #important #revisit
 - #bst [[Binary Search Tree]], #inorder [[Inorder Traversal]]
-- **Last Revised:** 2026-09-18
+- **Revision Date:** 2026-09-18
 - **Problem Link:** [Predecessor and Successor - GeeksforGeeks](https://www.geeksforgeeks.org/problems/predecessor-and-successor/1)
 
 ---

@@ -149,7 +149,7 @@ Space: O(H) → Recursive call stack depth, where H is height of tree (O(N) wors
 - #dsa #important #revisit
 - #binarytree #dfs #recursion
 - [[Binary Search Tree]], [[Depth-First Search]], [[Tree Traversal]]
-- **Last Revised:** 2026-09-16
+- **Revision Date:** 2026-09-16
 - **Problem Link:** [LeetCode - Validate Binary Search Tree](https://leetcode.com/problems/validate-binary-search-tree/)
 
 ---

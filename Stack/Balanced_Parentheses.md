@@ -13,6 +13,7 @@ revisions:
 
 ## Metadata & Placement Tags
 
+- **Folder:** Stack
 - **Target Companies:**
   - #Amazon #Google #Microsoft #Meta #Apple
 
@@ -22,7 +23,7 @@ revisions:
   - [ ] High
 
 - **Concepts:**
-  - #stack [[Stack]], #string [[String]]
+  - #stack [[Stack]], #strings [[String]]
 
 ## Pattern
 Stack-based Matching / LIFO Validation
@@ -123,7 +124,7 @@ Space: O(N) → In the worst case (e.g., `((((`), we push all characters onto th
 ---
 ## Tags and Properties
   - #dsa #important #revisit
-  - #stack #string
+  - #stack #strings
   - [[Stack]] [[String]]
   - Revision Date: 2026-07-29
   - **Problem Link:** [LeetCode - Valid Parentheses](https://leetcode.com/problems/valid-parentheses/)

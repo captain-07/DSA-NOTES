@@ -7,7 +7,7 @@ revisions:
   - 2026-10-17
 ---
 
-# Lowest Common Ancestor Of A Binary Search Tree
+# Lowest Common Ancestor of a Binary Search Tree
 
 ---
 

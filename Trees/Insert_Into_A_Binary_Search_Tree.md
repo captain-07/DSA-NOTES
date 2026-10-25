@@ -7,7 +7,7 @@ revisions:
   - 2026-10-15
 ---
 
-# Insert Into A Binary Search Tree
+# Insert into a Binary Search Tree
 
 ---
 

@@ -7,12 +7,13 @@ revisions:
   - 2026-09-19
 ---
 
-# Replace Elements By Their Rank
+# Replace Elements by Their Rank
 
 ---
 
 ## Metadata & Placement Tags
 
+- **Folder:** Hashing
 - **Target Companies:**
   - #Amazon #Google #Bloomberg #Adobe
 
@@ -22,7 +23,7 @@ revisions:
   - [ ] High
 
 - **Concepts:**
-  - #sorting [[Sorting]], #hashmap [[HashMap]], #array [[Array]]
+  - #sorting [[Sorting]], #hashmap [[HashMap]], #arrays [[Array]]
 
 ## Pattern
 

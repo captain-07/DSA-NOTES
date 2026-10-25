@@ -7,7 +7,7 @@ revisions:
   - 2026-10-16
 ---
 
-# Kth Largest Element In A Bst
+# Kth Largest Element in a BST
 
 ---
 
@@ -21,7 +21,7 @@ revisions:
   - [ ] High
 
 - **Concepts:**
-  - #bst [[Binary Search Tree]], #inorder [[Inorder Traversal]], #tree [[Tree]]
+  - #bst [[Binary Search Tree]], #inorder [[Inorder Traversal]], #trees [[Tree]]
 
 ## Pattern
 
@@ -149,7 +149,7 @@ Space: $O(H)$ → Auxiliary recursion stack space proportional to tree height $H
 
   - #dsa #important #revisit #trees #bst
   - [[Binary Search Tree]], [[Inorder Traversal]]
-  - **Last Revised:** 2026-09-16
+  - **Revision Date:** 2026-09-16
   - **Problem Link:** [Kth Largest Element in a BST - GeeksforGeeks](https://www.geeksforgeeks.org/problems/kth-largest-element-in-bst/1)
 
 ---

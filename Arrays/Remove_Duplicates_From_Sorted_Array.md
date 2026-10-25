@@ -7,12 +7,13 @@ revisions:
   - 2026-05-25
 ---
 
-# Remove Duplicates From Sorted Array
+# Remove Duplicates from Sorted Array
 
 ---
 
 ## Metadata & Placement Tags
 
+- **Folder:** Arrays
 - **Target Companies:**
   - #Amazon #Google #Microsoft #Facebook #Adobe #Bloomberg
 

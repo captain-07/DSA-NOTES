@@ -20,7 +20,7 @@ revisions:
   - [ ] Medium
   - [ ] High
 - **Concepts:**
-  - #graph [[Graph]], #topological-sort [[Topological Sort]], #bfs [[Breadth-First Search]], #dfs [[Depth-First Search]], #cycle-detection [[Cycle Detection]]
+  - #graph [[Graph]], #topologicalsort [[Topological Sort]], #bfs [[Breadth-First Search]], #dfs [[Depth-First Search]], #cycle-detection [[Cycle Detection]]
 
 ## Pattern
 
@@ -188,9 +188,9 @@ Space: O(V + E) → Storage for adjacency list, indegree/state array, and queue/
 
 ## Tags and Properties
 
-- #dsa #important #revisit #topological-sort #graph #bfs #dfs
+- #dsa #important #revisit #topologicalsort #graph #bfs #dfs
 - [[Graph]], [[Topological Sort]], [[Breadth-First Search]], [[Cycle Detection]]
-- **Last Revised:** 2026-10-14
+- **Revision Date:** 2026-10-14
 - **Problem Link:** [LeetCode - Course Schedule](https://leetcode.com/problems/course-schedule/)
 
 ---

@@ -7,12 +7,13 @@ revisions:
   - 2026-05-10
 ---
 
-# Floor And Ceiling In Sorted Array
+# Floor and Ceiling in Sorted Array
 
 ---
 
 ## Metadata & Placement Tags
 
+- **Folder:** Binary Search
 - **Target Companies:**
   - #Amazon #Microsoft #Samsung #Adobe #Flipkart
 

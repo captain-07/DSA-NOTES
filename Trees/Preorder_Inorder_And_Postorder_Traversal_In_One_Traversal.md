@@ -7,12 +7,13 @@ revisions:
   - 2026-10-02
 ---
 
-# Preorder, Inorder, And Postorder Traversal In One Traversal
+# Preorder, Inorder, and Postorder Traversal in One Traversal
 
 ---
 
 ## Metadata & Placement Tags
 
+- **Folder:** Trees
 - **Target Companies:** #Amazon #Microsoft #Google #TCS #Accenture
 - **Confidence Checklist:**
   - [ ] Low
@@ -153,7 +154,7 @@ Space: $O(N)$ → Stack holds at most $O(H)$ height nodes ($O(N)$ worst case).
 ## Tags and Properties
 
 - #dsa #important #revisit
-- #tree #binarytree #stack #traversal
+- #trees #binarytree #stack #traversal
 - [[Binary Tree]] [[Stack]] [[Tree Traversal]]
 - **Revision Date:** 2026-09-02
 - **Problem Link:** [GeeksforGeeks - Tree Traversals](https://www.geeksforgeeks.org/problems/tree-traversals/1)

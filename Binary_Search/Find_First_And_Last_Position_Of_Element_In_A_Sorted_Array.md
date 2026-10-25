@@ -9,7 +9,7 @@ revisions:
 
 I will generate the high-signal DSA note for "Find First And Last Position Of Element In A Sorted Array" and save it to your Obsidian vault as mandated.
 
-# Find First And Last Position Of Element In A Sorted Array
+# Find First and Last Position of Element in a Sorted Array
 
 ---
 
@@ -137,13 +137,14 @@ Space: $O(1)$ → Only a few pointers used.
 ---
 
 ## Tags and Properties
-  - #dsa #important #revisit #binarysearch #array
+  - #dsa #important #revisit #binarysearch #arrays
   - [[Binary Search]] [[Array]]
   - **Revision Date:** 2026-04-11
   - **Problem Link:** [LeetCode 34 - Find First and Last Position of Element in Sorted Array](https://leetcode.com/problems/find-first-and-last-position-of-element-in-a-sorted-array/)
 
 ## Metadata & Placement Tags
 
+- **Folder:** Binary Search
 - **Target Companies:**
   - #Google #Amazon #Facebook #Microsoft #LinkedIn #Uber
 
@@ -153,7 +154,7 @@ Space: $O(1)$ → Only a few pointers used.
   - [ ] High  
 
 - **Concepts:**
-  - #binarysearch [[Binary Search]], #array [[Array]]
+  - #binarysearch [[Binary Search]], #arrays [[Array]]
 
 ---
 ### 🔄 Revision Checklist

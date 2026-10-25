@@ -7,7 +7,7 @@ revisions:
   - 2026-11-23
 ---
 
-# Count Good Nodes In Binary Tree
+# Count Good Nodes in Binary Tree
 
 ---
 
@@ -21,7 +21,7 @@ revisions:
   - [ ] High
 
 - **Concepts:**
-  - #dfs [[Depth-First Search]], #tree [[Binary Tree]], #recursion [[Recursion]]
+  - #dfs [[Depth-First Search]], #trees [[Binary Tree]], #recursion [[Recursion]]
 
 ## Pattern
 
@@ -154,8 +154,8 @@ Space: O(H) → Recursive call stack equals the height of the tree ($O(\log N)$ 
 ## Tags and Properties
 
 - #dsa #important #revisit
-- #binary-tree #dfs [[Depth-First Search]] [[Binary Tree]]
-- **Last Revised:** 2026-10-24
+- #binarytree #dfs [[Depth-First Search]] [[Binary Tree]]
+- **Revision Date:** 2026-10-24
 - **Problem Link:** [LeetCode: Count Good Nodes in Binary Tree](https://leetcode.com/problems/count-good-nodes-in-binary-tree/)
 
 ---

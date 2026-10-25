@@ -7,12 +7,13 @@ revisions:
   - 2026-05-10
 ---
 
-# Find The Smallest Divisor Given A Threshold
+# Find the Smallest Divisor Given a Threshold
 
 ---
 
 ## Metadata & Placement Tags
 
+- **Folder:** Binary Search
 - **Target Companies:**
   - #Amazon #Google #Microsoft #Facebook #Uber #Bloomberg
 
@@ -22,7 +23,7 @@ revisions:
   - [ ] High  
 
 - **Concepts:**
-  - #binarysearch [[Binary Search]], #array [[Arrays]], #math [[Mathematics]]
+  - #binarysearch [[Binary Search]], #arrays [[Arrays]], #math [[Mathematics]]
 
 ## Pattern
 

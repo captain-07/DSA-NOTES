@@ -7,12 +7,13 @@ revisions:
   - 2026-05-31
 ---
 
-# Roman To Integer
+# Roman to Integer
 
 ---
 
 ## Metadata & Placement Tags
 
+- **Folder:** Strings
 - **Target Companies:**
   - #Amazon #Google #Microsoft #Adobe #Apple #Bloomberg
 
@@ -23,7 +24,7 @@ revisions:
 
 - **Concepts:**
   - #hashmap [[HashMap]]
-  - #string [[String]]
+  - #strings [[String]]
   - #math [[Math]]
 
 ## Pattern
@@ -134,7 +135,7 @@ Space: O(1) → The Hash Map size is fixed (7 symbols), and we only use a few in
 
 ## Tags and Properties
 - #dsa #important #revisit
-- #string [[String]]
+- #strings [[String]]
 - #hashmap [[HashMap]]
 - **Revision Date:** 2026-05-01
 - **Problem Link:** [LeetCode: Roman to Integer](https://leetcode.com/problems/roman-to-integer/)

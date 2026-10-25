@@ -7,7 +7,7 @@ revisions:
   - 2026-05-27
 ---
 
-# Largest Odd Number In A String
+# Largest Odd Number in a String
 
 ---
 
@@ -23,7 +23,7 @@ revisions:
   - [ ] High  
 
 - **Concepts:**
-  - #string [[String]], #greedy [[Greedy]], #math [[Mathematics]]
+  - #strings [[String]], #greedy [[Greedy]], #math [[Mathematics]]
 
 ## Pattern
 

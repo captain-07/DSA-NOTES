@@ -13,6 +13,7 @@ revisions:
 
 ## Metadata & Placement Tags
 
+- **Folder:** Arrays
 - **Target Companies:**
   - #Amazon #Google #Microsoft #Uber #Flipkart
 
@@ -22,7 +23,7 @@ revisions:
   - [ ] High
 
 - **Concepts:**
-  - #heap [[Heap]]
+  - #heaps [[Heap]]
   - #sorting [[Sorting]]
 
 ## Pattern
@@ -130,7 +131,7 @@ Space: O($k$) → The min-heap stores at most $k + 1$ elements.
 ---
 ## Tags and Properties
 
-- #dsa #important #revisit #heap #sorting [[Heap]] [[Sorting]]
+- #dsa #important #revisit #heaps #sorting [[Heap]] [[Sorting]]
 - Revision Date: 2026-08-20
 - **Problem Link:** [GeeksforGeeks - Nearly Sorted](https://www.geeksforgeeks.org/problems/nearly-sorted-1587115620/1)
 

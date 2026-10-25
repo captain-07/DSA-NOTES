@@ -7,12 +7,13 @@ revisions:
   - 2026-05-25
 ---
 
-# Count All Digits Of A Number
+# Count All Digits of a Number
 
 ---
 
 ## Metadata & Placement Tags
 
+- **Folder:** Math
 - **Target Companies:**
   - #Amazon #Microsoft #TCS #Zoho #Accenture
 

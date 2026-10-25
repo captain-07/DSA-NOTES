@@ -7,12 +7,13 @@ revisions:
   - 2026-05-25
 ---
 
-# Find The Number That Appears Once, And Other Numbers Twice
+# Find the Number That Appears Once, and Other Numbers Twice
 
 ---
 
 ## Metadata & Placement Tags
 
+- **Folder:** Arrays
 - **Target Companies:**
   - #Amazon #Google #Microsoft #Facebook #Apple #Adobe
 
@@ -23,7 +24,7 @@ revisions:
 
 - **Concepts:**
   - #bitmanipulation [[Bit Manipulation]]
-  - #array [[Array]]
+  - #arrays [[Array]]
   - #hashmap [[HashMap]]
 
 ---

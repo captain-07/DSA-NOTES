@@ -7,7 +7,7 @@ revisions:
   - 2026-10-08
 ---
 
-# Bottom View Of Binary Tree
+# Bottom View of Binary Tree
 
 ---
 
