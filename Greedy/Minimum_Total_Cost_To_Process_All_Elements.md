@@ -15,7 +15,7 @@ revisions:
 
 - **Folder:** Greedy
 - **Target Companies:**
-  #Google #Amazon #Uber
+  - #Google #Amazon #Uber
 
 - **Confidence Checklist:**
   - [ ] Low

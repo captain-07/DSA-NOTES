@@ -7,7 +7,7 @@ revisions:
   - 2026-11-27
 ---
 
-# Floyd Warshall Algorithm
+# Floyd-Warshall Algorithm
 
 ---
 

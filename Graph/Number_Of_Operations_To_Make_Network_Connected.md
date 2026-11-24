@@ -7,7 +7,7 @@ revisions:
   - 2026-11-29
 ---
 
-# Number Of Operations To Make Network Connected
+# Number of Operations to Make Network Connected
 
 ---
 

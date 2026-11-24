@@ -14,7 +14,7 @@ revisions:
 ## Metadata & Placement Tags
 
 - **Folder:** Two Pointers
-- **Target Companies:** #Amazon #Microsoft #MakeMyTrip #VMTware
+- **Target Companies:** #Amazon #Microsoft #MakeMyTrip #VMware
 - **Confidence Checklist:**
   - [ ] Low
   - [ ] Medium

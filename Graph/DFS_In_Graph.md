@@ -7,7 +7,7 @@ revisions:
   - 2026-10-30
 ---
 
-# DFS in Graph
+# DFS in a Graph
 
 ---
 

@@ -7,7 +7,7 @@ revisions:
   - 2026-05-18
 ---
 
-# Painters Partition
+# Painter's Partition
 
 ---
 

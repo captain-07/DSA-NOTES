@@ -19,7 +19,7 @@ revisions:
   - [ ] Low
   - [ ] Medium
   - [ ] High
-- **Concepts:** #graph [[Graph]], #shortestpath [[Shortest Path]], #heap [[Heap]], #greedy [[Greedy]]
+- **Concepts:** #graph [[Graph]], #shortestpath [[Shortest Path]], #heaps [[Heaps]], #greedy [[Greedy]]
 
 ## Pattern
 

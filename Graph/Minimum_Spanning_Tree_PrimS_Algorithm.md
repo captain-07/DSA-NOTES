@@ -7,7 +7,7 @@ revisions:
   - 2026-11-29
 ---
 
-# Minimum Spanning Tree Prim'S Algorithm
+# Minimum Spanning Tree (Prim's Algorithm)
 
 ---
 

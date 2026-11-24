@@ -25,7 +25,7 @@ revisions:
 - **Concepts:**
   - #matrix [[Matrix]]
   - #binarysearch [[Binary Search]]
-  - #pointers [[Two Pointers]]
+  - #twopointers [[Two Pointers]]
 
 ## Pattern
 

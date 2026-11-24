@@ -15,7 +15,7 @@ revisions:
 
 - **Folder:** Recursion
 - **Target Companies:**
-  #Google #Amazon #Microsoft #Meta #Apple
+  - #Google #Amazon #Microsoft #Meta #Apple
 
 - **Confidence Checklist:**
   - [ ] Low

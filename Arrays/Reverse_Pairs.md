@@ -23,10 +23,10 @@ revisions:
   - [ ] High  
 
 - **Concepts:**
-  - #DivideAndConquer [[Divide and Conquer]]
-  - #MergeSort [[Merge Sort]]
-  - #TwoPointers [[Two Pointers]]
-  - #BIT [[Fenwick Tree]]
+  - #divideandconquer [[Divide and Conquer]]
+  - #mergesort [[Merge Sort]]
+  - #twopointers [[Two Pointers]]
+  - #bit [[Fenwick Tree]]
 
 ---
 ## Pattern

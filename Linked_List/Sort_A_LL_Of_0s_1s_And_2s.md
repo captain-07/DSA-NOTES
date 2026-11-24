@@ -25,7 +25,7 @@ revisions:
 - **Concepts:**
   - #linkedlist [[Linked List]]
   - #sorting [[Sorting]]
-  - #pointers [[Two Pointers]]
+  - #twopointers [[Two Pointers]]
 
 ## Pattern
 

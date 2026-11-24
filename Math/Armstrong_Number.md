@@ -7,7 +7,7 @@ revisions:
   - 2026-05-25
 ---
 
-# Check If the Number Is Armstrong
+# Check If a Number Is Armstrong
 
 ---
 

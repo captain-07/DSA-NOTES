@@ -7,7 +7,7 @@ revisions:
   - 2026-11-24
 ---
 
-# Bellman Ford Algorithm
+# Bellman-Ford Algorithm
 
 ---
 

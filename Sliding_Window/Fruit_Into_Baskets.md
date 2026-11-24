@@ -7,7 +7,7 @@ revisions:
   - 2026-09-11
 ---
 
-# Fruit into Baskets
+# Fruit Into Baskets
 
 ---
 
